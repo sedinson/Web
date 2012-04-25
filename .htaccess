@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^([a-zA-Z0-9_]+).html$ index.php?controller=$1
+RewriteRule ^([a-zA-Z0-9_]+)$ index.php?controller=$1
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+).html$ index.php?controller=$1&action=$2
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ index.php?controller=$1&action=$2
+##Reglas De la Pagina
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_/]+).html$ index.php?controller=$1&action=$2&str=$3
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_/]+)$ index.php?controller=$1&action=$2&str=$3

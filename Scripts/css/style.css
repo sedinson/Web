@@ -1,0 +1,331 @@
+/* 
+    Document   : style
+    Created on : 06-mar-2012, 21:26:23
+    Author     : sedinson
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+::-webkit-input-placeholder  { 
+    color:#cccbcb;
+    font-style: oblique;
+}
+
+input:-moz-placeholder  { 
+    color:#cccbcb;
+    font-style: oblique;
+}
+
+body {
+    font-family: sans-serif, serif;
+    font-size: 14px;
+    color: #454545;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #305f9a;
+    text-decoration: none;
+    display: block;
+    margin: 3px 0;
+}
+
+input {
+    border: #adadad 1px solid;
+    margin: 3px 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 2px;
+    -moz-box-shadow: 2px 2px 4px -3px #ccc;
+    -webkit-box-shadow: 2px 2px 4px -3px #ccc;
+    box-shadow: 2px 2px 4px -3px #ccc;
+    outline: none;
+}
+
+input[type="button"], input[type="submit"] {
+    background: #f2f1f1;
+    background: -moz-linear-gradient(top, #f2f1f1, #e4e3e3);
+    background: -webkit-linear-gradient(top, #f2f1f1, #e4e3e3);
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+input[type="text"], input[type="password"] {
+    background: #fff;
+    background: -moz-linear-gradient(top, #fff, #f6f5f5);
+    background: -webkit-linear-gradient(top, #fff, #f6f5f5);
+    padding: 5px 0;
+}
+
+input[type="file"] {
+    position: fixed;
+    top: -999px;
+}
+
+.footer {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    margin: -160px 0 0 0;
+    background: url(../../Resources/Images/deg1.png) repeat-x;
+    z-index: 0;
+}
+
+.superpanel {
+    position: fixed;
+    outline: 0px;
+    z-index: 9999;
+    left: 15px;
+    top: 0;
+    width: 282px;
+    padding: 0;
+    height: 100%;
+}
+
+.panel {
+    position: absolute;
+    margin: 0 0 0 15px;
+    width: 245px;
+    min-height: 100%;
+    padding: 0 5px 0 10px;
+    background: whitesmoke;
+    -moz-box-shadow: 5px 0 4px -3px #ccc;
+    -webkit-box-shadow: 5px 0 4px -3px #ccc;
+    box-shadow: 5px 0 4px -3px #ccc;
+}
+
+.message {
+    position: fixed;
+    width: 40%;
+    top: 15px;
+    left: 30%;
+    text-align: center;
+    padding: 5px 0;
+    opacity: 0.8;
+    font-weight: bold;
+    -moz-box-shadow: 5px 5px 4px -3px #ccc;
+    -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    box-shadow: 5px 5px 4px -3px #ccc;
+    border: #ccc 1px solid;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: whitesmoke;
+    z-index: 99999;
+    display: none;
+}
+
+#Failed {
+    background: #d30000;
+    background: -moz-linear-gradient(top, #e20202, #a10000);
+    background: -webkit-linear-gradient(top, #e20202, #a10000);
+}
+
+#Done {
+    background: #a5cd00;
+    background: -moz-linear-gradient(top, #a5cd00, #5d5d00);
+    background: -webkit-linear-gradient(top, #a5cd00, #5d5d00);
+}
+
+#help, #example {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.title1 {
+    position: relative;
+    background: url(../../Resources/Images/title1.png) no-repeat;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 30px 0 -10px -25px;
+    padding: 5px 7px;
+    width: 179px;
+    height: 37px;
+}
+
+.title2 {
+    background: #4a4a4a;
+    background: -moz-linear-gradient(top, #4a4a4a, #2a2a2a);
+    background: -webkit-linear-gradient(top, #4a4a4a, #2a2a2a);
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;  
+    color: whitesmoke; 
+    text-align: center; 
+    padding: 5px 0; 
+    margin-bottom: 10px;
+    -moz-box-shadow: 5px 5px 4px -3px #ccc;
+    -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    box-shadow: 5px 5px 4px -3px #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#containner {
+    margin: 50px 0 20px 320px;
+    position: relative;
+    float: left;
+    z-index: 2;
+}
+
+#subContainner {
+    margin: 10px 0 10px 320px;
+    position: relative;
+    float: left;
+}
+
+.baseBox {
+    position: relative;
+    float: left;
+    width: 300px;
+    height: 220px;
+    margin: 10px;
+    background: white;
+    -moz-box-shadow: 5px 5px 4px -3px #ccc;
+    -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    box-shadow: 5px 5px 4px -3px #ccc;
+    border: #ccc 1px solid;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.box {
+    font-size: 14px;
+    text-align: center;
+    color: #555555;
+    background: white;
+    -webkit-transition:background .3s ease-out;
+    -moz-transition:background .3s ease-out;
+    -o-transition:background .3s ease-out;
+    -ms-transition:background .3s ease-out;
+    transition:background .3s ease-out;
+}
+
+.box:hover {
+    background: #305f9a;
+    border-color: #305f9a;
+    color: white;
+    cursor: pointer;
+}
+
+.boxImg {
+    margin: 5px 5px 15px 5px;
+    width: 290px;
+    height: 170px;
+    background: white;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.add, .sadd {
+    background: #f2f1f1 url(../../Resources/Images/add.png) no-repeat;
+    background-position: center;
+}
+
+.add:hover, .sadd:hover {
+    background: #f2f1f1 url(../../Resources/Images/addSel.png) no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.shadowInt {
+    -moz-box-shadow: 5px 5px 4px -3px #000;
+    -webkit-box-shadow: 5px 5px 4px -3px #000;
+    box-shadow: 5px 5px 4px -3px #000;
+}
+
+#dropdown {
+    margin: 0 0 0 0;
+    position: absolute;
+    background: url(../../Resources/Images/bgGray.png) repeat;
+    width: 100%;
+    display: none;
+    z-index: 99;
+}
+
+#triangle {
+    margin: -20px 0 0 0;
+    position: absolute;
+    background: url(../../Resources/Images/triangle.png) repeat;
+    width: 50px;
+    height: 20px;
+    z-index: 99;
+}
+
+.darkBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../Resources/Images/bgBlack.png) repeat;
+    z-index: 100;
+}
+
+#dadd {
+    display: none;
+}
+
+#modal {
+    display: none;
+}
+
+.modalDialog {
+    position: fixed;
+    outline: 0px;
+    top: 30px;
+    left: 330px;
+    padding: 0 0 0 10px;
+}
+
+#modalDialog {
+    background: white;
+    position: relative;
+    padding: 10px;
+    min-height: 100%;
+}
+
+.dialog {
+    background: white;
+    width: 300px;
+    margin: 150px auto;
+    padding: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#close1, #close2 {
+    position: absolute;
+    background: url(../../Resources/Images/close1.png) no-repeat;
+    width: 29px;
+    height: 29px;
+    margin: -20px 0 0 290px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+#close2 {
+    position: fixed;
+    margin-top: -12px;
+}
+
+.close2 {
+    position: absolute;
+    background: url(../../Resources/Images/close2.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0 280px;
+    cursor: pointer;
+}
