@@ -68,7 +68,7 @@
             }
             
             $(document).ready(function() {
-                alert(Stat.deviation([[10, 5], [11, 3], [14, 19]]))
+//                alert(Stat.deviation([[10, 5], [11, 3], [14, 19]]))
                 $("body").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
                 $(".superpanel").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
                 $(".modalDialog").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
