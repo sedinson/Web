@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?=$config->get('BaseUrl')?>/Scripts/css/style.css"/>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Stat.js"></script>
+        <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Graph.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript">
             var bodyScroll = null;
@@ -69,6 +70,10 @@
             
             $(document).ready(function() {
 //                alert(Stat.deviation([[10, 5], [11, 3], [14, 19]]))
+                var graphics = new Graph(document.getElementById('hola'));
+                graphics.setData([[11, 5], [14, 3], [12, 19], [9, 9], [10, 6], [13, 6]]);
+                graphics.setType(1);
+                graphics.start();
                 $("body").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
                 $(".superpanel").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
                 $(".modalDialog").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
@@ -180,6 +185,8 @@
                 <div id="modalDialog"></div>
             </div>
         </div>
+        
+        <div id="hola" style="width: 600px; height: 600px; margin-left: 300px; z-index: 9; position: relative;"></div>
         
         <div class="footer"></div>
     </body>

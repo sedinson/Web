@@ -9,54 +9,32 @@ function Stat () { }
 
 Stat.averrage = function (array)
 {
+    array = Stat.prepare(array);
     var sum = 0;
-    var i = 0;
-    if(typeof array[i] == "number")
+    var f = 0;
+    for(var i=0; i<array.length; i++)
     {
-        for(i=0; i<array.length; i++)
-        {
-            sum += array[i];
-        }
-        return (sum/array.length);
+        sum += array[i][0]*array[i][1];
+        f += array[i][1];
     }
-    else
-    {
-        var f = 0;
-        for(i=0; i<array.length; i++)
-        {
-            sum += array[i][0]*array[i][1];
-            f += array[i][1];
-        }
-        
-        return (sum/f);
-    }
+
+    return (sum/f);
     
 }
 
 Stat.variance = function (array)
 {
+    array = Stat.prepare(array);
     var sum = 0;
     var i = 0;
-    if(typeof array[i] == "number")
+    var f = 0;
+    for(i=0; i<array.length; i++)
     {
-        for(var i=0; i<array.length; i++)
-        {
-            sum += Math.pow(array[i], 2);
-        }
+        sum += Math.pow(array[i][0], 2)*array[i][1];
+        f += array[i][1];
+    }
 
-        return (sum/array.length-Math.pow(Stat.averrage(array), 2));
-    }
-    else 
-    {
-        var f = 0;
-        for(i=0; i<array.length; i++)
-        {
-            sum += Math.pow(array[i][0], 2)*array[i][1];
-            f += array[i][1];
-        }
-        
-        return (sum/f-Math.pow(Stat.averrage(array), 2));
-    }
+    return (sum/f-Math.pow(Stat.averrage(array), 2));
 }
 
 Stat.deviation = function (array)
@@ -79,4 +57,12 @@ Stat.frecuency = function (array)
     }
     
     return tmp;
+}
+
+Stat.prepare = function (array)
+{
+    if(typeof array == "number")
+        return Stat.frecuency(array);
+    else
+        return array;
 }
