@@ -12,11 +12,19 @@
             var bodyScroll = null;
             var helpScroll = null;
             
-            function subcontenido(val) {
-                $("#subContainner").load("<?=$config->get('BaseUrl')?>/Index/subIndex/" + val); 
+            function subcontenido(val) 
+            {
+                if(document.getElementById("dropdown").style.display == "none")
+                {
+                    document.getElementById("subContainner").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
+                    $("#subContainner").load("<?=$config->get('BaseUrl')?>/Index/subIndex/" + val, function() {
+                        bodyScroll.resize().show();
+                    });
+                }
             }
             
-            function mostrar(url) {
+            function mostrar(url) 
+            {
                 document.getElementById("modalDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
@@ -32,7 +40,8 @@
                 });
             }
             
-            function subAdd(val) {
+            function subAdd(val) 
+            {
                 $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/addSubAccess/" + val, function() {
                     setSelFile();
                 }); 
@@ -41,7 +50,8 @@
                 $("#dadd").animate({opacity: 1}, 300);
             }
             
-            function deleteBox(val) {
+            function deleteBox(val) 
+            {
                 $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/deleteBox/" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
@@ -50,14 +60,16 @@
                 });
             }
             
-            function deleteBox2(val) {
+            function deleteBox2(val) 
+            {
                 $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/deleteBox2/" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
                 $("#dadd").animate({opacity: 1}, 300);
             }
             
-            function setSelFile() {
+            function setSelFile() 
+            {
                 var fileElem = document.getElementById("fileElem");
                 var fileSelect = document.getElementById("fileSelect");
                 fileSelect.addEventListener("click", function(e) {
@@ -68,22 +80,20 @@
                 }, false);
             }
             
-            $(document).ready(function() {
+            $(document).ready(function() 
+            {
 //                alert(Stat.deviation([[10, 5], [11, 3], [14, 19]]))
-//                var graphics = new Graph(document.getElementById('hola'));
-//                graphics.setData([[11, 5], [14, 3], [12, 19], [9, 9], [10, 6], [13, 6]]);
-//                graphics.setType(1);
-//                graphics.start();
                 $("body").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
                 $(".superpanel").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
-                $(".modalDialog").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
+                $(".modalDialog").niceScroll({cursorborder:"", cursorcolor:"#fff", cursoropacitymax:0.7});
                 bodyScroll = $("body").getNiceScroll();
                 helpScroll = $(".superpanel").getNiceScroll();
                 modalScroll = $(".modalDialog").getNiceScroll();
                 
                 $("#dropdown").css("display", "none");
                 
-                $(".box").click(function(event) {
+                $(".box").click(function(event) 
+                {
                     var post = $(this).offset();
                     var size = $(this).innerHeight() + 7;
                     var wobj = ($(this).innerWidth()-50)/2;
@@ -96,14 +106,15 @@
                     } else {
                         $("#dropdown").animate({opacity: 0}, 300, function() {
                             $("#dropdown").css("display", "none");
+                            bodyScroll.resize().show();
                         });
                     }
                     
-                    bodyScroll.resize().show();
                     helpScroll.resize().show();
                 });
                 
-                $(".add").click(function(event) {
+                $(".add").click(function(event) 
+                {
                     $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/addAccess", function() {
                         setSelFile();
                     }); 
@@ -112,14 +123,17 @@
                     $("#dadd").animate({opacity: 1}, 300);
                 });
                 
-                $("#close1").click(function(event) {
+                $("#close1").click(function(event) 
+                {
                     $("#dadd").animate({opacity: 0}, 300, function() {
                         $("#dadd").css("display", "none");
                     });
                 });
                 
-                $("#close2").click(function(event) {
+                $("#close2").click(function(event) 
+                {
                     modalScroll.hide();
+                    modalClosed();
                     $("#modal").animate({opacity: 0}, 300, function() {
                         $("#modal").css("display", "none");
                     });
@@ -185,8 +199,6 @@
                 <div id="modalDialog"></div>
             </div>
         </div>
-        
-<!--        <div id="hola" style="width: 600px; height: 600px; margin-left: 300px; z-index: 9; position: relative;"></div>-->
         
         <div class="footer"></div>
     </body>

@@ -146,8 +146,8 @@ input[type="file"] {
     font-size: 16px;
     font-weight: bold;
     margin: 30px 0 -10px -25px;
-    padding: 5px 7px;
-    width: 179px;
+    padding: 5px 0 0 7px;
+    width: 174px;
     height: 37px;
 }
 
@@ -168,6 +168,19 @@ input[type="file"] {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+}
+
+.title3 {
+    position: relative;
+    left: 100%;
+    background: url(../../Resources/Images/title3.png) no-repeat;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: bold;
+    margin: -10px 0 10px -155px;
+    padding: 20px 0 0 20px;
+    width: 159px;
+    height: 37px;
 }
 
 #containner {
@@ -285,8 +298,8 @@ input[type="file"] {
     position: fixed;
     outline: 0px;
     top: 30px;
-    left: 330px;
-    padding: 0 0 0 10px;
+    left: 322px;
+    padding: 0 15px;
 }
 
 #modalDialog {
@@ -328,4 +341,17 @@ input[type="file"] {
     height: 16px;
     margin: 2px 0 0 280px;
     cursor: pointer;
+}
+
+#grafica {
+    position: relative;
+    float: right;
+    margin: 10px;
+    padding: 5px;
+    width: 600px;
+    height: 400px;
+    border: #666666 1px solid;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
