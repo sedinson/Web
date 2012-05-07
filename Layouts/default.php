@@ -37,6 +37,7 @@
                 $("#close2").css("margin-left", (w-395) + "px");
                 $("#modalDialog").load("<?=$config->get('BaseUrl')?>/"+url, function() {
                     modalScroll.resize().show();
+                    timmerPeriodic = setInterval(function() {periodic()}, 250);
                 });
             }
             

@@ -19,6 +19,8 @@ function Graph(div)
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
+    var pData = 2;                  //Ubicacion en la cual estan los datos en el array
+    var pLabel = 0;                 //Ubicacion en el array donde se encuentra la etiqueta, Puede ser marca de clase o clases
     var timmer1 = null;
     var option = 0;
     var data = [];
@@ -60,14 +62,14 @@ function Graph(div)
         g.textBaseline = "top";
         for(var i=0; i<data.length; i++)
         {
-            var y = (data[i][1]/max)*(h-60);
+            var y = (data[i][pData]/max)*(h-60);
             var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
             grad.addColorStop(0, colors[i%colors.length][0]);
             grad.addColorStop(1, colors[i%colors.length][1]);
             g.fillStyle = grad;//colors[(i%colors.length)];
             g.fillRect(60+sep*i, (h-50)-y, sep, y);
             g.fillStyle = "#000000";
-            g.fillText(data[i][0]+"", 60+sep*i+sep/2, h-45);
+            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
         }
 
         g.textAlign = "right";
@@ -92,7 +94,7 @@ function Graph(div)
                 grad.addColorStop(1, colors[i%colors.length][1]);
                 g.strokeStyle = grad;
                 g.beginPath();
-                    var angle = 2*(data[i][1]/sum)*Math.PI;
+                    var angle = 2*(data[i][pData]/sum)*Math.PI;
                     g.arc(w/2, h/2, weight/2, acum, acum+angle, false);
                     acum += angle;
                     g.stroke();
@@ -125,6 +127,11 @@ function Graph(div)
         option = opt;
     }
     
+    this.setLabel = function (opt)
+    {
+        pLabel = opt;
+    }
+    
     this.setData = function (array)
     {
         data = Stat.prepare(array);
@@ -134,9 +141,9 @@ function Graph(div)
         sum = 0;
         for(var i=0; i<data.length; i++)
         {
-            min = (Math.min(min, data[i][1]));
-            max = (Math.max(max, data[i][1]));
-            sum += data[i][1];
+            min = (Math.min(min, data[i][pData]));
+            max = (Math.max(max, data[i][pData]));
+            sum += data[i][pData];
         }
     }
     

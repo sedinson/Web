@@ -4,8 +4,23 @@
  */
 
 Array.prototype.unique = function(a) {return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0});
+Math.logBase = function (x, b) {return Math.log(x)/Math.log(b)};
 
 function Stat () { }
+
+Stat.minVal = function (a) {
+    var m = Infinity;
+    for(var i=0; i<a.length; i++)
+        m = (a[i]<m)? a[i] : m;
+    return m;
+}
+
+Stat.maxVal = function (a) {
+    var m = -Infinity;
+    for(var i=0; i<a.length; i++)
+        m = (a[i]>m)? a[i] : m;
+    return m;
+}
 
 Stat.averrage = function (array)
 {
@@ -44,16 +59,22 @@ Stat.deviation = function (array)
 
 Stat.frecuency = function (array)
 {
-    var values = array.unique();
+    var li = Stat.minVal(array);
+    var ls = Stat.maxVal(array);
+    var r = ls - li;
+    var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
+    var w = Math.ceil(r/c);
     var tmp = [];
     
-    for(var i=0; i<values.length; i++)
+    for(var i=0; i<c; i++)
+        tmp[i] = [(li+i*w) + "-" + (li+(i+1)*w-1), ((li+i*w)+(li+(i+1)*w-1))/2, 0];
+    
+    for(i=0; i<array.length; i++)
     {
-        tmp[i] = [values[i], 0];
-        for(var j=0; j<array.length; j++)
-        {
-            tmp[i][1]+= ((array[j] == values[i])? 1 : 0);
-        }
+        if((array[i]-li)/w >= i)
+            tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-1), ((li+c*w)+(li+(++c)*w-1))/2, 0];
+        
+        tmp[Math.floor((array[i]-li)/w)][2] += 1;
     }
     
     return tmp;
@@ -61,7 +82,7 @@ Stat.frecuency = function (array)
 
 Stat.prepare = function (array)
 {
-    if(typeof array == "number")
+    if(typeof array[0] == "number")
         return Stat.frecuency(array);
     else
         return array;

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-04-2012 a las 20:05:13
--- Versión del servidor: 5.5.16
--- Versión de PHP: 5.3.8
+-- Tiempo de generación: 23-04-2012 a las 06:35:10
+-- Versión del servidor: 5.5.8
+-- Versión de PHP: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -35,16 +34,19 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `access`
+-- Volcar la base de datos para la tabla `access`
 --
 
 INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
-(6, 0, 'Medidas', '73e079image3014.png', 'Diferentes tipos de medidas: de centralizaci&oacute;n, de variabilidad, de posici&oacute;n y de forma'),
-(7, 0, 'Graficas', '24e450g3862.png', 'Dibujar todo tipo de gr&aacute;ficas como torta, barra, etc.'),
-(8, 6, 'Ejemplo', '68227fimage3014.png', 'Prueba/uno');
+(1, 0, 'Descripcion', '55134fpath3084-7.png', 'Comentario'),
+(2, 1, 'Titulo', '9c4eedKoala.jpg', 'Prueba/uno'),
+(3, 0, 'Otro Mas', 'faf32bChrysanthemum.jpg', 'Lass Diarra'),
+(4, 0, 'Nuevo Titulo', '329477Koala.jpg', 'Nuevo Comentario'),
+(5, 0, 'Cita en un bar', '2099c0Hydrangeas.jpg', 'Ricardo Arjona'),
+(6, 0, 'A Ti', '096e12mundo-1600-x-1200.jpg', 'Ricardo Arjona');
 
 -- --------------------------------------------------------
 
@@ -61,6 +63,11 @@ CREATE TABLE IF NOT EXISTS `example` (
   PRIMARY KEY (`idexample`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
+--
+-- Volcar la base de datos para la tabla `example`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +83,11 @@ CREATE TABLE IF NOT EXISTS `help` (
   PRIMARY KEY (`idhelp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
 
+--
+-- Volcar la base de datos para la tabla `help`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +100,11 @@ CREATE TABLE IF NOT EXISTS `modexample` (
   `example` text COLLATE utf8_spanish2_ci NOT NULL,
   `modificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcar la base de datos para la tabla `modexample`
+--
+
 
 -- --------------------------------------------------------
 
@@ -102,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `modhelp` (
   `modificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Volcar la base de datos para la tabla `modhelp`
+--
+
