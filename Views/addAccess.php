@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-<form method="POST" action="<?=$config->get('BaseUrl')?>/Register/newAccess" enctype="multipart/form-data">
+<form method="POST" action="<?=$config->get('BaseUrl')?>?controller=Register&action=newAccess" enctype="multipart/form-data">
     <div class="title2">Agregar Acceso</div>
     <input type="text" name="title" placeholder="Titulo"  style="width: 100%;"/>
     <input type="text" name="url" placeholder="Comentario" style="width: 100%;"/>

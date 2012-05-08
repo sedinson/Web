@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-<form method="POST" action="<?=$config->get('BaseUrl')?>/Register/newSubAccess/<?=$obj?>" enctype="multipart/form-data">
+<form method="POST" action="<?=$config->get('BaseUrl')?>?controller=Register&action=newSubAccess/<?=$obj?>" enctype="multipart/form-data">
     <div class="title2">Agregar Sub Acceso</div>
     <input type="text" name="title" placeholder="Titulo"  style="width: 100%;"/>
     <input type="text" name="url" placeholder="URL" style="width: 100%;"/>

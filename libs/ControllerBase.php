@@ -10,7 +10,7 @@
         function __construct($post, $get, $files)
         {
             $this->config = Config::singleton();
-            $this->get = str_getcsv($get, '/');
+            $this->get = split("/", $get);
             $this->post = $post;
             $this->files = $files;
             $this->view = new View();

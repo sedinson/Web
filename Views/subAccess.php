@@ -1,8 +1,10 @@
 <?php
     foreach($vars as $row)
     {
+        $array = split("/", $row['url']);
+        $url = "controller=" . $array[0] . "&action=" . $array[1]; 
         ?>
-            <div class="baseBox box shadowInt" onclick="javascript: mostrar('<?=$row['url']?>');">
+            <div class="baseBox box shadowInt" onclick="javascript: mostrar('<?=$url?>');">
             <div class="close2" onclick="javascript: deleteBox2(<?=$row['idaccess']?>);"></div>
             <div class="boxImg" style="background: url(<?=$config->get('BaseUrl') . '/Resources/Public/' . $row['image']?>);"></div>
             <?=$row['title']?>

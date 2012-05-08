@@ -31,7 +31,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "/Index/index/" . $status);
+        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function newSubAccess () {
@@ -52,7 +52,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "/Index/index/" . $status);
+        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function deleteBox () {
@@ -65,7 +65,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "/Index/index/" . $status);
+        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function deleteBox2 () {
@@ -78,7 +78,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "/Index/index/" . $status);
+        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
     }
 }
 ?>

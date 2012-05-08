@@ -17,7 +17,7 @@
                 if(document.getElementById("dropdown").style.display == "none")
                 {
                     document.getElementById("subContainner").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
-                    $("#subContainner").load("<?=$config->get('BaseUrl')?>/Index/subIndex/" + val, function() {
+                    $("#subContainner").load("<?=$config->get('BaseUrl')?>?controller=Index&action=subIndex&str=" + val, function() {
                         bodyScroll.resize().show();
                     });
                 }
@@ -35,7 +35,7 @@
                 $(".modalDialog").css("height", (h-80) + "px");
                 $("#modalDialog").css("width", (w-400) + "px");
                 $("#close2").css("margin-left", (w-395) + "px");
-                $("#modalDialog").load("<?=$config->get('BaseUrl')?>/"+url, function() {
+                $("#modalDialog").load("<?=$config->get('BaseUrl')?>?"+url, function() {
                     modalScroll.resize().show();
                     timmerPeriodic = setInterval(function() {periodic()}, 250);
                 });
@@ -43,7 +43,7 @@
             
             function subAdd(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/addSubAccess/" + val, function() {
+                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=addSubAccess&str=" + val, function() {
                     setSelFile();
                 }); 
                 $("#dadd").css("opacity", "0");
@@ -53,7 +53,7 @@
             
             function deleteBox(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/deleteBox/" + val); 
+                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=deleteBox&str=" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
                 $("#dadd").animate({opacity: 1}, 300, function() {
@@ -63,7 +63,7 @@
             
             function deleteBox2(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/deleteBox2/" + val); 
+                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=deleteBox2&str=" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
                 $("#dadd").animate({opacity: 1}, 300);
@@ -116,7 +116,7 @@
                 
                 $(".add").click(function(event) 
                 {
-                    $("#dialog").load("<?=$config->get('BaseUrl')?>/Form/addAccess", function() {
+                    $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=addAccess", function() {
                         setSelFile();
                     }); 
                     $("#dadd").css("opacity", "0");
