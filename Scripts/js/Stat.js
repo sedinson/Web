@@ -71,7 +71,7 @@ Stat.frecuency = function (array)
     
     for(i=0; i<array.length; i++)
     {
-        if((array[i]-li)/w >= i)
+        if(Math.floor((array[i]-li)/w) >= tmp.length)
             tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-1), ((li+c*w)+(li+(++c)*w-1))/2, 0];
         
         tmp[Math.floor((array[i]-li)/w)][2] += 1;

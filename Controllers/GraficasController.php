@@ -18,6 +18,10 @@ class GraficasController extends ControllerBase {
     function Barra() {
         $this->view->partial("barra.php");
     }
+    
+    function FrecuenciaAcumulada() {
+        $this->view->partial("frecuencia.php");
+    }
 }
 
 ?>
