@@ -16,7 +16,7 @@ Stat.minVal = function (a) {
 }
 
 Stat.maxVal = function (a) {
-    var m = -Infinity;
+    var m = -1*Infinity;
     for(var i=0; i<a.length; i++)
         m = (a[i]>m)? a[i] : m;
     return m;
@@ -59,22 +59,34 @@ Stat.deviation = function (array)
 
 Stat.frecuency = function (array)
 {
-    var li = Stat.minVal(array);
-    var ls = Stat.maxVal(array);
-    var r = ls - li;
-    var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
-    var w = Math.ceil(r/c);
     var tmp = [];
-    
-    for(var i=0; i<c; i++)
-        tmp[i] = [(li+i*w) + "-" + (li+(i+1)*w-1), ((li+i*w)+(li+(i+1)*w-1))/2, 0];
-    
-    for(i=0; i<array.length; i++)
-    {
-        if(Math.floor((array[i]-li)/w) >= tmp.length)
-            tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-1), ((li+c*w)+(li+(++c)*w-1))/2, 0];
-        
-        tmp[Math.floor((array[i]-li)/w)][2] += 1;
+    if(typeof array[0] == "number") {
+        var li = Stat.minVal(array);
+        var ls = Stat.maxVal(array);
+        var r = ls - li;
+        var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
+        var w = Math.ceil(r/c);
+
+        for(var i=0; i<c; i++)
+            tmp[i] = [(li+i*w) + "-" + (li+(i+1)*w-1), ((li+i*w)+(li+(i+1)*w-1))/2, 0];
+
+        for(i=0; i<array.length; i++)
+        {
+            if(Math.floor((array[i]-li)/w) >= tmp.length)
+                tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-1), ((li+c*w)+(li+(++c)*w-1))/2, 0];
+
+            tmp[Math.floor((array[i]-li)/w)][2] += 1;
+        }
+    } else if(typeof array[0] == "string") {
+        var vars = array.unique();
+
+        for(i=0; i<vars.length; i++) {
+            tmp[i] = [vars[i], vars[i], 0];
+            for(var j=0; j<array.length; j++) {
+                if(array[j] == vars[i])
+                    tmp[i][2] += 1;
+            }
+        }
     }
     
     return tmp;
@@ -82,8 +94,42 @@ Stat.frecuency = function (array)
 
 Stat.prepare = function (array)
 {
-    if(typeof array[0] == "number")
+    if(typeof array[0] == "number" || typeof array[0] == "string")
         return Stat.frecuency(array);
     else
         return array;
+}
+
+function Extra() { }
+
+Extra.transformData = function (value) {
+    var str = value.split("\n");
+    var tmp = [];
+    if(str.length > 0)
+    {
+        var data = str[0].split("\t");
+        if(data.length == 2)
+        {
+            var j = 0;
+            for(var i=0; i<str.length; i++)
+            {
+                data = str[i].split("\t");
+                if(data.length == 2)
+                    tmp[j++] = [data[0], data[0], parseFloat(data[1].replace(",", "."))];
+            }
+        }
+        else
+        {
+            for(var i=0; i<data.length; i++)
+            {
+                data = str;
+                if(data[i] != "") {
+                    var tmpstr =  parseFloat(data[i].replace(",", "."));
+                    tmp[i] = (tmpstr+"" != data[i])? data[i] : tmpstr;
+                }
+            }
+        }
+    }
+    
+    return tmp;
 }

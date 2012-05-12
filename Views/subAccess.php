@@ -1,8 +1,8 @@
 <?php
     foreach($vars as $row)
     {
-        $array = split("/", $row['url']);
-        $url = "controller=" . $array[0] . "&action=" . $array[1]; 
+        @$a = split("/", $row['url']);
+        $url = "controller=" . $a[0] . "&action=" . $a[1];
         ?>
             <div class="baseBox box shadowInt" onclick="javascript: mostrar('<?=$url?>');">
             <div class="close2" onclick="javascript: deleteBox2(<?=$row['idaccess']?>);"></div>

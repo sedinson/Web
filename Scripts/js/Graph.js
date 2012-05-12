@@ -130,7 +130,7 @@ function Graph(div)
         }
         
         //Dibujar el ultimo punto al salir
-        setPoint(antX, antY, data.length-1);
+        setPoint(antX, antY, data.length);
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";

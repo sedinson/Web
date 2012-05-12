@@ -9,25 +9,14 @@
         var text = document.getElementById("text");
         if(text.value.length > 0) 
         {
-            var data = text.value.split("\n");
-            if(data.length > 0)
-            {
-                var tmp = [];
-                for(var i=0; i<data.length; i++)
-                {
-                    if(data[i] != "")
-                        tmp[i] =  parseFloat(data[i].replace(",", "."));
-                }
-            }
-                graphics.setData(tmp);
+            graphics.setData(Extra.transformData(text.value));
             
             text.value = "";
             text.blur();
         }
     }
     
-    function modalClosed() 
-    {
+    function modalClosed() {
         graphics.stop();
         graphics.stop();
     }
