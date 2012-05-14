@@ -10,9 +10,10 @@
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Graph.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript">
+            var myData = [11, 5, 14, 3, 12, 15, 16, 13, 22, 21, 23, 24, 19, 9, 9, 10, 6, 13, 6, 51, 32, 45, 40, 19, 39, 51];
             var bodyScroll = null;
             var helpScroll = null;
-			var selOpt = 0;
+            var selOpt = 0;
             
             function subcontenido(val) 
             {
@@ -27,9 +28,9 @@
             
             function mostrar(url) 
             {
-				var str = url.split("/");
-				if(str.length >= 2) url = "controller=" + str[0] + "&action=" + str[1];
-				if(str.length >= 3) selOpt = str[2];
+                var str = url.split("/");
+                if(str.length >= 2) url = "controller=" + str[0] + "&action=" + str[1];
+                if(str.length >= 3) selOpt = str[2];
                 document.getElementById("modalDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
@@ -44,14 +45,14 @@
                     modalScroll.resize().show();
                     timmerPeriodic = setInterval(function() {periodic()}, 250);
                 });
-				$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-				$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
             }
 			
-			function edit(url) 
+            function edit(url) 
             {
-				var str = url.split("/");
-				if(url.length >=2) url = "controller=" + str[0] + "&action=" + str[1] + "&str=" + selOpt;
+                var str = url.split("/");
+                if(url.length >=2) url = "controller=" + str[0] + "&action=" + str[1] + "&str=" + selOpt;
 				
                 document.getElementById("editDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
                 $("#editHelp").css("opacity", "0");
@@ -156,22 +157,22 @@
                     $("#modal").animate({opacity: 0}, 300, function() {
                         $("#modal").css("display", "none");
                     });
-					
-					selOpt = 0;
-					$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-					$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+
+                    selOpt = 0;
+                    $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+                    $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
                 });
 				
-				$("#close3").click(function(event)
-				{
-					$("#editHelp").animate({opacity: 0}, 300, function() {
+                $("#close3").click(function(event)
+                {
+                        $("#editHelp").animate({opacity: 0}, 300, function() {
                         $("#editHelp").css("display", "none");
                     });
-				});
-				
-				selOpt = '0';
-				$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-				$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+                });
+
+                selOpt = '0';
+                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
                 
                 <?php
                     if(isset($obj)) {

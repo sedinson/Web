@@ -57,6 +57,15 @@ Stat.deviation = function (array)
     return Math.sqrt(Stat.variance(array));
 }
 
+Stat.n = function (array) {
+    var sum = 0;
+    for(var i=0; i<array.length; i++) {
+        sum += array[i][2];
+    }
+    
+    return sum;
+}
+
 Stat.frecuency = function (array)
 {
     var tmp = [];
@@ -100,8 +109,33 @@ Stat.prepare = function (array)
         return array;
 }
 
+Stat.getTableInfo = function (array)
+{
+    var data = Stat.prepare(array);
+    var n = Stat.n(data);
+    var sw = (data[0][0] != data[0][1]);
+    var sum = 0;
+
+    var str = "<table><thead><tr><th>clases</th>" + ((sw)? "<th>x</th>" : "") + 
+                "<th>f</th><th>f<sub>a</sub></th><th>f<sub>r</sub></th><th>f<sub>ra</sub>" +
+                "</th></tr></thead><tbody>";
+    for(var i=0; i<data.length; i++)
+    {
+        sum += data[i][2];
+        str += "<tr>";
+        str += "<td>" + data[i][0] + "</td><td>" + ((sw)? data[i][1] + "</td><td>" : "") + data[i][2] + "</td>";
+        str += "<td>" + sum + "</td><td>" + (data[i][2]/n).toFixed(3) + "</td><td>" + (sum/n).toFixed(3) + "</td>";
+        str += "</tr>";
+    }
+    str += "<tbody></table>";
+    
+    return str;
+}
+
 function Extra() { }
 
+//Convierte value en un array de datos. Usa \n como simbolo de nueva fila y \t como nueva columna.
+//tal como vienen los datos de excel. Una mejora a futuro es elegir los delimitadores.
 Extra.transformData = function (value) {
     var str = value.split("\n");
     var tmp = [];
@@ -120,9 +154,9 @@ Extra.transformData = function (value) {
         }
         else
         {
+            data = str;
             for(var i=0; i<data.length; i++)
             {
-                data = str;
                 if(data[i] != "") {
                     var tmpstr =  parseFloat(data[i].replace(",", "."));
                     tmp[i] = (tmpstr+"" != data[i])? data[i] : tmpstr;
