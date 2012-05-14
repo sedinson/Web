@@ -27,6 +27,7 @@
     
     #Configuracion de Conexiones
     $config->set('BaseUrl', 'http://localhost/web');
+	$config->set('InitUrl', 'http://localhost/web/index.php');
 //    $config->set('BaseUrl', 'http://statistics.hostzi.com');
     
     #Configuracion del usuario

@@ -12,13 +12,14 @@
         <script type="text/javascript">
             var bodyScroll = null;
             var helpScroll = null;
+			var selOpt = 0;
             
             function subcontenido(val) 
             {
                 if(document.getElementById("dropdown").style.display == "none")
                 {
                     document.getElementById("subContainner").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
-                    $("#subContainner").load("<?=$config->get('BaseUrl')?>?controller=Index&action=subIndex&str=" + val, function() {
+                    $("#subContainner").load("<?=$config->get('InitUrl')?>?controller=Index&action=subIndex&str=" + val, function() {
                         bodyScroll.resize().show();
                     });
                 }
@@ -26,6 +27,9 @@
             
             function mostrar(url) 
             {
+				var str = url.split("/");
+				if(str.length >= 2) url = "controller=" + str[0] + "&action=" + str[1];
+				if(str.length >= 3) selOpt = str[2];
                 document.getElementById("modalDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
@@ -36,15 +40,29 @@
                 $(".modalDialog").css("height", (h-80) + "px");
                 $("#modalDialog").css("width", (w-400) + "px");
                 $("#close2").css("margin-left", (w-395) + "px");
-                $("#modalDialog").load("<?=$config->get('BaseUrl')?>?"+url, function() {
+                $("#modalDialog").load("<?=$config->get('InitUrl')?>?" + url, function() {
                     modalScroll.resize().show();
                     timmerPeriodic = setInterval(function() {periodic()}, 250);
                 });
+				$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+				$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+            }
+			
+			function edit(url) 
+            {
+				var str = url.split("/");
+				if(url.length >=2) url = "controller=" + str[0] + "&action=" + str[1] + "&str=" + selOpt;
+				
+                document.getElementById("editDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
+                $("#editHelp").css("opacity", "0");
+                $("#editHelp").css("display", "block");
+                $("#editHelp").animate({opacity: 1}, 300);
+                $("#editDialog").load("<?=$config->get('InitUrl')?>?" + url);
             }
             
             function subAdd(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=addSubAccess&str=" + val, function() {
+                $("#dialog").load("<?=$config->get('InitUrl')?>?controller=Form&action=addSubAccess&str=" + val, function() {
                     setSelFile();
                 }); 
                 $("#dadd").css("opacity", "0");
@@ -54,7 +72,7 @@
             
             function deleteBox(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=deleteBox&str=" + val); 
+                $("#dialog").load("<?=$config->get('InitUrl')?>?controller=Form&action=deleteBox&str=" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
                 $("#dadd").animate({opacity: 1}, 300, function() {
@@ -64,7 +82,7 @@
             
             function deleteBox2(val) 
             {
-                $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=deleteBox2&str=" + val); 
+                $("#dialog").load("<?=$config->get('InitUrl')?>?controller=Form&action=deleteBox2&str=" + val); 
                 $("#dadd").css("opacity", "0");
                 $("#dadd").css("display", "block");
                 $("#dadd").animate({opacity: 1}, 300);
@@ -116,7 +134,7 @@
                 
                 $(".add").click(function(event) 
                 {
-                    $("#dialog").load("<?=$config->get('BaseUrl')?>?controller=Form&action=addAccess", function() {
+                    $("#dialog").load("<?=$config->get('InitUrl')?>?controller=Form&action=addAccess", function() {
                         setSelFile();
                     }); 
                     $("#dadd").css("opacity", "0");
@@ -138,7 +156,22 @@
                     $("#modal").animate({opacity: 0}, 300, function() {
                         $("#modal").css("display", "none");
                     });
+					
+					selOpt = 0;
+					$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+					$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
                 });
+				
+				$("#close3").click(function(event)
+				{
+					$("#editHelp").animate({opacity: 0}, 300, function() {
+                        $("#editHelp").css("display", "none");
+                    });
+				});
+				
+				selOpt = '0';
+				$("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
+				$("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
                 
                 <?php
                     if(isset($obj)) {
@@ -148,7 +181,7 @@
                             $("#Failed").css("display", "block");
                             $("#Failed").animate({opacity: .8}, 1000);
                             <?php
-                        } else {
+                        } else if($obj === "Done") {
                             ?>
                             $("#Done").css("opacity", "0");
                             $("#Done").css("display", "block");
@@ -171,10 +204,10 @@
         <div id="Done" class="message">Excelente, no hay de que temer.</div>
         <div class="superpanel">
             <div class="panel">
-                <div class="title1">Ayuda</div>
-                <div id="help">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                <div class="title1">Ejemplos</div>
-                <div id="example">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                <div class="title1"><a href="javascript: edit('Form/help');" style="float: left; margin-right: 10px;"><img src="<?=$config->get('BaseUrl')?>/Resources/Images/edit.png" alt="Editar" /></a>Ayuda</div>
+                <div id="help">Loading...</div>
+                <div class="title1"><a href="javascript: edit('Form/example');" style="float: left; margin-right: 10px;"><img src="<?=$config->get('BaseUrl')?>/Resources/Images/edit.png" alt="Editar" /></a>Ejemplos</div>
+                <div id="example">Loading...</div>
             </div>
         </div>
         
@@ -198,6 +231,13 @@
             <div class="modalDialog" class="shadowInt">
                 <div id="close2"></div>
                 <div id="modalDialog"></div>
+            </div>
+        </div>
+		
+		<div class="darkBox" id="editHelp">
+            <div class="editHelp" class="shadowInt">
+                <div id="close3"></div>
+                <div id="editDialog"></div>
             </div>
         </div>
         

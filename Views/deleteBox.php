@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-<form method="POST" action="<?=$config->get('BaseUrl')?>?controller=Register&action=deleteBox&str=<?=$obj?>" enctype="multipart/form-data">
+<form method="POST" action="<?=$config->get('InitUrl')?>?controller=Register&action=deleteBox&str=<?=$obj?>" enctype="multipart/form-data">
     <div class="title2">Eliminar Acceso</div>
     <input type="password" name="pass" placeholder="Clave" style="width: 100%;"/>
     <input type="submit" value="Eliminar" style="float: right;"/>

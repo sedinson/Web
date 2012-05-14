@@ -302,11 +302,7 @@ input[type="file"] {
     z-index: 100;
 }
 
-#dadd {
-    display: none;
-}
-
-#modal {
+#dadd, #modal, #editHelp {
     display: none;
 }
 
@@ -325,7 +321,7 @@ input[type="file"] {
     min-height: 100%;
 }
 
-.dialog {
+.dialog, .editHelp {
     background: white;
     width: 300px;
     margin: 150px auto;
@@ -335,7 +331,11 @@ input[type="file"] {
     border-radius: 5px;
 }
 
-#close1, #close2 {
+.editHelp {
+    width: 480px;
+}
+
+#close1, #close2, #close3 {
     position: absolute;
     background: url(../../Resources/Images/close1.png) no-repeat;
     width: 29px;
@@ -348,6 +348,10 @@ input[type="file"] {
 #close2 {
     position: fixed;
     margin-top: -12px;
+}
+
+#close3 {
+	margin-left: 475px;
 }
 
 .close2 {
@@ -388,4 +392,13 @@ input[type="file"] {
 
 #text:focus {
     height: 60px;
+}
+
+.fillAll {
+	width: 100%;
+}
+
+#contenido {
+	height: 150px;
+	resize: none;
 }

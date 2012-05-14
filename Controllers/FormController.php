@@ -27,5 +27,17 @@ class FormController extends ControllerBase {
     function deleteBox2() {
         $this->view->partial("deleteBox2.php", null, $this->get[0]);
     }
+	
+	function help() {
+		$model = $this->getModel("Help");
+		$result = $model->getAllInformation($this->get[0]);
+		$this->view->partial("editar.php", $result, $this->get[0]);
+	}
+	
+	function example() {
+		$model = $this->getModel("Example");
+		$result = $model->getAllInformation($this->get[0]);
+		$this->view->partial("editExample.php", $result, $this->get[0]);
+	}
 }
 ?>

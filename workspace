@@ -1,0 +1,119 @@
+<NotepadPlus>
+    <Project name="web">
+        <Folder name="Controllers">
+            <File name="Controllers\ErrorController.php" />
+            <File name="Controllers\FormController.php" />
+            <File name="Controllers\GraficasController.php" />
+            <File name="Controllers\HelpController.php" />
+            <File name="Controllers\index.html" />
+            <File name="Controllers\IndexController.php" />
+            <File name="Controllers\RegisterController.php" />
+            <File name="Controllers\ExampleController.php" />
+        </Folder>
+        <Folder name="Layouts">
+            <File name="Layouts\default.php" />
+            <File name="Layouts\index.html" />
+        </Folder>
+        <Folder name="libs">
+            <File name="libs\Config.php" />
+            <File name="libs\Content.php" />
+            <File name="libs\ControllerBase.php" />
+            <File name="libs\index.html" />
+            <File name="libs\ModelBase.php" />
+            <File name="libs\SPDO.php" />
+            <File name="libs\StartController.php" />
+            <File name="libs\View.php" />
+        </Folder>
+        <Folder name="Models">
+            <File name="Models\AccessModel.php" />
+            <File name="Models\index.html" />
+            <File name="Models\ExampleModel.php" />
+            <File name="Models\HelpModel.php" />
+        </Folder>
+        <Folder name="nbproject">
+            <Folder name="private">
+                <File name="nbproject\private\config.properties" />
+                <File name="nbproject\private\private.properties" />
+                <File name="nbproject\private\private.xml" />
+            </Folder>
+            <File name="nbproject\project.properties" />
+            <File name="nbproject\project.xml" />
+        </Folder>
+        <Folder name="Resources">
+            <Folder name="fonts">
+                <File name="Resources\fonts\index.html" />
+            </Folder>
+            <Folder name="Images">
+                <File name="Resources\Images\382875_10151064168390322_864585321_21972518_1615960656_n.jpg" />
+                <File name="Resources\Images\accesos.svg" />
+                <File name="Resources\Images\add.png" />
+                <File name="Resources\Images\addSel.png" />
+                <File name="Resources\Images\ajax.gif" />
+                <File name="Resources\Images\bgBlack.png" />
+                <File name="Resources\Images\bgGray.png" />
+                <File name="Resources\Images\close.png" />
+                <File name="Resources\Images\close1.png" />
+                <File name="Resources\Images\close2.png" />
+                <File name="Resources\Images\deg1.png" />
+                <File name="Resources\Images\edit.png" />
+                <File name="Resources\Images\index.html" />
+                <File name="Resources\Images\Thumbs.db" />
+                <File name="Resources\Images\title1.old.png" />
+                <File name="Resources\Images\title1.png" />
+                <File name="Resources\Images\title3.png" />
+                <File name="Resources\Images\trabajo.svg" />
+                <File name="Resources\Images\triangle.png" />
+            </Folder>
+            <Folder name="Public">
+                <File name="Resources\Public\9015bd24e450g3862.png" />
+                <File name="Resources\Public\ac09549c3079g5488.png" />
+                <File name="Resources\Public\e163487184e0g5777.png" />
+                <File name="Resources\Public\f8d2f124e450g3862.png" />
+                <File name="Resources\Public\index.html" />
+            </Folder>
+            <File name="Resources\index.html" />
+        </Folder>
+        <Folder name="Scripts">
+            <Folder name="css">
+                <File name="Scripts\css\index.html" />
+                <File name="Scripts\css\style.css" />
+            </Folder>
+            <Folder name="js">
+                <File name="Scripts\js\Graph.js" />
+                <File name="Scripts\js\index.html" />
+                <File name="Scripts\js\jquery.min.js" />
+                <File name="Scripts\js\jquery.nicescroll.min.js" />
+                <File name="Scripts\js\Stat.js" />
+                <File name="Scripts\js\zoomico.png" />
+            </Folder>
+            <File name="Scripts\index.html" />
+        </Folder>
+        <Folder name="Views">
+            <File name="Views\addAccess.php" />
+            <File name="Views\addSubAccess.php" />
+            <File name="Views\barra.php" />
+            <File name="Views\deleteBox.php" />
+            <File name="Views\deleteBox2.php" />
+            <File name="Views\editar.php" />
+            <File name="Views\editExample.php" />
+            <File name="Views\error.php" />
+            <File name="Views\frecuencia.php" />
+            <File name="Views\index.html" />
+            <File name="Views\index.php" />
+            <File name="Views\subAccess.php" />
+            <File name="Views\torta.php" />
+            <File name="Views\content.php" />
+        </Folder>
+        <Folder name="_database">
+            <File name="_database\stat.old.sql" />
+            <File name="_database\stat.old[19-04-12].sql" />
+            <File name="_database\stat.old[29-04-12].sql" />
+            <File name="_database\stat.sql" />
+        </Folder>
+        <File name=".htaccess" />
+        <File name="configs.php" />
+        <File name="index.php" />
+        <File name="README.md" />
+        <File name="workspace" />
+    </Project>
+</NotepadPlus>

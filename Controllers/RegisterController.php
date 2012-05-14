@@ -31,7 +31,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
+        header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function newSubAccess () {
@@ -52,7 +52,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
+        header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function deleteBox () {
@@ -65,7 +65,7 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
+        header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
     }
     
     function deleteBox2 () {
@@ -78,7 +78,45 @@ class RegisterController extends ControllerBase {
             $status = "Failed";
         }
         
-        header("location:" . $this->config->get("BaseUrl") . "?controller=Index&action=index&str=" . $status);
+        header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
     }
+	
+	function help () {
+		$model = $this->getModel("User");
+		$model2 = $this->getModel("Help");
+		$result1 = $model->getUser($this->post['user'], $this->post['password']);
+		if(!empty($result1))
+		{
+			$row = $result1->fetch();
+			$result2 = $model2->insertHelp($this->post['help'], $this->post['idaccess'], $this->post['idhelp'], $row['id']);
+			if($result2)
+				$status = "Done";
+			else
+				$status = "Failed";
+		}
+		else
+			$status = "Failed";
+		
+		header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
+	}
+	
+	function example () {
+		$model = $this->getModel("User");
+		$model2 = $this->getModel("Example");
+		$result1 = $model->getUser($this->post['user'], $this->post['password']);
+		if(!empty($result1))
+		{
+			$row = $result1->fetch();
+			$result2 = $model2->insertExample($this->post['example'], $this->post['idaccess'], $this->post['idexample'], $row['id']);
+			if($result2)
+				$status = "Done";
+			else
+				$status = "Failed";
+		}
+		else
+			$status = "Failed";
+		
+		header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
+	}
 }
 ?>
