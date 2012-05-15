@@ -8,6 +8,8 @@ Math.logBase = function (x, b) {return Math.log(x)/Math.log(b)};
 
 function Stat () { }
 
+Stat.p = 1;
+
 Stat.minVal = function (a) {
     var m = Infinity;
     for(var i=0; i<a.length; i++)
@@ -34,7 +36,19 @@ Stat.averrage = function (array)
     }
 
     return (sum/f);
+}
+
+Stat.mode = function (array) 
+{
+    array = Stat.prepare(array);
+    var tmp = [0, 0, 0];    //[c, x, f]
+    for(var i=0; i<array.length; i++)
+    {
+        if(array[i][2] > tmp[2])
+            tmp = array[i];
+    }
     
+    return tmp;
 }
 
 Stat.variance = function (array)
@@ -57,13 +71,46 @@ Stat.deviation = function (array)
     return Math.sqrt(Stat.variance(array));
 }
 
-Stat.n = function (array) {
+Stat.CV = function (array)
+{
+    return Stat.deviation(array) / Stat.averrage(array);
+}
+
+Stat.Quartile = function (i, n)
+{
+    return (i*(n+1))/4;
+}
+
+Stat.Percentile = function (i, n)
+{
+    return (i*(n+1))/10;
+}
+
+Stat.Decile = function (i, n)
+{
+    return (i*(n+1))/100;
+}
+
+Stat.n = function (array) 
+{
     var sum = 0;
-    for(var i=0; i<array.length; i++) {
+    array = Stat.prepare(array);
+    for(var i=0; i<array.length; i++) 
+    {
         sum += array[i][2];
     }
     
     return sum;
+}
+
+Stat.median = function (array)
+{
+    array = Stat.prepare(array);
+    var n = Stat.n(array);
+    var q2 = Stat.Quartile(2, n);
+    var diff = q2-Math.floor(q2);
+    var tmp = [0, 0, 0];
+    /*TERMINAR...!*/
 }
 
 Stat.frecuency = function (array)
@@ -82,7 +129,7 @@ Stat.frecuency = function (array)
         for(i=0; i<array.length; i++)
         {
             if(Math.floor((array[i]-li)/w) >= tmp.length)
-                tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-1), ((li+c*w)+(li+(++c)*w-1))/2, 0];
+                tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-Stat.p), ((li+c*w)+(li+(++c)*w-Stat.p))/2, 0];
 
             tmp[Math.floor((array[i]-li)/w)][2] += 1;
         }

@@ -28,6 +28,10 @@ body {
     padding: 0;
 }
 
+img {
+    border: 0;
+}
+
 a {
     color: #305f9a;
     text-decoration: none;
