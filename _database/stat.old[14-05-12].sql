@@ -2,10 +2,10 @@
 -- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 15, 2012 at 02:19 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Servidor: localhost
+-- Tiempo de generación: 14-05-2012 a las 18:45:06
+-- Versión del servidor: 5.5.16
+-- Versión de PHP: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `stat`
+-- Base de datos: `stat`
 --
+CREATE DATABASE `stat` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+USE `stat`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `access`
+-- Estructura de tabla para la tabla `access`
 --
 
 CREATE TABLE IF NOT EXISTS `access` (
@@ -33,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=22 ;
 
 --
--- Dumping data for table `access`
+-- Volcado de datos para la tabla `access`
 --
 
 INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
@@ -54,13 +56,12 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (18, 9, 'Normal', '6673b0g6080.png', 'Distribucion/Normal'),
 (19, 6, 'Centralizaci&oacute;n', 'b6730373e079image3014.png', 'Medidas/Centralizacion'),
 (20, 6, 'Variabilidad', 'c5145a73e079image3014.png', 'Medidas/Variabilidad'),
-(21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion'),
-(23, 14, 'Intervalo de Confianza para la Media', 'f18a70miu.png', 'Estimacion/media');
+(21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `example`
+-- Estructura de tabla para la tabla `example`
 --
 
 CREATE TABLE IF NOT EXISTS `example` (
@@ -75,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `example` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `help`
+-- Estructura de tabla para la tabla `help`
 --
 
 CREATE TABLE IF NOT EXISTS `help` (
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `help` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `help`
+-- Volcado de datos para la tabla `help`
 --
 
 INSERT INTO `help` (`idhelp`, `idaccess`, `help`, `iduser`, `creationdate`) VALUES
@@ -97,7 +98,7 @@ INSERT INTO `help` (`idhelp`, `idaccess`, `help`, `iduser`, `creationdate`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modexample`
+-- Estructura de tabla para la tabla `modexample`
 --
 
 CREATE TABLE IF NOT EXISTS `modexample` (
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `modexample` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modhelp`
+-- Estructura de tabla para la tabla `modhelp`
 --
 
 CREATE TABLE IF NOT EXISTS `modhelp` (
@@ -123,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `modhelp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `user`, `password`) VALUES
