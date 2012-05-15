@@ -63,7 +63,7 @@ input[type="button"], input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], textarea, input[type="number"] {
     background: #fff;
     background: -moz-linear-gradient(top, #fff, #f6f5f5);
     background: -webkit-linear-gradient(top, #fff, #f6f5f5);

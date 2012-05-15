@@ -124,7 +124,7 @@
     body{
         color: #222;
     }
-    input[type="text"],input[type="number"]{
+    input[type="text"], input[type="number"]{
         display: inline-block;
         width: 200px;
     }

@@ -91,6 +91,25 @@ Stat.Decile = function (i, n)
     return (i*(n+1))/100;
 }
 
+Stat.getData = function (f, i, array) 
+{
+    array = Stat.prepare(array);
+    var n = Stat.n(array);
+    var p = f(i, n);
+    var d = p-Math.floor(p);
+    p = Math.floor(p);
+    var sum = 0;
+    var j, l;
+    for(j=0; j<array.length && sum<p; j++)
+    {
+        sum += array[j][2];
+        alert(sum + ":" + array[j][2])
+        l = (sum == p)? j : j-1;
+    }
+    
+    return parseFloat(array[j][1])*d + parseFloat(array[l][1])*(1-d);
+}
+
 Stat.n = function (array) 
 {
     var sum = 0;
@@ -105,12 +124,7 @@ Stat.n = function (array)
 
 Stat.median = function (array)
 {
-    array = Stat.prepare(array);
-    var n = Stat.n(array);
-    var q2 = Stat.Quartile(2, n);
-    var diff = q2-Math.floor(q2);
-    var tmp = [0, 0, 0];
-    /*TERMINAR...!*/
+    return Stat.getData(Stat.Quartile, 2, array);
 }
 
 /*Regresa un array, donde todos los datos los divide y clasifica para que sean acumulados,
