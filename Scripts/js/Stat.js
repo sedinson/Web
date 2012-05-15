@@ -113,6 +113,8 @@ Stat.median = function (array)
     /*TERMINAR...!*/
 }
 
+/*Regresa un array, donde todos los datos los divide y clasifica para que sean acumulados,
+ *y asi poder trabajar en esta clase. Metodo importante!*/
 Stat.frecuency = function (array)
 {
     var tmp = [];
@@ -148,6 +150,7 @@ Stat.frecuency = function (array)
     return tmp;
 }
 
+/*Prepara el array pasado para que este normalizado como se necesita para que funcione en esta clase*/
 Stat.prepare = function (array)
 {
     if(typeof array[0] == "number" || typeof array[0] == "string")
@@ -156,6 +159,8 @@ Stat.prepare = function (array)
         return array;
 }
 
+/*Genera una tabla que muestra los diferentes valores de una tabla de frecuencias, tales como
+ *clase, marca de clase, frecuencia, frecuencia acumulada, frecuencia relativa y frecuencia relativa acumulada*/
 Stat.getTableInfo = function (array)
 {
     var data = Stat.prepare(array);
@@ -181,8 +186,8 @@ Stat.getTableInfo = function (array)
 
 function Extra() { }
 
-//Convierte value en un array de datos. Usa \n como simbolo de nueva fila y \t como nueva columna.
-//tal como vienen los datos de excel. Una mejora a futuro es elegir los delimitadores.
+/*Convierte value en un array de datos. Usa \n como simbolo de nueva fila y \t como nueva columna.
+ *tal como vienen los datos de excel. Una mejora a futuro es elegir los delimitadores.*/
 Extra.transformData = function (value) {
     var str = value.split("\n");
     var tmp = [];

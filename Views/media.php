@@ -14,6 +14,13 @@
             $("#vmuestral").fadeIn("slow");
         });
     }
+    
+    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    
+    function modalClosed() 
+    {
+        clearInterval(timmerPeriodic);
+    }
 </script>
 <div>
     <h1>Intervalos de Confianza para la Media: </h1>
