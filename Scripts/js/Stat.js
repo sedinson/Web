@@ -133,11 +133,10 @@ Stat.getData = function (f, i, array)
     for(j=0; j<array.length && sum<p; j++)
     {
         sum += array[j][2];
-        alert(sum + ":" + array[j][2])
-        l = (sum == p)? j : j-1;
+        l = (sum == p)? j+1 : j;
     }
     
-    return parseFloat(array[j][1])*d + parseFloat(array[l][1])*(1-d);
+    return parseFloat(array[j-1][1])*d + parseFloat(array[l][1])*(1-d);
 }
 
 Stat.n = function (array) 
