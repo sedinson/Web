@@ -2,7 +2,7 @@
     document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
     var graphics = new Graph(document.getElementById('grafica'));
     graphics.setData(myData);
-    graphics.setType(1);
+    graphics.setType(graphics.CIRCULAR);
     graphics.start();
     
     function periodic () 

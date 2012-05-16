@@ -8,20 +8,18 @@ Math.logBase = function (x, b) {return Math.log(x)/Math.log(b)};
 
 function Stat () { }
 
+Stat.min = Infinity;
+Stat.max = -1*Infinity;
 Stat.p = 1;
 
-Stat.minVal = function (a) {
-    var m = Infinity;
-    for(var i=0; i<a.length; i++)
-        m = (a[i]<m)? a[i] : m;
-    return m;
+Stat.minVal = function () 
+{
+    return Stat.min;
 }
 
-Stat.maxVal = function (a) {
-    var m = -1*Infinity;
-    for(var i=0; i<a.length; i++)
-        m = (a[i]>m)? a[i] : m;
-    return m;
+Stat.maxVal = function () 
+{
+    return Stat.max;
 }
 
 Stat.averrage = function (array)
@@ -31,8 +29,8 @@ Stat.averrage = function (array)
     var f = 0;
     for(var i=0; i<array.length; i++)
     {
-        sum += array[i][0]*array[i][1];
-        f += array[i][1];
+        sum += array[i][1]*array[i][2];
+        f += array[i][2];
     }
 
     return (sum/f);
@@ -59,8 +57,8 @@ Stat.variance = function (array)
     var f = 0;
     for(i=0; i<array.length; i++)
     {
-        sum += Math.pow(array[i][0], 2)*array[i][1];
-        f += array[i][1];
+        sum += Math.pow(array[i][1], 2)*array[i][2];
+        f += array[i][2];
     }
 
     return (sum/f-Math.pow(Stat.averrage(array), 2));
@@ -74,6 +72,38 @@ Stat.deviation = function (array)
 Stat.CV = function (array)
 {
     return Stat.deviation(array) / Stat.averrage(array);
+}
+
+Stat.CAs = function (array)
+{
+    array = Stat.prepare(array);
+    var xm = Stat.averrage(array);
+    var sum = 0;
+    var i = 0;
+    var f = 0;
+    for(i=0; i<array.length; i++)
+    {
+        sum += Math.pow(array[i][1]-xm, 3)*array[i][2];
+        f += array[i][2];
+    }
+
+    return sum/(f*Math.pow(Stat.deviation(array), 3));
+}
+
+Stat.CAp = function (array)
+{
+    array = Stat.prepare(array);
+    var xm = Stat.averrage(array);
+    var sum = 0;
+    var i = 0;
+    var f = 0;
+    for(i=0; i<array.length; i++)
+    {
+        sum += Math.pow(array[i][1]-xm, 4)*array[i][2];
+        f += array[i][2];
+    }
+
+    return sum/(f*Math.pow(Stat.deviation(array), 4));
 }
 
 Stat.Quartile = function (i, n)
@@ -132,7 +162,13 @@ Stat.median = function (array)
 Stat.frecuency = function (array)
 {
     var tmp = [];
-    if(typeof array[0] == "number") {
+    for(var i=0; i<array.length; i++)
+    {
+        Stat.min = (array[i] < Stat.min)? array[i] : Stat.min;
+        Stat.max = (array[i] > Stat.max)? array[i] : Stat.max;
+    }
+    if(typeof array[0] == "number") 
+    {
         var li = Stat.minVal(array);
         var ls = Stat.maxVal(array);
         var r = ls - li;
@@ -149,12 +185,15 @@ Stat.frecuency = function (array)
 
             tmp[Math.floor((array[i]-li)/w)][2] += 1;
         }
-    } else if(typeof array[0] == "string") {
+    } 
+    else if(typeof array[0] == "string") 
+    {
         var vars = array.unique();
 
         for(i=0; i<vars.length; i++) {
             tmp[i] = [vars[i], vars[i], 0];
-            for(var j=0; j<array.length; j++) {
+            for(var j=0; j<array.length; j++) 
+            {
                 if(array[j] == vars[i])
                     tmp[i][2] += 1;
             }
@@ -167,6 +206,9 @@ Stat.frecuency = function (array)
 /*Prepara el array pasado para que este normalizado como se necesita para que funcione en esta clase*/
 Stat.prepare = function (array)
 {
+    Stat.min = Infinity;
+    Stat.max = -1*Infinity;
+    
     if(typeof array[0] == "number" || typeof array[0] == "string")
         return Stat.frecuency(array);
     else
