@@ -17,6 +17,12 @@ function Graph(div)
     cnv.height = 100;
     cnv.width = 100;
     
+    //Variables que tienen los tipos de graficas
+    this.BARRAS = 0;
+    this.CIRCULAR = 1;
+    this.FRECUENCIA = 2;
+    this.CAJA_Y_BIGOTES = 3;
+    
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
     var pData = 2;                  //Ubicacion en la cual estan los datos en el array
@@ -26,6 +32,9 @@ function Graph(div)
     var data = [];                  //Array que contiene los datos a graficar
     var max = 0;                    //Valor maximo del array de datos
     var min = 0;                    //Valor minimo del array de datos
+    var q1 = 0;
+    var q2 = 0;
+    var q3 = 0;
     var sum = 0;                    //Suma de todos los elementos del array de datos
     var w = 100;                    //Ancho del canvas
     var h = 100;                    //Alto del canvas
@@ -174,6 +183,40 @@ function Graph(div)
         }
     }
     
+    var cajaybigotes = function ()
+    {   //Algunos calculos preliminares antes de empezar a graficar
+        var bottomBase = 50;
+        var sideBase = 50;
+        var width = w-2*sideBase;
+        var D = max-min;
+        var dq1 = (q1*width)/D;
+        var dq2 = (q2*width)/D;
+        var dq3 = (q3*width)/D;
+        
+        //Estableciendo configuraciones de pintado
+        g.strokeStyle = "#000";
+        g.lineWidth = 2;
+        g.font = "15px Arial";
+        g.textBaseline = "top";
+        g.textAlign = "center";
+        
+        //Pintando las lineas del campo
+        g.beginPath();
+            g.moveTo(sideBase, h-bottomBase);
+            g.lineTo(sideBase+width, h-bottomBase);
+            
+            g.moveTo(sideBase, h-bottomBase-5);
+            g.lineTo(sideBase, h-bottomBase+5);
+            
+            g.moveTo(sideBase+width, h-bottomBase-5);
+            g.lineTo(sideBase+width, h-bottomBase+5);
+            
+            g.moveTo(sideBase+dq1, h-bottomBase-5);
+            g.lineTo(sideBase+dq1, h-bottomBase+5);
+            
+            g.stroke();
+    }
+    
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -197,6 +240,8 @@ function Graph(div)
             case 2: //Frecuencia
                 base(frecuencia);
                 break;
+            case 3:
+                cajaybigotes();
         }
     }
     
@@ -218,15 +263,16 @@ function Graph(div)
         data = Stat.prepare(array);
         
         //Obtener los valores minimo, maximo y la suma de todos los elementos del array
-        min = Infinity;
-        max = 0;
+        min = Stat.minVal();
+        max = Stat.maxVal();
+        q1 = Stat.getData(Stat.Quartile, 1, array);
+        alert(q1)
+        q2 = Stat.median(array);
+        q3 = Stat.getData(Stat.Quartile, 3, array);
+        
         sum = 0;
         for(var i=0; i<data.length; i++)
-        {
-            min = (Math.min(min, data[i][pData]));
-            max = (Math.max(max, data[i][pData]));
             sum += data[i][pData];
-        }
     }
     
     //Funcion que inicia el hilo que repintara

@@ -11,16 +11,20 @@
  * @author Edinson Salas
  */
 class GraficasController extends ControllerBase {
-    function Torta() {
+    function Torta () {
         $this->view->partial("torta.php");
     }
     
-    function Barra() {
+    function Barra () {
         $this->view->partial("barra.php");
     }
     
-    function FrecuenciaAcumulada() {
+    function FrecuenciaAcumulada () {
         $this->view->partial("frecuencia.php");
+    }
+    
+    function CajayBigotes () {
+        $this->view->partial("cajaybigotes.php");
     }
 }
 

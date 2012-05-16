@@ -28,6 +28,15 @@
                 }
             }
             
+            function navegador(nav)
+            {
+                $(nav + " li").click(function(event)
+                {
+                    $(nav + " li ul>li").css("display", "none");
+                    $(this).find("li").css("display", "block");
+                });
+            }
+            
             function mostrar(url) 
             {
                 var str = url.split("/");
@@ -47,8 +56,12 @@
                     modalScroll.resize().show();
                     timmerPeriodic = setInterval(function() {periodic()}, 250);
                 });
-                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt, function() {
+                    navegador("#help");
+                });
+                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt, function() {
+                    navegador("#example");
+                });
             }
 			
             function edit(url) 
@@ -161,8 +174,12 @@
                     });
 
                     selOpt = 0;
-                    $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-                    $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+                    $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt, function() {
+                        navegador("#help");
+                    });
+                    $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt, function() {
+                        navegador("#example");
+                    });
                 });
 				
                 $("#close3").click(function(event)
@@ -173,8 +190,12 @@
                 });
 
                 selOpt = '0';
-                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt);
-                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt);
+                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt, function() {
+                    navegador("#help");
+                });
+                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt, function() {
+                    navegador("#example");
+                });
                 
                 <?php
                     if(isset($obj)) {

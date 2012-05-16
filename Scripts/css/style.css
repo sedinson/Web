@@ -32,6 +32,16 @@ img {
     border: 0;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    margin: 0;
+}
+
 a {
     color: #305f9a;
     text-decoration: none;
@@ -144,7 +154,23 @@ input[type="file"] {
 
 #help, #example {
     font-size: 13px;
+    color: #5b5b5b;
     line-height: 20px;
+}
+
+#help li {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#help li ul, #example li ul {
+    padding-left: 10px;
+}
+
+#help li ul>li, #example li ul>li {
+    font-weight: normal;
+    cursor: text;
+    display: none;
 }
 
 .title1 {
@@ -429,10 +455,6 @@ input[type="file"] {
 #tabla td, #tabla th {
     padding: 5px 0;
 }
-
-/*#tabla tbody tr:nth-child(odd){ 
-    background: #fafafa;
-}*/
 
 #tabla tbody tr:nth-child(even){ 
     background: #f1f1f1;

@@ -2,8 +2,7 @@
     document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
     var graphics = new Graph(document.getElementById('grafica'));
     graphics.setData(myData);
-    graphics.setType(graphics.FRECUENCIA);
-    graphics.setLabel(1);
+    graphics.setType(graphics.CAJA_Y_BIGOTES);
     graphics.start();
     
     function periodic () 
