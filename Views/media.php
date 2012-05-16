@@ -97,6 +97,7 @@
               }else{
                   sigma = $("#smuestral").val();
                   if($("#siNorm:checked").val() == "si"){
+                      z= tStudentICDF(alfa/2,n-1);
                       casetype="Tipo III";
                   }else{
                       z = NORMSINV(alfa/2);
