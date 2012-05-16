@@ -1,4 +1,6 @@
 <script type="text/javascript">
+    var desc = ["El tamaño de la muestra no es la suficientemente grande para aproximar a la Normal","Poblacion Normal, Varianza poblacional(&sigma;&sup2;) conocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) conocida, Tamaño de muestra &ge; 30",
+                "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"]
     $(document).load(function (){
         $("#vpoblacional").hide();
         $("#vmuestral").hide();
@@ -80,17 +82,21 @@
               var x = $("#miu").val();
               var sigma;
               var casetype;
+              var des;
               if($("#consi:checked").val()=="si"){
                   sigma = Math.sqrt($("#varpoblacional").val());
                   z = NORMSINV(alfa/2);
                   if($("#siNorm:checked").val() == "si"){
                       casetype = "Tipo I";
+                      des = 1;
                   }else if(n>=30){
                       casetype = "Tipo II";
+                      des = 2;
                   }
                   else{
-                      casetype = "El N no es lo suficientemente grande para aproximar a la Normal";
-                      $("#casoTipo").html(caseType);
+                      casetype = "Desconocido";
+                      $("#casoTipo").html(casetype);
+                      $("#descCaso").html(desc[0]);
                       $("#resultado").fadeIn();
                       return false;
                   }
@@ -99,21 +105,43 @@
                   if($("#siNorm:checked").val() == "si"){
                       z= tStudentICDF(alfa/2,n-1);
                       casetype="Tipo III";
-                  }else{
+                      des = 3;
+                  }else if(n>=30){
                       z = NORMSINV(alfa/2);
                       casetype="Tipo IV";
+                      des = 4;
+                  }else{
+                      casetype = "Desconocido";
+                      $("#casoTipo").html(caseType);
+                      $("#descCaso").html(desc[0]);
+                      $("#resultado").fadeIn();
+                      return false;
                   }
               }
+              
               var amplitud = z*sigma/Math.sqrt(n);
               var min = x - amplitud;
-              var may = x + amplitud;
-              $("#casoTipo").html(casetype);
-              $("#minInt").html(min);
-              $("#mayInt").html(may);
-              $("#resultado").fadeIn();
+              var may = x*1 + amplitud;
+              $("#casoTipo").html("Caso "+casetype);
+              $("#descCaso").html(desc[des]);
+              var res = $("#resultado");
+              var cont = $("#modalDialog");
+              res.width(cont.width()-580);
+              var intervalo = $("#intervalo");
+              intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
+              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+              res.slideUp(function(){
+                  res.slideDown(function(){
+                      $("#divIntervalo").fadeIn();
+                  });
+              });
+              ajustarIntervalo();
           }
        });
     });
+    function ajustarIntervalo(){
+        $("#intervalo").width($("#intervalo").children().width()+20);
+    }
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -125,15 +153,80 @@
     body{
         color: #222;
     }
+    h1{
+        color: #BBB;
+        text-shadow: 3px 3px 5px;
+        font-size: 38px;
+    }
+    h2.data{
+        background: #AAA;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 24px;
+        margin: 0;
+        margin-bottom: 10px;
+        padding-left: 12px;
+        width: 97.4%
+    }
     input[type="text"], input[type="number"]{
         display: inline-block;
+        text-align: right;
         width: 200px;
     }
     input[type="radio"]{
         margin-right: 10px;
     }
     pre{
-        margin: 0;
+        display: table;
+    }
+    strong{
+        display: inline-block;
+        font-weight: normal;
+        margin-right: 40px;
+        text-shadow: 1px 1px 3px #000;     
+    }
+    #divIntervalo{
+        background-color: #AAA;
+        border-radius: 10px;
+        display: table;
+        margin-bottom: 20px;
+    }
+    #resultado{
+        background-image: linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
+        background-image: -o-linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
+        background-image: -moz-linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
+        background-image: -webkit-linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
+        background-image: -ms-linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
+
+        background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                right bottom,
+                color-stop(0, rgb(240,240,240)),
+                color-stop(0.15, rgb(255,255,255)),
+                color-stop(0.85, rgb(255,255,255)),
+                color-stop(1, rgb(240,240,240))
+        );
+        border-radius: 5px;
+        box-shadow: 2px 2px 3px #999;
+        text-align: center
+    }
+    #intervalo{
+        background-image: linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
+        background-image: -o-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
+        background-image: -moz-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
+        background-image: -webkit-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
+        background-image: -ms-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
+
+        background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0, rgb(212,212,212)),
+                color-stop(0.15, rgb(250,250,250))
+        );
+        border-radius: 7px;
+        box-shadow: 1px 1px 2px #444;
     }
     .calcular{
         background-image: linear-gradient(bottom, rgb(232,232,232) 8%, rgb(247,247,247) 54%);
@@ -174,15 +267,6 @@
         );
         cursor: pointer;
     }
-    strong{
-        display: inline-block;
-        font-weight: normal;
-        margin-right: 40px;
-        text-shadow: 1px 1px 3px #000;     
-    }
-    #resultado{
-        text-align: center
-    }
     .data{
        display: inline-block;
        text-align: left;
@@ -205,9 +289,11 @@
                 color-stop(1, rgb(237,237,237))
         );
         border-radius: 5px;
-        box-shadow: 2px 2px 3px #444;
+        box-shadow: 2px 2px 3px #999;
         color: #FFF;
-        padding: 15px;
+        margin-left: 30px;
+        padding: 0;
+        padding-bottom: 10px;
         width: 450px;
     }
     label.error{
@@ -229,10 +315,15 @@
         display: inline;
         float: left;
     }
+    .wrap{
+        margin: 0 auto;
+    }
 </style>
 <div>
-    <h1>Intervalos de Confianza para la Media: </h1>
+    <div class="title1">Media</div>
     <div class="datos inlineB">
+        <h2 class="data">Datos</h2>
+        <div style="padding: 0 15px;"">
         <form id="datos"> 
             <div id="divAlfa">
                 <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
@@ -271,11 +362,15 @@
                 </div>
             </div>
             <input type="submit" class="calcular" value="Calcular Intervalo" />
-            <!--<div class="calcular" onclick="javascript: calcular();">Calcular Intervalo</div>-->
         </form>
+        </div>
    </div>
     <div id="resultado"  class="inlineB" style="display: none;margin-left: 50px;">
-        <h1 id="casoTipo"></h1>
-        <h3><div id="minInt" class="inline"></div><div class="inline"><pre>    &le;    &micro;    &le;    </pre></div><div id="mayInt" class="inline"></div></h3>
+        <div id="casoTipo" class="title1" style="margin-left: -15px"></div>
+        <h3 id="descCaso"></h3>
+        <div id="divIntervalo" style="display: hidden" class="wrap">
+            <div id="intTitle"></div>
+            <div id="intervalo" class="wrap"></div>
+        </div>
     </div>
 </div>

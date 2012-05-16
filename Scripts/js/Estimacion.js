@@ -40,25 +40,26 @@ function NORMSINV(p)
     // Define break-points.
     var plow  = 0.02425;
     var phigh = 1 - plow;
-
+    var q;
     // Rational approximation for lower region:
     if ( p < plow ) {
-             var q  = Math.sqrt(-2*Math.log(p));
-             return 1-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+             q  = Math.sqrt(-2*Math.log(p));
+             return -1*(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
                                              ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
     }
+    
 
     // Rational approximation for upper region:
     if ( phigh < p ) {
-             var q  = Math.sqrt(-2*Math.log(1-p));
-             return 1+(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+             q  = Math.sqrt(-2*Math.log(1-p));
+             return -1*(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
                                                     ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
     }
 
     // Rational approximation for central region:
-    var q = p - 0.5;
+    q = p - 0.5;
     var r = q*q;
-    return 1-(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q /
+    return -1*(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q /
                              (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
 }
 
@@ -345,263 +346,178 @@ function qnorm(p,upper) {
     }
     return (ppnd);
 }
-function gamma(x){
+/*  The following JavaScript functions for calculating normal and
+    chi-square probabilities and critical values were adapted by
+    John Walker from C implementations
+    written by Gary Perlman of Wang Institute, Tyngsboro, MA
+    01879.  Both the original C code and this JavaScript edition
+    are in the public domain.  */
 
-    var P = [1.60119522476751861407E-4, 1.19135147006586384913E-3, 1.04213797561761569935E-2, 4.76367800457137231464E-2,
-                    2.07448227648435975150E-1, 4.94214826801497100753E-1, 9.99999999999999996796E-1 ];
-    var Q = [-2.31581873324120129819E-5, 5.39605580493303397842E-4, -4.45641913851797240494E-3, 1.18139785222060435552E-2,
-                    3.58236398605498653373E-2, -2.34591795718243348568E-1, 7.14304917030273074085E-2, 1.00000000000000000320E0 ];
-    //double MAXGAM = 171.624376956302725;
-    //double LOGPI  = 1.14472988584940017414;
+/*  POZ  --  probability of normal z value
 
-    var p, z;
-    var i;
+    Adapted from a polynomial approximation in:
+            Ibbetson D, Algorithm 209
+            Collected Algorithms of the CACM 1963 p. 616
+    Note:
+            This routine has six digit accuracy, so it is only useful for absolute
+            z values < 6.  For z values >= to 6.0, poz() returns 0.0.
+*/
 
-    var q = Math.abs(x);
+function poz(z) {
+    var y, x, w;
+    var Z_MAX = 6.0;              /* Maximum meaningful z value */
 
-    if (q > 33.0) {
-            if (x < 0.0) {
-                    p = Math.floor(q);
-                    i = p;
-                    z = q - p;
-                    if (z > 0.5) {
-                            p += 1.0;
-                            z = q - p;
-                    }
-                    z = q * Math.sin(Math.PI * z);
-                    z = Math.abs(z);
-                    z = Math.PI / (z * stirlingFormula(q));
-
-                    return -z;
-            } else {
-                    return stirlingFormula(x);
-            }
-    }
-
-    z = 1.0;
-    while (x >= 3.0) {
-            x -= 1.0;
-            z *= x;
-    }
-
-    while (x < 0.0) {
-            if (x > -1.E-9) {
-                    return (z / ((1.0 + 0.5772156649015329 * x) * x));
-            }
-            z /= x;
-            x += 1.0;
-    }
-
-    while (x < 2.0) {
-            if (x < 1.e-9) {
-                    return (z / ((1.0 + 0.5772156649015329 * x) * x));
-            }
-            z /= x;
-            x += 1.0;
-    }
-
-    if ((x == 2.0) || (x == 3.0)) {
-            return z;
-    }
-
-    x -= 2.0;
-    p = polevl(x, P, 6);
-    q = polevl(x, Q, 7);
-    return z * p / q;
-
-}
-function stirlingFormula(x){
-        var STIR = [ 7.87311395793093628397E-4, -2.29549961613378126380E-4, -2.68132617805781232825E-3, 3.47222221605458667310E-3,
-                        8.33333333333482257126E-2, ];
-        var MAXSTIR = 143.01608;
-
-        var w = 1.0 / x;
-        var y = Math.exp(x);
-
-        w = 1.0 + w * polevl(w, STIR, 4);
-
-        if (x > MAXSTIR) {
-                /* Avoid overflow in Math.pow() */
-                var v = Math.pow(x, 0.5 * x - 0.25);
-                y = v * (v / y);
-        } else {
-                y = Math.pow(x, x - 0.5) / y;
-        }
-        y = SQTPI * y * w;
-        return y;
-}
-function polevl(x,coef,N){
-    var ans;
-    ans = coef[0];
-    for (var i = 1; i <= N; i++) {
-            ans = ans * x + coef[i];
-    }
-
-    return ans;
-}
-function incompleteGamma(a,x){
-
-    var ans, ax, c, r;
-
-    if (x <= 0 || a <= 0) {
-            return 0.0;
-    }
-
-    if (x > 1.0 && x > a) {
-            return 1.0 - incompleteGammaComplement(a, x);
-    }
-
-    /* Compute  x**a * exp(-x) / gamma(a)  */
-    ax = a * Math.log(x) - x - logGamma(a);
-    if (ax < -MAXLOG) {
-            return (0.0);
-    }
-
-    ax = Math.exp(ax);
-
-    /* power series */
-    r = a;
-    c = 1.0;
-    ans = 1.0;
-
-    do {
-            r += 1.0;
-            c *= x / r;
-            ans += c;
-    } while (c / ans > MACHEP);
-
-    return (ans * ax / a);
-}
-function incompleteGammaComplement(a,x){
-    var ans, ax, c, yc, r, t, y, z;
-    var pk, pkm1, pkm2, qk, qkm1, qkm2;
-
-    if (x <= 0 || a <= 0) {
-            return 1.0;
-    }
-
-    if (x < 1.0 || x < a) {
-            return 1.0 - incompleteGamma(a, x);
-    }
-
-    ax = a * Math.log(x) - x - logGamma(a);
-    if (ax < -MAXLOG) {
-            return 0.0;
-    }
-
-    ax = Math.exp(ax);
-
-    /* continued fraction */
-    y = 1.0 - a;
-    z = x + y + 1.0;
-    c = 0.0;
-    pkm2 = 1.0;
-    qkm2 = x;
-    pkm1 = x + 1.0;
-    qkm1 = z * x;
-    ans = pkm1 / qkm1;
-
-    do {
-            c += 1.0;
-            y += 1.0;
-            z += 2.0;
-            yc = y * c;
-            pk = pkm1 * z - pkm2 * yc;
-            qk = qkm1 * z - qkm2 * yc;
-            if (qk != 0) {
-                    r = pk / qk;
-                    t = Math.abs((ans - r) / r);
-                    ans = r;
-            } else {
-                    t = 1.0;
-            }
-
-            pkm2 = pkm1;
-            pkm1 = pk;
-            qkm2 = qkm1;
-            qkm1 = qk;
-            if (Math.abs(pk) > big) {
-                    pkm2 *= biginv;
-                    pkm1 *= biginv;
-                    qkm2 *= biginv;
-                    qkm1 *= biginv;
-            }
-    } while (t > MACHEP);
-
-    return ans * ax;
-}
-function logGamma(x){
-    var p, q, w, z;
-
-    var A = [8.11614167470508450300E-4, -5.95061904284301438324E-4, 7.93650340457716943945E-4, -2.77777777730099687205E-3,
-                    8.33333333333331927722E-2 ];
-    var B= [-1.37825152569120859100E3, -3.88016315134637840924E4, -3.31612992738871184744E5, -1.16237097492762307383E6,
-                    -1.72173700820839662146E6, -8.53555664245765465627E5 ];
-    var C = [/* 1.00000000000000000000E0, */
-    -3.51815701436523470549E2, -1.70642106651881159223E4, -2.20528590553854454839E5, -1.13933444367982507207E6, -2.53252307177582951285E6,
-                    -2.01889141433532773231E6 ];
-
-    if (x < -34.0) {
-            q = -x;
-            w = logGamma(q);
-            p = Math.floor(q);
-            z = q - p;
-            if (z > 0.5) {
-                    p += 1.0;
-                    z = p - q;
-            }
-            z = q * Math.sin(Math.PI * z);
-            z = LOGPI - Math.log(z) - w;
-            return z;
-    }
-
-    if (x < 13.0) {
-            z = 1.0;
-            while (x >= 3.0) {
-                    x -= 1.0;
-                    z *= x;
-            }
-            while (x < 2.0) {
-                    z /= x;
-                    x += 1.0;
-            }
-            if (z < 0.0) {
-                    z = -z;
-            }
-            if (x == 2.0) {
-                    return Math.log(z);
-            }
-            x -= 2.0;
-            p = x * polevl(x, B, 5) / p1evl(x, C, 6);
-            return (Math.log(z) + p);
-    }
-    q = (x - 0.5) * Math.log(x) - x + 0.91893853320467274178;
-    //if( x > 1.0e8 ) return( q );
-    if (x > 1.0e8) {
-            return (q);
-    }
-
-    p = 1.0 / (x * x);
-    if (x >= 1000.0) {
-            q += ((7.9365079365079365079365e-4 * p - 2.7777777777777777777778e-3) * p + 0.0833333333333333333333) / x;
+    if (z == 0.0) {
+        x = 0.0;
     } else {
-            q += polevl(p, A, 4) / x;
+        y = 0.5 * Math.abs(z);
+        if (y >= (Z_MAX * 0.5)) {
+            x = 1.0;
+        } else if (y < 1.0) {
+            w = y * y;
+            x = ((((((((0.000124818987 * w
+                        - 0.001075204047) * w + 0.005198775019) * w
+                        - 0.019198292004) * w + 0.059054035642) * w
+                        - 0.151968751364) * w + 0.319152932694) * w
+                        - 0.531923007300) * w + 0.797884560593) * y * 2.0;
+        } else {
+            y -= 2.0;
+            x = (((((((((((((-0.000045255659 * y
+                            + 0.000152529290) * y - 0.000019538132) * y
+                            - 0.000676904986) * y + 0.001390604284) * y
+                            - 0.000794620820) * y - 0.002034254874) * y
+                            + 0.006549791214) * y - 0.010557625006) * y
+                            + 0.011630447319) * y - 0.009279453341) * y
+                            + 0.005353579108) * y - 0.002141268741) * y
+                            + 0.000535310849) * y + 0.999936657524;
+        }
     }
-    return q;
+    return z > 0.0 ? ((x + 1.0) * 0.5) : ((1.0 - x) * 0.5);
 }
-function p1evl(x,coef,N){
-    var ans;
 
-    ans = x + coef[0];
 
-    for (var i = 1; i < N; i++) {
-            ans = ans * x + coef[i];
+var BIGX = 20.0;                  /* max value to represent exp(x) */
+
+function ex(x) {
+    return (x < -BIGX) ? 0.0 : Math.exp(x);
+}   
+
+/*  POCHISQ  --  probability of chi-square value
+
+            Adapted from:
+                    Hill, I. D. and Pike, M. C.  Algorithm 299
+                    Collected Algorithms for the CACM 1967 p. 243
+            Updated for rounding errors based on remark in
+                    ACM TOMS June 1985, page 185
+*/
+
+function pochisq(x, df) {
+    var a, y, s;
+    var e, c, z;
+    var even;                     /* True if df is an even number */
+
+    var LOG_SQRT_PI = 0.5723649429247000870717135; /* log(sqrt(pi)) */
+    var I_SQRT_PI = 0.5641895835477562869480795;   /* 1 / sqrt(pi) */
+
+    if (x <= 0.0 || df < 1) {
+        return 1.0;
     }
 
-    return ans;
+    a = 0.5 * x;
+    even = !(df & 1);
+    if (df > 1) {
+        y = ex(-a);
+    }
+    s = (even ? y : (2.0 * poz(-Math.sqrt(x))));
+    if (df > 2) {
+        x = 0.5 * (df - 1.0);
+        z = (even ? 1.0 : 0.5);
+        if (a > BIGX) {
+            e = (even ? 0.0 : LOG_SQRT_PI);
+            c = Math.log(a);
+            while (z <= x) {
+                e = Math.log(z) + e;
+                s += ex(c * z - a - e);
+                z += 1.0;
+            }
+            return s;
+        } else {
+            e = (even ? 1.0 : (I_SQRT_PI / Math.sqrt(a)));
+            c = 0.0;
+            while (z <= x) {
+                e = e * (a / z);
+                c = c + e;
+                z += 1.0;
+            }
+            return c * y + s;
+        }
+    } else {
+        return s;
+    }
 }
 
-function chi2ICDF(p,v){
-   return incompleteGamma(v/2, 1/(2*p))/gamma(v/2);
+/*  CRITCHI  --  Compute critical chi-square value to
+                    produce given p.  We just do a bisection
+                    search for a value within CHI_EPSILON,
+                    relying on the monotonicity of pochisq().  */
+
+function critchi(p, df) {
+    var CHI_EPSILON = 0.000001;   /* Accuracy of critchi approximation */
+    var CHI_MAX = 99999.0;        /* Maximum chi-square value */
+    var minchisq = 0.0;
+    var maxchisq = CHI_MAX;
+    var chisqval;
+
+    if (p <= 0.0) {
+        return maxchisq;
+    } else {
+        if (p >= 1.0) {
+            return 0.0;
+        }
+    }
+
+    chisqval = df / Math.sqrt(p);    /* fair first value */
+    while ((maxchisq - minchisq) > CHI_EPSILON) {
+        if (pochisq(chisqval, df) < p) {
+            maxchisq = chisqval;
+        } else {
+            minchisq = chisqval;
+        }
+        chisqval = (maxchisq + minchisq) * 0.5;
+    }
+    return chisqval;
 }
+
+//	TRIMFLOAT  --  Trim a floating point number to maximum number of digits
+
+function trimfloat(ov, d) {
+    var o = "", v = ov.toString();
+    var c, i, n = 0, indec = false, aftdec = false;
+
+    for (i = 0; i < v.length; i++) {
+        c = v.charAt(i);
+        if (!indec) {
+            if (c == '.') {
+                indec = true;
+            }
+            o += c;
+        } else {
+            if (aftdec) {
+                o += c;
+            } else {
+                if ((c >= '0') && (c <= '9')) {
+                    if (n < d) {
+                        o += c;
+                    }
+                    n++;
+                } else {
+                    aftdec = true;
+                    o += c;
+                }
+            }
+        }
+    }
+    return o;
+}
+
 
