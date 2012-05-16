@@ -122,7 +122,7 @@
               var amplitud = z*sigma/Math.sqrt(n);
               var min = x - amplitud;
               var may = x*1 + amplitud;
-              $("#casoTipo").html(casetype);
+              $("#casoTipo").html("Caso "+casetype);
               $("#descCaso").html(desc[des]);
               var res = $("#resultado");
               var cont = $("#modalDialog");
@@ -208,7 +208,7 @@
                 color-stop(1, rgb(240,240,240))
         );
         border-radius: 5px;
-        box-shadow: 2px 2px 3px;
+        box-shadow: 2px 2px 3px #999;
         text-align: center
     }
     #intervalo{
@@ -289,7 +289,7 @@
                 color-stop(1, rgb(237,237,237))
         );
         border-radius: 5px;
-        box-shadow: 2px 2px 3px #444;
+        box-shadow: 2px 2px 3px #999;
         color: #FFF;
         margin-left: 30px;
         padding: 0;
@@ -320,7 +320,7 @@
     }
 </style>
 <div>
-    <h1>Intervalos de Confianza para la Media: </h1>
+    <div class="title1">Media</div>
     <div class="datos inlineB">
         <h2 class="data">Datos</h2>
         <div style="padding: 0 15px;"">
@@ -366,7 +366,7 @@
         </div>
    </div>
     <div id="resultado"  class="inlineB" style="display: none;margin-left: 50px;">
-        <h2 id="casoTipo"></h2>
+        <div id="casoTipo" class="title1" style="margin-left: -15px"></div>
         <h3 id="descCaso"></h3>
         <div id="divIntervalo" style="display: hidden" class="wrap">
             <div id="intTitle"></div>
