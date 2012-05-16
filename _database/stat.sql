@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 15, 2012 at 02:19 AM
+-- Generation Time: May 16, 2012 at 06:19 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `access`
@@ -55,7 +55,8 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (19, 6, 'Centralizaci&oacute;n', 'b6730373e079image3014.png', 'Medidas/Centralizacion'),
 (20, 6, 'Variabilidad', 'c5145a73e079image3014.png', 'Medidas/Variabilidad'),
 (21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion'),
-(23, 14, 'Intervalo de Confianza para la Media', 'f18a70miu.png', 'Estimacion/media');
+(23, 14, 'Intervalo de Confianza para la Media', 'f18a70miu.png', 'Estimacion/media'),
+(24, 14, 'Intervalo de Confianza para la Varianza', '237b47sigma.png', 'Estimacion/Varianza');
 
 -- --------------------------------------------------------
 
