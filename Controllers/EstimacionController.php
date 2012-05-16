@@ -15,19 +15,20 @@ class EstimacionController extends ControllerBase{
         $this->view->partial("media.php");
     }
     function Varianza(){
-        
+        $this->view->partial("varianza.php");
     }
     function Proporcion(){
+        $this->view->partial("proporcion.php");
         
     }
     function DiferenciaDeMedia(){
-        
+        $this->view->partial("difMedias.php");
     }
     function CoeficienteVarianzas(){
-        
+        $this->view->partial("coefVarianzas.php");
     }
-    function DiferenciaMedias(){
-        
+    function DiferenciaProporcion(){
+        $this->view->partial("difProporcion.php");
     }
 }
 ?>
