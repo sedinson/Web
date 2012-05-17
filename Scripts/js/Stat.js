@@ -274,3 +274,15 @@ Extra.transformData = function (value) {
     
     return tmp;
 }
+
+Extra.insertSort = function (array, pos) {
+   var a = array;
+   for (var i = 0, j, tmp; i < a.length; ++i) {
+      tmp = a[i];
+      for (j = i - 1; j >= 0 && a[j][pos] < tmp[pos]; --j)
+         a[j + 1] = a[j];
+      a[j + 1] = tmp;
+   }
+   
+   return a;
+}

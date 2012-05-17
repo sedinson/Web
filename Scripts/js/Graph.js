@@ -23,6 +23,7 @@ function Graph(div)
     this.FRECUENCIA = 2;
     this.CAJA_Y_BIGOTES = 3;
     this.FRECUENCIA_ACUMULADA = 4;
+    this.PARETO = 5;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -32,6 +33,7 @@ function Graph(div)
     var timmer1 = null;             //Temporizador encargado de pintar cada x milisegundos
     var option = 0;                 //Tipo de grafica (barra, torta, frecuencia, etc)
     var data = [];                  //Array que contiene los datos a graficar
+    var olData = [];                //Array que contiene los datos a graficar ordenados descendentemente
     var max = 0;                    //Valor maximo del array de datos
     var min = 0;                    //Valor minimo del array de datos
     var q1 = 0;
@@ -333,6 +335,76 @@ function Graph(div)
             g.restore();
     }
     
+    //Grafica de Pareto
+    var pareto = function () 
+    {   //Calcular el ancho de las barras y algunas propiedades del texto
+        var sep = (w-80)/olData.length;
+        var antX = -1;
+        var antY = -1;
+        
+        //Funcion que pintara un punto
+        var setPoint = function (x, y, i) 
+        {
+            g.save();
+                g.lineWidth = 6;
+                g.beginPath();
+                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.arc(x, y, 3, 0, 2*Math.PI, false);
+                    g.stroke();
+            g.restore();
+        }
+        
+        g.textAlign = "center";
+        g.textBaseline = "top";
+        
+        for(var i=0; i<olData.length; i++)
+        {   //Pintar la barra
+            var y = (olData[i][pData]/sum)*(h-60);
+            var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
+            grad.addColorStop(0, colors[i%colors.length][0]);
+            grad.addColorStop(1, colors[i%colors.length][1]);
+            g.fillStyle = grad;
+            g.fillRect(60+sep*i, (h-50)-y, sep, y);
+            g.fillStyle = "#000000";
+            g.fillText(olData[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        }
+        
+        g.fillStyle = "#000000";
+        var acum = 0;
+        for(var i=0; i<olData.length; i++)
+        {   //Pintar el punto y si es necesario la linea
+            acum += olData[i][pData];
+            y = (acum/sum)*(h-60);
+            if(i>0) 
+            {   //Si es el segundo punto, dibujar una linea que una los puntos
+                g.strokeStyle = "#000000";
+                g.lineWidth = 1;
+                g.beginPath();
+                    g.moveTo(antX, antY);
+                    g.lineTo(60+sep*i+sep/2, (h-50)-y);
+                    g.stroke();
+                    
+                    //Dibujar el punto
+                    setPoint(antX, antY, i);
+            }
+            
+            //Guardar el punto actual
+            antX = 60+sep*i+sep/2;
+            antY = (h-50)-y;
+        }
+        
+        //Dibujar el ultimo punto al salir
+        setPoint(antX, antY, olData.length);
+
+        //Pintar el texto de la guias del eje y
+        g.textAlign = "right";
+        g.textBaseline = "bottom";
+        for(i=1; i<=6; i++)
+        {
+            g.fillText((i*sum/6).toFixed(0)+"", 45, (6-i)*(h-80)/6+20);
+        }
+    }
+    
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -361,6 +433,9 @@ function Graph(div)
                 break;
             case 4: //Frecuencia Acumulada
                 base(frecuenciaAcumulada);
+                break;
+            case 5: //Pareto
+                base(pareto);
         }
     }
     
@@ -380,6 +455,7 @@ function Graph(div)
     this.setData = function (array)
     {   //Utiliza informacion de la clase Stat, encargada de preparar el array (estandarizar)
         data = Stat.prepare(array);
+        olData = Extra.insertSort(Stat.prepare(array), 2);
         
         //Obtener los valores minimo, maximo y la suma de todos los elementos del array
         min = Stat.minVal();

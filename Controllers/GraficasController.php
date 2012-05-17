@@ -30,6 +30,10 @@ class GraficasController extends ControllerBase {
     function CajayBigotes () {
         $this->view->partial("cajaybigotes.php");
     }
+    
+    function Pareto () {
+        $this->view->partial("pareto.php");
+    }
 }
 
 ?>
