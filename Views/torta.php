@@ -26,6 +26,7 @@
         graphics.stop();
     }
 </script>
+<div class="title2">Gr&aacute;fica Circular</div>
 <div class="title1">Datos</div>
 <div class="regular">
     <div id="tabla"></div>

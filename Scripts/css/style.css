@@ -153,22 +153,38 @@ input[type="file"] {
 }
 
 #help, #example {
-    font-size: 13px;
-    color: #5b5b5b;
+    font-size: 12px;
+    color: #333333;
     line-height: 20px;
 }
 
-#help li, #example li {
-    font-weight: bold;
+#help ul li, #example ul li {
+    background: #4a4a4a;
+    background: -moz-linear-gradient(top, #4a4a4a, #2a2a2a);
+    background: -webkit-linear-gradient(top, #4a4a4a, #2a2a2a);
     cursor: pointer;
-}
-
-#help li ul, #example li ul {
-    padding-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;  
+    color: whitesmoke; 
+    text-align: center; 
+    padding: 2px 0; 
+    margin-bottom: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #help li ul>li, #example li ul>li {
+    background: whitesmoke;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    margin: 0;
+    color: #333333;
     font-weight: normal;
+    font-size: 12px;
+    text-align: left;
     cursor: text;
     display: none;
 }
@@ -396,7 +412,7 @@ input[type="file"] {
 #grafica {
     position: relative;
     float: right;
-    margin: 5px;
+    margin: 0 5px 5px 5px;
     padding: 5px;
     width: 65%;
     height: 400px;
@@ -458,4 +474,39 @@ input[type="file"] {
 
 #tabla tbody tr:nth-child(even){ 
     background: #f1f1f1;
+}
+
+.left {
+    position: relative;
+    float: left;
+    width: 50%;
+}
+
+.right {
+    position: relative;
+    float: right;
+    width: 50%;
+}
+
+.right table, .left table {
+    width: 100%;
+}
+
+.right table {
+    text-align: right;
+}
+
+.right table tr:nth-child(even), .left table tr:nth-child(even){ 
+    background: #f1f1f1;
+}
+
+.right table tr td, .left table tr td {
+    width: 50%;
+}
+
+.textPos {
+    margin-top: 10px;
+    width: 95%;
+    position: relative;
+    float: right;
 }

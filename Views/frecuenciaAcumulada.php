@@ -28,6 +28,7 @@
         graphics.stop();
     }
 </script>
+<div class="title2">Diagrama de Frecuencia Acumulada</div>
 <div class="title1">Datos</div>
 <div class="regular">
     <div id="tabla"></div>
