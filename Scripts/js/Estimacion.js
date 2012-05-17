@@ -2,7 +2,7 @@
  *son funciones adaptadas para que tiren el resultado de una grafica acumulada a la derecha
  *
  *Andrés A. Pérez L.
- *
+ */
 ////
 // Lower tail quantile for standard normal distribution function.
 //
