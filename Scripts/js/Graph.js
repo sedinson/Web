@@ -22,6 +22,7 @@ function Graph(div)
     this.CIRCULAR = 1;
     this.FRECUENCIA = 2;
     this.CAJA_Y_BIGOTES = 3;
+    this.FRECUENCIA_ACUMULADA = 4;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -149,6 +150,64 @@ function Graph(div)
         for(i=1; i<=6; i++)
         {
             g.fillText((i*frecuently/6).toFixed(0)+"", 45, (6-i)*(h-80)/6+20);
+        }
+    }
+    
+    //Grafica de Frecuencia
+    var frecuenciaAcumulada = function () 
+    {   //Calcular la separacion entre cada punto
+        var sep = (w-80)/data.length;
+        var antX = -1;
+        var antY = -1;
+        
+        //Funcion que pintara un punto
+        var setPoint = function (x, y, i) 
+        {
+            g.save();
+                g.lineWidth = 6;
+                g.beginPath();
+                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.arc(x, y, 3, 0, 2*Math.PI, false);
+                    g.stroke();
+            g.restore();
+        }
+        
+        g.textAlign = "center";
+        g.textBaseline = "top";
+        g.fillStyle = "#000000";
+        var acum = 0;
+        for(var i=0; i<data.length; i++)
+        {   //Pintar el punto y si es necesario la linea
+            acum += data[i][pData];
+            var y = (acum/sum)*(h-60);
+            if(i>0) 
+            {   //Si es el segundo punto, dibujar una linea que una los puntos
+                g.strokeStyle = "#000000";
+                g.lineWidth = 1;
+                g.beginPath();
+                    g.moveTo(antX, antY);
+                    g.lineTo(60+sep*i+sep/2, (h-50)-y);
+                    g.stroke();
+                    
+                    //Dibujar el punto
+                    setPoint(antX, antY, i);
+            }
+            
+            //Guardar el punto actual
+            antX = 60+sep*i+sep/2;
+            antY = (h-50)-y;
+            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        }
+        
+        //Dibujar el ultimo punto al salir
+        setPoint(antX, antY, data.length);
+
+        //Pintar el texto de la guias del eje y
+        g.textAlign = "right";
+        g.textBaseline = "bottom";
+        for(i=1; i<=6; i++)
+        {
+            g.fillText((i*sum/6).toFixed(0)+"", 45, (6-i)*(h-80)/6+20);
         }
     }
     
@@ -297,8 +356,11 @@ function Graph(div)
             case 2: //Frecuencia
                 base(frecuencia);
                 break;
-            case 3:
+            case 3: //Caja y Bigotes
                 cajaybigotes();
+                break;
+            case 4: //Frecuencia Acumulada
+                base(frecuenciaAcumulada);
         }
     }
     

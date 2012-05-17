@@ -19,8 +19,12 @@ class GraficasController extends ControllerBase {
         $this->view->partial("barra.php");
     }
     
-    function FrecuenciaAcumulada () {
+    function Frecuencia () {
         $this->view->partial("frecuencia.php");
+    }
+    
+    function FrecuenciaAcumulada () {
+        $this->view->partial("frecuenciaAcumulada.php");
     }
     
     function CajayBigotes () {
