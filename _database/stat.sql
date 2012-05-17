@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2012 at 06:58 AM
+-- Generation Time: May 17, 2012 at 08:13 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `access`
@@ -69,7 +69,8 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (34, 7, 'Diagrama de Ojiva', '2382c3g4650.png', 'Graficas/Ojiva'),
 (35, 6, 'Medidas de Posici&oacute;n', '07849bg4651.png', 'Medidas/Posicion'),
 (36, 7, 'Ingresar Datos Manualmente', '5701e806c7c8g6253.png', 'Graficas/Datos'),
-(37, 6, 'Ingresar Datos Manualmente', '8a96a806c7c8g6253.png', 'Graficas/Datos');
+(37, 6, 'Medidas de Forma', '8a96a806c7c8g6253.png', 'Medidas/Forma'),
+(38, 6, 'Ingresar Datos Manualmente', 'f4d1a006c7c8g6253.png', 'Graficas/Datos');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,14 @@ CREATE TABLE IF NOT EXISTS `example` (
   `iduser` int(11) NOT NULL,
   `creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idexample`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `example`
+--
+
+INSERT INTO `example` (`idexample`, `idaccess`, `example`, `iduser`, `creationdate`) VALUES
+(1, 35, '<ul>\r\n <li>Ejemplo 1\r\n  <ul>\r\n   <li>Aqui va texto oculto, solo se muestra al hacer cli en el texto de arriba</li>\r\n  </ul>\r\n </li>\r\n <li>Ejemplo 2\r\n  <ul>\r\n   <li>Este es el segundo comentario. Se mostro al hacer clic sobre el texto Ejemplo 2</li>\r\n  </ul>\r\n </li>\r\n</ul>', 1, '2012-05-17 06:00:25');
 
 -- --------------------------------------------------------
 
@@ -99,14 +107,15 @@ CREATE TABLE IF NOT EXISTS `help` (
   `iduser` int(11) NOT NULL,
   `creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idhelp`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `help`
 --
 
 INSERT INTO `help` (`idhelp`, `idaccess`, `help`, `iduser`, `creationdate`) VALUES
-(1, 10, 'Esto es un ejemplo de ayuda, hecho en la <b>grÃ¡fica de torta</b>', 1, '2012-05-14 16:27:15');
+(1, 10, 'Esto es un ejemplo de ayuda, hecho en la <b>grÃ¡fica de torta</b>', 1, '2012-05-14 16:27:15'),
+(2, 35, '<ul>\r\n	<li>Titulo 1\r\n		<ul>\r\n			<li>Aqui va el texto</li>\r\n		</ul>\r\n	</li>\r\n	\r\n	<li>Titulo 2\r\n		<ul>\r\n			<li>Aqui va el texto</li>\r\n		</ul>\r\n	</li>\r\n	\r\n	<li>Titulo 3\r\n		<ul>\r\n			<li>Aqui va el texto</li>\r\n		</ul>\r\n	</li>\r\n	\r\n	<li>Titulo n\r\n		<ul>\r\n			<li>Aqui va el texto</li>\r\n		</ul>\r\n	</li>\r\n</ul>', 1, '2012-05-17 05:52:48');
 
 -- --------------------------------------------------------
 

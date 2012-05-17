@@ -158,7 +158,7 @@ input[type="file"] {
     line-height: 20px;
 }
 
-#help li {
+#help li, #example li {
     font-weight: bold;
     cursor: pointer;
 }
