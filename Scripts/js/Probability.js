@@ -150,21 +150,13 @@ Probability.calculateBinomial = function (n, p, x, direction)
         {
             result = Probability.binomial(n, p, x);
         }
-        else if (direction == "<=")
+        else if (direction == "<")
         {
             result = Probability.binomialAccumulated(n, p, x);
         }
-        else if (direction == "<")
-        {
-            result = Probability.binomialAccumulated(n, p, x-1);
-        }
-        else if (direction == ">=")
-        {
-            result = 1 - Probability.binomialAccumulated(n, p, x-1);
-        }
         else if (direction == ">")
         {
-            result = 1 - Probability.binomialAccumulated(n, p, x);
+            result = 1 - Probability.binomialAccumulated(n, p, x-1);
         }
     }
 
