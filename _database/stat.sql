@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2012 at 06:19 PM
+-- Generation Time: May 17, 2012 at 04:28 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `access`
@@ -56,7 +56,13 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (20, 6, 'Variabilidad', 'c5145a73e079image3014.png', 'Medidas/Variabilidad'),
 (21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion'),
 (23, 14, 'Intervalo de Confianza para la Media', 'f18a70miu.png', 'Estimacion/media'),
-(24, 14, 'Intervalo de Confianza para la Varianza', '237b47sigma.png', 'Estimacion/Varianza');
+(24, 14, 'Intervalo de Confianza para la Varianza', '237b47sigma.png', 'Estimacion/Varianza'),
+(25, 14, 'Intervalo de Confianza para ProporciÃ³n', '6a0313proporcion.png', 'Estimacion/Proporcion'),
+(26, 14, 'Intervalo de Confianza para  Diferencia de Medias', '690b7cdiferenciaMedias.png', 'Estimacion/DiferenciaDeMedia'),
+(27, 14, 'Intervalo para el Coeficiente de Varianzas', '94aaadcoefVar.png', 'Estimacion/CoeficienteVarianzas'),
+(28, 14, 'Intervalo para la Diferencia de Proporciones', 'ac35fddifP.png', 'Estimacion/DiferenciaProporcion'),
+(29, 14, 'Intervalo de PredicciÃ³n', 'a8b320prediccion.png', 'Estimacion/Prediccion'),
+(30, 14, 'Intervalo de Tolerancia', 'c3fe8ftolerancia.png', 'Estimacion/Tolerancia');
 
 -- --------------------------------------------------------
 

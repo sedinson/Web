@@ -83,17 +83,19 @@
               var sigma;
               var casetype;
               var des;
+              var caso12 = false;
               if($("#consi:checked").val()=="si"){
                   sigma = Math.sqrt($("#varpoblacional").val());
                   z = NORMSINV(alfa/2);
                   if($("#siNorm:checked").val() == "si"){
                       casetype = "Tipo I";
                       des = 1;
+                      caso12=true;
                   }else if(n>=30){
                       casetype = "Tipo II";
                       des = 2;
-                  }
-                  else{
+                      caso12=true;
+                  }else{
                       casetype = "Desconocido";
                       $("#casoTipo").html(casetype);
                       $("#descCaso").html(desc[0]);
@@ -130,6 +132,13 @@
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+              if(caso12){
+                  $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
+                  $("#errorM").html("<pre class='wrap'>|x&#772;-&micro;|   &le;   "+amplitud+"</pre>");
+                  //$("#maxNTitle").html("Tamaño maximo para e="+trimfloat(amplitud,4));
+                  //$("#maxN").html("<pre class='wrap'>n   =   "+(Math.pow(z,2)/(4*Math.pow(amplitud,2)))+"</pre>");
+                  $("#divError").show();
+              }
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -141,6 +150,7 @@
     });
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
+        $("#errorM").width($("#errorM").children().width()+20);
     }
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
@@ -178,6 +188,7 @@
     }
     pre{
         display: table;
+        font-size: 16px;
     }
     strong{
         display: inline-block;
@@ -185,7 +196,7 @@
         margin-right: 40px;
         text-shadow: 1px 1px 3px #000;     
     }
-    #divIntervalo{
+    .subdivRes{
         background-color: #AAA;
         border-radius: 10px;
         display: table;
@@ -211,7 +222,7 @@
         box-shadow: 2px 2px 3px #999;
         text-align: center
     }
-    #intervalo{
+    .res{
         background-image: linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
         background-image: -o-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
         background-image: -moz-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
@@ -227,6 +238,9 @@
         );
         border-radius: 7px;
         box-shadow: 1px 1px 2px #444;
+    }
+    .resTitle{
+        color: #FFF;
     }
     .calcular{
         background-image: linear-gradient(bottom, rgb(232,232,232) 8%, rgb(247,247,247) 54%);
@@ -323,7 +337,7 @@
     <div class="title1">Media</div>
     <div class="datos inlineB">
         <h2 class="data">Datos</h2>
-        <div style="padding: 0 15px;"">
+        <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
                 <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
@@ -368,9 +382,17 @@
     <div id="resultado"  class="inlineB" style="display: none;margin-left: 50px;">
         <div id="casoTipo" class="title1" style="margin-left: -15px"></div>
         <h3 id="descCaso"></h3>
-        <div id="divIntervalo" style="display: hidden" class="wrap">
-            <div id="intTitle"></div>
-            <div id="intervalo" class="wrap"></div>
+        <div id="divIntervalo" style="display: hidden" class="wrap subdivRes">
+            <div id="intTitle" class="resTitle"></div>
+            <div id="intervalo" class="wrap res"></div>
         </div>
+        <br>
+        <div id="divError" style="display: none" class="wrap subdivRes">
+            <div id="errorTitle" class="resTitle"></div>
+            <div id="errorM" class="wrap res"></div>
+            <!--<div id="maxNTitle" class="resTitle"></div>
+            <div id="maxN" class="wrap res"></div>-->
+        </div>
+        <br>
     </div>
 </div>

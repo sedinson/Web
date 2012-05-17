@@ -115,6 +115,7 @@
     }
     pre{
         display: table;
+        font-size: 16px;
     }
     strong{
         display: inline-block;
@@ -122,7 +123,7 @@
         margin-right: 40px;
         text-shadow: 1px 1px 3px #000;     
     }
-    #divIntervalo{
+    .subdivRes{
         background-color: #AAA;
         border-radius: 10px;
         display: table;
@@ -148,7 +149,7 @@
         box-shadow: 2px 2px 3px #999;
         text-align: center
     }
-    #intervalo{
+    .res{
         background-image: linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
         background-image: -o-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
         background-image: -moz-linear-gradient(bottom, rgb(212,212,212) 0%, rgb(250,250,250) 15%);
@@ -164,6 +165,9 @@
         );
         border-radius: 7px;
         box-shadow: 1px 1px 2px #444;
+    }
+    .resTitle{
+        color: #FFF;
     }
     .calcular{
         background-image: linear-gradient(bottom, rgb(232,232,232) 8%, rgb(247,247,247) 54%);
@@ -260,7 +264,7 @@
     <div class="title1">Varianza</div>
     <div class="datos inlineB">
         <h2 class="data">Datos</h2>
-        <div style="padding: 0 15px;"">
+        <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
                 <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
@@ -280,9 +284,10 @@
    </div>
     <div id="resultado"  class="inlineB" style="display: none;margin-left: 50px;">
         <div id="casoTipo" class="title1" style="margin-left: -15px">Intervalo</div>
-        <div id="divIntervalo" style="display: hidden" class="wrap">
-            <div id="intTitle">Intervalo</div>
-            <div id="intervalo" class="wrap"></div>
+        <div id="divIntervalo" style="display: hidden" class="wrap subdivRes">
+            <div id="intTitle" class="resTitle">Intervalo</div>
+            <div id="intervalo" class="wrap res"></div>
         </div>
+        <br>
     </div>
 </div>
