@@ -11,6 +11,7 @@
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.validate.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Estimacion.js"></script>
+        <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Probability.js"></script>
         <script type="text/javascript">
             var myData = [11, 5, 14, 3, 12, 15, 16, 13, 22, 21, 23, 24, 19, 9, 9, 10, 6, 13, 6, 51, 32, 45, 40, 19, 39, 51];
             var bodyScroll = null;
