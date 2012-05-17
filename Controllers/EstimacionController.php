@@ -18,8 +18,7 @@ class EstimacionController extends ControllerBase{
         $this->view->partial("varianza.php");
     }
     function Proporcion(){
-        $this->view->partial("proporcion.php");
-        
+        $this->view->partial("proporcion.php");        
     }
     function DiferenciaDeMedia(){
         $this->view->partial("difMedias.php");
@@ -29,6 +28,12 @@ class EstimacionController extends ControllerBase{
     }
     function DiferenciaProporcion(){
         $this->view->partial("difProporcion.php");
+    }
+    function Prediccion(){
+        $this->view->partial("prediccion.php");
+    }
+    function Tolerancia(){
+        $this->view->partial("tolerancia.php");
     }
 }
 ?>
