@@ -1,4 +1,9 @@
-//
+/*Todas las funciones inversas aqui presentadas NORMSINV, tStudentICDF. fisherICDF, critchi
+ *son funciones adaptadas para que tiren el resultado de una grafica acumulada a la derecha
+ *
+ *Andrés A. Pérez L.
+ *
+////
 // Lower tail quantile for standard normal distribution function.
 //
 // This function returns an approximation of the inverse cumulative
@@ -131,7 +136,7 @@ var LOGPI = 1.14472988584940017414;
 var big = 4.503599627370496e15;
 var biginv = 2.22044604925031308085e-16;
 
-function FIsherICDF(p,num,den){
+function fisherICDF(p,den,num){
     var precision = 0.0001;
     var max = p + precision;
     var min = p - precision;
@@ -158,7 +163,7 @@ function FIsherICDF(p,num,den){
             }
             sol = FisherCDF(zs, num, den);
     }
-    return zs;
+    return 1/zs;
 }
 function FisherCDF(f,num,den) {
     var df1 = num;
@@ -237,6 +242,8 @@ function lnGamma(c) {
 function tStudentICDF(quantile,freedomDegrees) {
     var t = 0;
     var j = 0;
+    quantile *= 2;
+    freedomDegrees++;
     var p = 1 - (quantile / 2);
     if (p == .6) {
             j = 0;
