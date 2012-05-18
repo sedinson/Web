@@ -527,7 +527,7 @@ function Graph(div)
     this.setData = function (array)
     {   //Utiliza informacion de la clase Stat, encargada de preparar el array (estandarizar)
         data = Stat.prepare(array);
-        olData = Extra.insertSort(Stat.prepare(array), 2);
+        olData = Extra.insertArraySort(Stat.prepare(array), 2);
         
         //Obtener los valores minimo, maximo y la suma de todos los elementos del array
         min = Stat.minVal();

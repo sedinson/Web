@@ -297,7 +297,7 @@ Extra.transformData = function (value) {
     return tmp;
 }
 
-Extra.insertSort = function (array, pos) {
+Extra.insertArraySort = function (array, pos) {
    var a = array;
    for (var i = 0, j, tmp; i < a.length; ++i) {
       tmp = a[i];

@@ -8,12 +8,17 @@
     }
 </script>
 <div class="title2">Medidas de Centralizaci&oacute;n</div>
-<div class="title1">Media</div>
+<div class="title1">Centralizaci&oacute;n</div>
 <div class="regular">
+    <table>
+        <tr>
+            <td>x&#772;</td>
+        </tr>
+        <tr>
+            <td>x&tilde;</td>
+        </tr>
+    </table>
 </div>
-<div style="clear: both;"></div>
-<div class="title3">Mediana</div>
-<div style="clear: both;"></div>
 <div class="regular">
     <div class="title1">Datos</div>
     <div id="tabla"></div>
