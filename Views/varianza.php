@@ -59,8 +59,8 @@
               var chiMin = critchi(alfa/2,n-1);
               var chiMax = critchi(1-alfa/2,n-1);
               var s2 = $("#smuestral").val();
-              var min = (n-1)*s2/chiMin;
-              var may = (n-1)*s2/chiMax;
+              var min = trimfloat((n-1)*s2/chiMin);
+              var may = trimfloat((n-1)*s2/chiMax);
               var res = $("#resultado");
               var cont = $("#modalDialog");
               res.width(cont.width()-580);

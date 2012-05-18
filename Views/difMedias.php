@@ -135,8 +135,6 @@
               if(caso12){
                   $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
                   $("#errorM").html("<pre class='wrap'>|x&#772;-&micro;|   &le;   "+amplitud+"</pre>");
-                  //$("#maxNTitle").html("Tamaño maximo para e="+trimfloat(amplitud,4));
-                  //$("#maxN").html("<pre class='wrap'>n   =   "+(Math.pow(z,2)/(4*Math.pow(amplitud,2)))+"</pre>");
                   $("#divError").show();
               }
               res.slideUp(function(){
@@ -152,11 +150,27 @@
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#errorM").width($("#errorM").children().width()+20);
     }
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {
+        if($("#chkTabla:checked").val()=="tabla"){
+            var text = $("#text");
+            if(text.val().length > 0){
+                
+            }
+        }
+    }
     
     function modalClosed() 
     {
         clearInterval(timmerPeriodic);
+    }
+    function mostrarTabla(){
+        if($("#chkTabla:checked").val()=="tabla")
+            $("#tabla").fadeIn();
+        else
+            $("#tabla").fadeOut();
+    }
+    function mostrarVar(){
+        $("#divSD")
     }
 </script>
 <div class="estimacion">
@@ -169,9 +183,18 @@
                 <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
+            <div id="tablaDatos">
+                <label for="chkTabla" class="data">Tabla</label>
+                <input type="checkbox" name="tablaDatos" id="chkTabla" value="tabla" onclick="javascript: mostrarTabla();"/>
+            </div>
+            <div id="tabla" style="display: none">
+                <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
+            </div>
             <div id="divMedia">
-                <label for="miu" class="data">Media muestral(x&#772;):</label>
-                <input id="miu" name="miu" type="text"/>
+                <label for="miu1" class="data">Media muestral(x&#772;<sub>1</sub>):</label>
+                <input id="miu1" name="miu1" type="text"/>
+                <label for="miu2" class="data">Media muestral(x&#772;<sub>2</sub>):</label>
+                <input id="miu2" name="miu2" type="text"/>
             </div>
             <div id="divNormal">
                 <label for="normal" class="data">Poblacion Normal? </label>
@@ -182,10 +205,20 @@
                 <label for="normal" class="error block"><br />Es obligatorio</label>
             </div>
             <div id="divN">
-                <label for="tamano" class="data">Tama&ntilde;o de la muestra(n):</label>
-                <input id="tamano" name="tamano" type="text"/>
+                <label for="tamano1" class="data">Tama&ntilde;o de la muestra 1(n<sub>1</sub>):</label>
+                <input id="tamano1" name="tamano1" type="text"/>
+                <label for="tamano2" class="data">Tama&ntilde;o de la muestra 2(n<sub>2</sub>):</label>
+                <input id="tamano2" name="tamano2" type="text"/>
             </div>
-            <div id="divVar">
+            <div id="divInd">
+                <label for="independientes" class="data">Muestras independientes?</label>
+                <strong><label for="indsi">Si</label>
+                <input type="radio" id="indsi" name="independientes" value="si" onclick="javascript: mostrarVar();" /></strong>
+                <strong><label for="indno">No</label>
+                <input type="radio" id="indno" name="independientes" value="no" onclick="javascript: mostrarSd();" /></strong>
+                <label for="independientes" class="error block"><br />Es obligatorio</label>
+            </div>
+            <div id="divVar" style="display: none;">
                 <label for="conocida" class="data">Varianza poblacional(&sigma;&sup2;) conocida?</label>
                 <strong><label for="consi">Si</label>
                 <input type="radio" id="consi" name="conocida" value="si" onclick="javascript: mostrarVarP();" /></strong>
@@ -193,13 +226,21 @@
                 <input type="radio" id="conno" name="conocida" value="no" onclick="javascript: mostrarVarM();" /></strong>
                 <label for="conocida" class="error block"><br />Es obligatorio</label>
                 <div id="vpoblacional" style="display: none">
-                    <label for="varpoblacional" class="data">Varianza poblacional(&sigma;&sup2;): </label>
-                    <input id="varpoblacional" name="varpoblacional" type="text"/>
+                    <label for="varpoblacional" class="data">Varianza poblacional(&sigma;&sup2;<sub>1</sub>): </label>
+                    <input id="varpoblacional1" name="varpoblacional" type="text"/>
+                    <label for="varpoblacional2" class="data">Varianza poblacional(&sigma;&sup2;<sub>2</sub>): </label>
+                    <input id="varpoblacional2" name="varpoblacional2" type="text"/>
                 </div>
                 <div id="vmuestral" style="display: none">
-                    <label for="smuestral" class="data">Desviaci&oacute;n estandar muestral(s): </label>
-                    <input id="smuestral" name="smuestral" type="text"/>
+                    <label for="smuestral1" class="data">Varianza muestral(s<sub>1</sub>): </label>
+                    <input id="smuestral1" name="smuestral1" type="text"/>
+                    <label for="smuestra2" class="data">Varianza muestral(s<sub>2</sub>): </label>
+                    <input id="smuestral2" name="smuestral2" type="text"/>
                 </div>
+            </div>
+            <div id="divSD" style="display: none;">
+                <label for="sd" class="data">S<sub>d</sub></label>
+                <input id="sd" name="sd" type="text"/>
             </div>
             <input type="submit" class="calcular" value="Calcular Intervalo" />
         </form>

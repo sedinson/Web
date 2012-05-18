@@ -64,8 +64,8 @@
                 var q = 1-p;
                 var z = NORMSINV(alfa/2);
                 var amplitud = z*Math.sqrt(p*q/n);
-                var min = p - amplitud;
-                var may = p*1 + amplitud;
+                var min = trimfloat(p - amplitud,4);
+                var may = trimfloat(p*1 + amplitud,4);
                 var res = $("#resultado");
                 var cont = $("#modalDialog");
                 res.width(cont.width()-580);
