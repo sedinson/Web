@@ -123,20 +123,40 @@ Stat.Decile = function (i, n)
 
 Stat.getData = function (f, i, array) 
 {
-    array = Stat.prepare(array);
-    var n = Stat.n(array);
-    var p = f(i, n);
-    var d = p-Math.floor(p);
-    p = Math.floor(p);
-    var sum = 0;
-    var j, l;
-    for(j=0; j<array.length && sum<p; j++)
+    if(typeof array[0] != "number")
     {
-        sum += array[j][2];
-        l = (sum == p)? j+1 : j;
+        array = Stat.prepare(array);
+        var n = Stat.n(array);
+        var p = f(i, n);
+        var d = p-Math.floor(p);
+        p = Math.floor(p);
+        var sum = 0;
+        var j, l;
+        for(j=0; j<array.length && sum<p; j++)
+        {
+            sum += array[j][2];
+            l = (sum == p)? j+1 : j;
+        }
+
+        if(d != 0)
+            return parseFloat(array[j-1][1])*d + parseFloat(array[l][1])*(1-d);
+        else
+            return parseFloat(array[j-1][1]);
     }
-    
-    return parseFloat(array[j-1][1])*d + parseFloat(array[l][1])*(1-d);
+    else
+    {
+        array = Extra.insertSort(array);
+        n = array.length;
+        p = f(i, n);
+        d = p-Math.floor(p);
+        p = Math.floor(p);
+        p = (p<1)? 1 : p;
+        
+        if(d != 0)
+            return parseFloat(array[Math.min(p-1, n-1)])*d + parseFloat(array[Math.min(p, n-1)])*(1-d);
+        else
+            return parseFloat(array[Math.min(p-1, n-1)]);
+    }
 }
 
 Stat.n = function (array) 
@@ -272,6 +292,8 @@ Extra.transformData = function (value) {
         }
     }
     
+    original = Extra.createCopy(tmp);
+    
     return tmp;
 }
 
@@ -285,4 +307,19 @@ Extra.insertSort = function (array, pos) {
    }
    
    return a;
+}
+
+Extra.insertSort = function (a) {
+   for (var i = 0, j, tmp; i < a.length; ++i) {
+      tmp = a[i];
+      for (j = i - 1; j >= 0 && a[j] > tmp; --j)
+         a[j + 1] = a[j];
+      a[j + 1] = tmp;
+   }
+   
+   return a;
+}
+
+Extra.createCopy = function (array) {
+    return array.slice(0);
 }

@@ -1,9 +1,9 @@
 <script type="text/javascript">
     document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
     function periodic () {
-        $("#cuartil").val(Stat.getData(Stat.Quartile, parseInt($("#rcuartil").val()), myData));
-        $("#decil").val(Stat.getData(Stat.Decile, parseInt($("#rdecil").val()), myData));
-        $("#percentil").val(Stat.getData(Stat.Percentile, parseInt($("#rpercentil").val()), myData));
+        $("#cuartil").val("El cuartil " + $("#rcuartil").val() + " tiene el valor " + Stat.getData(Stat.Quartile, parseInt($("#rcuartil").val()), original).toFixed(2));
+        $("#decil").val("El decil " + $("#rdecil").val() + " tiene el valor " + Stat.getData(Stat.Decile, parseInt($("#rdecil").val()), original).toFixed(2));
+        $("#percentil").val("El percentil " + $("#rpercentil").val() + " tiene el valor " + Stat.getData(Stat.Percentile, parseInt($("#rpercentil").val()), original).toFixed(2));
         
         var tabla = document.getElementById("tabla");
         var text = document.getElementById("text");
