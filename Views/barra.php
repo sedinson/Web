@@ -27,7 +27,7 @@
         graphics.stop();
     }
 </script>
-<div class="title2">Diagrama de Barras</div>
+<div class="title2">Histograma</div>
 <div class="title1">Datos</div>
 <div class="regular">
     <div id="tabla"></div>

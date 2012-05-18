@@ -2,7 +2,7 @@
     document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
     var graphics = new Graph(document.getElementById('grafica'));
     graphics.setData(myData);
-    graphics.setType(graphics.OJIVA);
+    graphics.setType(graphics.POLIGONO_FRECUENCIA);
     graphics.setLabel(1);
     graphics.start();
     
@@ -28,7 +28,7 @@
         graphics.stop();
     }
 </script>
-<div class="title2">Diagrama de Ojiva</div>
+<div class="title2">Diagrama de Pol&iacute;gono de Frecuencia</div>
 <div class="title1">Datos</div>
 <div class="regular">
     <div id="tabla"></div>

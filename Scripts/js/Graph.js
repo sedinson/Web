@@ -22,8 +22,9 @@ function Graph(div)
     this.CIRCULAR = 1;
     this.FRECUENCIA = 2;
     this.CAJA_Y_BIGOTES = 3;
-    this.FRECUENCIA_ACUMULADA = 4;
+    this.OJIVA = 4;
     this.PARETO = 5;
+    this.POLIGONO_FRECUENCIA = 6;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -89,6 +90,73 @@ function Graph(div)
             g.fillStyle = "#000000";
             g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
         }
+
+        //Pintar el texto de la guias del eje y
+        g.textAlign = "right";
+        g.textBaseline = "bottom";
+        for(i=1; i<=6; i++)
+        {
+            g.fillText((i*frecuently/6).toFixed(0)+"", 45, (6-i)*(h-80)/6+20);
+        }
+    }
+    
+    //Grafica de Barras
+    var poligonoFrecuencia = function () 
+    {   //Calcular el ancho de las barras y algunas propiedades del texto
+        var sep = (w-80)/data.length;
+        var antX = -1;
+        var antY = -1;
+        
+        //Funcion que pintara un punto
+        var setPoint = function (x, y, i) 
+        {
+            g.save();
+                g.lineWidth = 6;
+                g.beginPath();
+                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.arc(x, y, 3, 0, 2*Math.PI, false);
+                    g.stroke();
+            g.restore();
+        }
+        
+        g.textAlign = "center";
+        g.textBaseline = "top";
+        for(var i=0; i<data.length; i++)
+        {   //Pintar la barra
+            var y = (data[i][pData]/frecuently)*(h-60);
+            var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
+            grad.addColorStop(0, colors[i%colors.length][0]);
+            grad.addColorStop(1, colors[i%colors.length][1]);
+            g.fillStyle = grad;
+            g.fillRect(60+sep*i, (h-50)-y, sep, y);
+            g.fillStyle = "#000000";
+            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        }
+        
+        for(var i=0; i<data.length; i++)
+        {   //Pintar el punto y si es necesario la linea
+            y = (data[i][pData]/frecuently)*(h-60);
+            if(i>0) 
+            {   //Si es el segundo punto, dibujar una linea que una los puntos
+                g.strokeStyle = "#000000";
+                g.lineWidth = 1;
+                g.beginPath();
+                    g.moveTo(antX, antY);
+                    g.lineTo(60+sep*i+sep/2, (h-50)-y);
+                    g.stroke();
+                    
+                    //Dibujar el punto
+                    setPoint(antX, antY, i);
+            }
+            
+            //Guardar el punto actual
+            antX = 60+sep*i+sep/2;
+            antY = (h-50)-y;
+            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        }
+        
+        //Dibujar el ultimo punto al salir
+        setPoint(antX, antY, data.length);
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";
@@ -436,6 +504,10 @@ function Graph(div)
                 break;
             case 5: //Pareto
                 base(pareto);
+                break;
+            case 6: //Poligono de Frecuencia
+                base(poligonoFrecuencia);
+                break;
         }
     }
     

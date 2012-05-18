@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
     function periodic () {}
     
     function modalClosed() 
@@ -12,3 +13,10 @@
 </div>
 <div style="clear: both;"></div>
 <div class="title3">Valores</div>
+<div style="clear: both;"></div>
+<div class="regular">
+    <div class="title1">Datos</div>
+    <div id="tabla"></div>
+    <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
+</div>
+<div style="clear: both;"></div>

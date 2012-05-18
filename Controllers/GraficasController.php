@@ -34,6 +34,10 @@ class GraficasController extends ControllerBase {
     function Pareto () {
         $this->view->partial("pareto.php");
     }
+    
+    function PoligonoFrecuencia () {
+        $this->view->partial("poligonoFrecuencia.php");
+    }
 }
 
 ?>

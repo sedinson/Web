@@ -113,12 +113,12 @@ Stat.Quartile = function (i, n)
 
 Stat.Percentile = function (i, n)
 {
-    return (i*(n+1))/10;
+    return (i*(n+1))/100;
 }
 
 Stat.Decile = function (i, n)
 {
-    return (i*(n+1))/100;
+    return (i*(n+1))/10;
 }
 
 Stat.getData = function (f, i, array) 
