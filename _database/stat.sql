@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2012 at 08:13 AM
+-- Generation Time: May 18, 2012 at 06:14 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -44,9 +44,9 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (7, 0, 'Gr&aacute;ficas', '24e450g3862.png', 'Dibujar todo tipo de gr&aacute;ficas como torta, barra, etc.'),
 (9, 0, 'Distribuciones', '9a5626g6080.png', 'Diferentes tipos de distribuciones de probabilidad'),
 (10, 7, 'Gr&aacute;fica Circular', '82a3e324e450g3862.png', 'Graficas/Torta'),
-(11, 7, 'Diagrama de Barras', '9c3079g5488.png', 'Graficas/Barra'),
+(11, 7, 'Histograma', '9c3079g5488.png', 'Graficas/Barra'),
 (12, 7, 'Caja y Bigotes', 'dff5a1g5504.png', 'Graficas/CajayBigotes'),
-(13, 7, 'Diagrama de Frecuencia Acumulada', '7184e0g5777.png', 'Graficas/FrecuenciaAcumulada'),
+(13, 7, 'Diagrama de Ojiva', '7184e0g5777.png', 'Graficas/FrecuenciaAcumulada'),
 (14, 0, 'Estimaci&oacute;n', 'f7cdfeg4652.png', 'Estimaciones por intervalos e intervalos de confianza'),
 (15, 0, 'Sobre la Aplicaci&oacute;n', 'e8619ag5289.png', 'Descubre quienes trabajaron en esta aplicaci&oacute;n y como contribuir'),
 (16, 15, 'Quienes Colaboraron', 'a4d7f5g5289.png', 'About/Quienes'),
@@ -63,10 +63,10 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (28, 14, 'Intervalo para la Diferencia de Proporciones', 'ac35fddifP.png', 'Estimacion/DiferenciaProporcion'),
 (29, 14, 'Intervalo de PredicciÃ³n', 'a8b320prediccion.png', 'Estimacion/Prediccion'),
 (30, 14, 'Intervalo de Tolerancia', 'c3fe8ftolerancia.png', 'Estimacion/Tolerancia'),
-(31, 7, 'Diagrama de Frecuencia', 'e8e7c3g4647.png', 'Graficas/Frecuencia'),
+(31, 7, 'Diagrama de Poligono', 'e8e7c3g4647.png', 'Graficas/Frecuencia'),
 (32, 7, 'Diagrama de Puntos', 'c07571g4648.png', 'Graficas/Puntos'),
 (33, 7, 'Diagrama de Pareto', '2470e6g4649.png', 'Graficas/Pareto'),
-(34, 7, 'Diagrama de Ojiva', '2382c3g4650.png', 'Graficas/Ojiva'),
+(34, 7, 'Pol&iacute;gono de frecuencia', '2382c3g4650.png', 'Graficas/PoligonoFrecuencia'),
 (35, 6, 'Medidas de Posici&oacute;n', '07849bg4651.png', 'Medidas/Posicion'),
 (36, 7, 'Ingresar Datos Manualmente', '5701e806c7c8g6253.png', 'Graficas/Datos'),
 (37, 6, 'Medidas de Forma', '8a96a806c7c8g6253.png', 'Medidas/Forma'),
