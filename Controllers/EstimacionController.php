@@ -23,8 +23,8 @@ class EstimacionController extends ControllerBase{
     function DiferenciaDeMedia(){
         $this->view->partial("difMedias.php");
     }
-    function CocienteVarianzas(){
-        $this->view->partial("cocienteVarianzas.php");
+    function CoeficienteVarianzas(){
+        $this->view->partial("coefVarianzas.php");
     }
     function DiferenciaProporcion(){
         $this->view->partial("difProporcion.php");

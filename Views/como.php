@@ -12,10 +12,10 @@ A través de github, puede clonar el proyecto y seguir desarrollando, luego que 
 <div style="clear: both;"></div>
 <div class="title1">GitHub</div>
 <a href="https://github.com/sedinson/Web" target="_blank">Enlace al repositorio</a>
-<a href="http://www.github.com" target="_blank">Enlace a github.com</a>
+<a href="www.github.com" target="_blank">Enlace a github.com</a>
 <div class="title1">MySQL</div>
 <a href="http://dev.mysql.com/downloads/workbench/" target="_blank">Enlace a Workbench</a>
-<a href="http://www.mysql.com" target="_blank">Enlace a mysql.com</a>
+<a href="www.mysql.com" target="_blank">Enlace a mysql.com</a>
 <div class="title1">Xampp</div>
 <a href="http://www.apachefriends.org/en/xampp.html" target="_blank">Enlace a xampp</a>
 <div class="title1">Netbeans IDE</div>

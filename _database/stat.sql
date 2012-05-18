@@ -59,7 +59,7 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (24, 14, 'Intervalo de Confianza para la Varianza', '237b47sigma.png', 'Estimacion/Varianza'),
 (25, 14, 'Intervalo de Confianza para ProporciÃ³n', '6a0313proporcion.png', 'Estimacion/Proporcion'),
 (26, 14, 'Intervalo de Confianza para  Diferencia de Medias', '690b7cdiferenciaMedias.png', 'Estimacion/DiferenciaDeMedia'),
-(27, 14, 'Intervalo para el Cociente de Varianzas', '94aaadcoefVar.png', 'Estimacion/CocienteVarianzas'),
+(27, 14, 'Intervalo para el Coeficiente de Varianzas', '94aaadcoefVar.png', 'Estimacion/CoeficienteVarianzas'),
 (28, 14, 'Intervalo para la Diferencia de Proporciones', 'ac35fddifP.png', 'Estimacion/DiferenciaProporcion'),
 (29, 14, 'Intervalo de PredicciÃ³n', 'a8b320prediccion.png', 'Estimacion/Prediccion'),
 (30, 14, 'Intervalo de Tolerancia', 'c3fe8ftolerancia.png', 'Estimacion/Tolerancia'),
