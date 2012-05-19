@@ -2,10 +2,10 @@
 -- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 18, 2012 at 06:14 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Servidor: localhost
+-- Tiempo de generación: 19-05-2012 a las 21:15:21
+-- Versión del servidor: 5.5.16
+-- Versión de PHP: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `stat`
+-- Base de datos: `stat`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `access`
+-- Estructura de tabla para la tabla `access`
 --
 
 CREATE TABLE IF NOT EXISTS `access` (
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `access` (
   `image` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `url` text COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=49 ;
 
 --
--- Dumping data for table `access`
+-- Volcado de datos para la tabla `access`
 --
 
 INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
@@ -51,7 +51,6 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (15, 0, 'Sobre la Aplicaci&oacute;n', 'e8619ag5289.png', 'Descubre quienes trabajaron en esta aplicaci&oacute;n y como contribuir'),
 (16, 15, 'Quienes Colaboraron', 'a4d7f5g5289.png', 'About/Quienes'),
 (17, 15, 'Como Contribuir', '8b1bf2g5789.png', 'About/Como'),
-(18, 9, 'Normal', '6673b0g6080.png', 'Distribucion/Normal'),
 (19, 6, 'Medidas de Centralizaci&oacute;n', 'b6730373e079image3014.png', 'Medidas/Centralizacion'),
 (20, 6, 'Medidas de Variabilidad', 'c5145a73e079image3014.png', 'Medidas/Variabilidad'),
 (21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion'),
@@ -70,12 +69,22 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`) VALUES
 (35, 6, 'Medidas de Posici&oacute;n', '07849bg4651.png', 'Medidas/Posicion'),
 (36, 7, 'Ingresar Datos Manualmente', '5701e806c7c8g6253.png', 'Graficas/Datos'),
 (37, 6, 'Medidas de Forma', '8a96a806c7c8g6253.png', 'Medidas/Forma'),
-(38, 6, 'Ingresar Datos Manualmente', 'f4d1a006c7c8g6253.png', 'Graficas/Datos');
+(38, 6, 'Ingresar Datos Manualmente', 'f4d1a006c7c8g6253.png', 'Graficas/Datos'),
+(39, 9, 'DistribuciÃ³n Binomial', 'fedd2bg8037.png', 'Probability/Binomial'),
+(40, 9, 'DistribuciÃ³n GeomÃ©trica', '4611fbg8102.png', 'Probability/Geometrica'),
+(41, 9, 'DistribuciÃ³n Binomial Negativa', '2ba2b9g8224.png', 'Probability/BinomialNegativa'),
+(42, 9, 'DistribuciÃ³n HipergeomÃ©trica', '3cd86ag8313.png', 'Probability/HiperGeometrica'),
+(43, 9, 'DistribuciÃ³n de Poisson', 'fcce40g9031.png', 'Probability/Poisson'),
+(44, 9, 'DistribuciÃ³n Uniforme Discreta', 'b79b8cg9224.png', 'Probability/UniformeDiscreta'),
+(45, 9, 'DistribuciÃ³n Normal', '9ce5bcg9512.png', 'Probability/Normal'),
+(46, 9, 'DistribuciÃ³n Normal EstÃ¡ndar', 'c4418fg9739.png', 'Probability/NormalEstandar'),
+(47, 9, 'DistribuciÃ³n Uniforme Continua', '8fff21g9927.png', 'Probability/UniformeContinua'),
+(48, 9, 'DistribuciÃ³n Exponencial', '7f6992g10143.png', 'Probability/Exponencial');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `example`
+-- Estructura de tabla para la tabla `example`
 --
 
 CREATE TABLE IF NOT EXISTS `example` (
@@ -88,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `example` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `example`
+-- Volcado de datos para la tabla `example`
 --
 
 INSERT INTO `example` (`idexample`, `idaccess`, `example`, `iduser`, `creationdate`) VALUES
@@ -97,7 +106,7 @@ INSERT INTO `example` (`idexample`, `idaccess`, `example`, `iduser`, `creationda
 -- --------------------------------------------------------
 
 --
--- Table structure for table `help`
+-- Estructura de tabla para la tabla `help`
 --
 
 CREATE TABLE IF NOT EXISTS `help` (
@@ -110,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `help` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `help`
+-- Volcado de datos para la tabla `help`
 --
 
 INSERT INTO `help` (`idhelp`, `idaccess`, `help`, `iduser`, `creationdate`) VALUES
@@ -120,7 +129,7 @@ INSERT INTO `help` (`idhelp`, `idaccess`, `help`, `iduser`, `creationdate`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modexample`
+-- Estructura de tabla para la tabla `modexample`
 --
 
 CREATE TABLE IF NOT EXISTS `modexample` (
@@ -133,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `modexample` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modhelp`
+-- Estructura de tabla para la tabla `modhelp`
 --
 
 CREATE TABLE IF NOT EXISTS `modhelp` (
@@ -146,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `modhelp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -157,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `user`, `password`) VALUES
