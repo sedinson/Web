@@ -56,7 +56,7 @@
 <div class="left">
     <table>
         <tr>
-            <td>Jhon Gonzalez</td>
+            <td>John Gonzalez</td>
             <td><a href="mailto:jbentham@uninorte.edu.co">jbentham@uninorte.edu.co</a></td>
         </tr>
         <tr>
@@ -95,5 +95,5 @@
     </table>
 </div>
 <div style="clear: both;"></div>
-<div class="title3">Agradecimientos</div>
+<div class="title3">Revisi&oacute;n</div>
 <div style="clear: both;"></div>

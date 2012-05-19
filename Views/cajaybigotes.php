@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
+    $("#tabla").html(Stat.getTableInfo(myData));
     var graphics = new Graph(document.getElementById('grafica'));
     graphics.setData(myData);
     graphics.setType(graphics.CAJA_Y_BIGOTES);
@@ -7,17 +7,20 @@
     
     function periodic () 
     {
-        var tabla = document.getElementById("tabla");
-        var text = document.getElementById("text");
-        
-        if(text.value.length > 0) 
+        try
         {
-            var data = Extra.transformData(text.value);
-            tabla.innerHTML = Stat.getTableInfo(data);
-            graphics.setData(data);
-            myData = data;
-            text.value = "";
-            text.blur();
+            if($("#text").val().length > 0) 
+            {
+                myData = Extra.transformData(text.value);
+                $("#tabla").html(Stat.getTableInfo(myData));
+                graphics.setData(myData);
+                $("#text").val("");
+                $("#text").blur();
+            }
+        }
+        catch(exception)
+        {
+            clearInterval(timmerPeriodic);
         }
     }
     
