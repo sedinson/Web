@@ -38,7 +38,7 @@
                 {
                     var _this = this;
                     $(nav + " li ul>li").hide(150, function() {
-                        $(_this).find("li").fadeIn(300, function() {
+                        $(_this).find("li").fadeIn(150, function() {
                             helpScroll.resize().show();
                         });
                     });                   
