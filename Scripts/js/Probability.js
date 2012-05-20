@@ -166,28 +166,25 @@ Probability.calculateGeometric = function (p, x, direction)
 {
     var result = 0;
     
-    if (Validate.geometric(p, x))
+    if (direction == "=")
     {
-        if (direction == "=")
-        {
-            result = Probability.geometric(p, x);
-        }
-        else if (direction == "<=")
-        {
-            result = Probability.geometricAccumulated(p, x);
-        }
-        else if (direction == "<")
-        {
-            result = Probability.geometricAccumulated(p, x-1);
-        }
-        else if (direction == ">=")
-        {
-            result = 1 - Probability.geometricAccumulated(p, x-1);
-        }
-        else if (direction == ">")
-        {
-            result = 1 - Probability.geometricAccumulated(p, x);
-        }
+        result = Probability.geometric(p, x);
+    }
+    else if (direction == "<=")
+    {
+        result = Probability.geometricAccumulated(p, x);
+    }
+    else if (direction == "<")
+    {
+        result = Probability.geometricAccumulated(p, x-1);
+    }
+    else if (direction == ">=")
+    {
+        result = 1 - Probability.geometricAccumulated(p, x-1);
+    }
+    else if (direction == ">")
+    {
+        result = 1 - Probability.geometricAccumulated(p, x);
     }
     
     result = result.toFixed(3);
