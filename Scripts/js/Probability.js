@@ -144,8 +144,8 @@ Probability.calculateBinomial = function (n, p, x, direction)
 {
     var result = 0;
     
-    if (Validate.binomial(n, p, x))
-    {
+    //if (Validate.binomial(n, p, x))
+    //{
         if (direction == "=")
         {
             result = Probability.binomial(n, p, x);
@@ -158,7 +158,7 @@ Probability.calculateBinomial = function (n, p, x, direction)
         {
             result = 1 - Probability.binomialAccumulated(n, p, x-1);
         }
-    }
+    //}
 
     return result;
 }

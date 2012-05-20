@@ -118,6 +118,14 @@
                 }, false);
             }
             
+            //Funcion periodica
+            function periodic () { }
+    
+            function modalClosed() 
+            {
+                clearInterval(timmerPeriodic);
+            }
+            
             $(document).ready(function() 
             {
                 $("body").niceScroll({cursorborder:"", cursorcolor:"#000", cursoropacitymax:0.7});
