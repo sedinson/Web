@@ -25,6 +25,7 @@ function Graph(div)
     this.OJIVA = 4;
     this.PARETO = 5;
     this.POLIGONO_FRECUENCIA = 6;
+    this.PUNTOS = 7;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -473,6 +474,53 @@ function Graph(div)
         }
     }
     
+    //Grafica de Frecuencia
+    var puntos = function () 
+    {   //Calcular la separacion entre cada punto
+        var sep = (w-80)/data.length;
+        var antX = -1;
+        var antY = -1;
+        
+        //Funcion que pintara un punto
+        var setPoint = function (x, y, i) 
+        {
+            g.save();
+                g.lineWidth = 6;
+                g.beginPath();
+                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.arc(x, y, 3, 0, 2*Math.PI, false);
+                    g.stroke();
+            g.restore();
+        }
+        
+        g.textAlign = "center";
+        g.textBaseline = "top";
+        g.fillStyle = "#000000";
+        for(var i=0; i<data.length; i++)
+        {   //Pintar el punto y si es necesario la linea
+            var y = (data[i][pData]/frecuently)*(h-60);
+            
+            //Dibujar puntos
+            setPoint(60+sep*i+sep/2, (h-50)-y, i+1)
+            
+            //Guardar el punto actual
+            antX = 60+sep*i+sep/2;
+            antY = (h-50)-y;
+            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        }
+        
+        //Dibujar el ultimo punto al salir
+        setPoint(antX, antY, data.length);
+
+        //Pintar el texto de la guias del eje y
+        g.textAlign = "right";
+        g.textBaseline = "bottom";
+        for(i=1; i<=6; i++)
+        {
+            g.fillText((i*frecuently/6).toFixed(0)+"", 45, (6-i)*(h-80)/6+20);
+        }
+    }
+    
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -487,27 +535,29 @@ function Graph(div)
         //Seleccionar la opcion que se va a graficar
         switch (option)
         {
-            case 0: //Barra
+            case 0:     //Barra
                 base(barras);
                 break;
-            case 1: //Circular
+            case 1:     //Circular
                 circular();
                 break;
-            case 2: //Frecuencia
+            case 2:     //Frecuencia
                 base(frecuencia);
                 break;
-            case 3: //Caja y Bigotes
+            case 3:     //Caja y Bigotes
                 cajaybigotes();
                 break;
-            case 4: //Frecuencia Acumulada
+            case 4:     //Frecuencia Acumulada
                 base(frecuenciaAcumulada);
                 break;
-            case 5: //Pareto
+            case 5:     //Pareto
                 base(pareto);
                 break;
-            case 6: //Poligono de Frecuencia
+            case 6:     //Poligono de Frecuencia
                 base(poligonoFrecuencia);
                 break;
+            case 7:     //Diagrama de Puntos
+                base(puntos);
         }
     }
     
