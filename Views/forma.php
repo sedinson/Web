@@ -30,6 +30,8 @@
 
                 $("#asimetria").text(Stat.CAs(myData).toFixed(3));
                 $("#apuntamiento").text(Stat.CAp(myData).toFixed(3));
+                $("#gasimetria").html("<img src='" + BaseUrl + "/Resources/measures/" + asimetria(cas) + ".png' alt='coeficiente asimetria' />");
+                $("#lasimetria").text(asimetria(cas));
             }
         }
         catch (exception)
