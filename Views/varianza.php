@@ -66,7 +66,7 @@
               res.width(cont.width()-580);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;   &le;   "+may+"</pre>");
-              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -93,7 +93,7 @@
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="divN">

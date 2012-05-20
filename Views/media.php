@@ -131,10 +131,10 @@
               res.width(cont.width()-580);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
-              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               if(caso12){
                   $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
-                  $("#errorM").html("<pre class='wrap'>|x&#772;-&micro;|   &le;   "+amplitud+"</pre>");
+                  $("#errorM").html("|x&#772;-&micro;|<pre class='wrap'>   &le;   "+amplitud+"</pre>");
                   //$("#maxNTitle").html("Tamaño maximo para e="+trimfloat(amplitud,4));
                   //$("#maxN").html("<pre class='wrap'>n   =   "+(Math.pow(z,2)/(4*Math.pow(amplitud,2)))+"</pre>");
                   $("#divError").show();
@@ -166,7 +166,7 @@
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="divMedia">

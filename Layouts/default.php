@@ -15,6 +15,7 @@
         <script type="text/javascript">
             var myData = [11, 5, 14, 3, 12, 15, 16, 13, 22, 21, 23, 24, 19, 9, 9, 10, 6, 13, 6, 51, 32, 45, 40, 19, 39, 51];
             var original = Extra.createCopy(myData);
+            var BaseUrl = '<?=$config->get('BaseUrl')?>';
             var bodyScroll = null;
             var helpScroll = null;
             var selOpt = 0;
@@ -32,10 +33,15 @@
             
             function navegador(nav)
             {
+                helpScroll.resize().show();
                 $(nav + " li").click(function(event)
                 {
-                    $(nav + " li ul>li").css("display", "none");
-                    $(this).find("li").css("display", "block");
+                    var _this = this;
+                    $(nav + " li ul>li").hide(150, function() {
+                        $(_this).find("li").fadeIn(300, function() {
+                            helpScroll.resize().show();
+                        });
+                    });                   
                 });
             }
             
@@ -44,7 +50,7 @@
                 var str = url.split("/");
                 if(str.length >= 2) url = "controller=" + str[0] + "&action=" + str[1];
                 if(str.length >= 3) selOpt = str[2];
-                document.getElementById("modalDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
+                $("#modalDialog").html("<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>");
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
                 $("#modal").animate({opacity: 1}, 300);
@@ -71,7 +77,7 @@
                 var str = url.split("/");
                 if(url.length >=2) url = "controller=" + str[0] + "&action=" + str[1] + "&str=" + selOpt;
 				
-                document.getElementById("editDialog").innerHTML = "<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>";
+                $("#editDialog").html("<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>");
                 $("#editHelp").css("opacity", "0");
                 $("#editHelp").css("display", "block");
                 $("#editHelp").animate({opacity: 1}, 300);
@@ -116,6 +122,14 @@
                     }
                     e.preventDefault();
                 }, false);
+            }
+            
+            //Funcion periodica
+            function periodic () { }
+    
+            function modalClosed() 
+            {
+                clearInterval(timmerPeriodic);
             }
             
             $(document).ready(function() 

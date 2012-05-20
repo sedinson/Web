@@ -85,18 +85,18 @@ class RegisterController extends ControllerBase {
 		$model = $this->getModel("User");
 		$model2 = $this->getModel("Help");
 		$result1 = $model->getUser($this->post['user'], $this->post['password']);
-		if(!empty($result1))
+		if($result1)
 		{
-			$row = $result1->fetch();
-			$result2 = $model2->insertHelp($this->post['help'], $this->post['idaccess'], $this->post['idhelp'], $row['id']);
-			if($result2)
-				$status = "Done";
-			else
-				$status = "Failed";
+                    $row = $result1->fetch();
+                    $result2 = $model2->insertHelp($this->post['help'], $this->post['idaccess'], $this->post['idhelp'], $row['id']);
+                    if($result2)
+                        $status = "Done";
+                    else
+                        $status = "Failed";
 		}
 		else
-			$status = "Failed";
-		
+                    $status = "Failed";
+                
 		header("location:" . $this->config->get("InitUrl") . "?controller=Index&action=index&str=" . $status);
 	}
 	

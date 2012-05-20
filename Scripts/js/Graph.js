@@ -533,9 +533,9 @@ function Graph(div)
         min = Stat.minVal();
         max = Stat.maxVal();
         frecuently = 0;
-        q1 = Stat.getData(Stat.Quartile, 1, data);
-        q2 = Stat.median(data);
-        q3 = Stat.getData(Stat.Quartile, 3, data);
+        q1 = Stat.getData(Stat.Quartile, 1, original);
+        q2 = Stat.median(original);
+        q3 = Stat.getData(Stat.Quartile, 3, original);
         xm = Stat.averrage(data);
         
         sum = 0;

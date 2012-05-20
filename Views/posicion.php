@@ -1,21 +1,28 @@
 <script type="text/javascript">
     document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
-    function periodic () {
-        $("#cuartil").val("El cuartil " + $("#rcuartil").val() + " tiene el valor " + Stat.getData(Stat.Quartile, parseInt($("#rcuartil").val()), original).toFixed(2));
-        $("#decil").val("El decil " + $("#rdecil").val() + " tiene el valor " + Stat.getData(Stat.Decile, parseInt($("#rdecil").val()), original).toFixed(2));
-        $("#percentil").val("El percentil " + $("#rpercentil").val() + " tiene el valor " + Stat.getData(Stat.Percentile, parseInt($("#rpercentil").val()), original).toFixed(2));
-        
-        var tabla = document.getElementById("tabla");
-        var text = document.getElementById("text");
-        
-        if(text.value.length > 0) 
+    function periodic () 
+    {
+        try
         {
-            var data = Extra.transformData(text.value);
-            tabla.innerHTML = Stat.getTableInfo(data);
-            graphics.setData(data);
-            myData = data;
-            text.value = "";
-            text.blur();
+            $("#cuartil").val("El cuartil " + $("#rcuartil").val() + " tiene el valor " + Stat.getData(Stat.Quartile, parseInt($("#rcuartil").val()), original).toFixed(2));
+            $("#decil").val("El decil " + $("#rdecil").val() + " tiene el valor " + Stat.getData(Stat.Decile, parseInt($("#rdecil").val()), original).toFixed(2));
+            $("#percentil").val("El percentil " + $("#rpercentil").val() + " tiene el valor " + Stat.getData(Stat.Percentile, parseInt($("#rpercentil").val()), original).toFixed(2));
+
+            if($("#text").val().length > 0) 
+            {
+                myData = Extra.transformData($("#text").val());
+                $("#tabla").html(Stat.getTableInfo(myData));
+                $("#text").val("");
+                $("#text").blur();
+
+                $("#media").text(Stat.averrage(myData).toFixed(3));
+                $("#mediana").text(Stat.median(myData).toFixed(3));
+                $("#moda").text(Stat.mode(myData)[0]);
+            }
+        }
+        catch (exception)
+        {
+            clearInterval(timmerPeriodic);
         }
     }
     

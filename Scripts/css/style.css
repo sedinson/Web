@@ -449,7 +449,7 @@ input[type="file"] {
 	resize: none;
 }
 
-#tabla table {
+#tabla table, .tabla {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
@@ -468,11 +468,11 @@ input[type="file"] {
     margin-bottom: 10px;
 }
 
-#tabla td, #tabla th {
+#tabla td, #tabla th, .tabla td, .tabla th {
     padding: 5px 0;
 }
 
-#tabla tbody tr:nth-child(even){ 
+#tabla tbody tr:nth-child(even), .tabla tbody tr:nth-child(even) { 
     background: #f1f1f1;
 }
 
