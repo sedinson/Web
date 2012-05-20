@@ -45,7 +45,7 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
+//                ocultarResultado();
                 
                 var n = $("#n").val();
                 var p = $("#p").val();
@@ -68,19 +68,19 @@
                     res = Probability.calculateBinomial(n, p, x, ">");
                 }
                 
-                mostrarResultado();
+//                mostrarResultado();
                 
-                $("#calculoDP").html("P(X"+direccion+x+") = "+res);
+                $("#calculoDP").html("P(X"+direccion+x+") = "+res.toFixed(3));
             }
         });
     });
     //
     function ocultarResultado ()
     {
-        $("#resultadoDP").animate({
-            opacity: "0",
-            marginLeft: "100%"
-        }, 100);
+//        $("#resultadoDP").animate({
+//            opacity: "0",
+//            marginLeft: "100%"
+//        }, 100);
     }
     
     function mostrarResultado ()
@@ -100,35 +100,35 @@
 
 </script>
 
-<div id="probabilidad">
+<div id="probabilidad" class="estimacion">
     <div class="title2">Distribuci&oacute;n Binomial</div>
     <div class="title1">Datos</div>
-    <div class="left">
-        <div class="datosDP">
+    <div class="datos inlineB">
+        <div style="padding: 10px 15px;">
             <form id="datos">
                 <div>
-                    <label class="dplbl" for="n">Tama&ntilde;o de la muestra (n):</label>
+                    <label for="n" class="data">Tama&ntilde;o de la muestra (n):</label>
                     <input id="n" name="n" type="text" />
                 </div>
                 <div>
-                    <label class="dplbl" for="p">Probabilidad (p):</label>
+                    <label for="p" class="data">Probabilidad (p):</label>
                     <input id="p" name="p" type="text" />
                 </div>
                 <div>
-                    <label class="dplbl" for="x">Variable aleatoria (X):</label>
+                    <label for="x" class="data">Variable aleatoria (X):</label>
                     <input id="x" name="x" type="text" />
                 </div>
                 <div class="tipoDP">
-                    <label for="tipo">Tipo de probabilidad:</label>
+                    <label for="tipo" class="data">Tipo de probabilidad:</label>
                     <br />
                     <input id="puntual" name="tipo" type="radio" checked="true" value="puntual" />
-                    <label for="puntual">Puntual (=)</label>
+                    <label for="puntual" class="data">Puntual (=)</label>
                     <br />
                     <input id="acuIzq" name="tipo" type="radio" value="izquierda" />
-                    <label for="puntual">Acumulada a la izquierda (&le;)</label>
+                    <label for="puntual" class="data">Acumulada a la izquierda (&le;)</label>
                     <br />
                     <input id="acuDer" name="tipo" type="radio" value="derecha" />
-                    <label for="puntual">Acumulada a la derecha (&ge;)</label>
+                    <label for="puntual" class="data">Acumulada a la derecha (&ge;)</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />
@@ -137,9 +137,10 @@
         </div>
     </div>
     <div class="right">
-        <div class="title3">Resultado</div>
-        <div id="resultadoDP">
+        <div id="resultadoDP" class="inlineB">
             <div id="calculoDP"></div>
         </div>
     </div>
+    <div style="clear: both;"></div>
+    <div class="title3">Resultado</div>
 </div>
