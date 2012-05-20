@@ -512,67 +512,6 @@ input[type="file"] {
 }
 
 
-/****** CSS DISTRIBUCIONES DE PROBABILIDAD ******/
-
-/*.datosDP
-{
-    background-color: #f1f1f1;
-    border-radius: 15px;
-    padding: 10px;
-    padding-bottom: 50px;
-    box-shadow: 2px 2px 4px;
-}
-
-.datosDP input[type="text"], .datosDP input[type="number"]
-{
-    text-align: right;
-    width: 49%;
-}
-
-.dplbl
-{
-    display: inline-block;
-    width: 49%;
-}
-
-.tipoDP
-{
-    margin-bottom: 20px;
-    padding-top: 10px;
-}
-
-.tipoDP input[type="radio"]
-{
-    margin: 10px;
-    margin-left: 20px;
-}
-
-#resultadoDP
-{
-    opacity: 0;
-    background-color: #f1f1f1;
-    border-radius: 15px;
-    width: 300px;
-    margin-left: auto;
-    margin-right: 0px;
-    padding: 10px;
-    box-shadow: 2px 2px 4px;
-}
-
-#calculoDP
-{
-    text-align: center;
-    font-style: italic;
-    font-family: sans-serif;
-    font-size: xx-large;
-    font-weight: bold;
-    padding: 0px;
-    margin: 0px;
-}*/
-
-/**** FIN CSS DISTRIBUCIONES DE PROBABILIDAD ****/
-
-
 /*Comienzo CSS Estimacion*/
 .estimacion body{
     color: #222;

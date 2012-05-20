@@ -45,7 +45,7 @@
             },
             submitHandler: function (){
                 
-//                ocultarResultado();
+                ocultarResultado();
                 
                 var n = $("#n").val();
                 var p = $("#p").val();
@@ -67,28 +67,28 @@
                     direccion = "&ge;";
                     res = Probability.calculateBinomial(n, p, x, ">");
                 }
-                
-//                mostrarResultado();
-                
-                $("#calculoDP").html("P(X"+direccion+x+") = "+res.toFixed(3));
+
+                mostrarResultado();
+   
+                $("#intTitle").html("El calculo es");
+                $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
             }
         });
     });
-    //
+    
     function ocultarResultado ()
     {
-//        $("#resultadoDP").animate({
-//            opacity: "0",
-//            marginLeft: "100%"
-//        }, 100);
+        $("#resultado").fadeOut(300, function() {
+            $("#resultadoDP").css("display", "none")
+        });
     }
     
     function mostrarResultado ()
     {
-        $("#resultadoDP").animate({
-            marginLeft: "-=320",
-            opacity: "1"
-        }, 500);
+        $("#resultadoDP").width($("#resultadoDP").children().width()+20);
+        $("#resultado").fadeIn(150, function() {
+            $("#resultadoDP").fadeIn(300);
+        });
     }
     
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
@@ -136,9 +136,10 @@
             </form>
         </div>
     </div>
-    <div class="right">
-        <div id="resultadoDP" class="inlineB">
-            <div id="calculoDP"></div>
+    <div id="resultado" class="inlineB" style="padding: 40px 20px; display: none; margin-left: 50px;">
+        <div id="resultadoDP" class="wrap subdivRes">
+            <div class="resTitle" id="intTitle"></div>
+            <div id="calculoDP" class="wrap res" style="padding: 0 10px;"></div>
         </div>
     </div>
     <div style="clear: both;"></div>
