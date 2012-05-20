@@ -3,18 +3,25 @@
     $("#media").text(Stat.averrage(myData).toFixed(3));
     $("#mediana").text(Stat.median(myData).toFixed(3));
     $("#moda").text(Stat.mode(myData)[0]);
-    function periodic () {
-        
-        if($("#text").val().length > 0) 
+    function periodic () 
+    {
+        try
         {
-            myData = Extra.transformData($("#text").val());
-            $("#tabla").html(Stat.getTableInfo(myData));
-            $("#text").val("");
-            $("#text").blur();
-            
-            $("#media").text(Stat.averrage(myData).toFixed(3));
-            $("#mediana").text(Stat.median(myData).toFixed(3));
-            $("#moda").text(Stat.mode(myData)[0]);
+            if($("#text").val().length > 0) 
+            {
+                myData = Extra.transformData($("#text").val());
+                $("#tabla").html(Stat.getTableInfo(myData));
+                $("#text").val("");
+                $("#text").blur();
+
+                $("#media").text(Stat.averrage(myData).toFixed(3));
+                $("#mediana").text(Stat.median(myData).toFixed(3));
+                $("#moda").text(Stat.mode(myData)[0]);
+            }
+        }
+        catch (exception)
+        {
+            clearInterval(timmerPeriodic);
         }
     }
     
@@ -24,7 +31,7 @@
     }
 </script>
 <div class="title2">Medidas de Centralizaci&oacute;n</div>
-<div class="title1">Variables</div>
+<div class="title1">Valores</div>
 <div class="regular">
     <table class="tabla">
         <tr>
