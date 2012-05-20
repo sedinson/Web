@@ -3,16 +3,19 @@
     $(document).ready(function (){
         $("#datos").validate({
             rules: {
+                N: {
+                    required: true,
+                    number: true
+                },
                 n: {
                     required: true,
                     number: true,
                     min: 1
                 },
-                p: {
+                k: {
                     required: true,
                     number: true,
-                    min: 0,
-                    max: 1
+                    min: 0
                 },
                 x: {
                     required: true,
@@ -24,16 +27,19 @@
                 }
             },
             messages: {
+                N: {
+                    required: "<br />Es obligatorio",
+                    number: "<br />Se necesita un valor numerico"
+                },
                 n: {
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico",
                     min: "<br />No puede ser menor que 1"
                 },
-                p: {
+                k: {
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico",
-                    min: "<br />No puede ser menor que 0",
-                    max: "<br />No puede ser mayor que 1"
+                    min: "<br />No puede ser menor que 0"
                 },
                 x: {
                     required: "<br />Es obligatorio",
@@ -45,25 +51,26 @@
                 
                 ocultarResultado();
                 
+                var N = $("#N").val();
                 var n = $("#n").val();
-                var p = $("#p").val();
+                var k = $("#k").val();
                 var x = $("#x").val();
                 var direccion = "=";
                 var res = 0;
                 if ($("#puntual").is(":checked"))
                 {
                     direccion = "=";
-                    res = Probability.calculateBinomial(n, p, x, "=");
+                    res = Probability.calculateHyperGeometric(N, n, k, x, "=");
                 }
                 else if ($("#acuIzq").is(":checked"))
                 {
                     direccion = "&le;";
-                    res = Probability.calculateBinomial(n, p, x, "<");
+                    res = Probability.calculateHyperGeometric(N, n, k, x, "<");
                 }
                 else if ($("#acuDer").is(":checked"))
                 {
                     direccion = "&ge;";
-                    res = Probability.calculateBinomial(n, p, x, ">");
+                    res = Probability.calculateHyperGeometric(N, n, k, x, ">");
                 }
 
                 mostrarResultado();
@@ -89,17 +96,6 @@
         });
     }
     
-    $("#x").keyup(function (){
-        if ($("#x").val() >= $("#n").val())
-        {
-            $("#Xerror").fadeIn(300);
-        }
-        else
-        {
-            $("#Xerror").fadeOut(300);
-        }
-    });
-    
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -116,17 +112,20 @@
         <div style="padding: 10px 15px;">
             <form id="datos">
                 <div>
+                    <label for="N" class="data">Tama&ntilde;o de la poblaci&oacute;n (N):</label>
+                    <input id="N" name="N" type="text" />
+                </div>
+                <div>
                     <label for="n" class="data">Tama&ntilde;o de la muestra (n):</label>
                     <input id="n" name="n" type="text" />
                 </div>
                 <div>
-                    <label for="p" class="data">Probabilidad (p):</label>
-                    <input id="p" name="p" type="text" />
+                    <label for="k" class="data">Exitos (k):</label>
+                    <input id="k" name="k" type="text" />
                 </div>
                 <div>
                     <label for="x" class="data">Variable aleatoria (X):</label>
                     <input id="x" name="x" type="text" />
-                    <label id="Xerror" class="error" style="display: none;"><br />X debe ser menor que n</label>
                 </div>
                 <div class="tipoDP">
                     <label for="tipo" class="data">Tipo de probabilidad:</label>
