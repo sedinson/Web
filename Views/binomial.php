@@ -74,7 +74,7 @@
             }
         });
     });
-    
+    //
     function ocultarResultado ()
     {
         $("#resultadoDP").animate({
