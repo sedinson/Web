@@ -85,7 +85,7 @@
     
     function mostrarResultado ()
     {
-        $("#resultadoDP").width($("#resultadoDP").children().width()+20);
+        $("#resultadoDP").width($("#resultadoDP").children().width());
         $("#resultado").fadeIn(150, function() {
             $("#resultadoDP").fadeIn(300);
         });
@@ -142,6 +142,6 @@
             <div id="calculoDP" class="wrap res" style="padding: 0 10px;"></div>
         </div>
     </div>
-    <div style="clear: both;"></div>
+    <div style="clear: left;"></div>
     <div class="title3">Resultado</div>
 </div>
