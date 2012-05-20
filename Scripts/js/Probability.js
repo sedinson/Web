@@ -168,21 +168,13 @@ Probability.calculateGeometric = function (p, x, direction)
     {
         result = Probability.geometric(p, x);
     }
-    else if (direction == "<=")
+    else if (direction == "<")
     {
         result = Probability.geometricAccumulated(p, x);
     }
-    else if (direction == "<")
-    {
-        result = Probability.geometricAccumulated(p, x-1);
-    }
-    else if (direction == ">=")
-    {
-        result = 1 - Probability.geometricAccumulated(p, x-1);
-    }
     else if (direction == ">")
     {
-        result = 1 - Probability.geometricAccumulated(p, x);
+        result = 1 - Probability.geometricAccumulated(p, x-1);
     }
     
     return result.toFixed(3);
@@ -196,21 +188,13 @@ Probability.calculateNegativeBinomial = function (k, p, x, direction)
     {
         result = Probability.negativeBinomial(k, p, x);
     }
-    else if (direction == "<=")
+    else if (direction == "<")
     {
         result = Probability.negativeBinomialAccumulated(k, p, x);
     }
-    else if (direction == "<")
-    {
-        result = Probability.negativeBinomialAccumulated(k, p, x-1);
-    }
-    else if (direction == ">=")
-    {
-        result = 1 - Probability.negativeBinomialAccumulated(k, p, x-1);
-    }
     else if (direction == ">")
     {
-        result = 1 - Probability.negativeBinomialAccumulated(k, p, x);
+        result = 1 - Probability.negativeBinomialAccumulated(k, p, x-1);
     }
     
     return result.toFixed(3);
@@ -224,21 +208,13 @@ Probability.calculateHyperGeometric = function (N, n, k, x, direction)
     {
         result = Probability.hyperGeometric(N, n, k, x);
     }
-    else if (direction == "<=")
+    else if (direction == "<")
     {
         result = Probability.hyperGeometricAccumulated(N, n, k, x);
     }
-    else if (direction == "<")
-    {
-        result = Probability.hyperGeometricAccumulated(N, n, k, x-1);
-    }
-    else if (direction == ">=")
-    {
-        result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x-1);
-    }
     else if (direction == ">")
     {
-        result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x);
+        result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x-1);
     }
     
     return result.toFixed(3);
@@ -252,21 +228,13 @@ Probability.calculatePoisson = function (lambda, x, direction)
     {
         result = Probability.poisson(lambda, x);
     }
-    else if (direction == "<=")
+    else if (direction == "<")
     {
         result = Probability.poissonAccumulated(lambda, x);
     }
-    else if (direction == "<")
-    {
-        result = Probability.poissonAccumulated(lambda, x-1);
-    }
-    else if (direction == ">=")
-    {
-        result = 1 - Probability.poissonAccumulated(lambda, x-1);
-    }
     else if (direction == ">")
     {
-        result = 1 - Probability.poissonAccumulated(lambda, x);
+        result = 1 - Probability.poissonAccumulated(lambda, x-1);
     }
         
     return result.toFixed(3);
@@ -280,21 +248,13 @@ Probability.calculateDiscreteUniform = function (k, direction)
     {
         result = Probability.discreteUniform(k);
     }
-    else if (direction == "<=")
-    {
-        result = Probability.discreteUniformAccumulated(k);
-    }
     else if (direction == "<")
     {
         result = Probability.discreteUniformAccumulated(k);
     }
-    else if (direction == ">=")
-    {
-        result = 1 - Probability.discreteUniformAccumulated(k);
-    }
     else if (direction == ">")
     {
-        result = 1 - Probability.discreteUniformAccumulated(k);
+        result = 1 - Probability.discreteUniformAccumulated(k-1);
     }
     
     return result.toFixed(3);

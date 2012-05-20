@@ -24,7 +24,7 @@ class ProbabilityController extends ControllerBase
     
     function Poisson ()
     {
-        $this->view->partial("poissongeometrica.php");
+        $this->view->partial("poisson.php");
     }
     
     function UniformeDiscreta ()
