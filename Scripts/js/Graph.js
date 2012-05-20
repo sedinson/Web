@@ -36,11 +36,12 @@ function Graph(div)
     var option = 0;                 //Tipo de grafica (barra, torta, frecuencia, etc)
     var data = [];                  //Array que contiene los datos a graficar
     var olData = [];                //Array que contiene los datos a graficar ordenados descendentemente
+    var cmdData = [];               //Array que contiene los datos para la grafica de puntos
     var max = 0;                    //Valor maximo del array de datos
     var min = 0;                    //Valor minimo del array de datos
-    var q1 = 0;
-    var q2 = 0;
-    var q3 = 0;
+    var q1 = 0;                     //Cuartil 1
+    var q2 = 0;                     //Cuartil 2
+    var q3 = 0;                     //Cuartil 3
     var xm = 0;                     //Media de los datos
     var sum = 0;                    //Suma de todos los elementos del array de datos
     var w = 100;                    //Ancho del canvas
@@ -477,18 +478,17 @@ function Graph(div)
     //Grafica de Frecuencia
     var puntos = function () 
     {   //Calcular la separacion entre cada punto
-        var sep = (w-80)/data.length;
-        var antX = -1;
-        var antY = -1;
+        var sep = (w-80)/cmdData.length;
+        var ant = Infinity;
         
         //Funcion que pintara un punto
         var setPoint = function (x, y, i) 
         {
             g.save();
-                g.lineWidth = 6;
+                g.lineWidth = 4;
                 g.beginPath();
                     g.strokeStyle = colors[((i-1)%colors.length)][0];
-                    g.arc(x, y, 3, 0, 2*Math.PI, false);
+                    g.arc(x, y, 2, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
         }
@@ -496,21 +496,26 @@ function Graph(div)
         g.textAlign = "center";
         g.textBaseline = "top";
         g.fillStyle = "#000000";
-        for(var i=0; i<data.length; i++)
-        {   //Pintar el punto y si es necesario la linea
-            var y = (data[i][pData]/frecuently)*(h-60);
+        for(var i=0; i<cmdData.length; i++)
+        {   //Pintar los puntos horizontalmente de la clase tomada
+            var ancho = 0;
+            for(var j=0; j<cmdData[i][1].length; j++)
+            {
+                var y = (cmdData[i][1][j]/frecuently)*(h-60);
+                
+                //Dibujar puntos
+                setPoint(60+sep*i+sep/2+ancho, (h-50)-y, i+1)
+                if(j < cmdData[i][1].length-1) 
+                {
+                    if(cmdData[i][1][j] == cmdData[i][1][j+1])
+                        ancho += 8;
+                    else
+                        ancho = 0;
+                }
+            }
             
-            //Dibujar puntos
-            setPoint(60+sep*i+sep/2, (h-50)-y, i+1)
-            
-            //Guardar el punto actual
-            antX = 60+sep*i+sep/2;
-            antY = (h-50)-y;
-            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+            g.fillText(cmdData[i][0]+"", 60+sep*i+sep/2, h-45);
         }
-        
-        //Dibujar el ultimo punto al salir
-        setPoint(antX, antY, data.length);
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";
@@ -558,6 +563,7 @@ function Graph(div)
                 break;
             case 7:     //Diagrama de Puntos
                 base(puntos);
+                break;
         }
     }
     
@@ -593,6 +599,24 @@ function Graph(div)
         {
             frecuently = (data[i][2] > frecuently)? data[i][2] : frecuently;
             sum += data[i][pData];
+        }
+        
+        cmdData = [];
+        if(typeof original[0] != "number") {
+            var init = [];
+            for(i=0; i<original.length; i++)
+                init[i] = original[i][0];
+            init = init.unique();
+            
+            for(i=0; i<init.length; i++) {
+                var tmp = [];
+                for(var j=0; j<original.length; j++) {
+                    if(init[i] == original[j][0]) {
+                        tmp.push(original[j][2]);
+                    }
+                }
+                cmdData[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
+            }
         }
     }
     
