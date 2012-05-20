@@ -185,7 +185,7 @@ input[type="file"] {
     font-weight: normal;
     font-size: 12px;
     text-align: left;
-    cursor: text;
+    cursor: default;
     display: none;
 }
 

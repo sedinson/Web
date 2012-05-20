@@ -34,14 +34,16 @@
             function navegador(nav)
             {
                 helpScroll.resize().show();
-                $(nav + " li").click(function(event)
+                
+                $(nav + " ul > li").click(function(event)
                 {
-                    var _this = this;
-                    $(nav + " li ul>li").hide(150, function() {
-                        $(_this).find("li").fadeIn(150, function() {
-                            helpScroll.resize().show();
-                        });
-                    });                   
+                    $(nav + " ul li > ul li").click(function(event) {
+                        event.stopPropagation();
+                    });
+                    
+                    $(this).find("li").animate({height: 'toggle'}, 150, function() {
+                        helpScroll.resize().show();
+                    });
                 });
             }
             
