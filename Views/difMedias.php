@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    var desc = ["El tamaño de la muestra no es la suficientemente grande para aproximar a la Normal","Poblacion Normal, Varianza poblacional(&sigma;&sup2;) conocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) conocida, Tamaño de muestra &ge; 30",
-                "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"]
+    var desc = ["Poblaciones Normales, Varianzas poblacional(&sigma;&sup2;) conocidas","Poblaciones Normales, Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero iguales",
+                "Poblaciones Normales,Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero diferentes","Muestras Dependientes"]
     $(document).load(function (){
         $("#vpoblacional").hide();
         $("#vmuestral").hide();
@@ -28,26 +28,45 @@
                 required: true,
                 number: true
               },
-              normal: {
-                required: true  
-              },
-              tamano: {
+              tamano1: {
                   required: true,
                   digits: true,
                   min: 1
               },
               conocida: {
-                  required: true
+                  required: "#indsi:checked"
               },
-              varpoblacional: {
-                  required: "#consi:checked",
+              varpoblacional1: {
+                  required: "#consi:checked" && "#indsi:checked",
                   number: true,
                   min: 0
               },
-              smuestral: {
-                 required: "#conno:checked",
-                 number: true
+              smuestral1: {
+                 required: "#conno:checked" && "#indsi:checked",
+                 number: true,
+                 min: 0
+              },
+              tamano2: {
+                  required: "#indsi:checked" && "#indsi:checked",
+                  digits: true,
+                  min: 1
+              },
+              varpoblacional2: {
+                  required: "#consi:checked" && "#indsi:checked",
+                  number: true,
+                  min: 0
+              },
+              smuestral2: {
+                 required: "#conno:checked" && "#indsi:checked",
+                 number: true,
+                 min: 0
+              },
+              sd: {
+                  required: "#indno:checked",
+                  number: true,
+                  min: 0
               }
+              
           },
           messages: {
               alfa:{
@@ -60,65 +79,67 @@
                 required: "<br />Es obligatorio",
                 number: "<br />Se necesita un valor numerico"
               },
-              tamano: {
+              tamano1: {
                   required: "<br />Es obligatorio",
                   digits: "<br />Solo numero enteros",
                   min: "<br />Es imposible"
               },
-              varpoblacional: {
+              varpoblacional1: {
                   required: "<br />Es obligatorio",
                   number: "<br />Se necesita un valor numerico",
                   min: "<br />Todo numero al cuadrado es positivo verdad?"
               },
-              smuestral: {
+              smuestral1: {
                  required: "<br />Es obligatorio",
-                 number: "Se necesita un valor numerico"
+                 number: "<br />Se necesita un valor numerico",
+                 min: "<br />Todo numero al cuadrado es positivo verdad?"
+              },
+              tamano2: {
+                  required: "<br />Es obligatorio",
+                  digits: "<br />Solo numero enteros",
+                  min: "<br />Es imposible"
+              },
+              varpoblacional2: {
+                  required: "<br />Es obligatorio",
+                  number: "<br />Se necesita un valor numerico",
+                  min: "<br />Todo numero al cuadrado es positivo verdad?"
+              },
+              smuestral2: {
+                 required: "<br />Es obligatorio",
+                 number: "<br />Se necesita un valor numerico",
+                 min: "<br />Todo numero al cuadrado es positivo verdad?"
+              },
+              sd: {
+                required: "<br />Es obligatorio",
+                number: "<br />Se necesita un valor numerico",
+                min: "<br />Todo numero al cuadrado es positivo verdad?"
               }
           },
           submitHandler: function(){
               var alfa = $("#alfa").val();
               var z;
-              var n = $("#tamano").val();
-              var x = $("#miu").val();
-              var sigma;
+              var n1 = $("#tamano1").val();
+              var difmed = $("#miu").val();
               var casetype;
               var des;
-              var caso12 = false;
-              if($("#consi:checked").val()=="si"){
-                  sigma = Math.sqrt($("#varpoblacional").val());
-                  z = NORMSINV(alfa/2);
-                  if($("#siNorm:checked").val() == "si"){
-                      casetype = "Tipo I";
-                      des = 1;
-                      caso12=true;
-                  }else if(n>=30){
-                      casetype = "Tipo II";
-                      des = 2;
-                      caso12=true;
-                  }else{
-                      casetype = "Desconocido";
-                      $("#casoTipo").html(casetype);
-                      $("#descCaso").html(desc[0]);
-                      $("#resultado").fadeIn();
-                      return false;
-                  }
-              }else{
-                  sigma = $("#smuestral").val();
-                  if($("#siNorm:checked").val() == "si"){
-                      z= tStudentICDF(alfa/2,n-1);
-                      casetype="Tipo III";
-                      des = 3;
-                  }else if(n>=30){
-                      z = NORMSINV(alfa/2);
-                      casetype="Tipo IV";
-                      des = 4;
-                  }else{
-                      casetype = "Desconocido";
-                      $("#casoTipo").html(caseType);
-                      $("#descCaso").html(desc[0]);
-                      $("#resultado").fadeIn();
-                      return false;
-                  }
+              var amplitud;
+              if($("#indsi:checked").val()="si"){
+                var sigma1;
+                var sigma2;
+                var n2 = $("#tamnao2").val();
+                if($("#consi:checked").val()=="si"){
+                    sigma1 = $("#varpoblacional1").val();
+                    sigma2 = $("#varpoblacional2").val();
+                    z = NORMSINV(alfa/2);
+                    casetype="Caso Tipo I y II";
+                    des=0;
+                    amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);                    
+                    
+                }else{
+                    sigma1 = $("#smuestral1").val();
+                    sigma1 = $("#smuestral1").val();
+                    
+                }
               }
               
               var amplitud = z*sigma/Math.sqrt(n);
@@ -131,7 +152,7 @@
               res.width(cont.width()-580);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
-              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               if(caso12){
                   $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
                   $("#errorM").html("<pre class='wrap'>|x&#772;-&micro;|   &le;   "+amplitud+"</pre>");
@@ -151,64 +172,108 @@
         $("#errorM").width($("#errorM").children().width()+20);
     }
     function periodic () {
-        if($("#chkTabla:checked").val()=="tabla"){
-            var text = $("#text");
-            if(text.val().length > 0){
-                
+        
+        if(($("#consi:checked").val()=="si" || $("#conno:checked").val()=="no") && ($("#siNorm:checked").val()=="si" || $("#noNorm:checked").val()=="no"))
+            $("#masDatos").fadeIn();
+        var text = $("#text");
+        if(text.val().length > 0){
+            getData(text.val());
+            text.val("");
+            text.blur();
+        }
+    }
+    function getData(text){
+        var lines = text.split("\n");
+        if(lines.length >= 2){
+            var line0 = lines[0].split(" ");
+            var line1 = lines[1].split(" ");
+            if(line0.length>0 && line1.length>0){
+                var med1,med2;
+                var n1 = line0.length;
+                var n2 = line1.length;
+                var sum=0;
+                for(var i=0;i<line0.length;i++){
+                    try{
+                        sum += parseFloat(line0[i]);
+                    }catch(err) {
+                        n1--;
+                    }
+                }
+                med1=sum/n1;
+                sum=0;
+                for(var i=0;i<line1.length;i++){
+                    try{
+                        sum += parseFloat(line1[i]);
+                    }catch(err) {
+                        n2--;
+                    }
+                }
+                med2=sum/n2;
+                var difmed = med1*1-med2*1;
+                $("#miu1").val(med1);
+                $("#tamano1").val(n1);
+                $("#miu2").val(med2);
+                $("#tamano2").val(n2);
+                $("#miu").val(difmed);
+                sum = 0;
+                for(var i=0;i<n1;i++){
+                    try{
+                        sum += Math.pow((parseFloat(line0[i])-med1),2);
+                    }catch(err){};
+                }
+                $("#smuestral1").val(sum/(n1-1));
+                sum = 0
+                for(var i=0;i<n2;i++){
+                    try{
+                        sum += Math.pow((parseFloat(line1[i])-med2),2);
+                    }catch(err){};
+                }
+                $("#smuestral2").val(sum/(n2-1));
+                sum = 0
+                for(var i=0;i<n1;i++){
+                    try{
+                        sum += Math.pow((parseFloat(line0[i])-parseFloat(line1[i]))-difmed,2);
+                    }catch(err){};
+                }
+                $("#sd").val(Math.sqrt(sum/(n1-1)));
             }
         }
     }
-    
     function modalClosed() 
     {
         clearInterval(timmerPeriodic);
     }
-    function mostrarTabla(){
-        if($("#chkTabla:checked").val()=="tabla")
-            $("#tabla").fadeIn();
-        else
-            $("#tabla").fadeOut();
-    }
     function mostrarVar(){
-        $("#divSD")
+        $("#divVarInd").fadeIn();
+        $("#divtamano2").fadeIn();
+        $("#lmiu").html("Diferencia de Medias(x&#772;<sub>1</sub>-x&#772;<sub>2</sub>):");
+        $("#ltamano1").html("Tama&ntilde;o de la muestra 1(n<sub>1</sub>):");
+        $("#divSD").fadeOut(function(){
+            $("#divVar").fadeIn();
+        });
+        
+    }
+    function mostrarSd(){ 
+        $("#masDatos").fadeIn( function(){
+            $("#divVarInd").fadeOut();
+            $("#divtamano2").fadeOut();
+            $("#lmiu").html("Diferencia de Medias(d): ");
+            $("#ltamano1").html("Tama&ntilde;o de la muestra(n): ");
+            $("#divVar").fadeOut(function(){
+                $("#divSD").fadeIn();
+            });
+        });        
     }
 </script>
 <div class="estimacion">
-    <div class="title1">Media</div>
+    <div class="title1">Diferencia de Medias</div>
     <div class="datos inlineB">
         <h2 class="data">Datos</h2>
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
-            </div>
-            <div id="tablaDatos">
-                <label for="chkTabla" class="data">Tabla</label>
-                <input type="checkbox" name="tablaDatos" id="chkTabla" value="tabla" onclick="javascript: mostrarTabla();"/>
-            </div>
-            <div id="tabla" style="display: none">
-                <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
-            </div>
-            <div id="divMedia">
-                <label for="miu1" class="data">Media muestral(x&#772;<sub>1</sub>):</label>
-                <input id="miu1" name="miu1" type="text"/>
-                <label for="miu2" class="data">Media muestral(x&#772;<sub>2</sub>):</label>
-                <input id="miu2" name="miu2" type="text"/>
-            </div>
-            <div id="divNormal">
-                <label for="normal" class="data">Poblacion Normal? </label>
-                <strong><label for="siNorm">Si</label>
-                <input type="radio" id="siNorm" name="normal" value="si"></strong>
-                <strong><label for="noNorm">No</label>
-                <input type="radio" id="noNorm" name="normal" value="no"></strong>
-                <label for="normal" class="error block"><br />Es obligatorio</label>
-            </div>
-            <div id="divN">
-                <label for="tamano1" class="data">Tama&ntilde;o de la muestra 1(n<sub>1</sub>):</label>
-                <input id="tamano1" name="tamano1" type="text"/>
-                <label for="tamano2" class="data">Tama&ntilde;o de la muestra 2(n<sub>2</sub>):</label>
-                <input id="tamano2" name="tamano2" type="text"/>
             </div>
             <div id="divInd">
                 <label for="independientes" class="data">Muestras independientes?</label>
@@ -225,31 +290,54 @@
                 <strong><label for="conno">No</label>
                 <input type="radio" id="conno" name="conocida" value="no" onclick="javascript: mostrarVarM();" /></strong>
                 <label for="conocida" class="error block"><br />Es obligatorio</label>
-                <div id="vpoblacional" style="display: none">
-                    <label for="varpoblacional" class="data">Varianza poblacional(&sigma;&sup2;<sub>1</sub>): </label>
-                    <input id="varpoblacional1" name="varpoblacional" type="text"/>
-                    <label for="varpoblacional2" class="data">Varianza poblacional(&sigma;&sup2;<sub>2</sub>): </label>
-                    <input id="varpoblacional2" name="varpoblacional2" type="text"/>
-                </div>
-                <div id="vmuestral" style="display: none">
-                    <label for="smuestral1" class="data">Varianza muestral(s<sub>1</sub>): </label>
-                    <input id="smuestral1" name="smuestral1" type="text"/>
-                    <label for="smuestra2" class="data">Varianza muestral(s<sub>2</sub>): </label>
-                    <input id="smuestral2" name="smuestral2" type="text"/>
-                </div>
             </div>
-            <div id="divSD" style="display: none;">
-                <label for="sd" class="data">S<sub>d</sub></label>
-                <input id="sd" name="sd" type="text"/>
+            <div id="masDatos" style="display: none">
+                <div id="tabla">
+                    <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
+                </div>
+                <div id="divMedia">
+                    <label for="miu1" class="data">Media muestral(x&#772;<sub>1</sub>):</label>
+                    <input id="miu1" name="miu1" type="text"/>
+                    <label for="miu2" class="data">Media muestral(x&#772;<sub>2</sub>):</label>
+                    <input id="miu2" name="miu2" type="text"/>
+                    <label for="miu" class="data" id="lmiu">Diferencia de Medias(x&#772;<sub>1</sub>-x&#772;<sub>2</sub>):</label>
+                    <input id="miu" name="miu" type="text"/>
+                </div>
+                <div id="divN">
+                    <label for="tamano1" class="data" id="ltamano1">Tama&ntilde;o de la muestra 1(n<sub>1</sub>):</label>
+                    <input id="tamano1" name="tamano1" type="text"/>
+                    <div id="divtamano2">
+                        <label for="tamano2" class="data">Tama&ntilde;o de la muestra 2(n<sub>2</sub>):</label>
+                        <input id="tamano2" name="tamano2" type="text"/>
+                    </div>
+                </div>
+                <div id="divVarInd">
+                    <div id="vpoblacional" style="display: none">
+                        <label for="varpoblacional1" class="data">Varianza poblacional(&sigma;&sup2;<sub>1</sub>): </label>
+                        <input id="varpoblacional1" name="varpoblacional" type="text"/>
+                        <label for="varpoblacional2" class="data">Varianza poblacional(&sigma;&sup2;<sub>2</sub>): </label>
+                        <input id="varpoblacional2" name="varpoblacional2" type="text"/>
+                    </div>
+                    <div id="vmuestral" style="display: none">
+                        <label for="smuestral1" class="data">Varianza muestral(s&sup2;<sub>1</sub>): </label>
+                        <input id="smuestral1" name="smuestral1" type="text"/>
+                        <label for="smuestra2" class="data">Varianza muestral(s&sup2;<sub>2</sub>): </label>
+                        <input id="smuestral2" name="smuestral2" type="text"/>
+                    </div>
+                </div>
+                <div id="divSD" style="display: none;">
+                    <label for="sd" class="data">Desviacion estandar(S<sub>d</sub>)</label>
+                    <input id="sd" name="sd" type="text"/>
+                </div>
+                <input type="submit" class="calcular" value="Calcular Intervalo" />
             </div>
-            <input type="submit" class="calcular" value="Calcular Intervalo" />
         </form>
         </div>
    </div>
     <div id="resultado"  class="inlineB" style="display: none;margin-left: 50px;">
         <div id="casoTipo" class="title1" style="margin-left: -15px"></div>
         <h3 id="descCaso"></h3>
-        <div id="divIntervalo" style="display: hidden" class="wrap subdivRes">
+        <div id="divIntervalo" style="display: none" class="wrap subdivRes">
             <div id="intTitle" class="resTitle"></div>
             <div id="intervalo" class="wrap res"></div>
         </div>

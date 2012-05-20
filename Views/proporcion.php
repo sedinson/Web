@@ -71,7 +71,7 @@
                 res.width(cont.width()-580);
                 var intervalo = $("#intervalo");
                 intervalo.html("<pre class='wrap'>"+min+"   &le;   p   &le;   "+may+"</pre>");
-                $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confiabilidad");
+                $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
                 $("#errorTitle").html("Error Muestral para n = "+n+" y p&#x302; = "+p);
                 $("#errorM").html("<pre class='wrap'>|p&#x302;-p|   &le;   "+amplitud+"</pre>");
                 $("#maxNTitle").html("Tamaño maximo para e="+trimfloat(amplitud,4));
@@ -123,7 +123,7 @@
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confiabilidad(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="divN">
