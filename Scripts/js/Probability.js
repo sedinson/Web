@@ -144,21 +144,20 @@ Probability.calculateBinomial = function (n, p, x, direction)
 {
     var result = 0;
     
-    //if (Validate.binomial(n, p, x))
-    //{
-        if (direction == "=")
-        {
-            result = Probability.binomial(n, p, x);
-        }
-        else if (direction == "<")
-        {
-            result = Probability.binomialAccumulated(n, p, x);
-        }
-        else if (direction == ">")
-        {
-            result = 1 - Probability.binomialAccumulated(n, p, x-1);
-        }
-    //}
+    if (direction == "=")
+    {
+        result = Probability.binomial(n, p, x);
+    }
+    else if (direction == "<")
+    {
+        result = Probability.binomialAccumulated(n, p, x);
+    }
+    else if (direction == ">")
+    {
+        result = 1 - Probability.binomialAccumulated(n, p, x-1);
+    }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -190,6 +189,8 @@ Probability.calculateGeometric = function (p, x, direction)
             result = 1 - Probability.geometricAccumulated(p, x);
         }
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -221,6 +222,8 @@ Probability.calculateNegativeBinomial = function (k, p, x, direction)
             result = 1 - Probability.negativeBinomialAccumulated(k, p, x);
         }
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -252,6 +255,8 @@ Probability.calculateHyperGeometric = function (N, n, k, x, direction)
             result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x);
         }
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -283,6 +288,8 @@ Probability.calculatePoisson = function (lambda, x, direction)
             result = 1 - Probability.poissonAccumulated(lambda, x);
         }
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -314,6 +321,8 @@ Probability.calculateDiscreteUniform = function (k, direction)
             result = 1 - Probability.discreteUniformAccumulated(k);
         }
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -326,6 +335,8 @@ Probability.calculateNormal = function (m, s, x)
     {
         result = Probability.normal(m, s, x);
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -338,6 +349,8 @@ Probability.calculateStandardNormal = function (x)
     {
         result = Probability.standardNormal(x);
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -350,6 +363,8 @@ Probability.calculateContinuousUniform = function (a, b)
     {
         result = Probability.continuousUniform(a, b);
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
@@ -362,6 +377,8 @@ Probability.calculateExponential = function (beta, x)
     {
         result = Probability.exponential(beta, x);
     }
+    
+    result = result.toFixed(3);
 
     return result;
 }
