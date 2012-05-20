@@ -30,7 +30,7 @@ class AccessModel extends ModelBase {
     
     function deleteBox($id)
     {
-        $sql = "DELETE FROM access WHERE idparent = $id OR idaccess = $id";
+        $sql = "UPDATE access SET shw = 0 WHERE idparent = $id OR idaccess = $id";
         $result = $this->db->query($sql);
         
         return $result;
@@ -38,7 +38,7 @@ class AccessModel extends ModelBase {
     
     function deleteBox2($id)
     {
-        $sql = "DELETE FROM access WHERE idaccess = $id";
+        $sql = "UPDATE access SET shw = 0 WHERE idaccess = $id";
         $result = $this->db->query($sql);
         
         return $result;
@@ -46,7 +46,7 @@ class AccessModel extends ModelBase {
     
     function getAccess()
     {
-        $sql = "SELECT * FROM access WHERE idparent = 0;";
+        $sql = "SELECT * FROM access WHERE idparent = 0 AND shw = 1 ORDER BY ord ASC;";
         $result = $this->db->query($sql);
         
         return $result;
@@ -54,7 +54,7 @@ class AccessModel extends ModelBase {
     
     function getSubAccess($id)
     {
-        $sql = "SELECT * FROM access WHERE idparent = $id;";
+        $sql = "SELECT * FROM access WHERE idparent = $id AND shw = 1 ORDER BY ord ASC;";
         $result = $this->db->query($sql);
         
         return $result;

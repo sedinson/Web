@@ -38,6 +38,9 @@ class GraficasController extends ControllerBase {
     function PoligonoFrecuencia () {
         $this->view->partial("poligonoFrecuencia.php");
     }
+    
+    function Datos () {
+        $this->view->partial("ingresarDatos.php");
+    }
 }
-
 ?>
