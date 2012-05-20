@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    var desc = ["Poblaciones Normales, Varianzas poblacional(&sigma;&sup2;) conocidas","Poblaciones Normales, Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero iguales",
-                "Poblaciones Normales,Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero diferentes","Muestras Dependientes"]
+    var desc = ["Poblaciones Normales, Varianzas poblacional(&sigma;&sup2;) conocidas","Poblaciones Normales, Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero estadisticamente iguales",
+                "Poblaciones Normales,Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero estadisticamente diferentes","Muestras Dependientes"]
     $(document).load(function (){
         $("#vpoblacional").hide();
         $("#vmuestral").hide();
@@ -37,27 +37,35 @@
                   required: "#indsi:checked"
               },
               varpoblacional1: {
-                  required: "#consi:checked" && "#indsi:checked",
+                  required: function(element){
+                      return $("#consi:checked").val()=="si" && $("#indsi:checked").val()=="si";
+                  },
                   number: true,
                   min: 0
               },
               smuestral1: {
-                 required: "#conno:checked" && "#indsi:checked",
+                 required: function(element){
+                      return $("#consi:checked").val()=="si" && $("#indsi:checked").val()=="si";
+                  },
                  number: true,
                  min: 0
               },
               tamano2: {
-                  required: "#indsi:checked" && "#indsi:checked",
+                  required: "#indsi:checked",
                   digits: true,
                   min: 1
               },
               varpoblacional2: {
-                  required: "#consi:checked" && "#indsi:checked",
+                  required: function(element){
+                      return $("#consi:checked").val()=="si" && $("#indsi:checked").val()=="si";
+                  },
                   number: true,
                   min: 0
               },
               smuestral2: {
-                 required: "#conno:checked" && "#indsi:checked",
+                 required: function(element){
+                      return $("#consi:checked").val()=="si" && $("#indsi:checked").val()=="si";
+                  },
                  number: true,
                  min: 0
               },
@@ -116,64 +124,87 @@
               }
           },
           submitHandler: function(){
-              var alfa = $("#alfa").val();
-              var z;
-              var n1 = $("#tamano1").val();
-              var difmed = $("#miu").val();
-              var casetype;
-              var des;
-              var amplitud;
-              if($("#indsi:checked").val()="si"){
-                var sigma1;
-                var sigma2;
-                var n2 = $("#tamnao2").val();
-                if($("#consi:checked").val()=="si"){
-                    sigma1 = $("#varpoblacional1").val();
-                    sigma2 = $("#varpoblacional2").val();
-                    z = NORMSINV(alfa/2);
-                    casetype="Caso Tipo I y II";
-                    des=0;
-                    amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);                    
-                    
-                }else{
-                    sigma1 = $("#smuestral1").val();
-                    sigma1 = $("#smuestral1").val();
-                    
-                }
-              }
-              
-              var amplitud = z*sigma/Math.sqrt(n);
-              var min = trimfloat(x - amplitud,4);
-              var may = trimfloat(x*1 + amplitud,4);
-              $("#casoTipo").html("Caso "+casetype);
-              $("#descCaso").html(desc[des]);
-              var res = $("#resultado");
-              var cont = $("#modalDialog");
-              res.width(cont.width()-580);
-              var intervalo = $("#intervalo");
-              intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
-              $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
-              if(caso12){
-                  $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
-                  $("#errorM").html("<pre class='wrap'>|x&#772;-&micro;|   &le;   "+amplitud+"</pre>");
-                  $("#divError").show();
-              }
-              res.slideUp(function(){
-                  res.slideDown(function(){
-                      $("#divIntervalo").fadeIn();
-                  });
-              });
-              ajustarIntervalo();
+              calcularIntervalo();
           }
        });
     });
+    function calcularIntervalo(){
+        var alfa = $("#alfa").val();
+        var z;
+        var n1 = $("#tamano1").val();
+        var difmed = $("#miu").val();
+        var casetype;
+        var des;
+        var amplitud;
+        if($("#indsi:checked").val()=="si"){
+            var sigma1;
+            var sigma2;
+            var n2 = $("#tamano2").val();
+            if($("#consi:checked").val()=="si"){
+                sigma1 = $("#varpoblacional1").val();
+                sigma2 = $("#varpoblacional2").val();
+                z = NORMSINV(alfa/2);
+                casetype="Caso Tipo I y II";
+                des=0;
+                amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);                    
+
+            }else{
+                sigma1 = $("#smuestral1").val();
+                sigma2 = $("#smuestral2").val();
+                var interval = cocienteVarianzas(sigma1,sigma2,n1,n2,alfa);
+                if(varianzasIguales(interval)){
+                    casetype = "Caso Tipo III";
+                    des=1;
+                    z = tStudentICDF(alfa/2,n1+n2-2);
+                    var sp = ((n1-1)*sigma1+(n2-1)*sigma2)/(n1+n2-2);
+                    amplitud = z*Math.sqrt(sp*((1/n1)+(1/n2)));
+                }else{
+                    casetype = "Caso Tipo IV";
+                    des=2;
+                    var v = Math.pow((sigma1/n1)+(sigma2/n2),2)/((Math.pow(sigma1/n1,2)/(n1-1))+(Math.pow(sigma2/n2,2)/(n2-1)));
+                    z = tStudentICDF(alfa/2,v);
+                    amplitud = z*Math.sqrt((sigma1/n1)+(sigma2/n2));                            
+                }                 
+            }
+        }else{
+            var sd = $("#sd").val();
+            casetype = "Caso Tipo V";
+            des = 3;
+            z = tStudentICDF(alfa/2,n1-1);
+            amplitud = z*(sd/Math.sqrt(n1));
+        }
+        var min = trimfloat(difmed - amplitud,4);
+        var may = trimfloat(difmed*1 + amplitud,4);
+        $("#casoTipo").html(casetype);
+        var analisis;
+        if(min<=0 && may>=0){
+            analisis = "&micro;<sub>1</sub> y &micro;<sub>2</sub> son estadisticamente <b>IGUALES</b>";
+        }else if(may<0){
+            analisis = "&micro;<sub>1</sub> es estadisticamente <b>MENOR</b> que &micro;<sub>2</sub>"
+        }else if(min>0){
+            analisis = "&micro;<sub>1</sub> es estadisticamente <b>MAYOR</b> que &micro;<sub>2</sub>"
+        }
+        $("#analisis").html(analisis);
+        $("#descCaso").html(desc[des]);
+        var res = $("#resultado");
+        var cont = $("#modalDialog");
+        res.width(cont.width()-580);
+        var intervalo = $("#intervalo");
+        intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;<sub>1</sub>-&micro;<sub>2</sub>   &le;   "+may+"</pre>");
+        $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
+        res.slideUp(function(){
+            res.slideDown(function(){
+                $("#divIntervalo").fadeIn();
+            });
+        });
+        ajustarIntervalo();
+    }
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
-        $("#errorM").width($("#errorM").children().width()+20);
     }
     function periodic () {
-        
-        if(($("#consi:checked").val()=="si" || $("#conno:checked").val()=="no") && ($("#siNorm:checked").val()=="si" || $("#noNorm:checked").val()=="no"))
+        ajustarIntervalo();
+        if($("#consi:checked").val()=="si" || $("#conno:checked").val()=="no")
             $("#masDatos").fadeIn();
         var text = $("#text");
         if(text.val().length > 0){
@@ -184,6 +215,7 @@
     }
     function getData(text){
         var lines = text.split("\n");
+        $("#textError").hide();
         if(lines.length >= 2){
             var line0 = lines[0].split(" ");
             var line1 = lines[1].split(" ");
@@ -196,7 +228,8 @@
                     try{
                         sum += parseFloat(line0[i]);
                     }catch(err) {
-                        n1--;
+                        $("#textError").show();
+                        return;
                     }
                 }
                 med1=sum/n1;
@@ -205,7 +238,8 @@
                     try{
                         sum += parseFloat(line1[i]);
                     }catch(err) {
-                        n2--;
+                        $("#textError").show();
+                        return;
                     }
                 }
                 med2=sum/n2;
@@ -266,9 +300,9 @@
     }
 </script>
 <div class="estimacion">
-    <div class="title1">Diferencia de Medias</div>
+    <div class="title2">Intervalo de Confianza para la Diferencia de Medias</div>
+    <div class="title1">Datos</div>
     <div class="datos inlineB">
-        <h2 class="data">Datos</h2>
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
@@ -294,6 +328,7 @@
             <div id="masDatos" style="display: none">
                 <div id="tabla">
                     <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
+                    <label for="text" id="textError" class="error block">2 lineas. Datos separados por un espacio.</label>
                 </div>
                 <div id="divMedia">
                     <label for="miu1" class="data">Media muestral(x&#772;<sub>1</sub>):</label>
@@ -314,14 +349,14 @@
                 <div id="divVarInd">
                     <div id="vpoblacional" style="display: none">
                         <label for="varpoblacional1" class="data">Varianza poblacional(&sigma;&sup2;<sub>1</sub>): </label>
-                        <input id="varpoblacional1" name="varpoblacional" type="text"/>
+                        <input id="varpoblacional1" name="varpoblacional1" type="text"/>
                         <label for="varpoblacional2" class="data">Varianza poblacional(&sigma;&sup2;<sub>2</sub>): </label>
                         <input id="varpoblacional2" name="varpoblacional2" type="text"/>
                     </div>
                     <div id="vmuestral" style="display: none">
                         <label for="smuestral1" class="data">Varianza muestral(s&sup2;<sub>1</sub>): </label>
                         <input id="smuestral1" name="smuestral1" type="text"/>
-                        <label for="smuestra2" class="data">Varianza muestral(s&sup2;<sub>2</sub>): </label>
+                        <label for="smuestral2" class="data">Varianza muestral(s&sup2;<sub>2</sub>): </label>
                         <input id="smuestral2" name="smuestral2" type="text"/>
                     </div>
                 </div>
@@ -342,10 +377,10 @@
             <div id="intervalo" class="wrap res"></div>
         </div>
         <br>
-        <div id="divError" style="display: none" class="wrap subdivRes">
-            <div id="errorTitle" class="resTitle"></div>
-            <div id="errorM" class="wrap res"></div>
+        <div id="analisis" class="wrap">            
         </div>
         <br>
     </div>
+    <div style="clear: left;"></div>
+    <div class="title3">Resultado</div>
 </div>
