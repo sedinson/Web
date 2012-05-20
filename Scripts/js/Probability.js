@@ -90,7 +90,7 @@ Probability.binomialAccumulated = function (n, p, x)
 Probability.geometricAccumulated = function (p, x)
 {
     var sum = 0;
-    for(var i=0; i<=x; i++)
+    for(var i=1; i<=x; i++)
     {
         sum += Probability.geometric(p, i);
     }
@@ -130,7 +130,7 @@ Probability.poissonAccumulated = function (lambda, x)
 Probability.discreteUniformAccumulated = function (k)
 {
     var sum = 0;
-    for(var i=0; i<=k; i++)
+    for(var i=1; i<=k; i++)
     {
         sum += Probability.discreteUniform(i);
     }
