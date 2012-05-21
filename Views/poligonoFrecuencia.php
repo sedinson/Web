@@ -35,6 +35,7 @@
 <div class="title1">Datos</div>
 <div class="regular">
     <div id="tabla"></div>
+    <a href="javascript:mostrar('Graficas/Datos/36');" style="text-align: center;">Ingreso de Datos manual</a>
     <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
 </div>
 <div id="grafica" class="shadowClear"></div>

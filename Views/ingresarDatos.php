@@ -7,7 +7,9 @@
     });
     
     $("document").ready(function() {
-        $("#btnConfigurar").click(function() {
+        $("#tabla").html(Stat.getTableInfo(myData));
+        
+        $("#btnConfigurar").click(function(event) {
             Stat.config($("#precision").val(), ($("input[name='radio']:checked").val() == "Si")? true : false);
             fps = $("#time").slider("value");
             alert("Configuraciones Guardadas!");
@@ -93,6 +95,40 @@
                 $("#txtclass").focus();
             }
         });
+        
+        $("#btnGenerar-1").click(function(event) {
+            if($("#txtLD").val().length > 0)
+            {
+                myData = Extra.transformData($("#txtLD").val());
+                $("#tabla").html(Stat.getTableInfo(myData));
+                alert("Tabla Generada...!");
+            }
+            else
+            {
+                alert("No hay datos para generar la tabla.");
+            }
+            $("#txtLD").val("");
+        });
+        
+        $("#btnGenerar-2").click(function(event) {
+            if($("#txtLA").val().length > 0)
+            {
+                myData = Extra.transformData($("#txtLA").val());
+                $("#tabla").html(Stat.getTableInfo(myData));
+                alert("Tabla Generada...!");
+            }
+            else
+            {
+                alert("No hay datos para generar la tabla.");
+            }
+            $("#txtLA").val("");
+        });
+        
+        $("#reiniciar").click(function(event) {
+            $("#txtLA").val("");
+            $("#txtLD").val("");
+            alert("Se han reiniciado los campos.");
+        });
     });
     function periodic() { }
     
@@ -112,7 +148,7 @@
         
         <div id="tabs-1">
             <form id="datos-1">
-                <textarea id="txtLD" placeholder="Aqui van los datos ingresados" class="fillAll" style="height: 200px;"></textarea>
+                <textarea id="txtLD" placeholder="Aqui van los datos ingresados" class="fillAll" style="height: 200px;" readonly="readonly"></textarea>
                 <table class="fillAll">
                     <tr>
                         <td><input type="text" name="txtnclass" id="txtnclass" placeholder="Numero Clases" style="text-align: center;" class="fillAll" /></td>
@@ -133,7 +169,7 @@
         
         <div id="tabs-2">
             <form id="datos-2">
-                <textarea id="txtLA" placeholder="Aqui van los datos ingresados" class="fillAll" style="height: 200px;"></textarea>
+                <textarea id="txtLA" placeholder="Aqui van los datos ingresados" class="fillAll" style="height: 200px;" readonly="readonly"></textarea>
                 <table class="fillAll">
                     <tr>
                         <td><input type="text" id="txtclass" name="txtclass" placeholder="Digite Valor de x" class="fillAll" /></td>
@@ -148,7 +184,7 @@
     </div>
 </div>
 <div class="right">
-    <table id="tabla">
+    <table class="tabla">
         <thead>
             <tr>
                 <th>Configuraci&oacute;n</th>
@@ -173,7 +209,13 @@
             <td><div id="time" class="fillAll"></div></td>
         </tr>
     </table>
-    <input type="button" id="btnConfigurar" value="Guardar Cambios" style="float: right;" />
+    <div style="float: right;">
+        <input type="button" value="Reiniciar Tablas" id="reiniciar" />
+        <input type="button" id="btnConfigurar" value="Guardar Cambios" />
+    </div>
 </div>
 <div style="clear: both;"></div>
 <div class="title3">Configuraciones</div>
+<div style="clear: both;"></div>
+<div class="title1">Datos</div>
+<div id="tabla"></div>

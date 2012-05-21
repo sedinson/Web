@@ -34,9 +34,22 @@
     }
 </script>
 <div class="title2">Medidas de Centralizaci&oacute;n</div>
-<div class="title1">Valores</div>
+<div class="title1">Datos</div>
+<div style="clear: both;"></div>
 <div class="regular">
+    <div id="tabla"></div>
+    <a href="javascript:mostrar('Graficas/Datos/36');" style="text-align: center;">Ingreso de Datos manual</a>
+    <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
+</div>
+
+<div class="right">
     <table class="tabla">
+        <thead>
+            <tr>
+                <th>Medida</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
         <tr>
             <th>Media (x&#772;)</th>
             <td><div id="media"></div></td>
@@ -52,9 +65,4 @@
     </table>
 </div>
 <div style="clear: both;"></div>
-<div class="regular">
-    <div class="title1">Datos</div>
-    <div id="tabla"></div>
-    <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
-</div>
-<div style="clear: both;"></div>
+<div class="title3">Valores</div>

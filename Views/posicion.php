@@ -67,9 +67,10 @@
     <div class="title3">Valores</div>
 </div>
 <div style="clear: both;"></div>
-<div class="regular">
+<div class="left">
     <div class="title1">Datos</div>
     <div id="tabla"></div>
+    <a href="javascript:mostrar('Graficas/Datos/36');" style="text-align: center;">Ingreso de Datos manual</a>
     <textarea id="text" placeholder="Pegue aqui la tabla"></textarea>
 </div>
 <div style="clear: both;"></div>
