@@ -38,7 +38,8 @@ Edinson Salas
 
 Andres Perez
 
-	http://github.com/andresp
+	http://github.com/andresperezl
+	@andresperezl
 
 David Seija
 
