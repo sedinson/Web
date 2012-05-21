@@ -82,7 +82,7 @@
                 $("#maxN").html("<pre class='wrap'>n   =   "+(Math.pow(z,2)/(4*Math.pow(amplitud,2)))+"</pre>");
                 $("#divError").show();
                 $("#uniTitle").html("Limites Unilaterales");
-                $("#unilateral").html("<pre style='margin: 0'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
+                $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
                 res.slideUp(function(){
                     res.slideDown(function(){
                         $("#divIntervalo").fadeIn();
