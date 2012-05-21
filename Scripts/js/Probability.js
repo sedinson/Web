@@ -1,3 +1,5 @@
+/*David Seija*/
+
 
 Math.factorial = function (a)
 {
@@ -220,9 +222,33 @@ Probability.normal = function (m, s, x)
     return value;
 }
 
-Probability.standardNormal = function (x)
+Probability.standardNormal = function (z)
 {
-    return ( (1/Math.sqrt(2 * Math.PI)) * Math.exp((-1) * (1/2) * Math.pow(x, 2)) );
+    var value = 0;
+    
+    if (z >= 0)
+    {
+        if (z <= (3.59))
+        {
+            value = Probability.getNormalValue(z);
+        }
+        else{
+            value = 1;
+        }
+    }
+    else
+    {
+        if (z >= (-3.59))
+        {
+            z = (z * (-1)) + "";
+            value = 1 - Probability.getNormalValue(z);
+        }
+        else{
+            value = 0;
+        }
+    }
+    
+    return value;
 }
 
 Probability.continuousUniform = function (a, b)
@@ -378,11 +404,18 @@ Probability.calculateNormal = function (m, s, lower, upper, interval)
     return result.toFixed(3);
 }
 
-Probability.calculateStandardNormal = function (lower, upper, interval)
+Probability.calculateStandardNormal = function (z, interval)
 {
     var result = 0;
     
-    result = Probability.standardNormal(x);
+    if (interval == "<")
+    {
+        result = Probability.standardNormal(z);
+    }
+    else if (interval == ">")
+    {
+        result = 1 - Probability.standardNormal(z);
+    }
     
     return result.toFixed(3);
 }
