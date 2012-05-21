@@ -49,34 +49,37 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var N = $("#N").val();
-                var n = $("#n").val();
-                var k = $("#k").val();
-                var x = $("#x").val();
-                var direccion = "=";
-                var res = 0;
-                if ($("#puntual").is(":checked"))
+                if ((validarN() == true) && (validarn() == true) && (validarK() == true) && (validarX() == true))
                 {
-                    direccion = "=";
-                    res = Probability.calculateHyperGeometric(N, n, k, x, "=");
-                }
-                else if ($("#acuIzq").is(":checked"))
-                {
-                    direccion = "&le;";
-                    res = Probability.calculateHyperGeometric(N, n, k, x, "<");
-                }
-                else if ($("#acuDer").is(":checked"))
-                {
-                    direccion = "&ge;";
-                    res = Probability.calculateHyperGeometric(N, n, k, x, ">");
-                }
+                    ocultarResultado();
 
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
+                    var N = $("#N").val();
+                    var n = $("#n").val();
+                    var k = $("#k").val();
+                    var x = $("#x").val();
+                    var direccion = "=";
+                    var res = 0;
+                    if ($("#puntual").is(":checked"))
+                    {
+                        direccion = "=";
+                        res = Probability.calculateHyperGeometric(N, n, k, x, "=");
+                    }
+                    else if ($("#acuIzq").is(":checked"))
+                    {
+                        direccion = "&le;";
+                        res = Probability.calculateHyperGeometric(N, n, k, x, "<");
+                    }
+                    else if ($("#acuDer").is(":checked"))
+                    {
+                        direccion = "&ge;";
+                        res = Probability.calculateHyperGeometric(N, n, k, x, ">");
+                    }
+
+                    mostrarResultado();
+
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
+                }
             }
         });
     });
@@ -96,6 +99,92 @@
         });
     }
     
+    
+    $("#N").keyup(validarN);
+    
+    function validarN ()
+    {
+        var N = parseInt($("#N").val());
+        var k = parseInt($("#k").val());
+        
+        if (N < k)
+        {
+            $("#Nerror").css("display", "inline");
+            $("#N").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#Nerror").css("display", "none");
+            $("#N").css("border", "");
+            return true;
+        }
+    }
+    
+    $("#n").keyup(validarn);
+    
+    function validarn ()
+    {
+        var n = parseInt($("#n").val());
+        var N = parseInt($("#N").val());
+        
+        if (n > N)
+        {
+            $("#nerror").css("display", "inline");
+            $("#n").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#nerror").css("display", "none");
+            $("#n").css("border", "");
+            return true;
+        }
+    }
+    
+    $("#k").keyup(validarK);
+    
+    function validarK ()
+    {
+        var n = parseInt($("#n").val());
+        var k = parseInt($("#k").val());
+        
+        if (k > n)
+        {
+            $("#Kerror").css("display", "inline");
+            $("#k").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#Kerror").css("display", "none");
+            $("#k").css("border", "");
+            return true;
+        }
+    }
+    
+    $("#x").keyup(validarX);
+    
+    function validarX ()
+    {
+        var n = parseInt($("#n").val());
+        var x = parseInt($("#x").val());
+        
+        if (x > n)
+        {
+            $("#Xerror").css("display", "inline");
+            $("#x").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#Xerror").css("display", "none");
+            $("#x").css("border", "");
+            return true;
+        }
+    }
+    
+    
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -106,7 +195,7 @@
 </script>
 
 <div id="probabilidad" class="estimacion">
-    <div class="title2">Distribuci&oacute;n Binomial</div>
+    <div class="title2">Distribuci&oacute;n Hipergeom&eacute;trica</div>
     <div class="title1">Datos</div>
     <div class="datos inlineB">
         <div style="padding: 10px 15px;">
@@ -114,18 +203,22 @@
                 <div>
                     <label for="N" class="data">Tama&ntilde;o de la poblaci&oacute;n (N):</label>
                     <input id="N" name="N" type="text" />
+                    <label id="Nerror" class="error" style="display: none;"><br />N no puede ser menor que k</label>
                 </div>
                 <div>
                     <label for="n" class="data">Tama&ntilde;o de la muestra (n):</label>
                     <input id="n" name="n" type="text" />
+                    <label id="nerror" class="error" style="display: none;"><br />n no puede ser mayor que N</label>
                 </div>
                 <div>
                     <label for="k" class="data">Exitos (k):</label>
                     <input id="k" name="k" type="text" />
+                    <label id="Kerror" class="error" style="display: none;"><br />k no puede ser mayor que n</label>
                 </div>
                 <div>
                     <label for="x" class="data">Variable aleatoria (X):</label>
                     <input id="x" name="x" type="text" />
+                    <label id="Xerror" class="error" style="display: none;"><br />X no puede ser mayor que k</label>
                 </div>
                 <div class="tipoDP">
                     <label for="tipo" class="data">Tipo de probabilidad:</label>

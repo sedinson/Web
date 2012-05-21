@@ -43,33 +43,36 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var n = $("#n").val();
-                var p = $("#p").val();
-                var x = $("#x").val();
-                var direccion = "=";
-                var res = 0;
-                if ($("#puntual").is(":checked"))
+                if(validarX() == true)
                 {
-                    direccion = "=";
-                    res = Probability.calculateBinomial(n, p, x, "=");
-                }
-                else if ($("#acuIzq").is(":checked"))
-                {
-                    direccion = "&le;";
-                    res = Probability.calculateBinomial(n, p, x, "<");
-                }
-                else if ($("#acuDer").is(":checked"))
-                {
-                    direccion = "&ge;";
-                    res = Probability.calculateBinomial(n, p, x, ">");
-                }
+                    ocultarResultado();
 
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
+                    var n = $("#n").val();
+                    var p = $("#p").val();
+                    var x = $("#x").val();
+                    var direccion = "=";
+                    var res = 0;
+                    if ($("#puntual").is(":checked"))
+                    {
+                        direccion = "=";
+                        res = Probability.calculateBinomial(n, p, x, "=");
+                    }
+                    else if ($("#acuIzq").is(":checked"))
+                    {
+                        direccion = "&le;";
+                        res = Probability.calculateBinomial(n, p, x, "<");
+                    }
+                    else if ($("#acuDer").is(":checked"))
+                    {
+                        direccion = "&ge;";
+                        res = Probability.calculateBinomial(n, p, x, ">");
+                    }
+
+                    mostrarResultado();
+
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
+                }
             }
         });
     });
@@ -89,16 +92,28 @@
         });
     }
     
-    $("#x").keyup(function (){
-        if ($("#x").val() >= $("#n").val())
+    
+    $("#x").keyup(validarX);
+    
+    function validarX ()
+    {
+        var n = parseInt($("#n").val());
+        var x = parseInt($("#x").val());
+        
+        if (x > n)
         {
-            $("#Xerror").fadeIn(300);
+            $("#Xerror").css("display", "inline");
+            $("#x").css("border", "1px solid red");
+            return false;
         }
         else
         {
-            $("#Xerror").fadeOut(300);
+            $("#Xerror").css("display", "none");
+            $("#x").css("border", "");
+            return true;
         }
-    });
+    }
+    
     
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     

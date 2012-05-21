@@ -24,16 +24,19 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var a = $("#la").val();
-                var b = $("#lb").val();
-                var res = Probability.calculateContinuousUniform(a, b);
+                if (validara() == true)
+                {
+                    ocultarResultado();
 
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X) = " + res + "</pre>");
+                    var a = $("#la").val();
+                    var b = $("#lb").val();
+                    var res = Probability.calculateContinuousUniform(a, b);
+
+                    mostrarResultado();
+
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>P(X) = " + res + "</pre>");
+                }
             }
         });
     });
@@ -53,6 +56,29 @@
         });
     }
     
+    
+    $("#la").keyup(validara);
+    
+    function validara ()
+    {
+        var a = parseInt($("#la").val());
+        var b = parseInt($("#lb").val());
+        
+        if (a > b)
+        {
+            $("#laerror").css("display", "inline");
+            $("#la").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#laerror").css("display", "none");
+            $("#la").css("border", "");
+            return true;
+        }
+    }
+    
+    
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -63,7 +89,7 @@
 </script>
 
 <div id="probabilidad" class="estimacion">
-    <div class="title2">Distribuci&oacute;n Binomial</div>
+    <div class="title2">Distribuci&oacute;n Uniforme Continua</div>
     <div class="title1">Datos</div>
     <div class="datos inlineB">
         <div style="padding: 10px 15px;">
@@ -71,6 +97,7 @@
                 <div>
                     <label for="la" class="data">L&iacute;mite inferior (a):</label>
                     <input id="la" name="la" type="text" />
+                    <label id="laerror" class="error" style="display: none;"><br />a debe ser menor que b</label>
                 </div>
                 <div>
                     <label for="lb" class="data">L&iacute;mite superior (b):</label>
