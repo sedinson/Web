@@ -11,6 +11,7 @@ function Stat () { }
 
 Stat.min = Infinity;
 Stat.max = -1*Infinity;
+Stat.borders = false;
 Stat.p = 1;
 
 Stat.minVal = function () 
@@ -194,14 +195,15 @@ Stat.frecuency = function (array)
         var r = ls - li;
         var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
         var w = Math.ceil(r/c);
+        var f = (Stat.borders)? Stat.p/2 : 0;
 
         for(var i=0; i<c; i++)
-            tmp[i] = [(li+i*w) + "-" + (li+(i+1)*w-1), ((li+i*w)+(li+(i+1)*w-1))/2, 0];
+            tmp[i] = [(li+i*w-f) + "-" + (li+(i+1)*w-Stat.p+f), ((li+i*w)+(li+(i+1)*w-Stat.p))/2, 0];
 
         for(i=0; i<array.length; i++)
         {
             if(Math.floor((array[i]-li)/w) >= tmp.length)
-                tmp[c] = [(li+c*w) + "-" + (li+(c+1)*w-Stat.p), ((li+c*w)+(li+(++c)*w-Stat.p))/2, 0];
+                tmp[c] = [(li+c*w-f) + "-" + (li+(c+1)*w-Stat.p+f), ((li+c*w)+(li+(++c)*w-Stat.p))/2, 0];
 
             tmp[Math.floor((array[i]-li)/w)][2] += 1;
         }
@@ -260,11 +262,18 @@ Stat.getTableInfo = function (array)
     return str;
 }
 
+Stat.config = function (p, borders) 
+{
+    Stat.p = p;
+    Stat.borders = borders;
+}
+
 function Extra() { }
 
 /*Convierte value en un array de datos. Usa \n como simbolo de nueva fila y \t como nueva columna.
  *tal como vienen los datos de excel. Una mejora a futuro es elegir los delimitadores.*/
-Extra.transformData = function (value) {
+Extra.transformData = function (value) 
+{
     var str = value.split("\n");
     var tmp = [];
     if(str.length > 0)
@@ -298,9 +307,11 @@ Extra.transformData = function (value) {
     return tmp;
 }
 
-Extra.insertArraySort = function (array, pos) {
+Extra.insertArraySort = function (array, pos) 
+{
    var a = array;
-   for (var i = 0, j, tmp; i < a.length; ++i) {
+   for (var i = 0, j, tmp; i < a.length; ++i) 
+   {
       tmp = a[i];
       for (j = i - 1; j >= 0 && a[j][pos] < tmp[pos]; --j)
          a[j + 1] = a[j];
@@ -310,8 +321,10 @@ Extra.insertArraySort = function (array, pos) {
    return a;
 }
 
-Extra.insertSort = function (a) {
-   for (var i = 0, j, tmp; i < a.length; ++i) {
+Extra.insertSort = function (a) 
+{
+   for (var i = 0, j, tmp; i < a.length; ++i) 
+   {
       tmp = a[i];
       for (j = i - 1; j >= 0 && a[j] > tmp; --j)
          a[j + 1] = a[j];
@@ -321,6 +334,7 @@ Extra.insertSort = function (a) {
    return a;
 }
 
-Extra.createCopy = function (array) {
+Extra.createCopy = function (array) 
+{
     return array.slice(0);
 }

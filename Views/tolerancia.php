@@ -54,20 +54,18 @@
               }
           },
           submitHandler: function(){
-              var alfa = $("#alfa").selectedIndex;
-              var z,zuni;
-              var n = $("#tamano").selectedIndex;
+              var alfa = $("#alfa")[0].selectedIndex;
+              var n = $("#tamano")[0].selectedIndex;
               var x = $("#miu").val();
-              var sigma = $("#smuestral");
+              var sigma = $("#smuestral").val();
               var k,kuni;
-              if($("#gamma").selectedIndex == 0){
+              if($("#gamma")[0].selectedIndex == 1){
                   k = matrizbi01[n][alfa];
                   kuni = matrizuni01[n][alfa];
               }else{
                   k = matrizbi05[n][alfa];
                   kuni = matrizuni05[n][alfa];
-              }
-              
+              }              
               var amplitud = k*sigma;
               var amplituduni = kuni*sigma;
               var min = trimfloat(x - amplitud,4);
@@ -79,9 +77,9 @@
               res.width(cont.width()-580);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   x   &le;   "+may+"</pre>");
-              $("#intTitle").html("Intervalo con un "+((1-$("#gamma").options[$("#gamma").selectedIndex])*100)+"% de Confianza<br>Contiene "+$("alfa").options[alfa]+" de la Poblaci&oacute;n");
+              $("#intTitle").html("Intervalo con un "+((1-$("#gamma")[0].options[$("#gamma")[0].selectedIndex].value)*100)+"% de Confianza<br>Contiene "+($("#alfa")[0].options[alfa].value*100)+"% de la Poblaci&oacute;n");
               $("#uniTitle").html("Limites Unilaterales");
-              $("#unilateral").html("<pre style='margin: 0'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");              
+              $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");              
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
