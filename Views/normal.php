@@ -55,23 +55,27 @@
                 var la = $("#la").val();
                 var lb = $("#lb").val();
                 var res = 0;
+                var direccion = "<";
                 if ($("#caso1").is(":checked"))
                 {
+                    direccion = "X&lt;" + lb;
                     res = Probability.calculateNormal(m, s, la, lb, "<");
                 }
                 else if ($("#caso2").is(":checked"))
                 {
+                    direccion = la + "&lt;X&lt;" + lb;
                     res = Probability.calculateNormal(m, s, la, lb, "<<");
                 }
                 else if ($("#caso3").is(":checked"))
                 {
+                    direccion = "X&gt;" + la;
                     res = Probability.calculateNormal(m, s, la, lb, ">");
                 }
 
                 mostrarResultado();
    
                 $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X) = " + res + "</pre>");
+                $("#calculoDP").html("<pre class='wrap'>P(" + direccion + ") = " + res + "</pre>");
             }
         });
     });
@@ -137,11 +141,11 @@
                 <div class="tipoDP">
                     <label for="tipo" class="data">Tipo de intervalo:</label>
                     <br />
-                    <strong><label for="caso1">(-&infin;&lt;b)</label>
+                    <strong><label for="caso1">P(X&lt;x)</label>
                         <input id="caso1" name="tipo" type="radio" value="caso1" onclick="javascript:mostrarLimSup();" /></strong>
-                    <strong><label for="caso2">(a&lt;x&lt;b)</label>
+                    <strong><label for="caso2">P(a&lt;X&lt;b)</label>
                         <input id="caso2" name="tipo" type="radio" value="caso2" onclick="javascript:mostrarLimites();" /></strong>
-                    <strong><label for="caso3">(a&lt;&infin;)</label>
+                    <strong><label for="caso3">P(X&gt;x)</label>
                         <input id="caso3" name="tipo" type="radio" value="caso3" onclick="javascript:mostrarLimInf();" /></strong>
                 </div>
                 <div id="liminf" style="display: none;">
