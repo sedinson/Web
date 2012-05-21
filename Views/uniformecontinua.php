@@ -24,18 +24,19 @@
             },
             submitHandler: function (){
                 
-                if (validara() == true)
+                if (validarLB() == true)
                 {
                     ocultarResultado();
 
                     var a = $("#la").val();
                     var b = $("#lb").val();
+                    
                     var res = Probability.calculateContinuousUniform(a, b);
 
                     mostrarResultado();
 
                     $("#intTitle").html("El calculo es");
-                    $("#calculoDP").html("<pre class='wrap'>P(X) = " + res + "</pre>");
+                    $("#calculoDP").html("<pre class='wrap'>P(" + a + "&lt;X&lt;" + b + ") = " + res + "</pre>");
                 }
             }
         });
@@ -57,23 +58,23 @@
     }
     
     
-    $("#la").keyup(validara);
+    $("#lb").keyup(validarLB);
     
-    function validara ()
+    function validarLB ()
     {
         var a = parseInt($("#la").val());
         var b = parseInt($("#lb").val());
         
         if (a > b)
         {
-            $("#laerror").css("display", "inline");
-            $("#la").css("border", "1px solid red");
+            $("#LBerror").css("display", "inline");
+            $("#lb").css("border", "1px solid red");
             return false;
         }
         else
         {
-            $("#laerror").css("display", "none");
-            $("#la").css("border", "");
+            $("#LBerror").css("display", "none");
+            $("#lb").css("border", "");
             return true;
         }
     }
@@ -97,11 +98,11 @@
                 <div>
                     <label for="la" class="data">L&iacute;mite inferior (a):</label>
                     <input id="la" name="la" type="text" />
-                    <label id="laerror" class="error" style="display: none;"><br />a debe ser menor que b</label>
                 </div>
                 <div>
                     <label for="lb" class="data">L&iacute;mite superior (b):</label>
                     <input id="lb" name="lb" type="text" />
+                    <label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser menor que el inferior</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

@@ -52,30 +52,7 @@ Probability.discreteUniform = function (k)
 }
 
 
-//CASOS CONTINUOS
-
-Probability.normal = function (m, s, x)
-{
-    return ( (1/Math.sqrt(2 * Math.PI * s)) * Math.exp((-1) * (1/2) * Math.pow((x - m)/s, 2)) );
-}
-
-Probability.standardNormal = function (x)
-{
-    return ( (1/Math.sqrt(2 * Math.PI)) * Math.exp((-1) * (1/2) * Math.pow(x, 2)) );
-}
-
-Probability.continuousUniform = function (a, b)
-{
-    return ( 1/(b-a) );
-}
-
-Probability.exponential = function (beta, x)
-{
-    return ( (1/beta) * Math.exp( ((-1) * x)/beta ) );
-}
-
-
-//CALCULO DE DISTRIBUCIONES DE PROBABILIDAD ACUMULADAS
+//DISTRIBUCIONES DE PROBABILIDAD ACUMULADAS
 
 Probability.binomialAccumulated = function (n, p, x)
 {
@@ -135,6 +112,69 @@ Probability.discreteUniformAccumulated = function (k)
         sum += Probability.discreteUniform(i);
     }
     return sum;
+}
+
+
+//CASOS CONTINUOS
+
+Probability.normal = function (m, s, x)
+{
+    return ( (1/Math.sqrt(2 * Math.PI * s)) * Math.exp((-1) * (1/2) * Math.pow((x - m)/s, 2)) );
+}
+
+Probability.standardNormal = function (x)
+{
+    return ( (1/Math.sqrt(2 * Math.PI)) * Math.exp((-1) * (1/2) * Math.pow(x, 2)) );
+}
+
+Probability.continuousUniform = function (a, b)
+{
+    return ( 1/(b-a) );
+}
+
+Probability.exponential = function (beta, x)
+{
+    return ( 1 - Math.exp( ((-1) * x)/beta ) );
+}
+
+
+//INTERVALOS PARA CASOS CONTINUOS
+
+Probability.normalCase1 = function (m, s, upper)
+{
+    var lower = (5 * (s - m));
+    var sum = 0;
+    for(var i=lower; i<upper; i+=0.01)
+    {
+        sum += Probability.normal(m, s, i);
+    }
+    return sum;
+}
+
+Probability.normalCase2 = function (m, s, lower, upper)
+{
+    var sum = 0;
+    for(var i=lower; i<upper; i+=0.01)
+    {
+        sum += Probability.normal(m, s, i);
+    }
+    return sum;
+}
+
+Probability.normalCase3 = function (m, s, lower)
+{
+    var upper = (5 * (s + m));
+    var sum = 0;
+    for(var i=lower; i<upper; i+=0.01)
+    {
+        sum += Probability.normal(m, s, i);
+    }
+    return sum;
+}
+
+Probability.exponentialInterval = function (beta, lower, upper)
+{
+    return (Probability.exponential(beta, upper) - Probability.exponential(beta, lower));
 }
 
 
@@ -260,16 +300,27 @@ Probability.calculateDiscreteUniform = function (k, direction)
     return result.toFixed(3);
 }
 
-Probability.calculateNormal = function (m, s, x)
+Probability.calculateNormal = function (m, s, lower, upper, interval)
 {
     var result = 0;
     
-    result = Probability.normal(m, s, x);
+    /*if (interval == "<")
+    {
+        result = Probability.normalCase1(m, s, upper);
+    }
+    else if (interval == "<<")
+    {
+        result = Probability.normalCase2(m, s, lower, upper);
+    }
+    else if (interval == ">")
+    {
+        result = Probability.normalCase3(m, s, lower);
+    }*/
     
     return result.toFixed(3);
 }
 
-Probability.calculateStandardNormal = function (x)
+Probability.calculateStandardNormal = function (lower, upper, interval)
 {
     var result = 0;
     
@@ -287,11 +338,18 @@ Probability.calculateContinuousUniform = function (a, b)
     return result.toFixed(3);
 }
 
-Probability.calculateExponential = function (beta, x)
+Probability.calculateExponential = function (beta, lower, upper, interval)
 {
     var result = 0;
     
-        result = Probability.exponential(beta, x);
+    if (interval == "<")
+    {
+        result = Probability.exponential(beta, upper);
+    }
+    else if (interval == "<<")
+    {
+        result = Probability.exponentialInterval(beta, lower, upper);
+    }
 
     return result.toFixed(3);
 }
