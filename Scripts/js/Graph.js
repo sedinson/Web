@@ -115,7 +115,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.strokeStyle = colors[((i-1)%colors.length)][1];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -418,7 +418,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.strokeStyle = colors[((i-1)%colors.length)][1];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();

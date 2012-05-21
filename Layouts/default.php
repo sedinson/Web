@@ -20,6 +20,7 @@
             var BaseUrl = '<?=$config->get('BaseUrl')?>';
             var bodyScroll = null;
             var helpScroll = null;
+            var fps = 250;
             var selOpt = 0;
             
             function subcontenido(val) 
@@ -66,7 +67,7 @@
                 $("#close2").css("margin-left", (w-395) + "px");
                 $("#modalDialog").load("<?=$config->get('InitUrl')?>?" + url, function() {
                     modalScroll.resize().show();
-                    timmerPeriodic = setInterval(function() {periodic()}, 250);
+                    timmerPeriodic = setInterval(function() {periodic()}, fps);
                 });
                 $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt, function() {
                     navegador("#help");

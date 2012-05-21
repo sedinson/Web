@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td>Andres Perez</td>
-            <td><a href="mailto:andres.a.perezleon@gmail.com">andres_kvzon@hotmail.com</a></td>
+            <td><a href="mailto:andres.a.perezleon@gmail.com">andres.a.perezleon@gmail.com</a></td>
         </tr>
         <tr>
             <td>David Seija Duque</td>
