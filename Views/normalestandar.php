@@ -3,28 +3,45 @@
     $(document).ready(function (){
         $("#datos").validate({
             rules: {
-                x: {
+                z: {
                     required: true,
                     number: true
+                },
+                tipo: {
+                    required: true
                 }
             },
             messages: {
-                x: {
+                z: {
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico"
+                },
+                tipo: {
+                    required: "<br />Es obligatorio"
                 }
             },
             submitHandler: function (){
                 
                 ocultarResultado();
                 
-                var x = $("#x").val();
-                var res = Probability.calculateStandardNormal(x);
+                var z = $("#z").val();
+                var res = 0;
+                var direccion = "<";
+                if ($("#caso1").is(":checked"))
+                {
+                    direccion = "Z&lt;" + z;
+                    res = Probability.calculateStandardNormal(z, "<");
+                }
+                else if ($("#caso2").is(":checked"))
+                {
+                    direccion = "Z&gt;" + z;
+                    res = Probability.calculateStandardNormal(z, ">");
+                }
 
                 mostrarResultado();
    
                 $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X=" + x + ") = " + res + "</pre>");
+                $("#calculoDP").html("<pre class='wrap'>P(" + direccion + ") = " + res + "</pre>");
             }
         });
     });
@@ -60,8 +77,16 @@
         <div style="padding: 10px 15px;">
             <form id="datos">
                 <div>
-                    <label for="x" class="data">Variable aleatoria (X):</label>
-                    <input id="x" name="x" type="text" />
+                    <label for="z" class="data">Valor (Z):</label>
+                    <input id="z" name="z" type="text" />
+                </div>
+                <div class="tipoDP">
+                    <label for="tipo" class="data">Tipo de intervalo:</label>
+                    <br />
+                    <strong><label for="caso1">P(Z&lt;z)</label>
+                        <input id="caso1" name="tipo" type="radio" value="caso1" checked="true" /></strong>
+                    <strong><label for="caso2">P(Z&gt;z)</label>
+                        <input id="caso2" name="tipo" type="radio" value="caso2" /></strong>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

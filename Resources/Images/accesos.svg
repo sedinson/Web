@@ -14,7 +14,7 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="accesos.svg">
   <defs
      id="defs4">
@@ -5973,16 +5973,6 @@
              y="697.39459">π</tspan></text>
       </g>
     </mask>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3955-3-4-3-6-3"
-       id="linearGradient9527"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-484.8681,258.70015)"
-       x1="417.19296"
-       y1="520.01184"
-       x2="-19.192884"
-       y2="254.34166" />
     <mask
        maskUnits="userSpaceOnUse"
        id="mask3821-0">
@@ -6094,16 +6084,6 @@
              sodipodi:role="line">x</tspan></text>
       </g>
     </mask>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5696-16-1"
-       id="linearGradient9756"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-504.66702,49.396662)"
-       x1="392.44421"
-       y1="502.33417"
-       x2="10.101538"
-       y2="276.05997" />
     <mask
        maskUnits="userSpaceOnUse"
        id="mask4638-2">
@@ -6367,6 +6347,139 @@
        y1="535.16412"
        x2="83.842674"
        y2="322.02188" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3955-3-4-3-6-3-4"
+       id="linearGradient4601-1"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-846.90673,763.57437)"
+       x1="417.19296"
+       y1="520.01184"
+       x2="-19.192884"
+       y2="254.34166" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3955-3-4-3-6-3-4">
+      <stop
+         style="stop-color:#005e1b;stop-opacity:1"
+         offset="0"
+         id="stop3957-8-7-8-2-6-8" />
+      <stop
+         style="stop-color:#00db06;stop-opacity:1"
+         offset="1"
+         id="stop3959-7-5-3-3-8-8" />
+    </linearGradient>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask4683">
+      <g
+         id="g4685"
+         transform="matrix(1.7997041,0,0,1.7510673,804.63034,-898.52983)">
+        <text
+           xml:space="preserve"
+           style="font-size:106.35966492px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+           x="-624.19977"
+           y="1252.8274"
+           id="text4687"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0640496,0.93980581)"><tspan
+             sodipodi:role="line"
+             id="tspan4689"
+             x="-624.19977"
+             y="1252.8274">x-μ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:106.35966492px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+           x="-590.92395"
+           y="1347.5907"
+           id="text4691"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0640496,0.93980581)"><tspan
+             sodipodi:role="line"
+             id="tspan4693"
+             x="-590.92395"
+             y="1347.5907">σ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:56px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold Italic"
+           x="-671.04431"
+           y="1199.4403"
+           id="text4695"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4697"
+             x="-671.04431"
+             y="1199.4403">______</tspan></text>
+      </g>
+    </mask>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3955-3-4-3-6-3"
+       id="linearGradient4710"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-854.6849,764.98858)"
+       x1="417.19296"
+       y1="520.01184"
+       x2="-19.192884"
+       y2="254.34166" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5696-16-1"
+       id="linearGradient4727"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2045.3097,533.45375)"
+       x1="392.44421"
+       y1="502.33417"
+       x2="10.101538"
+       y2="276.05997" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5696-16-1-7"
+       id="linearGradient4727-2"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1925.1016,529.91822)"
+       x1="392.44421"
+       y1="502.33417"
+       x2="10.101538"
+       y2="276.05997" />
+    <linearGradient
+       id="linearGradient5696-16-1-7"
+       inkscape:collect="always">
+      <stop
+         id="stop5698-58-9-1"
+         offset="0"
+         style="stop-color:#550000;stop-opacity:1" />
+      <stop
+         id="stop5700-0-7-7"
+         offset="1"
+         style="stop-color:#d40000;stop-opacity:1" />
+    </linearGradient>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask4771">
+      <text
+         sodipodi:linespacing="125%"
+         id="text4773"
+         y="1163.4769"
+         x="-1433.2976"
+         style="font-size:389.89144897px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+         xml:space="preserve"
+         transform="scale(1.0620552,0.94157064)"><tspan
+           y="1163.4769"
+           x="-1433.2976"
+           id="tspan4775"
+           sodipodi:role="line">Z</tspan></text>
+    </mask>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5696-16-1"
+       id="linearGradient4783"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2045.3097,533.45375)"
+       x1="392.44421"
+       y1="502.33417"
+       x2="10.101538"
+       y2="276.05997" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -6375,16 +6488,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.3535534"
-     inkscape:cx="181.48388"
-     inkscape:cy="94.573612"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="-2009.2996"
+     inkscape:cy="-31.374224"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="847"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1280"
+     inkscape:window-height="742"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:guide-bbox="true" />
@@ -6396,7 +6509,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -8836,198 +8949,6 @@
       </g>
     </g>
     <g
-       id="g9512"
-       transform="translate(1073.3881,1025.3048)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="C:\Users\Desarrollo 2\g3863.png"
-         y="598.9093"
-         x="-367.78885"
-         height="180"
-         width="300"
-         id="rect3860-9-5-9-1-5"
-         style="fill:url(#linearGradient9527);fill-opacity:1;stroke:none" />
-      <rect
-         transform="translate(800.44488,-14.142136)"
-         mask="url(#mask9488)"
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="C:\Users\Desarrollo 2\g3863.png"
-         y="611.38281"
-         x="-1169.5201"
-         height="180"
-         width="300"
-         id="rect3860-9-5-9-1"
-         style="opacity:0.15;fill:#ffffff;fill-opacity:1;stroke:none" />
-      <g
-         style="fill:#ffffff"
-         transform="matrix(2.8292989,0,0,2.4989357,2749.4886,-991.74986)"
-         id="g9420">
-        <text
-           xml:space="preserve"
-           style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-1053.5892"
-           y="664.86768"
-           id="text9315"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9317"
-             x="-1053.5892"
-             y="664.86768">x</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-1023.8907"
-           y="663.45343"
-           id="text9319"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9321"
-             x="-1023.8907"
-             y="663.45343">e</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-1066.317"
-           y="698.80878"
-           id="text9323"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9325"
-             x="-1066.317"
-             y="698.80878">σ</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-1088.9445"
-           y="673.35297"
-           id="text9327"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9329"
-             x="-1088.9445"
-             y="673.35297">μ</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-1033.7902"
-           y="697.39459"
-           id="text9416"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan9418"
-             x="-1033.7902"
-             y="697.39459">π</tspan></text>
-      </g>
-    </g>
-    <g
-       id="g9739"
-       transform="translate(1088.9444,1039.4469)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="C:\xampp\htdocs\Web\Resources\Public\7184e0g5777.png"
-         y="389.60565"
-         x="-387.58789"
-         height="180"
-         width="300"
-         id="rect3860-8-7-0-7-6"
-         style="fill:url(#linearGradient9756);fill-opacity:1;stroke:none" />
-      <rect
-         transform="translate(199.40411,-278.60007)"
-         mask="url(#mask9711)"
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="C:\xampp\htdocs\Web\Resources\Public\7184e0g5777.png"
-         y="666.7915"
-         x="-588.40369"
-         height="180"
-         width="300"
-         id="rect3860-8-7-0-7"
-         style="opacity:0.15;fill:#ffffff;fill-opacity:1;stroke:none" />
-      <g
-         transform="translate(197.9899,-278.60007)"
-         id="g9609">
-        <text
-           xml:space="preserve"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-422.50079"
-           y="864.50519"
-           id="text9585"
-           sodipodi:linespacing="125%"
-           transform="scale(1.0982399,0.91054785)"><tspan
-             sodipodi:role="line"
-             id="tspan9587"
-             x="-422.50079"
-             y="864.50519">π</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-358.88141"
-           y="908.0343"
-           id="text9589"
-           sodipodi:linespacing="125%"
-           transform="scale(1.0982399,0.91054785)"><tspan
-             sodipodi:role="line"
-             id="tspan9591"
-             x="-358.88141"
-             y="908.0343">e</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           x="-469.37814"
-           y="797.53741"
-           id="text9593"
-           sodipodi:linespacing="125%"
-           transform="scale(1.0982399,0.91054785)"><tspan
-             sodipodi:role="line"
-             id="tspan9595"
-             x="-469.37814"
-             y="797.53741">x</tspan></text>
-        <text
-           transform="scale(1.0982399,0.91054785)"
-           sodipodi:linespacing="125%"
-           id="text9597"
-           y="864.50519"
-           x="-422.50079"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           xml:space="preserve"><tspan
-             y="864.50519"
-             x="-422.50079"
-             id="tspan9599"
-             sodipodi:role="line">π</tspan></text>
-        <text
-           transform="scale(1.0982399,0.91054785)"
-           sodipodi:linespacing="125%"
-           id="text9601"
-           y="908.0343"
-           x="-358.88141"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           xml:space="preserve"><tspan
-             y="908.0343"
-             x="-358.88141"
-             id="tspan9603"
-             sodipodi:role="line">e</tspan></text>
-        <text
-           transform="scale(1.0982399,0.91054785)"
-           sodipodi:linespacing="125%"
-           id="text9605"
-           y="797.53741"
-           x="-469.37814"
-           style="font-size:94.70663452px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
-           xml:space="preserve"><tspan
-             y="797.53741"
-             x="-469.37814"
-             id="tspan9607"
-             sodipodi:role="line">x</tspan></text>
-      </g>
-    </g>
-    <g
        id="g9927"
        transform="translate(1250.1648,188.09043)"
        inkscape:export-xdpi="90"
@@ -9196,6 +9117,124 @@
          width="300"
          id="rect3860-8-0-4"
          style="opacity:0.15;fill:#ffffff;fill-opacity:1;stroke:none" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+       x="-492.1463"
+       y="1227.7247"
+       id="text4647"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4649"
+         x="-492.1463"
+         y="1227.7247" /></text>
+    <g
+       id="g4699"
+       inkscape:export-filename="/opt/lampp/htdocs/web/Resources/Public/9ce5bcg9512.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="translate(1440,519.99999)">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\Users\Desarrollo 2\g3863.png"
+         y="1105.1978"
+         x="-737.60565"
+         height="180"
+         width="300"
+         id="rect3860-9-5-9-1-5"
+         style="fill:url(#linearGradient4710);fill-opacity:1;stroke:none" />
+      <rect
+         transform="translate(-336.58282,4.2426406)"
+         mask="url(#mask4683)"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\Users\Desarrollo 2\g3863.png"
+         y="1100.248"
+         x="-401.02292"
+         height="180"
+         width="300"
+         id="rect3860-9-5-9-1-5-2"
+         style="opacity:0.15;fill:#ffffff;fill-opacity:1;stroke:none" />
+      <g
+         id="g4661">
+        <text
+           xml:space="preserve"
+           style="font-size:106.35966492px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+           x="-624.19977"
+           y="1252.8274"
+           id="text9315"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0640496,0.93980581)"><tspan
+             sodipodi:role="line"
+             id="tspan9317"
+             x="-624.19977"
+             y="1252.8274">x-μ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:106.35966492px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+           x="-590.92395"
+           y="1347.5907"
+           id="text9323"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0640496,0.93980581)"><tspan
+             sodipodi:role="line"
+             id="tspan9325"
+             x="-590.92395"
+             y="1347.5907">σ</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:56px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Bold Italic"
+           x="-671.04431"
+           y="1199.4403"
+           id="text4655"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4657"
+             x="-671.04431"
+             y="1199.4403">______</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g4777"
+       inkscape:export-filename="/opt/lampp/htdocs/web/Resources/Public/c4418fg9739.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="translate(2630.4372,554.3717)">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\xampp\htdocs\Web\Resources\Public\7184e0g5777.png"
+         y="873.66272"
+         x="-1928.2306"
+         height="180"
+         width="300"
+         id="rect3860-8-7-0-7-6"
+         style="fill:url(#linearGradient4783);fill-opacity:1;stroke:none" />
+      <rect
+         transform="translate(-391.03004,0.70710676)"
+         mask="url(#mask4771)"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\xampp\htdocs\Web\Resources\Public\7184e0g5777.png"
+         y="872.55957"
+         x="-1538.0505"
+         height="180"
+         width="300"
+         id="rect3860-8-7-0-7-6-8"
+         style="opacity:0.15;fill:#ffffff;fill-opacity:1;stroke:none" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text4763"
+         y="1012.0571"
+         x="-1820.6199"
+         style="font-size:132.06098938px;font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Sans Italic"
+         xml:space="preserve"><tspan
+           y="1012.0571"
+           x="-1820.6199"
+           id="tspan4765"
+           sodipodi:role="line">Z</tspan></text>
     </g>
   </g>
 </svg>
