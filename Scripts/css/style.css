@@ -53,7 +53,7 @@ a:hover {
     text-decoration: underline;
 }
 
-input, textarea {
+input, textarea, select {
     border: #adadad 1px solid;
     margin: 3px 0;
     -moz-border-radius: 5px;
@@ -61,14 +61,24 @@ input, textarea {
     border-radius: 2px;
     -moz-box-shadow: 2px 2px 4px -3px #ccc;
     -webkit-box-shadow: 2px 2px 4px -3px #ccc;
+    -ms-box-shadow: 2px 2px 4px -3px #ccc;
     box-shadow: 2px 2px 4px -3px #ccc;
     outline: none;
+}
+
+select {
+/*    background: #fff;*/
+    background-image: -moz-linear-gradient(top, #fff, #f6f5f5);
+    background-image: -webkit-linear-gradient(top, #fff, #f6f5f5);
+    background-image: -ms-linear-gradient(top, #fff, #f6f5f5);
+    padding: 5px;
 }
 
 input[type="button"], input[type="submit"] {
     background: #f2f1f1;
     background: -moz-linear-gradient(top, #f2f1f1, #e4e3e3);
     background: -webkit-linear-gradient(top, #f2f1f1, #e4e3e3);
+    background: -ms-linear-gradient(top, #f2f1f1, #e4e3e3);
     padding: 5px 20px;
     cursor: pointer;
 }
@@ -77,6 +87,7 @@ input[type="text"], input[type="password"], textarea, input[type="number"] {
     background: #fff;
     background: -moz-linear-gradient(top, #fff, #f6f5f5);
     background: -webkit-linear-gradient(top, #fff, #f6f5f5);
+    background: -ms-linear-gradient(top, #fff, #f6f5f5);
     padding: 5px 0;
 }
 
@@ -116,6 +127,7 @@ input[type="file"] {
     background: whitesmoke;
     -moz-box-shadow: 5px 0 4px -3px #ccc;
     -webkit-box-shadow: 5px 0 4px -3px #ccc;
+    -ms-box-shadow: 5px 0 4px -3px #ccc;
     box-shadow: 5px 0 4px -3px #ccc;
 }
 
@@ -130,10 +142,12 @@ input[type="file"] {
     font-weight: bold;
     -moz-box-shadow: 5px 5px 4px -3px #ccc;
     -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    -ms-box-shadow: 5px 5px 4px -3px #ccc;
     box-shadow: 5px 5px 4px -3px #ccc;
     border: #ccc 1px solid;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
     color: whitesmoke;
     z-index: 99999;
@@ -144,12 +158,14 @@ input[type="file"] {
     background: #d30000;
     background: -moz-linear-gradient(top, #e20202, #a10000);
     background: -webkit-linear-gradient(top, #e20202, #a10000);
+    background: -ms-linear-gradient(top, #e20202, #a10000);
 }
 
 #Done {
     background: #a5cd00;
     background: -moz-linear-gradient(top, #a5cd00, #5d5d00);
     background: -webkit-linear-gradient(top, #a5cd00, #5d5d00);
+    background: -ms-linear-gradient(top, #a5cd00, #5d5d00);
 }
 
 #help, #example {
@@ -162,6 +178,7 @@ input[type="file"] {
     background: #4a4a4a;
     background: -moz-linear-gradient(top, #4a4a4a, #2a2a2a);
     background: -webkit-linear-gradient(top, #4a4a4a, #2a2a2a);
+    background: -ms-linear-gradient(top, #4a4a4a, #2a2a2a);
     cursor: pointer;
     font-size: 12px;
     font-weight: bold;
@@ -172,6 +189,7 @@ input[type="file"] {
     margin-bottom: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -179,6 +197,7 @@ input[type="file"] {
     background: whitesmoke;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+    -ms-border-radius: 0;
     border-radius: 0;
     margin: 0;
     color: #333333;
@@ -205,6 +224,7 @@ input[type="file"] {
     background: #4a4a4a;
     background: -moz-linear-gradient(top, #4a4a4a, #2a2a2a);
     background: -webkit-linear-gradient(top, #4a4a4a, #2a2a2a);
+    background: -ms-linear-gradient(top, #4a4a4a, #2a2a2a);
     font-size: 14px;
     font-weight: bold;
     width: 100%;  
@@ -214,9 +234,11 @@ input[type="file"] {
     margin-bottom: 10px;
     -moz-box-shadow: 5px 5px 4px -3px #ccc;
     -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    -ms-box-shadow: 5px 5px 4px -3px #ccc;
     box-shadow: 5px 5px 4px -3px #ccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -261,10 +283,12 @@ input[type="file"] {
     background: white;
     -moz-box-shadow: 5px 5px 4px -3px #ccc;
     -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    -ms-box-shadow: 5px 5px 4px -3px #ccc;
     box-shadow: 5px 5px 4px -3px #ccc;
     border: #ccc 1px solid;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -294,6 +318,7 @@ input[type="file"] {
     background: white;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
+    -ms-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -311,12 +336,14 @@ input[type="file"] {
 .shadowInt {
     -moz-box-shadow: 5px 5px 4px -3px #000;
     -webkit-box-shadow: 5px 5px 4px -3px #000;
+    -ms-box-shadow: 5px 5px 4px -3px #000;
     box-shadow: 5px 5px 4px -3px #000;
 }
 
 .shadowClear {
     -moz-box-shadow: 5px 5px 4px -3px #ccc;
     -webkit-box-shadow: 5px 5px 4px -3px #ccc;
+    -ms-box-shadow: 5px 5px 4px -3px #ccc;
     box-shadow: 5px 5px 4px -3px #ccc;
 }
 
@@ -374,6 +401,7 @@ input[type="file"] {
     padding: 10px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -419,6 +447,7 @@ input[type="file"] {
     border: #efefef 1px solid;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
 }
 
@@ -433,6 +462,7 @@ input[type="file"] {
     -o-transition: height .3s ease-out;
     -moz-transition: height .3s ease-out;
     -webkit-transition: height .3s ease-out;
+    -ms-transition: height .3s ease-out;
     transition: height .3s ease-out;
 }
 
@@ -459,6 +489,7 @@ input[type="file"] {
     background: #4a4a4a;
     background: -moz-linear-gradient(top, #4a4a4a, #2a2a2a);
     background: -webkit-linear-gradient(top, #4a4a4a, #2a2a2a);
+    background: -ms-linear-gradient(top, #4a4a4a, #2a2a2a);
     border: none;
     font-size: 14px;
     font-weight: bold;
