@@ -139,7 +139,7 @@
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               $("#uniTitle").html("Limites Unilaterales");
-              $("#unilateral").html("<pre style='margin: 0'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
+              $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
               if(caso12){
                   $("#errorTitle").html("Error Muestral para n = "+n+" y &sigma; = "+sigma);
                   $("#errorM").html("|x&#772;-&micro;|<pre class='wrap'>   &le;   "+amplitud+"</pre>");

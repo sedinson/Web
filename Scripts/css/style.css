@@ -560,6 +560,9 @@ input[type="file"] {
     display: table;
     margin-bottom: 20px;
 }
+#unilateral{
+    text-align: center;
+}
 #resultado{
     background-image: linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
     background-image: -o-linear-gradient(left , rgb(240,240,240) 0%, rgb(255,255,255) 15%, rgb(255,255,255) 85%, rgb(240,240,240) 100%);
