@@ -58,15 +58,21 @@
               var n = $("#tamano").val();
               var chiMin = critchi(alfa/2,n-1);
               var chiMax = critchi(1-alfa/2,n-1);
+              var chiMinUni = critchi(alfa,n-1);
+              var chiMaxUni = critchi(1-alfa,n-1);
               var s2 = $("#smuestral").val();
-              var min = trimfloat((n-1)*s2/chiMin);
-              var may = trimfloat((n-1)*s2/chiMax);
+              var min = trimfloat((n-1)*s2/chiMin,4);
+              var inf = trimfloat((n-1)*s2/chiMinUni,4);
+              var may = trimfloat((n-1)*s2/chiMax,4);
+              var sup = trimfloat((n-1)*s2/chiMaxUni,4);
               var res = $("#resultado");
               var cont = $("#modalDialog");
               res.width(cont.width()-580);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
+              $("#uniTitle").html("Limites Unilaterales");
+              $("#unilateral").html("<pre style='margin: 0'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -78,8 +84,9 @@
     });
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
+        $("#unilateral").width($("#unilateral").children().width()+20);
     }
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {ajustarIntervalo()}
     
     function modalClosed() 
     {
@@ -113,6 +120,11 @@
         <div id="divIntervalo" style="display: hidden" class="wrap subdivRes">
             <div id="intTitle" class="resTitle">Intervalo</div>
             <div id="intervalo" class="wrap res"></div>
+        </div>
+        <br>
+        <div id="divUnilateral" class="wrap subdivRes">
+            <div id="uniTitle" class="resTitle"></div>
+            <div id="unilateral" class="wrap res"></div>
         </div>
         <br>
     </div>

@@ -63,9 +63,13 @@
                 var alfa = $("#alfa").val();
                 var q = 1-p;
                 var z = NORMSINV(alfa/2);
+                var zuni = NORMSINV(alfa);
                 var amplitud = z*Math.sqrt(p*q/n);
+                var amplituduni = zuni*Math.sqrt(p*q/n);
                 var min = trimfloat(p - amplitud,4);
                 var may = trimfloat(p*1 + amplitud,4);
+                var inf = trimfloat(p - amplituduni,4);
+                var sup = trimfloat(p*1 + amplituduni,4);
                 var res = $("#resultado");
                 var cont = $("#modalDialog");
                 res.width(cont.width()-580);
@@ -77,6 +81,8 @@
                 $("#maxNTitle").html("Tamaño maximo para e="+trimfloat(amplitud,4));
                 $("#maxN").html("<pre class='wrap'>n   =   "+(Math.pow(z,2)/(4*Math.pow(amplitud,2)))+"</pre>");
                 $("#divError").show();
+                $("#uniTitle").html("Limites Unilaterales");
+                $("#unilateral").html("<pre style='margin: 0'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
                 res.slideUp(function(){
                     res.slideDown(function(){
                         $("#divIntervalo").fadeIn();
@@ -90,8 +96,9 @@
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#errorM").width($("#errorM").children().width()+20);
+        $("#unilateral").width($("#unilateral").children().width()+20);
     }
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {ajustarIntervalo()}
     
     function modalClosed() 
     {
@@ -156,6 +163,11 @@
             <div id="errorM" class="wrap res"></div>
             <div id="maxNTitle" class="resTitle"></div>
             <div id="maxN" class="wrap res"></div>
+        </div>
+        <br>
+         <div id="divUnilateral" class="wrap subdivRes">
+            <div id="uniTitle" class="resTitle"></div>
+            <div id="unilateral" class="wrap res"></div>
         </div>
         <br>
     </div>
