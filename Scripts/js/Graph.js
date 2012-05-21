@@ -620,6 +620,23 @@ function Graph(div)
         }
     }
     
+    this.tablaPuntos = function () 
+    {
+        var str = "<table><thead><tr><th>clase</th><th>datos</th></tr></thead>";
+        for(var i=0; i<cmdData.length; i++) 
+        {
+            str += "<tr><td>" + cmdData[i][0] + "</td><td>";
+            for(var j=0; j<cmdData[i][1].length; j++)
+            {
+                str += cmdData[i][1][j] + " ";
+            }
+            str += "</td></tr>";
+        }
+        str += "</table>";
+        
+        return str;
+    }
+    
     //Funcion que inicia el hilo que repintara
     this.start = function () 
     {

@@ -5,6 +5,7 @@
 
 Array.prototype.unique = function(a) {return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0});
 Math.logBase = function (x, b) {return Math.log(x)/Math.log(b)};
+jQuery.fn.exists = function(){return this.length>0;}
 
 function Stat () { }
 

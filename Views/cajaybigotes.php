@@ -11,7 +11,7 @@
         {
             if($("#text").val().length > 0) 
             {
-                myData = Extra.transformData(text.value);
+                myData = Extra.transformData($("#text").val());
                 $("#tabla").html(Stat.getTableInfo(myData));
                 graphics.setData(myData);
                 $("#text").val("");
@@ -20,7 +20,10 @@
         }
         catch(exception)
         {
-            clearInterval(timmerPeriodic);
+            if($("#text").exists())
+                $("#text").val("");
+            else
+                clearInterval(timmerPeriodic);
         }
     }
     

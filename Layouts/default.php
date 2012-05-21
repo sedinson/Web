@@ -5,7 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Web - Statistics</title>
         <link rel="stylesheet" href="<?=$config->get('BaseUrl')?>/Scripts/css/style.css"/>
+        <link rel="stylesheet" href="<?=$config->get('BaseUrl')?>/Scripts/css/ui-lightness/jquery-ui-1.8.20.custom.css"/>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery-ui-1.8.20.custom.min.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Stat.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Graph.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/jquery.nicescroll.min.js"></script>
