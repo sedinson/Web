@@ -1,7 +1,7 @@
 <script type="text/javascript">
-    $("#tabla").html(Stat.getTableInfo(myData));
     var graphics = new Graph(document.getElementById('grafica'));
     graphics.setData(myData);
+    $("#tabla").html(graphics.tablaPuntos());
     graphics.setType(graphics.PUNTOS);
     graphics.setLabel(1);
     graphics.start();
@@ -12,16 +12,19 @@
         {
             if($("#text").val().length > 0) 
             {
-                myData = Extra.transformData(text.value);
-                $("#tabla").html(Stat.getTableInfo(myData));
+                myData = Extra.transformData($("#text").val());
                 graphics.setData(myData);
+                $("#tabla").html(graphics.tablaPuntos());
                 $("#text").val("");
                 $("#text").blur();
             }
         }
         catch(exception)
         {
-            clearInterval(timmerPeriodic);
+            if($("#text").exists())
+                $("#text").val("");
+            else
+                clearInterval(timmerPeriodic);
         }
     }
     

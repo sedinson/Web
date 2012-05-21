@@ -507,10 +507,15 @@ input[type="file"] {
 .textPos {
     margin-top: 10px;
     width: 95%;
+    text-align: center;
     position: relative;
     float: right;
 }
 
+#tabs li a {
+    padding: 2px 10px;
+    font-size: 12px;
+}
 
 /*Comienzo CSS Estimacion*/
 .estimacion body{

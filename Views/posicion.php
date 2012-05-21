@@ -1,14 +1,25 @@
 <script type="text/javascript">
-    document.getElementById("tabla").innerHTML = Stat.getTableInfo(myData);
-    function periodic () 
+    $(function () {
+        $("#rcuartil").slider({range: "min", value: 2, min: 0, max: 4, animate: true});
+        $("#rdecil").slider({range: "min", value: 5, min: 0, max: 10, animate: true});
+        $("#rpercentil").slider({range: "min", value: 50, min: 0, max: 100, animate: true});
+    });
+    $("document").ready(function () {
+        $("#tabla").html(Stat.getTableInfo(myData));
+    });
+    
+    function periodic ()
     {
         try
         {
-            $("#cuartil").val("El cuartil " + $("#rcuartil").val() + " tiene el valor " + Stat.getData(Stat.Quartile, parseInt($("#rcuartil").val()), original).toFixed(2));
-            $("#decil").val("El decil " + $("#rdecil").val() + " tiene el valor " + Stat.getData(Stat.Decile, parseInt($("#rdecil").val()), original).toFixed(2));
-            $("#percentil").val("El percentil " + $("#rpercentil").val() + " tiene el valor " + Stat.getData(Stat.Percentile, parseInt($("#rpercentil").val()), original).toFixed(2));
+            var c = $("#rcuartil").slider("option", "value");
+            var d = $("#rdecil").slider("option", "value");
+            var p = $("#rpercentil").slider("option", "value");
+            $("#cuartil").html("El <b>cuartil</b> " + c + " tiene el <b>valor </b>" + Stat.getData(Stat.Quartile, parseInt(c), original).toFixed(2));
+            $("#decil").html("El <b>decil</b> " + d + " tiene el <b>valor </b>" + Stat.getData(Stat.Decile, parseInt(d), original).toFixed(2));
+            $("#percentil").html("El <b>percentil</b> " + p + " <b>tiene el valor </b>" + Stat.getData(Stat.Percentile, parseInt(p), original).toFixed(2));
 
-            if($("#text").val().length > 0) 
+            if($("#text").val().length > 0)
             {
                 myData = Extra.transformData($("#text").val());
                 $("#tabla").html(Stat.getTableInfo(myData));
@@ -22,7 +33,10 @@
         }
         catch (exception)
         {
-            clearInterval(timmerPeriodic);
+            if($("#text").exists())
+                $("#text").val("");
+            else
+                clearInterval(timmerPeriodic);
         }
     }
     
@@ -34,21 +48,21 @@
 <div class="title2">Medidas de Posici&oacute;n</div>
 <div class="left">
     <div class="title1">Cuartil</div>
-    <input type="range" id="rcuartil" class="fillAll" min="0" max="4" />
+    <div id="rcuartil" class="fillAll"></div>
     <div class="title1">Decil</div>
-    <input type="range" id="rdecil" class="fillAll" min="0" max="10" />
+    <div id="rdecil" class="fillAll"></div>
     <div class="title1">Percentil</div>
-    <input type="range" id="rpercentil" class="fillAll" min="0" max="100" />
+    <div id="rpercentil" class="fillAll"></div>
 </div>
 <div class="right">
     <div style="width: 100%; height: 50px;"></div>
-    <input type="text" id="cuartil" class="textPos" />
+    <div id="cuartil" class="textPos"></div>
     <div style="clear: both;"></div>
     <div class="title3">Valores</div>
-    <input type="text" id="decil" class="textPos" />
+    <div id="decil" class="textPos"></div>
     <div style="clear: both;"></div>
     <div class="title3">Valores</div>
-    <input type="text" id="percentil" class="textPos" />
+    <div id="percentil" class="textPos"></div>
     <div style="clear: both;"></div>
     <div class="title3">Valores</div>
 </div>

@@ -21,7 +21,10 @@
         }
         catch (exception)
         {
-            clearInterval(timmerPeriodic);
+            if($("#text").exists())
+                $("#text").val("");
+            else
+                clearInterval(timmerPeriodic);
         }
     }
     
