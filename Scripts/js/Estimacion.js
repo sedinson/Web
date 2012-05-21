@@ -526,5 +526,14 @@ function trimfloat(ov, d) {
     }
     return o;
 }
+function cocienteVarianzas(s1,s2,n1,n2,alfa){
+    var interval = new Array(2);
+    interval[0] = (s1/s2)*(1/fisherICDF(alfa/2,n1-1,n2-1));
+    interval[1] = (s1/s2)*fisherICDF(alfa/2,n2-1,n1-1);
+    return interval;
+}
+function varianzasIguales(interval){
+    return interval[0]<=1 && interval[1]>=1;
+}
 
 

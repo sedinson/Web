@@ -87,10 +87,10 @@
     }
 </script>
 <div class="estimacion">
-    <div class="title1">Varianza</div>
+    <div class="title2">Intervalo de Confianza para la Varianza</div>
+    <div class="title1">Datos</div>
     <div class="datos inlineB">
-        <h2 class="data">Datos</h2>
-        <div style="padding: 0 15px;">
+        <div style="padding: 5px 15px;">
         <form id="datos"> 
             <div id="divAlfa">
                 <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
@@ -116,4 +116,6 @@
         </div>
         <br>
     </div>
+    <div style="clear: left;"></div>
+    <div class="title3">Resultado</div>
 </div>
