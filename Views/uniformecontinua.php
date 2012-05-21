@@ -24,16 +24,20 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var a = $("#la").val();
-                var b = $("#lb").val();
-                var res = Probability.calculateContinuousUniform(a, b);
+                if (validarLB() == true)
+                {
+                    ocultarResultado();
 
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X) = " + res + "</pre>");
+                    var a = $("#la").val();
+                    var b = $("#lb").val();
+                    
+                    var res = Probability.calculateContinuousUniform(a, b);
+
+                    mostrarResultado();
+
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>P(" + a + "&lt;X&lt;" + b + ") = " + res + "</pre>");
+                }
             }
         });
     });
@@ -53,6 +57,29 @@
         });
     }
     
+    
+    $("#lb").keyup(validarLB);
+    
+    function validarLB ()
+    {
+        var a = parseInt($("#la").val());
+        var b = parseInt($("#lb").val());
+        
+        if (a > b)
+        {
+            $("#LBerror").css("display", "inline");
+            $("#lb").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#LBerror").css("display", "none");
+            $("#lb").css("border", "");
+            return true;
+        }
+    }
+    
+    
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -63,7 +90,7 @@
 </script>
 
 <div id="probabilidad" class="estimacion">
-    <div class="title2">Distribuci&oacute;n Binomial</div>
+    <div class="title2">Distribuci&oacute;n Uniforme Continua</div>
     <div class="title1">Datos</div>
     <div class="datos inlineB">
         <div style="padding: 10px 15px;">
@@ -75,6 +102,7 @@
                 <div>
                     <label for="lb" class="data">L&iacute;mite superior (b):</label>
                     <input id="lb" name="lb" type="text" />
+                    <label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser menor que el inferior</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

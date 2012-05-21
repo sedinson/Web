@@ -40,17 +40,20 @@
             },
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var k = $("#k").val();
-                var p = $("#p").val();
-                var x = $("#x").val();
-                var res = Probability.calculateNegativeBinomial(k, p, x, "=");
-                
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(X=" + x + ") = " + res + "</pre>");
+                if(validarX() == true)
+                {
+                    ocultarResultado();
+
+                    var k = $("#k").val();
+                    var p = $("#p").val();
+                    var x = $("#x").val();
+                    var res = Probability.calculateNegativeBinomial(k, p, x, "=");
+
+                    mostrarResultado();
+
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>P(X=" + x + ") = " + res + "</pre>");
+                }
             }
         });
     });
@@ -70,6 +73,29 @@
         });
     }
     
+    
+    $("#x").keyup(validarX);
+    
+    function validarX ()
+    {
+        var k = parseInt($("#k").val());
+        var x = parseInt($("#x").val());
+        
+        if (x < k)
+        {
+            $("#Xerror").css("display", "inline");
+            $("#x").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#Xerror").css("display", "none");
+            $("#x").css("border", "");
+            return true;
+        }
+    }
+    
+    
     function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
     
     function modalClosed() 
@@ -80,7 +106,7 @@
 </script>
 
 <div id="probabilidad" class="estimacion">
-    <div class="title2">Distribuci&oacute;n Binomial</div>
+    <div class="title2">Distribuci&oacute;n Binomial Negativa</div>
     <div class="title1">Datos</div>
     <div class="datos inlineB">
         <div style="padding: 10px 15px;">
@@ -96,6 +122,7 @@
                 <div>
                     <label for="x" class="data">Variable aleatoria (X):</label>
                     <input id="x" name="x" type="text" />
+                    <label id="Xerror" class="error" style="display: none;"><br />X no puede ser menor que k</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

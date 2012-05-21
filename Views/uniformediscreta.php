@@ -63,7 +63,7 @@
 </script>
 
 <div id="probabilidad" class="estimacion">
-    <div class="title2">Distribuci&oacute;n Binomial</div>
+    <div class="title2">Distribuci&oacute;n Uniforme Discreta</div>
     <div class="title1">Datos</div>
     <div class="datos inlineB">
         <div style="padding: 10px 15px;">
