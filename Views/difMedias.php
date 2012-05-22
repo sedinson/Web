@@ -130,12 +130,12 @@
     });
     function calcularIntervalo(){
         var alfa = $("#alfa").val();
-        var z;
+        var z,zuni;
         var n1 = $("#tamano1").val();
         var difmed = $("#miu").val();
         var casetype;
         var des;
-        var amplitud;
+        var amplitud,amplituduni;
         if($("#indsi:checked").val()=="si"){
             var sigma1;
             var sigma2;
@@ -144,9 +144,11 @@
                 sigma1 = $("#varpoblacional1").val();
                 sigma2 = $("#varpoblacional2").val();
                 z = NORMSINV(alfa/2);
+                zuni = NORMSINV(alfa);
                 casetype="Caso Tipo I y II";
                 des=0;
-                amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);                    
+                amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);
+                amplituduni = zuni*Math.sqrt(sigma1/n1+sigma2/n2);
 
             }else{
                 sigma1 = $("#smuestral1").val();
@@ -156,14 +158,18 @@
                     casetype = "Caso Tipo III";
                     des=1;
                     z = tStudentICDF(alfa/2,n1+n2-2);
+                    zuni = tStudentICDF(alfa,n1+n2-2);
                     var sp = ((n1-1)*sigma1+(n2-1)*sigma2)/(n1+n2-2);
                     amplitud = z*Math.sqrt(sp*((1/n1)+(1/n2)));
+                    amplituduni = zuni*Math.sqrt(sp*((1/n1)+(1/n2)));
                 }else{
                     casetype = "Caso Tipo IV";
                     des=2;
                     var v = Math.pow((sigma1/n1)+(sigma2/n2),2)/((Math.pow(sigma1/n1,2)/(n1-1))+(Math.pow(sigma2/n2,2)/(n2-1)));
                     z = tStudentICDF(alfa/2,v);
-                    amplitud = z*Math.sqrt((sigma1/n1)+(sigma2/n2));                            
+                    zuni = tStudentICDF(alfa,v);
+                    amplitud = z*Math.sqrt((sigma1/n1)+(sigma2/n2));
+                    amplituduni = zuni*Math.sqrt((sigma1/n1)+(sigma2/n2));
                 }                 
             }
         }else{
@@ -171,7 +177,9 @@
             casetype = "Caso Tipo V";
             des = 3;
             z = tStudentICDF(alfa/2,n1-1);
+            zuni tStudentICDF(alfa,n1-1);
             amplitud = z*(sd/Math.sqrt(n1));
+            amplituduni = zuni*(sd/Math.sqrt(n1));
         }
         var min = trimfloat(difmed - amplitud,4);
         var may = trimfloat(difmed*1 + amplitud,4);
@@ -186,6 +194,8 @@
         }
         $("#analisis").html(analisis);
         $("#descCaso").html(desc[des]);
+        $("#uniTitle").html("Limites Unilaterales");
+        $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
         var res = $("#resultado");
         var cont = $("#modalDialog");
         res.width(cont.width()-580);
@@ -378,6 +388,11 @@
         </div>
         <br>
         <div id="analisis" class="wrap">            
+        </div>
+        <br>
+        <div id="divUnilateral" class="wrap subdivRes">
+            <div id="uniTitle" class="resTitle"></div>
+            <div id="unilateral" class="wrap res"></div>
         </div>
         <br>
     </div>
