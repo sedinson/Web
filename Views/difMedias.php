@@ -183,6 +183,8 @@
         }
         var min = trimfloat(difmed - amplitud,4);
         var may = trimfloat(difmed*1 + amplitud,4);
+        var sup = trimfloat(difmed - amplituduni,4);
+        var sup = trimfloat(difmed*1 + amplituduni,4);
         $("#casoTipo").html(casetype);
         var analisis;
         if(min<=0 && may>=0){
@@ -202,6 +204,8 @@
         var intervalo = $("#intervalo");
         intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;<sub>1</sub>-&micro;<sub>2</sub>   &le;   "+may+"</pre>");
         $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
+        $("#uniTitle").html("Limites Unilaterales");
+        $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
         res.slideUp(function(){
             res.slideDown(function(){
                 $("#divIntervalo").fadeIn();
@@ -211,6 +215,7 @@
     }
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
+        $("#unilateral").width($("#unilateral").children().width()+20);
     }
     function periodic () {
         ajustarIntervalo();

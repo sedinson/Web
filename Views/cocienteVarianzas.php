@@ -81,8 +81,11 @@
               var s1 = $("#smuestral1").val();
               var s2 = $("#smuestral2").val();
               var interval = cocienteVarianzas(s1,s2,n1,n2,alfa);
+              var intervaluni = cocienteVarianzas(s1,s2,n2,alfa*2);
               var min = trimfloat(interval[0],4);
               var may = trimfloat(interval[1],4);
+              var inf = trimfloat(intervaluni[0],4);
+              var sup = trimfloat(intervaluni[1],4);
               var analisis;
               if(min<=1 && may>=1){
                   analisis = "&sigma;&sup2;<sub>1</sub> y &sigma;&sup2;<sub>2</sub> son estadisticamente <b>IGUALES</b>";
@@ -98,6 +101,8 @@
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;<sub>1</sub>/&sigma;&sup2;<sub>2</sub>   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
+              $("#uniTitle").html("Limites Unilaterales");
+              $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -109,6 +114,7 @@
     });
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
+        $("#unilateral").width($("#unilateral").children().width()+20);
     }
     function periodic () {
         ajustarIntervalo();
@@ -212,6 +218,11 @@
         </div>
         <br>
         <div id="analisis" class="wrap">            
+        </div>
+        <br>
+        <div id="divUnilateral" class="wrap subdivRes">
+            <div id="uniTitle" class="resTitle"></div>
+            <div id="unilateral" class="wrap res"></div>
         </div>
         <br>
     </div>
