@@ -1,16 +1,16 @@
 http://statistics.hostzi.com
 
-Statistic Web Software
+<h1>Statistic Web Platform</h1>
 
 Provides a different way to study Data Analisys, developed on CSS, HTML, Javascript and PHP. This provides several js classes that can be used in other projects, a simple interface, and a design based on MVC. It's created and maintained by Edinson Salas, David Seija and Andres Perez.
 
 To get started, checkout http://statistics.hostzi.com/About/Documentacion!
 
-Quick start
+<h2>Quick start</h2>
 
-Clone the reop, git clone git@github.com:sedinson/Web.git, or download the latest release.
+Clone the repo, git clone git@github.com:sedinson/Web.git, or download the latest release.
 
-Versioning
+<h2>Versioning</h2>
 
 Versioning is very simple. The release cycle will be maintained under the Semantic Versioning as much as possible.
 
@@ -27,11 +27,11 @@ Have a bug? Please create an issue here on GitHub!
 
 https://github.com/sedinson/web/issues
 
-Authors
+<h2>Authors</h2>
 
 Edinson Salas
 
-  http://github.com/sedinson
+  	http://github.com/sedinson
 	http://facebook.com/sedinson
 	@sedinson
 	+sedinson
@@ -45,7 +45,7 @@ David Seija
 
 	http://github.com/david-sd
 
-License
+<h2>License</h2>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
