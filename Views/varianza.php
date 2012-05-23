@@ -21,8 +21,8 @@
               alfa:{
                   required: true,
                   number: true,
-                  min: 0.01,
-                  max: 0.1
+                  min: 0.90,
+                  max: 0.99
               },
               tamano: {
                   required: true,
@@ -54,7 +54,7 @@
               }
           },
           submitHandler: function(){
-              var alfa = $("#alfa").val();
+              var alfa = 1-$("#alfa").val();
               var n = $("#tamano").val();
               var chiMin = critchi(alfa/2,n-1);
               var chiMax = critchi(1-alfa/2,n-1);
@@ -65,12 +65,9 @@
               var inf = trimfloat((n-1)*s2/chiMinUni,4);
               var may = trimfloat((n-1)*s2/chiMax,4);
               var sup = trimfloat((n-1)*s2/chiMaxUni,4);
-              ponerGrafica($("#divGraphBi"), "Grafica &Chi;&sup2;", min, may, 1-alfa, "chi2bi.svg");
-              ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "chi2inf.svg");
-              ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "chi2sup.svg");
               var res = $("#resultado");
               var cont = $("#modalDialog");
-              res.width(cont.width()-580);
+              res.width(cont.width()-$("#datos").width()-130);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
@@ -103,7 +100,7 @@
         <div style="padding: 5px 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(1-&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="divN">

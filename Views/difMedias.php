@@ -21,8 +21,8 @@
               alfa:{
                   required: true,
                   number: true,
-                  min: 0.01,
-                  max: 0.1
+                  min: 0.90,
+                  max: 0.99
               },
               miu: {
                 required: true,
@@ -129,14 +129,13 @@
        });
     });
     function calcularIntervalo(){
-        var alfa = $("#alfa").val();
+        var alfa = 1-$("#alfa").val();
         var z,zuni;
         var n1 = $("#tamano1").val();
         var difmed = $("#miu").val();
         var casetype;
         var des;
         var amplitud,amplituduni;
-        var grafica,tGrafica;
         
         if($("#indsi:checked").val()=="si"){
             var sigma1;
@@ -151,8 +150,6 @@
                 des=0;
                 amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);
                 amplituduni = zuni*Math.sqrt(sigma1/n1+sigma2/n2);
-                grafica = "normal";
-                tGrafica = "Grafica Normal";
 
             }else{
                 sigma1 = $("#smuestral1").val();
@@ -175,8 +172,6 @@
                     amplitud = z*Math.sqrt((sigma1/n1)+(sigma2/n2));
                     amplituduni = zuni*Math.sqrt((sigma1/n1)+(sigma2/n2));
                 }
-                grafica = "tstudent";
-                tGrafica = "Grafica T-Student";
             }
         }else{
             var sd = $("#sd").val();
@@ -186,16 +181,11 @@
             zuni = tStudentICDF(alfa,n1-1);
             amplitud = z*(sd/Math.sqrt(n1));
             amplituduni = zuni*(sd/Math.sqrt(n1));
-            grafica = "tstudent";
-            tGrafica = "Grafica T-Student";
         }
         var min = trimfloat(difmed - amplitud,4);
         var may = trimfloat(difmed*1 + amplitud,4);
         var inf = trimfloat(difmed - amplituduni,4);
         var sup = trimfloat(difmed*1 + amplituduni,4);
-        ponerGrafica($("#divGraphBi"),tGrafica,min,may,1-alfa,grafica+"bi.svg");
-        ponerGrafica($("#divGraphInf"),"Limite Inferior",inf,null,1-alfa,grafica+"inf.svg");
-        ponerGrafica($("#divGraphSup"),"Limite Superior",null,sup,1-alfa,grafica+"sup.svg");
         $("#casoTipo").html(casetype);
         var analisis;
         if(min<=0 && may>=0){
@@ -211,7 +201,7 @@
         $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
         var res = $("#resultado");
         var cont = $("#modalDialog");
-        res.width(cont.width()-580);
+        res.width(cont.width()-$("#datos").width()-130);
         var intervalo = $("#intervalo");
         intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;<sub>1</sub>-&micro;<sub>2</sub>   &le;   "+may+"</pre>");
         $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
@@ -247,9 +237,18 @@
     function getData(text){
         var lines = text.split("\n");
         $("#textError").hide();
-        if(lines.length >= 2){
-            var line0 = lines[0].split(" ");
-            var line1 = lines[1].split(" ");
+        if(lines.length > 0){
+            var line0 = new Array();
+            var line1 = new Array();
+            for(var i=0;i<lines.length;i++){
+                var d = lines[i].split("\t");
+                if(d.length >= 2){
+                    if(d[0].length > 0)
+                        line0.push(d[0]);
+                    if(d[1].length > 0)
+                        line1.push(d[1]);
+                }
+            }
             if(line0.length>0 && line1.length>0){
                 var med1,med2;
                 var n1 = line0.length;
@@ -337,7 +336,7 @@
         <div style="padding: 0 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(1-&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="divInd">

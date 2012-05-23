@@ -74,7 +74,7 @@
               var sup = trimfloat(x*1 + amplituduni,4);
               var res = $("#resultado");
               var cont = $("#modalDialog");
-              res.width(cont.width()-580);
+              res.width(cont.width()-$("#datos").width()-130);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   x   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-$("#gamma")[0].options[$("#gamma")[0].selectedIndex].value)*100)+"% de Confianza<br>Contiene "+($("#alfa")[0].options[alfa].value*100)+"% de la Poblaci&oacute;n");

@@ -581,7 +581,8 @@ input[type="file"] {
 .estimacion input[type="text"],.estimacion input[type="number"]{
     display: inline-block;
     text-align: right;
-    width: 200px;
+    width: 45%;
+    min-width: 100px;
 }
 .estimacion input[type="radio"]{
     margin-right: 10px;
@@ -688,7 +689,8 @@ input[type="file"] {
     display: inline-block;
     text-align: left;
     text-shadow: 1px 1px 2px #000;
-    width: 200px;
+    width: 45%;
+    min-width: 100px;
 
 }
 .datos{
@@ -711,7 +713,7 @@ input[type="file"] {
     margin-left: 30px;
     padding: 0;
     padding-bottom: 10px;
-    width: 450px;
+    width: 30%;
 }
 label.error{
     display: none;

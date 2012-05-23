@@ -21,8 +21,8 @@
               alfa:{
                   required: true,
                   number: true,
-                  min: 0.01,
-                  max: 0.1
+                  min: 0.90,
+                  max: 0.99
               },
               tamano1: {
                   required: true,
@@ -75,7 +75,7 @@
               
           },
           submitHandler: function(){
-              var alfa = $("#alfa").val();
+              var alfa = 1-$("#alfa").val();
               var n1 = $("#tamano1").val();
               var n2 = $("#tamano2").val();
               var s1 = $("#smuestral1").val();
@@ -86,9 +86,6 @@
               var may = trimfloat(interval[1],4);
               var inf = trimfloat(intervaluni[0],4);
               var sup = trimfloat(intervaluni[1],4);
-              ponerGrafica($("#divGraphBi"), "Grafica Fisher", min, may, 1-alfa, "fisherbi.svg");
-              ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "fisherinf.svg");
-              ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "fishersup.svg");
               var analisis;
               if(min<=1 && may>=1){
                   analisis = "&sigma;&sup2;<sub>1</sub> y &sigma;&sup2;<sub>2</sub> son estadisticamente <b>IGUALES</b>";
@@ -100,7 +97,7 @@
               $("#analisis").html(analisis);
               var res = $("#resultado");
               var cont = $("#modalDialog");
-              res.width(cont.width()-580);
+              res.width(cont.width()-$("#datos").width()-130);
               var intervalo = $("#intervalo");
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;<sub>1</sub>/&sigma;&sup2;<sub>2</sub>   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
@@ -131,9 +128,18 @@
     function getData(text){
         var lines = text.split("\n");
         $("#textError").hide();
-        if(lines.length >= 2){
-            var line0 = lines[0].split(" ");
-            var line1 = lines[1].split(" ");
+        if(lines.length > 0){
+            var line0 = new Array();
+            var line1 = new Array();
+            for(var i=0;i<lines.length;i++){
+                var d = lines[i].split("\t");
+                if(d.length >= 2){
+                    if(d[0].length > 0)
+                        line0.push(d[0]);
+                    if(d[1].length > 0)
+                        line1.push(d[1]);
+                }
+            }
             if(line0.length>0 && line1.length>0){
                 var med1,med2;
                 var n1 = line0.length;
@@ -190,7 +196,7 @@
         <div style="padding: 5px 15px;">
         <form id="datos"> 
             <div id="divAlfa">
-                <label for="alfa" class="data">Nivel de Confianza(&alpha;):</label>
+                <label for="alfa" class="data">Nivel de Confianza(1-&alpha;):</label>
                 <input id="alfa" name="alfa" type="text"/>
             </div>
             <div id="tabla">
