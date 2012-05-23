@@ -15,7 +15,7 @@
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Estimacion.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Probability.js"></script>
         <script type="text/javascript">
-            var myData = [11, 5, 14, 3, 12, 15, 16, 13, 22, 21, 23, 24, 19, 9, 9, 10, 6, 13, 6, 51, 32, 45, 40, 19, 39, 51];
+            var myData = [0];
             var original = Extra.createCopy(myData);
             var BaseUrl = '<?=$config->get('BaseUrl')?>';
             var bodyScroll = null;
@@ -37,7 +37,6 @@
             function navegador(nav)
             {
                 helpScroll.resize().show();
-                
                 $(nav + " ul > li").click(function(event)
                 {
                     $(nav + " ul li > ul li").click(function(event) {
@@ -58,7 +57,11 @@
                 $("#modalDialog").html("<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>");
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
-                $("#modal").animate({opacity: 1}, 300);
+                $("#modal").animate({opacity: 1}, 300, function() {
+                    $(".superpanel").css("display", "block");
+                    $(".superpanel").css("opacity", "0");
+                    $(".superpanel").animate({opacity: 1}, 600);
+                });
                 var w = $("#modal").innerWidth();
                 var h = $("#modal").innerHeight();
                 $(".modalDialog").css("width", (w-380) + "px");
@@ -190,8 +193,12 @@
                 {
                     modalScroll.hide();
                     modalClosed();
-                    $("#modal").animate({opacity: 0}, 300, function() {
-                        $("#modal").css("display", "none");
+                    $(".superpanel").animate({opacity: 0}, 300, function() {
+                        $("#modal").animate({opacity: 0}, 300, function() {
+                            $(".superpanel").css("display", "none");
+                            $("#modal").css("display", "none");
+                            helpScroll.hide();
+                        });
                     });
 
                     selOpt = 0;
@@ -209,14 +216,8 @@
                         $("#editHelp").css("display", "none");
                     });
                 });
-
-                selOpt = '0';
-                $("#help").load("<?=$config->get('InitUrl')?>?controller=Help&action=load&str=" + selOpt, function() {
-                    navegador("#help");
-                });
-                $("#example").load("<?=$config->get('InitUrl')?>?controller=Example&action=load&str=" + selOpt, function() {
-                    navegador("#example");
-                });
+                
+                helpScroll.hide();
                 
                 <?php
                     if(isset($obj)) {

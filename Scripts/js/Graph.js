@@ -26,6 +26,7 @@ function Graph(div)
     this.PARETO = 5;
     this.POLIGONO_FRECUENCIA = 6;
     this.PUNTOS = 7;
+    this.TALLO_Y_HOJAS = 8;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -37,6 +38,7 @@ function Graph(div)
     var data = [];                  //Array que contiene los datos a graficar
     var olData = [];                //Array que contiene los datos a graficar ordenados descendentemente
     var cmdData = [];               //Array que contiene los datos para la grafica de puntos
+    var cmdTYH = [];                //Array que contiene los datos para la grafica de tallo y hojas
     var max = 0;                    //Valor maximo del array de datos
     var min = 0;                    //Valor minimo del array de datos
     var q1 = 0;                     //Cuartil 1
@@ -81,17 +83,21 @@ function Graph(div)
         var sep = (w-80)/data.length;
         g.textAlign = "center";
         g.textBaseline = "top";
-        for(var i=0; i<data.length; i++)
-        {   //Pintar la barra
-            var y = (data[i][pData]/frecuently)*(h-60);
-            var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
-            grad.addColorStop(0, colors[i%colors.length][0]);
-            grad.addColorStop(1, colors[i%colors.length][1]);
-            g.fillStyle = grad;
-            g.fillRect(60+sep*i, (h-50)-y, sep, y);
-            g.fillStyle = "#000000";
-            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+        try 
+        {
+            for(var i=0; i<data.length; i++)
+            {   //Pintar la barra
+                var y = (data[i][pData]/frecuently)*(h-60);
+                var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
+                grad.addColorStop(0, colors[i%colors.length][0]);
+                grad.addColorStop(1, colors[i%colors.length][1]);
+                g.fillStyle = grad;
+                g.fillRect(60+sep*i, (h-50)-y, sep, y);
+                g.fillStyle = "#000000";
+                g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+            }
         }
+        catch (exception) {}
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";
@@ -123,42 +129,45 @@ function Graph(div)
         
         g.textAlign = "center";
         g.textBaseline = "top";
-        for(var i=0; i<data.length; i++)
-        {   //Pintar la barra
-            var y = (data[i][pData]/frecuently)*(h-60);
-            var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
-            grad.addColorStop(0, colors[i%colors.length][0]);
-            grad.addColorStop(1, colors[i%colors.length][1]);
-            g.fillStyle = grad;
-            g.fillRect(60+sep*i, (h-50)-y, sep, y);
-            g.fillStyle = "#000000";
-            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
-        }
-        
-        for(var i=0; i<data.length; i++)
-        {   //Pintar el punto y si es necesario la linea
-            y = (data[i][pData]/frecuently)*(h-60);
-            if(i>0) 
-            {   //Si es el segundo punto, dibujar una linea que una los puntos
-                g.strokeStyle = "#000000";
-                g.lineWidth = 1;
-                g.beginPath();
-                    g.moveTo(antX, antY);
-                    g.lineTo(60+sep*i+sep/2, (h-50)-y);
-                    g.stroke();
-                    
-                    //Dibujar el punto
-                    setPoint(antX, antY, i);
+        try
+        {
+            for(var i=0; i<data.length; i++)
+            {   //Pintar la barra
+                var y = (data[i][pData]/frecuently)*(h-60);
+                var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
+                grad.addColorStop(0, colors[i%colors.length][0]);
+                grad.addColorStop(1, colors[i%colors.length][1]);
+                g.fillStyle = grad;
+                g.fillRect(60+sep*i, (h-50)-y, sep, y);
+                g.fillStyle = "#000000";
+                g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
             }
-            
-            //Guardar el punto actual
-            antX = 60+sep*i+sep/2;
-            antY = (h-50)-y;
-            g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
-        }
-        
-        //Dibujar el ultimo punto al salir
-        setPoint(antX, antY, data.length);
+
+            for(var i=0; i<data.length; i++)
+            {   //Pintar el punto y si es necesario la linea
+                y = (data[i][pData]/frecuently)*(h-60);
+                if(i>0) 
+                {   //Si es el segundo punto, dibujar una linea que una los puntos
+                    g.strokeStyle = "#000000";
+                    g.lineWidth = 1;
+                    g.beginPath();
+                        g.moveTo(antX, antY);
+                        g.lineTo(60+sep*i+sep/2, (h-50)-y);
+                        g.stroke();
+
+                        //Dibujar el punto
+                        setPoint(antX, antY, i);
+                }
+
+                //Guardar el punto actual
+                antX = 60+sep*i+sep/2;
+                antY = (h-50)-y;
+                g.fillText(data[i][pLabel]+"", 60+sep*i+sep/2, h-45);
+            }
+
+            //Dibujar el ultimo punto al salir
+            setPoint(antX, antY, data.length);
+        } catch (exception) {}
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";
@@ -334,75 +343,78 @@ function Graph(div)
         g.font = "15px Arial";
         g.textAlign = "center";
         
-        //Pintando las lineas del campo
-        g.beginPath();
-            //linea larga de la base
-            g.moveTo(sideBase, h-bottomBase);
-            g.lineTo(sideBase+width, h-bottomBase);
-            
-            //Lineas verticales de la linea base
-            g.moveTo(sideBase, h-bottomBase-5);
-            g.lineTo(sideBase, h-bottomBase+5);
-            g.moveTo(sideBase+width, h-bottomBase-5);
-            g.lineTo(sideBase+width, h-bottomBase+5);
-            
-            //Linea larga del centro
-            g.moveTo(sideBase, 3*h/8);
-            g.lineTo(sideBase+width, 3*h/8);
-            
-            //Lineas verticales de la linea del centro
-            g.moveTo(sideBase, 3*h/8-5);
-            g.lineTo(sideBase, 3*h/8+5);
-            g.moveTo(sideBase+width, 3*h/8-5);
-            g.lineTo(sideBase+width, 3*h/8+5);
-            
-            //Lineas verticales de los 3 cuartiles
-            g.moveTo(sideBase+dq1, h-bottomBase-5);
-            g.lineTo(sideBase+dq1, h-bottomBase+5);
-            
-            g.moveTo(sideBase+dq2, h-bottomBase-5);
-            g.lineTo(sideBase+dq2, h-bottomBase+5);
-            
-            g.moveTo(sideBase+dq3, h-bottomBase-5);
-            g.lineTo(sideBase+dq3, h-bottomBase+5);
-            
-            g.stroke();
-            
-            //Pintando las leyendas
-            g.textBaseline = "bottom";
-            g.fillText(q1.toFixed(2)+"", sideBase+dq1, h-bottomBase-5);
-            g.fillText(q2.toFixed(2)+"", sideBase+dq2, h-bottomBase-5);
-            g.fillText(q3.toFixed(2)+"", sideBase+dq3, h-bottomBase-5);
-            g.textBaseline = "top";
-            g.fillText("min", sideBase, h-bottomBase+5);
-            g.fillText("Q1", sideBase+dq1, h-bottomBase+5);
-            g.fillText("Q2", sideBase+dq2, h-bottomBase+5);
-            g.fillText("Q3", sideBase+dq3, h-bottomBase+5);
-            g.fillText("max", sideBase+width, h-bottomBase+5);
-            
-            //Pintando las Cajas
-            var grad = g.createLinearGradient(10, h/4, 10, h/2);
-            grad.addColorStop(0, colors[0][0]);
-            grad.addColorStop(1, colors[0][1]);
-            g.fillStyle = grad;
-            g.fillRect(sideBase+dq1, h/4, (dq2-dq1), h/4);
-            g.strokeRect(sideBase+dq1, h/4, (dq2-dq1), h/4);
-            
-            grad = g.createLinearGradient(10, h/4, 10, h/2);
-            grad.addColorStop(0, colors[1][0]);
-            grad.addColorStop(1, colors[1][1]);
-            g.fillStyle = grad;
-            g.fillRect(sideBase+dq2, h/4, (dq3-dq2), h/4);
-            g.strokeRect(sideBase+dq2, h/4, (dq3-dq2), h/4);
-            
-            //Pintando el punto de la media
-            g.strokeStyle = "#fff";
-            g.lineWidth = 6;
-            g.save();
-                g.beginPath();
-                    g.arc(sideBase+dxm, 3*h/8, 3, 0, 2*Math.PI, false);
-                    g.stroke();
-            g.restore();
+        try 
+        {
+            //Pintando las lineas del campo
+            g.beginPath();
+                //linea larga de la base
+                g.moveTo(sideBase, h-bottomBase);
+                g.lineTo(sideBase+width, h-bottomBase);
+
+                //Lineas verticales de la linea base
+                g.moveTo(sideBase, h-bottomBase-5);
+                g.lineTo(sideBase, h-bottomBase+5);
+                g.moveTo(sideBase+width, h-bottomBase-5);
+                g.lineTo(sideBase+width, h-bottomBase+5);
+
+                //Linea larga del centro
+                g.moveTo(sideBase, 3*h/8);
+                g.lineTo(sideBase+width, 3*h/8);
+
+                //Lineas verticales de la linea del centro
+                g.moveTo(sideBase, 3*h/8-5);
+                g.lineTo(sideBase, 3*h/8+5);
+                g.moveTo(sideBase+width, 3*h/8-5);
+                g.lineTo(sideBase+width, 3*h/8+5);
+
+                //Lineas verticales de los 3 cuartiles
+                g.moveTo(sideBase+dq1, h-bottomBase-5);
+                g.lineTo(sideBase+dq1, h-bottomBase+5);
+
+                g.moveTo(sideBase+dq2, h-bottomBase-5);
+                g.lineTo(sideBase+dq2, h-bottomBase+5);
+
+                g.moveTo(sideBase+dq3, h-bottomBase-5);
+                g.lineTo(sideBase+dq3, h-bottomBase+5);
+
+                g.stroke();
+
+                //Pintando las leyendas
+                g.textBaseline = "bottom";
+                g.fillText(q1.toFixed(2)+"", sideBase+dq1, h-bottomBase-5);
+                g.fillText(q2.toFixed(2)+"", sideBase+dq2, h-bottomBase-5);
+                g.fillText(q3.toFixed(2)+"", sideBase+dq3, h-bottomBase-5);
+                g.textBaseline = "top";
+                g.fillText("min", sideBase, h-bottomBase+5);
+                g.fillText("Q1", sideBase+dq1, h-bottomBase+5);
+                g.fillText("Q2", sideBase+dq2, h-bottomBase+5);
+                g.fillText("Q3", sideBase+dq3, h-bottomBase+5);
+                g.fillText("max", sideBase+width, h-bottomBase+5);
+
+                //Pintando las Cajas
+                var grad = g.createLinearGradient(10, h/4, 10, h/2);
+                grad.addColorStop(0, colors[0][0]);
+                grad.addColorStop(1, colors[0][1]);
+                g.fillStyle = grad;
+                g.fillRect(sideBase+dq1, h/4, (dq2-dq1), h/4);
+                g.strokeRect(sideBase+dq1, h/4, (dq2-dq1), h/4);
+
+                grad = g.createLinearGradient(10, h/4, 10, h/2);
+                grad.addColorStop(0, colors[1][0]);
+                grad.addColorStop(1, colors[1][1]);
+                g.fillStyle = grad;
+                g.fillRect(sideBase+dq2, h/4, (dq3-dq2), h/4);
+                g.strokeRect(sideBase+dq2, h/4, (dq3-dq2), h/4);
+
+                //Pintando el punto de la media
+                g.strokeStyle = "#fff";
+                g.lineWidth = 6;
+                g.save();
+                    g.beginPath();
+                        g.arc(sideBase+dxm, 3*h/8, 3, 0, 2*Math.PI, false);
+                        g.stroke();
+                g.restore();
+        } catch (exception) {}
     }
     
     //Grafica de Pareto
@@ -427,44 +439,48 @@ function Graph(div)
         g.textAlign = "center";
         g.textBaseline = "top";
         
-        for(var i=0; i<olData.length; i++)
-        {   //Pintar la barra
-            var y = (olData[i][pData]/sum)*(h-60);
-            var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
-            grad.addColorStop(0, colors[i%colors.length][0]);
-            grad.addColorStop(1, colors[i%colors.length][1]);
-            g.fillStyle = grad;
-            g.fillRect(60+sep*i, (h-50)-y, sep, y);
-            g.fillStyle = "#000000";
-            g.fillText(olData[i][pLabel]+"", 60+sep*i+sep/2, h-45);
-        }
-        
-        g.fillStyle = "#000000";
-        var acum = 0;
-        for(var i=0; i<olData.length; i++)
-        {   //Pintar el punto y si es necesario la linea
-            acum += olData[i][pData];
-            y = (acum/sum)*(h-60);
-            if(i>0) 
-            {   //Si es el segundo punto, dibujar una linea que una los puntos
-                g.strokeStyle = "#000000";
-                g.lineWidth = 1;
-                g.beginPath();
-                    g.moveTo(antX, antY);
-                    g.lineTo(60+sep*i+sep/2, (h-50)-y);
-                    g.stroke();
-                    
-                    //Dibujar el punto
-                    setPoint(antX, antY, i);
+        try 
+        {
+            for(var i=0; i<olData.length; i++)
+            {   //Pintar la barra
+                var y = (olData[i][pData]/sum)*(h-60);
+                var grad = g.createLinearGradient(10, (h-50)-y, 10, (h-50));
+                grad.addColorStop(0, colors[i%colors.length][0]);
+                grad.addColorStop(1, colors[i%colors.length][1]);
+                g.fillStyle = grad;
+                g.fillRect(60+sep*i, (h-50)-y, sep, y);
+                g.fillStyle = "#000000";
+                g.fillText(olData[i][pLabel]+"", 60+sep*i+sep/2, h-45);
             }
-            
-            //Guardar el punto actual
-            antX = 60+sep*i+sep/2;
-            antY = (h-50)-y;
+
+            g.fillStyle = "#000000";
+            var acum = 0;
+            for(var i=0; i<olData.length; i++)
+            {   //Pintar el punto y si es necesario la linea
+                acum += olData[i][pData];
+                y = (acum/sum)*(h-60);
+                if(i>0) 
+                {   //Si es el segundo punto, dibujar una linea que una los puntos
+                    g.strokeStyle = "#000000";
+                    g.lineWidth = 1;
+                    g.beginPath();
+                        g.moveTo(antX, antY);
+                        g.lineTo(60+sep*i+sep/2, (h-50)-y);
+                        g.stroke();
+
+                        //Dibujar el punto
+                        setPoint(antX, antY, i);
+                }
+
+                //Guardar el punto actual
+                antX = 60+sep*i+sep/2;
+                antY = (h-50)-y;
+            }
+
+            //Dibujar el ultimo punto al salir
+            setPoint(antX, antY, olData.length);
         }
-        
-        //Dibujar el ultimo punto al salir
-        setPoint(antX, antY, olData.length);
+        catch (exception) {}
 
         //Pintar el texto de la guias del eje y
         g.textAlign = "right";
@@ -526,6 +542,38 @@ function Graph(div)
         }
     }
     
+    var talloyhojas = function() 
+    {
+        var distX = 50;
+        var distY = 20;
+        var sepX = 25;
+        var sepY = 30;
+        
+        g.textBaseline = "top";
+        g.fillStyle = "#000000";
+        g.font = "22px Arial";
+        
+        g.save();
+            g.lineWidth = 2;
+            g.beginPath();
+                g.strokeStyle = "#000";
+                g.moveTo(distX+sepX/2-5, distY+sepY);
+                g.lineTo(distX+sepX/2-5, h-sepY);
+                g.stroke();
+        g.restore();
+        
+        for(var i=0; i<cmdTYH.length; i++) 
+        {
+            g.textAlign = "right";
+            g.fillText(cmdTYH[i][0] + "", distX, distY+sepY*(i+1));
+            g.textAlign = "center";
+            for(var j=0; j<cmdTYH[i][1].length; j++) 
+            {
+                g.fillText(cmdTYH[i][1][j]+"", distX+sepX*(j+1), distY+sepY*(i+1));
+            }
+        }
+    }
+    
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -534,6 +582,7 @@ function Graph(div)
         cnv.height = h;
         
         //Fondo blanco en el lienzo
+        g.font = "10px Arial";
         g.fillStyle = "#ffffff";
         g.fillRect(0, 0, w, h);
         
@@ -563,6 +612,9 @@ function Graph(div)
                 break;
             case 7:     //Diagrama de Puntos
                 base(puntos);
+                break;
+            case 8:     //Diagrama de Tallo y Hojas
+                talloyhojas();
                 break;
         }
     }
@@ -602,6 +654,7 @@ function Graph(div)
         }
         
         cmdData = [];
+        cmdTYH = [];
         if(typeof original[0] != "number") {
             var init = [];
             for(i=0; i<original.length; i++)
@@ -616,6 +669,28 @@ function Graph(div)
                     }
                 }
                 cmdData[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
+            }
+        } 
+        else 
+        {
+            init = [];
+            for(i=0; i<original.length; i++) 
+            {
+                init[i] = Math.floor(original[i]);
+            }
+            
+            init = init.unique();
+            for(i=0; i<init.length; i++) 
+            {
+                tmp = [];
+                for(j=0; j<original.length; j++) 
+                {
+                    if(original[j]-init[i] >= 0 && original[j]-init[i]<1)
+                    {
+                        tmp.push(((original[j]-init[i])*10).toFixed(0));
+                    }
+                }
+                cmdTYH[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
             }
         }
     }

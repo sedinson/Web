@@ -109,6 +109,7 @@ input[type="file"] {
 
 .superpanel {
     position: fixed;
+    display: none;
     outline: 0px;
     z-index: 9999;
     left: 15px;
@@ -262,16 +263,16 @@ input[type="file"] {
 }
 
 #containner {
-    margin: 50px 0 20px 320px;
+    margin: 40px auto;
+    max-width: 990px;
     position: relative;
-    float: left;
     z-index: 2;
 }
 
 #subContainner {
-    margin: 10px 0 10px 320px;
+    margin: 10px auto;
+    max-width: 990px;
     position: relative;
-    float: left;
 }
 
 .baseBox {
