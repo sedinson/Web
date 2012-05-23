@@ -549,6 +549,13 @@ input[type="file"] {
 }
 
 /*Comienzo CSS Estimacion*/
+#graphTitle{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    text-align: center;
+}
 .estimacion body{
     color: #222;
 }
@@ -566,6 +573,9 @@ input[type="file"] {
     margin-bottom: 10px;
     padding-left: 12px;
     width: 97.4%
+}
+.estimacion embed{
+    width:400px;
 }
 .estimacion input[type="text"],.estimacion input[type="number"]{
     display: inline-block;

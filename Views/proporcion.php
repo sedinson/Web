@@ -157,6 +157,7 @@
             <div id="intTitle" class="resTitle"></div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="divError" style="display: none" class="wrap subdivRes">
             <div id="errorTitle" class="resTitle"></div>
@@ -170,6 +171,9 @@
             <div id="unilateral" class="wrap res"></div>
         </div>
         <br>
+        <div id="divGraphInf"></div>
+        <br>
+        <div id="divGraphSup"></div>
     </div>
     <div style="clear: left;"></div>
     <div class="title3">Resultado</div>

@@ -541,5 +541,17 @@ function cocienteVarianzas(s1,s2,n1,n2,alfa){
 function varianzasIguales(interval){
     return interval[0]<=1 && interval[1]>=1;
 }
-
+function ponerGrafica(div,titulo,menor,mayor,porcentaje,nombreGrafica){
+    div.html("<div id='graphTitle' class='wrap'></div><div id='graphSVG'></div><div id='percent' style='position: relative; top: -100px; font-weight: bold; font-size: 18px; color: black;'></div><div id='graphInt' style='width: 400px;margin-bottom: 15px;margin-top: -25px;' class='wrap'><div id='intMin' style='display: inline;float: left;margin-left: 50px;'></div><div id='intMay' style='display: inline;float: right;margin-right: 50px;'></div></div>");
+    var divTitle = div.children("#graphTitle");
+    divTitle.html(titulo);
+    var graph = div.children("#graphSVG");
+    graph.html("<embed class='estimacion' src='" + BaseUrl + "/Resources/Public/"+nombreGrafica+"' alt='Grafica Normal' type='image/svg+xml' />");
+    var min = div.find("#intMin");
+    min.html(menor);
+    var may = div.find("#intMay");
+    may.html(mayor);        
+    var percent = div.find("#percent");
+    percent.html((porcentaje*100)+"%");
+}
 

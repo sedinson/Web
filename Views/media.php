@@ -1,10 +1,6 @@
 <script type="text/javascript">
     var desc = ["El tamaño de la muestra no es la suficientemente grande para aproximar a la Normal","Poblacion Normal, Varianza poblacional(&sigma;&sup2;) conocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) conocida, Tamaño de muestra &ge; 30",
-                "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"]
-    $(document).load(function (){
-        $("#vpoblacional").hide();
-        $("#vmuestral").hide();
-    });
+                "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"];
     function mostrarVarP(){
         $("#vmuestral").fadeOut("slow", function(){
             $("#vpoblacional").fadeIn("slow");
@@ -84,10 +80,14 @@
               var casetype;
               var des;
               var caso12 = false;
+              var grafica;
+              var tGrafica;
               if($("#consi:checked").val()=="si"){
                   sigma = Math.sqrt($("#varpoblacional").val());
                   z = NORMSINV(alfa/2);
-                  zuni = NORMSINV(alfa); 
+                  zuni = NORMSINV(alfa);
+                  grafica = "normal";
+                  tGrafica = "Grafica Normal";
                   if($("#siNorm:checked").val() == "si"){
                       casetype = "Tipo I";
                       des = 1;
@@ -106,11 +106,15 @@
               }else{
                   sigma = $("#smuestral").val();
                   if($("#siNorm:checked").val() == "si"){
+                      grafica = "tstudent";
+                      tGrafica = "Grafica T-Student";
                       z= tStudentICDF(alfa/2,n-1);
                       zuni = tStudentICDF(alfa,n-1);
                       casetype="Tipo III";
                       des = 3;
                   }else if(n>=30){
+                      grafica = "normal";
+                      tGrafica = "Grafica Normal";
                       z = NORMSINV(alfa/2);
                       zuni = NORMSINV(alfa); 
                       casetype="Tipo IV";
@@ -130,6 +134,9 @@
               var amplituduni = zuni*sigma/Math.sqrt(n);
               var inf = trimfloat(x - amplituduni,4);
               var sup = trimfloat(x*1 + amplituduni,4);
+              ponerGrafica($("#divGraphBi"),tGrafica,min,may,1-alfa,grafica+"bi.svg");
+              ponerGrafica($("#divGraphInf"),"Limite Inferior",inf,null,1-alfa,grafica+"inf.svg");
+              ponerGrafica($("#divGraphSup"),"Limite Superior",null,sup,1-alfa,grafica+"sup.svg");
               $("#casoTipo").html("Caso "+casetype);
               $("#descCaso").html(desc[des]);
               var res = $("#resultado");
@@ -219,6 +226,8 @@
             <div id="intTitle" class="resTitle"></div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi">
+        </div>
         <br>
         <div id="divError" style="display: none" class="wrap subdivRes">
             <div id="errorTitle" class="resTitle"></div>
@@ -228,6 +237,11 @@
         <div id="divUnilateral" class="wrap subdivRes">
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
+        </div>
+        <div id="divGraphInf">
+        </div>
+        <br>
+        <div id="divGraphSup">
         </div>
         <br>
     </div>
