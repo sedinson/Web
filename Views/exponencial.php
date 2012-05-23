@@ -175,6 +175,7 @@
             <div id="calculoDP" class="wrap res" style="padding: 0 10px;"></div>
         </div>
     </div>
+    <div id="graficaDP" class="inlineB" style="padding: 40px 20px; display: none; margin-left: 50px;"></div>
     <div style="clear: left;"></div>
     <div class="title3">Resultado</div>
 </div>
