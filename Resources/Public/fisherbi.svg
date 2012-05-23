@@ -2,22 +2,18 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="841.891px" height="245px" viewBox="0 168.14 841.891 245" enable-background="new 0 168.14 841.891 245"
-	 xml:space="preserve">
+	 width="841.891px" height="245px" viewBox="0 0 841.891 245" enable-background="new 0 0 841.891 245" xml:space="preserve">
 <g id="Capa_1_1_" display="none">
 	<g display="inline">
-		
-			<image overflow="visible" enable-background="new    " width="608" height="139" xlink:href="9196C360.jpeg"  transform="matrix(1.3837 0 0 1.3788 -0.0012 202.303)">
-		</image>
 	</g>
 </g>
 <g id="Capa_4">
-	<polyline fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="29.463,190.725 29.463,397.437 
-		828.792,397.437 	"/>
+	<polyline fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="29.463,20.725 29.463,227.438 
+		828.791,227.438 	"/>
 </g>
 <g id="Capa_5">
 	
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="369.6194" y1="368.7405" x2="369.6194" y2="82.0093" gradientTransform="matrix(1 0 0 -1 24.9448 586.6392)">
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="344.6746" y1="64.8989" x2="344.6746" y2="351.6317" gradientTransform="matrix(1 0 0 1 49.8896 -17.001)">
 		<stop  offset="0" style="stop-color:#BD3C36"/>
 		<stop  offset="0.1551" style="stop-color:#B93B36"/>
 		<stop  offset="0.3217" style="stop-color:#AC3833"/>
@@ -26,15 +22,15 @@
 		<stop  offset="0.8461" style="stop-color:#582120"/>
 		<stop  offset="1" style="stop-color:#3C1011"/>
 	</linearGradient>
-	<rect x="71.745" y="211.188" fill="url(#SVGID_1_)" width="645.639" height="182.55"/>
+	<rect x="71.745" y="41.188" fill="url(#SVGID_1_)" width="645.639" height="182.551"/>
 </g>
 <g id="Capa_2">
-	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M36.846,385.685
-		c34.898-2.686,57.046-164.43,95.301-165.101s91.274,77.181,161.745,108.725c70.47,31.544,151.005,56.413,514.765,56.395"/>
+	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M36.846,215.686
+		c34.898-2.688,57.046-164.431,95.301-165.102s91.274,77.182,161.745,108.725c70.47,31.545,151.005,56.414,514.765,56.395"/>
 </g>
 <g id="Capa_2_copia">
-	<path fill="#FFFFFF" d="M808.657,385.702c-363.76,0.02-444.295-24.851-514.765-56.395
-		c-70.471-31.544-123.49-109.396-161.745-108.725S71.745,382.999,36.846,385.685v-181.88h771.812L808.657,385.702L808.657,385.702z"
+	<path fill="#FFFFFF" d="M808.656,215.701c-363.76,0.021-444.295-24.85-514.765-56.395
+		c-70.471-31.543-123.49-109.396-161.745-108.725S71.745,212.998,36.846,215.686V33.805h771.812L808.656,215.701L808.656,215.701z"
 		/>
 </g>
 </svg>

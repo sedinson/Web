@@ -2,21 +2,18 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="679px" height="386px" viewBox="55.5 56.5 679 386" enable-background="new 55.5 56.5 679 386" xml:space="preserve">
+	 width="679px" height="386px" viewBox="0 0 679 386" enable-background="new 0 0 679 386" xml:space="preserve">
 <g id="Layer_1" display="none">
 	<g display="inline">
-		
-			<image overflow="visible" enable-background="new    " width="605" height="162" xlink:href="51C029BA.jpeg"  transform="matrix(1.3091 0 0 1.299 2.441406e-004 200.8689)">
-		</image>
 	</g>
 </g>
 <g id="Layer_3">
-	<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="73.896,69.206 73.896,428.689 
-		726.482,428.689 	"/>
+	<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="13.896,20 13.896,379.483 
+		666.482,379.483 	"/>
 </g>
 <g id="Layer_5">
 	
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="426.6174" y1="434.8591" x2="426.6174" y2="-62.2856" gradientTransform="matrix(1 0 0 -1 24.9448 603.3589)">
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="341.6741" y1="119.575" x2="341.674" y2="616.7206" gradientTransform="matrix(1 0 0 1 49.8896 -0.2813)">
 		<stop  offset="0" style="stop-color:#9AC545"/>
 		<stop  offset="0.1327" style="stop-color:#97C143"/>
 		<stop  offset="0.2753" style="stop-color:#8DB43F"/>
@@ -26,15 +23,16 @@
 		<stop  offset="0.8784" style="stop-color:#212B0F"/>
 		<stop  offset="1" style="stop-color:#000000"/>
 	</linearGradient>
-	<rect x="192.933" y="150.241" fill="url(#SVGID_1_)" width="517.261" height="276.207"/>
+	<rect x="132.933" y="101.035" fill="url(#SVGID_1_)" width="517.261" height="276.207"/>
 </g>
 <g id="Layer_2">
-	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M96.521,418.531c0,0,132.432,10.643,195.1-100.506
-		s92.56-158.443,114.268-153.714c21.709,4.729,44.176,21.467,106.843,145.438c62.668,123.97,195.102,105.783,197.464,109.056"/>
+	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M36.521,369.325
+		c0,0,132.433,10.644,195.101-100.506s92.56-158.443,114.268-153.714c21.709,4.729,44.176,21.467,106.843,145.438
+		c62.668,123.97,195.103,105.782,197.464,109.056"/>
 </g>
 <g id="Layer_2_copy">
-	<path fill="#FFFFFF" d="M710.193,418.805c-2.364-3.271-134.796,14.914-197.464-109.058
-		C450.062,185.777,427.595,169.04,405.886,164.31c-21.708-4.729-51.6,42.564-114.268,153.714S96.521,418.531,96.521,418.531V76.103
-		h613.673L710.193,418.805L710.193,418.805z"/>
+	<path fill="#FFFFFF" d="M650.193,369.599c-2.364-3.271-134.796,14.914-197.464-109.059
+		c-62.667-123.97-85.134-140.707-106.843-145.437c-21.708-4.729-51.6,42.563-114.268,153.714S36.521,369.325,36.521,369.325V26.897
+		h613.673L650.193,369.599L650.193,369.599z"/>
 </g>
 </svg>

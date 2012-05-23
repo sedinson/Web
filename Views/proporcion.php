@@ -70,6 +70,9 @@
                 var may = trimfloat(p*1 + amplitud,4);
                 var inf = trimfloat(p - amplituduni,4);
                 var sup = trimfloat(p*1 + amplituduni,4);
+                ponerGrafica($("#divGraphBi"), "Grafica Normal", min, may, 1-alfa, "normalbi.svg");
+                ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "normalinf.svg");
+                ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "normalsup.svg");
                 var res = $("#resultado");
                 var cont = $("#modalDialog");
                 res.width(cont.width()-580);
@@ -174,6 +177,7 @@
         <div id="divGraphInf"></div>
         <br>
         <div id="divGraphSup"></div>
+        <br>
     </div>
     <div style="clear: left;"></div>
     <div class="title3">Resultado</div>
