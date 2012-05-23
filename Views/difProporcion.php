@@ -91,6 +91,9 @@
                 var may = trimfloat((p1-p2)+amplitud,4);
                 var inf = trimfloat((p1-p2)-amplituduni,4);
                 var sup = trimfloat((p1-p2)+amplituduni,4);
+                ponerGrafica($("#divGraphBi"), "Grafica Normal", min, may, 1-alfa, "normalbi.svg");
+                ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "normalinf.svg");
+                ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "normalsup.svg");
                 var analisis;
                 if(min<=0 && may>=0){
                     analisis = "p<sub>1</sub> y p<sub>2</sub> son estadisticamente <b>IGUALES</b>";
@@ -198,6 +201,7 @@
             <div id="intTitle" class="resTitle">Intervalo</div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="analisis" class="wrap">            
         </div>
@@ -206,6 +210,8 @@
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
         </div>
+        <br><div id="divGraphInf"></div>
+        <br><div id="divGraphSup"></div>
         <br>
     </div>
     <div style="clear: left;"></div>

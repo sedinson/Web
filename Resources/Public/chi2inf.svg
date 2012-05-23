@@ -2,26 +2,22 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="841.891px" height="239px" viewBox="0 180.14 841.891 239" enable-background="new 0 180.14 841.891 239"
-	 xml:space="preserve">
+	 width="841.891px" height="239px" viewBox="0 0 841.891 239" enable-background="new 0 0 841.891 239" xml:space="preserve">
 <g id="Capa_1_1_" display="none">
 	<g display="inline">
-		
-			<image overflow="visible" enable-background="new    " width="608" height="156" xlink:href="2D90C2B3.jpeg"  transform="matrix(1.3837 0 0 1.3786 7.320642e-004 190.6116)">
-		</image>
 	</g>
 </g>
 <g id="Capa_4">
-	<polyline fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="24.765,198.081 24.765,406.134 
-		828.121,406.134 	"/>
+	<polyline fill="none" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="24.765,18.081 24.765,226.135 
+		828.12,226.135 	"/>
 </g>
 <g id="Capa_2">
-	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M810.001,396.425c0,0-358.391,9.26-488.592-52.352
-		c-130.201-61.61-140.268-133.557-189.262-133.557S69.061,396.92,37.517,396.423"/>
+	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M810,216.426c0,0-358.391,9.26-488.591-52.354
+		C191.208,102.463,181.141,30.516,132.147,30.516S69.061,216.92,37.517,216.424"/>
 </g>
 <g id="Capa_5">
 	
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="415.928" y1="374.7805" x2="415.928" y2="37.7175" gradientTransform="matrix(1 0 0 -1 24.9448 586.6392)">
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="390.9832" y1="48.8594" x2="390.9832" y2="385.9224" gradientTransform="matrix(1 0 0 1 49.8896 -17.001)">
 		<stop  offset="0" style="stop-color:#92B649"/>
 		<stop  offset="0.1392" style="stop-color:#8FB449"/>
 		<stop  offset="0.2887" style="stop-color:#84A847"/>
@@ -31,10 +27,10 @@
 		<stop  offset="0.9213" style="stop-color:#24391F"/>
 		<stop  offset="1" style="stop-color:#0D2816"/>
 	</linearGradient>
-	<rect x="71.745" y="203.805" fill="url(#SVGID_1_)" width="738.256" height="197.315"/>
+	<rect x="71.745" y="23.805" fill="url(#SVGID_1_)" width="738.255" height="197.314"/>
 </g>
 <g id="Capa_2_copia">
-	<path fill="#FFFFFF" d="M810.001,396.425c0,0-358.391,9.26-488.592-52.352c-130.201-61.61-140.268-133.557-189.262-133.557
-		S69.061,396.92,37.517,396.423V198.436h772.483V396.425z"/>
+	<path fill="#FFFFFF" d="M810,216.426c0,0-358.391,9.26-488.591-52.354C191.208,102.463,181.141,30.516,132.147,30.516
+		S69.061,216.92,37.517,216.424V18.436H810V216.426L810,216.426z"/>
 </g>
 </svg>

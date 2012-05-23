@@ -78,14 +78,19 @@
               var n = $("#tamano").val();
               var x = $("#miu").val();
               var sigma;
+              var grafica,tGrafica;
               if($("#consi:checked").val() == "si"){
                   sigma = Math.sqrt($("varpoblacional").val());
                   z = NORMSINV(alfa/2);
                   zuni = NORMSINV(alfa);
+                  grafica = "normal";
+                  tGrafica = "Grafica Normal";
               }else{
                   sigma = $("#smuestral").val();
-                  z = tStudentICDF(alfa/2, n-1);
+                  z = tStudentICDF(alfa/2, n-1);                  
                   zuni = tStudentICDF(alfa, n-1);
+                  grafica = "tstudent";
+                  tGrafica = "Grafica T-Student";
               }
               
               var amplitud = z*sigma/Math.sqrt(1+(1/n));
@@ -94,6 +99,9 @@
               var may = trimfloat(x*1 + amplitud,4);
               var inf = trimfloat(x - amplituduni,4);
               var sup = trimfloat(x*1 + amplituduni,4);
+              ponerGrafica($("#divGraphBi"), tGrafica, min, may, 1-alfa, grafica+"bi.svg");
+              ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, grafica+"inf.svg");
+              ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, grafica+"sup.svg");
               var res = $("#resultado");
               var cont = $("#modalDialog");
               res.width(cont.width()-580);
@@ -166,12 +174,14 @@
             <div id="intTitle" class="resTitle"></div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="divUnilateral" class="wrap subdivRes">
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
         </div>
-        <br>
+        <br><div id="divGraphInf"></div>
+        <br><div id="divGraphSup"></div>
     </div>
     <div style="clear: left;"></div>
     <div class="title3">Resultado</div>

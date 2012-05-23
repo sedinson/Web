@@ -136,6 +136,8 @@
         var casetype;
         var des;
         var amplitud,amplituduni;
+        var grafica,tGrafica;
+        
         if($("#indsi:checked").val()=="si"){
             var sigma1;
             var sigma2;
@@ -149,6 +151,8 @@
                 des=0;
                 amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);
                 amplituduni = zuni*Math.sqrt(sigma1/n1+sigma2/n2);
+                grafica = "normal";
+                tGrafica = "Grafica Normal";
 
             }else{
                 sigma1 = $("#smuestral1").val();
@@ -170,7 +174,9 @@
                     zuni = tStudentICDF(alfa,v);
                     amplitud = z*Math.sqrt((sigma1/n1)+(sigma2/n2));
                     amplituduni = zuni*Math.sqrt((sigma1/n1)+(sigma2/n2));
-                }                 
+                }
+                grafica = "tstudent";
+                tGrafica = "Grafica T-Student";
             }
         }else{
             var sd = $("#sd").val();
@@ -180,11 +186,16 @@
             zuni = tStudentICDF(alfa,n1-1);
             amplitud = z*(sd/Math.sqrt(n1));
             amplituduni = zuni*(sd/Math.sqrt(n1));
+            grafica = "tstudent";
+            tGrafica = "Grafica T-Student";
         }
         var min = trimfloat(difmed - amplitud,4);
         var may = trimfloat(difmed*1 + amplitud,4);
-        var sup = trimfloat(difmed - amplituduni,4);
+        var inf = trimfloat(difmed - amplituduni,4);
         var sup = trimfloat(difmed*1 + amplituduni,4);
+        ponerGrafica($("#divGraphBi"),tGrafica,min,may,1-alfa,grafica+"bi.svg");
+        ponerGrafica($("#divGraphInf"),"Limite Inferior",inf,null,1-alfa,grafica+"inf.svg");
+        ponerGrafica($("#divGraphSup"),"Limite Superior",null,sup,1-alfa,grafica+"sup.svg");
         $("#casoTipo").html(casetype);
         var analisis;
         if(min<=0 && may>=0){
@@ -226,6 +237,11 @@
             getData(text.val());
             text.val("");
             text.blur();
+        }
+        var x1 = $("#miu1");
+        var x2 = $("#miu2");
+        if(x1.val().length > 0 && x2.val().length > 0){
+            $("#miu").val(x1.val()-x2.val());
         }
     }
     function getData(text){
@@ -391,6 +407,7 @@
             <div id="intTitle" class="resTitle"></div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="analisis" class="wrap">            
         </div>
@@ -399,6 +416,10 @@
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
         </div>
+        <br>
+        <div id="divGraphInf"></div>
+        <br>
+        <div id="divGraphSup"></div>
         <br>
     </div>
     <div style="clear: left;"></div>

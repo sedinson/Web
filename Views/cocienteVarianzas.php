@@ -86,6 +86,9 @@
               var may = trimfloat(interval[1],4);
               var inf = trimfloat(intervaluni[0],4);
               var sup = trimfloat(intervaluni[1],4);
+              ponerGrafica($("#divGraphBi"), "Grafica Fisher", min, may, 1-alfa, "fisherbi.svg");
+              ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "fisherinf.svg");
+              ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "fishersup.svg");
               var analisis;
               if(min<=1 && may>=1){
                   analisis = "&sigma;&sup2;<sub>1</sub> y &sigma;&sup2;<sub>2</sub> son estadisticamente <b>IGUALES</b>";
@@ -216,6 +219,7 @@
             <div id="intTitle" class="resTitle">Intervalo</div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="analisis" class="wrap">            
         </div>
@@ -224,6 +228,10 @@
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
         </div>
+        <br>
+        <div id="divGraphInf"></div>
+        <br>
+        <div id="divGraphSup"></div>
         <br>
     </div>
     <div style="clear: left;"></div>
