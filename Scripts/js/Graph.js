@@ -121,7 +121,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][1];
+                    g.strokeStyle = colors[(((i-1<0)? 0 : i-1)%colors.length)][1];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -191,7 +191,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.strokeStyle = colors[(((i-1<0)? 0 : i-1)%colors.length)][0];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -247,7 +247,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.strokeStyle = colors[(((i-1<0)? 0 : i-1)%colors.length)][0];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -430,7 +430,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 6;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][1];
+                    g.strokeStyle = colors[(((i-1<0)? 0 : i-1)%colors.length)][1];
                     g.arc(x, y, 3, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -503,7 +503,7 @@ function Graph(div)
             g.save();
                 g.lineWidth = 4;
                 g.beginPath();
-                    g.strokeStyle = colors[((i-1)%colors.length)][0];
+                    g.strokeStyle = colors[(((i-1<0)? 0 : i-1)%colors.length)][0];
                     g.arc(x, y, 2, 0, 2*Math.PI, false);
                     g.stroke();
             g.restore();
@@ -698,15 +698,23 @@ function Graph(div)
     this.tablaPuntos = function () 
     {
         var str = "<table><thead><tr><th>clase</th><th>datos</th></tr></thead>";
-        for(var i=0; i<cmdData.length; i++) 
+        if(cmdData.length > 0)
         {
-            str += "<tr><td>" + cmdData[i][0] + "</td><td>";
-            for(var j=0; j<cmdData[i][1].length; j++)
+            for(var i=0; i<cmdData.length; i++) 
             {
-                str += cmdData[i][1][j] + " ";
+                str += "<tr><td>" + cmdData[i][0] + "</td><td>";
+                for(var j=0; j<cmdData[i][1].length; j++)
+                {
+                    str += cmdData[i][1][j] + " ";
+                }
+                str += "</td></tr>";
             }
-            str += "</td></tr>";
         }
+        else
+        {
+            str += "<tr><td colspan=2>No information</td></tr>";
+        }
+        
         str += "</table>";
         
         return str;

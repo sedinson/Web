@@ -125,40 +125,48 @@ Stat.Decile = function (i, n)
 
 Stat.getData = function (f, i, array) 
 {
-    if(typeof array[0] != "number")
+    try
     {
-        array = Stat.prepare(array);
-        var n = Stat.n(array);
-        var p = f(i, n);
-        var d = p-Math.floor(p);
-        p = Math.floor(p);
-        var sum = 0;
-        var j, l;
-        for(j=0; j<array.length && sum<p; j++)
+        if(typeof array[0] != "number")
         {
-            sum += array[j][2];
-            l = (sum == p)? j+1 : j;
-        }
+            array = Stat.prepare(array);
+            var n = Stat.n(array);
+            var p = f(i, n);
+            var d = p-Math.floor(p);
+            p = Math.floor(p);
+            var sum = 0;
+            var j, l;
+            for(j=0; j<array.length && sum<p; j++)
+            {
+                sum += array[j][2];
+                l = (sum == p)? j+1 : j;
+            }
 
-        if(d != 0)
-            return parseFloat(array[j-1][1])*d + parseFloat(array[l][1])*(1-d);
+            if(d != 0)
+                return parseFloat(array[j-1][1])*d + parseFloat(array[l][1])*(1-d);
+            else
+                return parseFloat(array[j-1][1]);
+        }
         else
-            return parseFloat(array[j-1][1]);
+        {
+            array = Extra.insertSort(array);
+            n = array.length;
+            p = f(i, n);
+            d = p-Math.floor(p);
+            p = Math.floor(p);
+            p = (p<1)? 1 : p;
+
+            if(d != 0)
+                return parseFloat(array[Math.min(p-1, n-1)])*d + parseFloat(array[Math.min(p, n-1)])*(1-d);
+            else
+                return parseFloat(array[Math.min(p-1, n-1)]);
+        }
     }
-    else
+    catch (exception)
     {
-        array = Extra.insertSort(array);
-        n = array.length;
-        p = f(i, n);
-        d = p-Math.floor(p);
-        p = Math.floor(p);
-        p = (p<1)? 1 : p;
-        
-        if(d != 0)
-            return parseFloat(array[Math.min(p-1, n-1)])*d + parseFloat(array[Math.min(p, n-1)])*(1-d);
-        else
-            return parseFloat(array[Math.min(p-1, n-1)]);
+        return 0;
     }
+    
 }
 
 Stat.n = function (array) 
@@ -245,23 +253,32 @@ Stat.prepare = function (array)
  *clase, marca de clase, frecuencia, frecuencia acumulada, frecuencia relativa y frecuencia relativa acumulada*/
 Stat.getTableInfo = function (array)
 {
-    var data = Stat.prepare(array);
-    var n = Stat.n(data);
-    var sw = (data[0][0] != data[0][1]);
-    var sum = 0;
-
-    var str = "<table><thead><tr><th>clases</th>" + ((sw)? "<th>x</th>" : "") + 
-                "<th>f</th><th>f<sub>a</sub></th><th>f<sub>r</sub></th><th>f<sub>ra</sub>" +
-                "</th></tr></thead><tbody>";
-    for(var i=0; i<data.length; i++)
+    try
     {
-        sum += data[i][2];
-        str += "<tr>";
-        str += "<td>" + data[i][0] + "</td><td>" + ((sw)? data[i][1] + "</td><td>" : "") + data[i][2] + "</td>";
-        str += "<td>" + sum + "</td><td>" + (data[i][2]/n).toFixed(3) + "</td><td>" + (sum/n).toFixed(3) + "</td>";
-        str += "</tr>";
+        var data = Stat.prepare(array);
+        var n = Stat.n(data);
+        var sw = (data[0][0] != data[0][1]);
+        var sum = 0;
+
+        var str = "<table><thead><tr><th>clases</th>" + ((sw)? "<th>x</th>" : "") + 
+                    "<th>f</th><th>f<sub>a</sub></th><th>f<sub>r</sub></th><th>f<sub>ra</sub>" +
+                    "</th></tr></thead><tbody>";
+        for(var i=0; i<data.length; i++)
+        {
+            sum += data[i][2];
+            str += "<tr>";
+            str += "<td>" + data[i][0] + "</td><td>" + ((sw)? data[i][1] + "</td><td>" : "") + data[i][2] + "</td>";
+            str += "<td>" + sum + "</td><td>" + (data[i][2]/n).toFixed(3) + "</td><td>" + (sum/n).toFixed(3) + "</td>";
+            str += "</tr>";
+        }
+        str += "</tbody></table>";
     }
-    str += "<tbody></table>";
+    catch (exception)
+    {
+        var str = "<table><thead><tr><th>clases</th>" +
+                    "<th>f</th><th>f<sub>a</sub></th><th>f<sub>r</sub></th><th>f<sub>ra</sub>" +
+                    "</th></tr></thead><tbody><tr><td colspan=5>No information</td></tr></tbody></table>";
+    }
     
     return str;
 }

@@ -15,7 +15,7 @@
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Estimacion.js"></script>
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Probability.js"></script>
         <script type="text/javascript">
-            var myData = [0];
+            var myData = [];
             var original = Extra.createCopy(myData);
             var BaseUrl = '<?=$config->get('BaseUrl')?>';
             var bodyScroll = null;
