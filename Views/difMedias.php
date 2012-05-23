@@ -177,7 +177,7 @@
             casetype = "Caso Tipo V";
             des = 3;
             z = tStudentICDF(alfa/2,n1-1);
-            zuni tStudentICDF(alfa,n1-1);
+            zuni = tStudentICDF(alfa,n1-1);
             amplitud = z*(sd/Math.sqrt(n1));
             amplituduni = zuni*(sd/Math.sqrt(n1));
         }
