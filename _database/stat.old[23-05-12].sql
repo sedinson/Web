@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 23, 2012 at 08:19 AM
+-- Generation Time: May 20, 2012 at 08:19 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `ord` int(11) NOT NULL DEFAULT '0',
   `shw` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idaccess`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `access`
@@ -55,7 +55,7 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`, `ord`, `s
 (17, 15, 'Como Contribuir', '8b1bf2g5789.png', 'About/Como', 0, 1),
 (19, 6, 'Medidas de Centralizaci&oacute;n', 'b6730373e079image3014.png', 'Medidas/Centralizacion', 0, 1),
 (20, 6, 'Medidas de Variabilidad', 'c5145a73e079image3014.png', 'Medidas/Variabilidad', 0, 1),
-(21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion', 0, 0),
+(21, 15, 'Documentaci&oacute;n', '06c7c8g6253.png', 'About/Documentacion', 0, 1),
 (23, 14, 'Intervalo de Confianza para la Media', 'f18a70miu.png', 'Estimacion/media', 0, 1),
 (24, 14, 'Intervalo de Confianza para la Varianza', '237b47sigma.png', 'Estimacion/Varianza', 0, 1),
 (25, 14, 'Intervalo de Confianza para ProporciÃ³n', '6a0313proporcion.png', 'Estimacion/Proporcion', 0, 1),
@@ -81,8 +81,7 @@ INSERT INTO `access` (`idaccess`, `idparent`, `title`, `image`, `url`, `ord`, `s
 (45, 9, 'DistribuciÃ³n Normal', '9ce5bcg9512.png', 'Probability/Normal', 0, 1),
 (46, 9, 'DistribuciÃ³n Normal EstÃ¡ndar', 'c4418fg9739.png', 'Probability/NormalEstandar', 0, 1),
 (47, 9, 'DistribuciÃ³n Uniforme Continua', '8fff21g9927.png', 'Probability/UniformeContinua', 0, 1),
-(48, 9, 'DistribuciÃ³n Exponencial', '7f6992g10143.png', 'Probability/Exponencial', 0, 1),
-(49, 7, 'Tallo y Hojas', '4ebf7fg5512.png', 'Graficas/TalloyHojas', 0, 1);
+(48, 9, 'DistribuciÃ³n Exponencial', '7f6992g10143.png', 'Probability/Exponencial', 0, 1);
 
 -- --------------------------------------------------------
 
