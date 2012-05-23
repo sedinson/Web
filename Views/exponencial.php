@@ -1,6 +1,6 @@
 <script type="text/javascript">
     
-    $("#graficaDP").html("<img src='" + BaseUrl + "/Resources/Public/exponential.svg' alt='Distribucion Exponencial' />");
+    $("#graf").html("<embed src='" + BaseUrl + "/Resources/Public/exponential.svg' alt='Distribucion Exponencial' type='image/svg+xml' width=400px />");
 
     $(document).ready(function (){
         $("#datos").validate({
@@ -177,7 +177,10 @@
             <div class="resTitle" id="intTitle"></div>
             <div id="calculoDP" class="wrap res" style="padding: 0 10px;"></div>
         </div>
-        <div id="graficaDP"></div>
+        <div id="graficaDP">
+            <div id="graphTitle" class="wrap">Gr&aacute;fica Exponencial</div>
+            <div id="graf"></div>
+        </div>
     </div>
     <div style="clear: left;"></div>
     <div class="title3">Resultado</div>
