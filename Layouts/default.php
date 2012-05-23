@@ -16,7 +16,7 @@
         <script type="text/javascript" src="<?=$config->get('BaseUrl')?>/Scripts/js/Probability.js"></script>
         <script type="text/javascript">
 //            var myData = [11, 5, 14, 3, 12, 15, 16, 13, 22, 21, 23, 24, 19, 9, 9, 10, 6, 13, 6, 51, 32, 45, 40, 19, 39, 51];
-            var myData = [3.1, 3.3, 3.4, 4.5, 4.5, 4.2, 5.1, 5.2];
+            var myData = [0];
             var original = Extra.createCopy(myData);
             var BaseUrl = '<?=$config->get('BaseUrl')?>';
             var bodyScroll = null;

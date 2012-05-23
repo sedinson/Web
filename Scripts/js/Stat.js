@@ -183,44 +183,48 @@ Stat.median = function (array)
 Stat.frecuency = function (array)
 {
     var tmp = [];
-    for(var i=0; i<array.length; i++)
+    try 
     {
-        Stat.min = (array[i] < Stat.min)? array[i] : Stat.min;
-        Stat.max = (array[i] > Stat.max)? array[i] : Stat.max;
-    }
-    if(typeof array[0] == "number") 
-    {
-        var li = Stat.minVal(array);
-        var ls = Stat.maxVal(array);
-        var r = ls - li;
-        var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
-        var w = Math.ceil(r/c);
-        var f = (Stat.borders)? Stat.p/2 : 0;
-
-        for(var i=0; i<c; i++)
-            tmp[i] = [(li+i*w-f) + "-" + (li+(i+1)*w-Stat.p+f), ((li+i*w)+(li+(i+1)*w-Stat.p))/2, 0];
-
-        for(i=0; i<array.length; i++)
+        for(var i=0; i<array.length; i++)
         {
-            if(Math.floor((array[i]-li)/w) >= tmp.length)
-                tmp[c] = [(li+c*w-f) + "-" + (li+(c+1)*w-Stat.p+f), ((li+c*w)+(li+(++c)*w-Stat.p))/2, 0];
-
-            tmp[Math.floor((array[i]-li)/w)][2] += 1;
+            Stat.min = (array[i] < Stat.min)? array[i] : Stat.min;
+            Stat.max = (array[i] > Stat.max)? array[i] : Stat.max;
         }
-    } 
-    else if(typeof array[0] == "string") 
-    {
-        var vars = array.unique();
+        if(typeof array[0] == "number") 
+        {
+            var li = Stat.minVal(array);
+            var ls = Stat.maxVal(array);
+            var r = ls - li;
+            var c = Math.round(3.322*Math.logBase(array.length, 10)+1);
+            var w = Math.ceil(r/c);
+            var f = (Stat.borders)? Stat.p/2 : 0;
 
-        for(i=0; i<vars.length; i++) {
-            tmp[i] = [vars[i], vars[i], 0];
-            for(var j=0; j<array.length; j++) 
+            for(var i=0; i<c; i++)
+                tmp[i] = [(li+i*w-f) + "-" + (li+(i+1)*w-Stat.p+f), ((li+i*w)+(li+(i+1)*w-Stat.p))/2, 0];
+
+            for(i=0; i<array.length; i++)
             {
-                if(array[j] == vars[i])
-                    tmp[i][2] += 1;
+                if(Math.floor((array[i]-li)/w) >= tmp.length)
+                    tmp[c] = [(li+c*w-f) + "-" + (li+(c+1)*w-Stat.p+f), ((li+c*w)+(li+(++c)*w-Stat.p))/2, 0];
+
+                tmp[Math.floor((array[i]-li)/w)][2] += 1;
+            }
+        } 
+        else if(typeof array[0] == "string") 
+        {
+            var vars = array.unique();
+
+            for(i=0; i<vars.length; i++) {
+                tmp[i] = [vars[i], vars[i], 0];
+                for(var j=0; j<array.length; j++) 
+                {
+                    if(array[j] == vars[i])
+                        tmp[i][2] += 1;
+                }
             }
         }
     }
+    catch (exception) { }
     
     return tmp;
 }
