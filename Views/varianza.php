@@ -65,6 +65,9 @@
               var inf = trimfloat((n-1)*s2/chiMinUni,4);
               var may = trimfloat((n-1)*s2/chiMax,4);
               var sup = trimfloat((n-1)*s2/chiMaxUni,4);
+              ponerGrafica($("#divGraphBi"), "Grafica &Chi;&sup2;", min, may, 1-alfa, "chi2bi.svg");
+              ponerGrafica($("#divGraphInf"), "Limite Inferior", inf, null, 1-alfa, "chi2inf.svg");
+              ponerGrafica($("#divGraphSup"), "Limite Superior", null, sup, 1-alfa, "chi2sup.svg");
               var res = $("#resultado");
               var cont = $("#modalDialog");
               res.width(cont.width()-580);
@@ -121,11 +124,16 @@
             <div id="intTitle" class="resTitle">Intervalo</div>
             <div id="intervalo" class="wrap res"></div>
         </div>
+        <div id="divGraphBi"></div>
         <br>
         <div id="divUnilateral" class="wrap subdivRes">
             <div id="uniTitle" class="resTitle"></div>
             <div id="unilateral" class="wrap res"></div>
         </div>
+        <br>
+        <div id="divGraphInf"></div>
+        <br>
+        <div id="divGraphSup"></div>
         <br>
     </div>
     <div style="clear: left;"></div>
