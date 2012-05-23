@@ -46,5 +46,9 @@ class GraficasController extends ControllerBase {
     function Datos () {
         $this->view->partial("ingresarDatos.php");
     }
+    
+    function TalloyHojas () {
+        $this->view->partial("talloyhojas.php");
+    }
 }
 ?>

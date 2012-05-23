@@ -26,6 +26,7 @@ function Graph(div)
     this.PARETO = 5;
     this.POLIGONO_FRECUENCIA = 6;
     this.PUNTOS = 7;
+    this.TALLO_Y_HOJAS = 8;
     
     //Variables usadas por la clase
     var g = cnv.getContext("2d");
@@ -37,6 +38,7 @@ function Graph(div)
     var data = [];                  //Array que contiene los datos a graficar
     var olData = [];                //Array que contiene los datos a graficar ordenados descendentemente
     var cmdData = [];               //Array que contiene los datos para la grafica de puntos
+    var cmdTYH = [];                //Array que contiene los datos para la grafica de tallo y hojas
     var max = 0;                    //Valor maximo del array de datos
     var min = 0;                    //Valor minimo del array de datos
     var q1 = 0;                     //Cuartil 1
@@ -526,6 +528,38 @@ function Graph(div)
         }
     }
     
+    var talloyhojas = function() 
+    {
+        var distX = 50;
+        var distY = 20;
+        var sepX = 25;
+        var sepY = 30;
+        
+        g.textBaseline = "top";
+        g.fillStyle = "#000000";
+        g.font = "22px Arial";
+        
+        g.save();
+            g.lineWidth = 2;
+            g.beginPath();
+                g.strokeStyle = "#000";
+                g.moveTo(distX+sepX/2-5, distY+sepY);
+                g.lineTo(distX+sepX/2-5, h-sepY);
+                g.stroke();
+        g.restore();
+        
+        for(var i=0; i<cmdTYH.length; i++) 
+        {
+            g.textAlign = "right";
+            g.fillText(cmdTYH[i][0] + "", distX, distY+sepY*(i+1));
+            g.textAlign = "center";
+            for(var j=0; j<cmdTYH[i][1].length; j++) 
+            {
+                g.fillText(cmdTYH[i][1][j]+"", distX+sepX*(j+1), distY+sepY*(i+1));
+            }
+        }
+    }
+    
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -534,6 +568,7 @@ function Graph(div)
         cnv.height = h;
         
         //Fondo blanco en el lienzo
+        g.font = "10px Arial";
         g.fillStyle = "#ffffff";
         g.fillRect(0, 0, w, h);
         
@@ -563,6 +598,9 @@ function Graph(div)
                 break;
             case 7:     //Diagrama de Puntos
                 base(puntos);
+                break;
+            case 8:     //Diagrama de Tallo y Hojas
+                talloyhojas();
                 break;
         }
     }
@@ -602,6 +640,7 @@ function Graph(div)
         }
         
         cmdData = [];
+        cmdTYH = [];
         if(typeof original[0] != "number") {
             var init = [];
             for(i=0; i<original.length; i++)
@@ -616,6 +655,28 @@ function Graph(div)
                     }
                 }
                 cmdData[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
+            }
+        } 
+        else 
+        {
+            init = [];
+            for(i=0; i<original.length; i++) 
+            {
+                init[i] = Math.floor(original[i]);
+            }
+            
+            init = init.unique();
+            for(i=0; i<init.length; i++) 
+            {
+                tmp = [];
+                for(j=0; j<original.length; j++) 
+                {
+                    if(original[j]-init[i] >= 0 && original[j]-init[i]<1)
+                    {
+                        tmp.push(((original[j]-init[i])*10).toFixed(0));
+                    }
+                }
+                cmdTYH[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
             }
         }
     }

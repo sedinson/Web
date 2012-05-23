@@ -54,7 +54,7 @@
                 var c = parseInt($("#txtnclass").val());
                 var li = parseInt($("#txtli").val());
                 var w = parseInt($("#txtamp").val());
-                var d = parseInt($("#txtList").val());
+                var d = parseFloat($("#txtList").val());
                 var r = w * c;
                 if((d-li)/w <= c && d-li >= 0) {
                     $("#txtLD").val($("#txtLD").val() + (($("#txtLD").val().length > 0)? "\n" : "") + d);
