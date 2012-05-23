@@ -59,11 +59,36 @@
                     {
                         direccion = "X&lt;" + lb;
                         res = Probability.calculateExponential(beta, la, lb, "<");
+                        var pos = parseInt(ubicarX(beta, lb));
+                        $("#valor").html("<div style='padding-left: " + pos + "px; width: 400px; text-align: left;'>" + lb + "</div>");
                     }
                     else if ($("#caso2").is(":checked"))
                     {
                         direccion = la + "&lt;X&lt;" + lb;
                         res = Probability.calculateExponential(beta, la, lb, "<<");
+                        var valor;
+                        if (lb < beta)
+                        {
+                            var posA = parseInt(ubicarX(beta, la));
+                            var posB = parseInt(ubicarX(beta, lb));
+                            valor = "<div style='padding-left: " + posA + "px; display: inline-block; text-align: left;'>" + la + "</div>";
+                            valor += "<div style='padding-left: " + (posB - posA) + "px; display: inline-block; text-align: left;'>" + lb + "</div>";
+                        }
+                        else if (la > beta)
+                        {
+                            var posA = parseInt(ubicarX(beta, la));
+                            var posB = parseInt(ubicarX(beta, lb));
+                            valor = "<div style='padding-left: " + posA + "px; display: inline-block; text-align: left;'>" + la + "</div>";
+                            valor += "<div style='padding-left: " + (posB - posA) + "px; display: inline-block; text-align: left;'>" + lb + "</div>";
+                        }
+                        else
+                        {
+                            var posA = parseInt((ubicarX(beta, la)) / 2);
+                            var posB = parseInt((ubicarX(beta, lb)) / 2);
+                            valor = "<div style='position: relative; float: left; margin-left: " + posA + "px; width: 200px; text-align: left;'>" + la + "</div>";
+                            valor += "<div style='position: relative; float: right; margin-left: " + posB + "px; width: 200px; text-align: left;'>" + lb + "</div>";
+                        }
+                        $("#valor").html(valor);
                     }
 
                     mostrarResultado();
@@ -102,6 +127,25 @@
     {
         $("#liminf").fadeIn("slow");
         $("#limsup").fadeIn("slow");
+    }
+    
+    function ubicarX (beta, x)
+    {
+        if (x < (2 * beta))
+        {
+            return ((x / (2 * beta)) * 400);
+        }
+        else
+        {
+            return 380;
+        }
+    }
+    
+    function ubicarX2 (beta, a, b)
+    {
+        if (b < beta){
+            
+        }
     }
     
     
@@ -180,6 +224,7 @@
         <div id="graficaDP">
             <div id="graphTitle" class="wrap">Gr&aacute;fica Exponencial</div>
             <div id="graf"></div>
+            <div id="valor" class="wrap" style="width: 400px;"></div>
         </div>
     </div>
     <div style="clear: left;"></div>

@@ -1,5 +1,7 @@
 <script type="text/javascript">
 
+
+
     $(document).ready(function (){
         $("#datos").validate({
             rules: {
@@ -27,21 +29,30 @@
                 var z = $("#z").val();
                 var res = 0;
                 var direccion = "<";
+                var grafica = "/Resources/Public/normal";
+                var valorZ;
                 if ($("#caso1").is(":checked"))
                 {
-                    direccion = "Z&lt;" + z;
+                    direccion = "P(Z&lt;" + z + ")";
                     res = Probability.calculateStandardNormal(z, "<");
+                    grafica += "inf.svg";
+                    valorZ = "<div style='text-align: left;'>" + direccion + "</div>";
                 }
                 else if ($("#caso2").is(":checked"))
                 {
-                    direccion = "Z&gt;" + z;
+                    direccion = "P(Z&gt;" + z + ")";
                     res = Probability.calculateStandardNormal(z, ">");
+                    grafica += "sup.svg";
+                    valorZ = "<div style='text-align: right;'>" + direccion + "</div>";
                 }
+                
+                $("#graf").html("<embed src='" + BaseUrl + grafica + "' alt='Distribucion Normal' type='image/svg+xml' width=400px />");
+                $("#valor").html(valorZ);
 
                 mostrarResultado();
    
                 $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>P(" + direccion + ") = " + res + "</pre>");
+                $("#calculoDP").html("<pre class='wrap'>" + direccion + " = " + res + "</pre>");
             }
         });
     });
@@ -98,6 +109,11 @@
         <div id="resultadoDP" class="wrap subdivRes">
             <div class="resTitle" id="intTitle"></div>
             <div id="calculoDP" class="wrap res" style="padding: 0 10px;"></div>
+        </div>
+        <div id="graficaDP">
+            <div id="graphTitle" class="wrap">Gr&aacute;fica Normal</div>
+            <div id="graf"></div>
+            <div id="valor" class="wrap" style="padding-left: 100px; padding-right: 100px;"></div>
         </div>
     </div>
     <div style="clear: left;"></div>
