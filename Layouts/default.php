@@ -59,7 +59,11 @@
                 $("#modalDialog").html("<img src='<?=$config->get('BaseUrl')?>/Resources/Images/ajax.gif'/>");
                 $("#modal").css("opacity", "0");
                 $("#modal").css("display", "block");
-                $("#modal").animate({opacity: 1}, 300);
+                $("#modal").animate({opacity: 1}, 300, function() {
+                    $(".superpanel").css("display", "block");
+                    $(".superpanel").css("opacity", "0");
+                    $(".superpanel").animate({opacity: 1}, 600);
+                });
                 var w = $("#modal").innerWidth();
                 var h = $("#modal").innerHeight();
                 $(".modalDialog").css("width", (w-380) + "px");
@@ -191,8 +195,11 @@
                 {
                     modalScroll.hide();
                     modalClosed();
-                    $("#modal").animate({opacity: 0}, 300, function() {
-                        $("#modal").css("display", "none");
+                    $(".superpanel").animate({opacity: 0}, 300, function() {
+                        $("#modal").animate({opacity: 0}, 300, function() {
+                            $(".superpanel").css("display", "none");
+                            $("#modal").css("display", "none");
+                        });
                     });
 
                     selOpt = 0;
