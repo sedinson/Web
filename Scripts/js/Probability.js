@@ -1,6 +1,13 @@
-/*David Seija*/
+/*
+ *@author David Seija Duque
+ */
 
 
+
+/*
+*@param a (integer) Numero para el cual se desea calcular el factorial
+*@return (integer) Valor de a factorial
+*/
 Math.factorial = function (a)
 {
     var n = 1;
@@ -12,6 +19,11 @@ Math.factorial = function (a)
     return n;
 }
 
+/*
+*@param a (integer) Numero para el cual se desea hacer las combinaciones
+*@param b (integer) Numero con el que se van a realizar las combinaciones de a
+*@return (integer) Valor de a combinado en b (aCb)
+*/
 Math.combinatory = function (a, b)
 {
     return ( Math.factorial(a)/( Math.factorial(b) * Math.factorial((a - b)) ) );
@@ -21,41 +33,87 @@ Math.combinatory = function (a, b)
 function Probability () { }
 
 
-//CASOS DISCRETOS
+//CASOS DISCRETOS DE PROBABILIDAD PUNTUAL
 
+/*
+*@param n (integer) Tamaño de la muestra
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Puntual Binomial
+*/
 Probability.binomial = function (n, p, x)
 {
     return ( Math.combinatory(n, x) * Math.pow(p, x) * Math.pow((1 - p), (n - x)) );
 }
 
+/*
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Puntual Geometrica
+*/
 Probability.geometric = function (p, x)
 {
     return ( p * Math.pow((1 - p), (x - 1)) );
 }
 
+/*
+*@param k (integer) Cantidad de exitos
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Puntual Binomial Negativa
+*/
 Probability.negativeBinomial = function (k, p, x)
 {
     return ( Math.combinatory((x - 1), (k - 1)) * Math.pow(p, k) * Math.pow((1 - p), (x - k)) );
 }
 
+/*
+*@param N (integer) Tamaño de la poblacion
+*@param n (integer) Tamaño de la muestra
+*@param k (integer) Cantidad de exitos en la poblacion
+*@param x (integer) Cantidad de exitos en la muestra
+*@return (float) Valor de la funcion de Probabilidad Puntual HiperGeometrica
+*/
 Probability.hyperGeometric = function (N, n, k, x)
 {
     return ( ( Math.combinatory(k, x) * Math.combinatory((N - k), (n - x)) )/Math.combinatory(N, n) );
 }
 
+/*
+*@param lambda (float) Promedio de ocurrencias
+*@param x (integer) Numero de ocurrencias
+*@return (float) Valor de la funcion de Probabilidad Puntual de Poisson
+*/
 Probability.poisson = function (lambda, x)
 {
     return ( ( Math.pow(lambda, x) * Math.exp((-1)*lambda) )/Math.factorial(x) );
 }
 
+/*
+*@param k (integer) Numero de valores posibles de la variable discreta
+*@return (float) Valor de la funcion de Probabilidad Puntual Uniforme Discreta
+*/
 Probability.discreteUniform = function (k)
 {
     return (1/k);
 }
 
 
-//DISTRIBUCIONES DE PROBABILIDAD ACUMULADAS
+/*
+*@comment Todas las funciones acumuladas que aparecen aqui son acumuladas a la izquierda.
+*La tabla de la normal también esta acumulada a la izquierda.
+*Cuando se necesita calcular la acumulada a la derecha, se calcula la acumulada a la izquierda y se resta el valor resultante a 1, P(X>=x)=1-P(X<=x).
+*/
 
+
+//DISTRIBUCIONES DE PROBABILIDAD ACUMULADAS A LA IZQUIERDA
+
+/*
+*@param n (integer) Tamaño de la muestra
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Acumulada Binomial
+*/
 Probability.binomialAccumulated = function (n, p, x)
 {
     var sum = 0;
@@ -66,6 +124,11 @@ Probability.binomialAccumulated = function (n, p, x)
     return sum;
 }
 
+/*
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Acumulada Geometrica
+*/
 Probability.geometricAccumulated = function (p, x)
 {
     var sum = 0;
@@ -76,6 +139,12 @@ Probability.geometricAccumulated = function (p, x)
     return sum;
 }
 
+/*
+*@param k (integer) Cantidad de exitos
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@return (float) Valor de la funcion de Probabilidad Acumulada Binomial Negativa
+*/
 Probability.negativeBinomialAccumulated = function (k, p, x)
 {
     var sum = 0;
@@ -86,6 +155,13 @@ Probability.negativeBinomialAccumulated = function (k, p, x)
     return sum;
 }
 
+/*
+*@param N (integer) Tamaño de la poblacion
+*@param n (integer) Tamaño de la muestra
+*@param k (integer) Cantidad de exitos en la poblacion
+*@param x (integer) Cantidad de exitos en la muestra
+*@return (float) Valor de la funcion de Probabilidad Acumulada HiperGeometrica
+*/
 Probability.hyperGeometricAccumulated = function (N, n, k, x)
 {
     var sum = 0;
@@ -96,6 +172,11 @@ Probability.hyperGeometricAccumulated = function (N, n, k, x)
     return sum;
 }
 
+/*
+*@param lambda (float) Promedio de ocurrencias
+*@param x (integer) Numero de ocurrencias
+*@return (float) Valor de la funcion de Probabilidad Acumulada de Poisson
+*/
 Probability.poissonAccumulated = function (lambda, x)
 {
     var sum = 0;
@@ -106,6 +187,10 @@ Probability.poissonAccumulated = function (lambda, x)
     return sum;
 }
 
+/*
+*@param k (integer) Numero de valores posibles de la variable discreta
+*@return (float) Valor de la funcion de Probabilidad Acumulada Uniforme Discreta
+*/
 Probability.discreteUniformAccumulated = function (k)
 {
     var sum = 0;
@@ -119,8 +204,13 @@ Probability.discreteUniformAccumulated = function (k)
 
 //CASOS CONTINUOS
 
+/*
+*@param z (float) Valor Z estandarizado para buscar su valor correspondiente en la tabla
+*@return (float) Valor de la funcion de Probabilidad Normal segun la tabla P(Z<z)
+*/
 Probability.getNormalValue = function (z)
 {
+    //TABLA NORMAL ACUMULADA A LA IZQUIERDA
     var NormalTable = [ [0, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
             [0.0, 0.5000, 0.5040, 0.5080, 0.5120, 0.5160, 0.5199, 0.5239, 0.5279, 0.5319, 0.5359],
             [0.1, 0.5398, 0.5438, 0.5478, 0.5517, 0.5557, 0.5596, 0.5636, 0.5675, 0.5714, 0.5753],
@@ -158,10 +248,13 @@ Probability.getNormalValue = function (z)
             [3.3, 0.9995, 0.9995, 0.9995, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9997],
             [3.4, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9998],
             [3.5, 0.9998, 0.9998, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999] ];
-        
-    var zColumn = z.substring(0, 3);
-    var zRow = "0.0" + z.substring(3);
     
+    //Se separa el valor z de entrada adecuandolo al valor de la columna y de la fila ara buscar en la tabla
+    //El valor z viene en un formato real truncado a 2 decimas
+    var zColumn = z.substring(0, 3);    //zColumn toma los primeros 3 caracteres del valor z, el valor entero, el punto (.) y el primer decimal
+    var zRow = "0.0" + z.substring(3);  //zRow toma el caracter faltante, el segundo decimal
+    
+    //Se busca la fila correspondiente al valor de zColumn. Guarda la posicion de la fila en la variable i
     var i = 1;
     var sw = false;
     while ((i<36) && (sw == false))
@@ -176,6 +269,7 @@ Probability.getNormalValue = function (z)
         }
     }
     
+    //Se busca la columna correspondiente al valor de zRow. Guarda la posicion de la culumna en la variable j
     var j = 1;
     sw = false;
     while ((j<11) && (sw == false))
@@ -190,12 +284,19 @@ Probability.getNormalValue = function (z)
         }
     }
     
+    //Retorna el valor correspondiente de la tabla en la fila y columna encontrada
     return NormalTable[i][j];
 }
 
+/*
+*@param m (float) Valor de la media miu
+*@param s (float) Valor de la desviacion estandar sigma
+*@param x (float) Valor del dato con el que se va a estandarizar
+*@return (float) Valor de la funcion de Probabilidad Normal
+*/
 Probability.normal = function (m, s, x)
 {
-    var z = ((x - m)/s).toFixed(2);
+    var z = ((x - m)/s).toFixed(2);     //Se estandariza a Z truncando a 2 decimas
     var value = 0;
     if (z >= 0)
     {
@@ -222,6 +323,10 @@ Probability.normal = function (m, s, x)
     return value;
 }
 
+/*
+*@param z (float) Valor estandarizado
+*@return (float) Valor de la funcion de Probabilidad Normal Estandar
+*/
 Probability.standardNormal = function (z)
 {
     var value = 0;
@@ -251,11 +356,21 @@ Probability.standardNormal = function (z)
     return value;
 }
 
+/*
+*@param a (float) Valor del limite inferior 
+*@param b (float) Valor del limite superior
+*@return (float) Valor de la funcion de Probabilidad Uniforme Continua
+*/
 Probability.continuousUniform = function (a, b)
 {
     return ( 1/(b-a) );
 }
 
+/*
+*@param beta (float) Promedio de ocurrencias
+*@param x (float) Numero de ocurrencias
+*@return (float) Valor de la funcion de Probabilidad Exponencial
+*/
 Probability.exponential = function (beta, x)
 {
     return ( 1 - Math.exp( ((-1) * x)/beta ) );
@@ -264,6 +379,13 @@ Probability.exponential = function (beta, x)
 
 //CALCULO DE LAS PROBABILIDADES
 
+/*
+*@param n (integer) Tamaño de la muestra
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Binomial
+*/
 Probability.calculateBinomial = function (n, p, x, direction)
 {
     var result = 0;
@@ -284,6 +406,12 @@ Probability.calculateBinomial = function (n, p, x, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Geometrica
+*/
 Probability.calculateGeometric = function (p, x, direction)
 {
     var result = 0;
@@ -304,6 +432,13 @@ Probability.calculateGeometric = function (p, x, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param k (integer) Cantidad de exitos
+*@param p (float) Proporcion de exitos
+*@param x (integer) Cantidad de intentos
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Binomial Negativa
+*/
 Probability.calculateNegativeBinomial = function (k, p, x, direction)
 {
     var result = 0;
@@ -324,6 +459,14 @@ Probability.calculateNegativeBinomial = function (k, p, x, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param N (integer) Tamaño de la poblacion
+*@param n (integer) Tamaño de la muestra
+*@param k (integer) Cantidad de exitos en la poblacion
+*@param x (integer) Cantidad de exitos en la muestra
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad HiperGeometrica
+*/
 Probability.calculateHyperGeometric = function (N, n, k, x, direction)
 {
     var result = 0;
@@ -344,6 +487,12 @@ Probability.calculateHyperGeometric = function (N, n, k, x, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param lambda (float) Promedio de ocurrencias
+*@param x (integer) Numero de ocurrencias
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad de Poisson
+*/
 Probability.calculatePoisson = function (lambda, x, direction)
 {
     var result = 0;
@@ -364,6 +513,11 @@ Probability.calculatePoisson = function (lambda, x, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param k (integer) Numero de valores posibles de la variable discreta
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Uniforme Discreta
+*/
 Probability.calculateDiscreteUniform = function (k, direction)
 {
     var result = 0;
@@ -384,6 +538,14 @@ Probability.calculateDiscreteUniform = function (k, direction)
     return result.toFixed(3);
 }
 
+/*
+*@param m (float) Valor de la media miu
+*@param s (float) Valor de la desviacion estandar sigma
+*@param lower (float) Valor del dato inferior con el que se va a estandarizar
+*@param upper (float) Valor del dato superior con el que se va a estandarizar
+*@param interval (String) Valor que determina si la probabilidad debe ser para un valor a la izquierda, entre dos valores o un valor a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Normal
+*/
 Probability.calculateNormal = function (m, s, lower, upper, interval)
 {
     var result = 0;
@@ -404,6 +566,11 @@ Probability.calculateNormal = function (m, s, lower, upper, interval)
     return result.toFixed(3);
 }
 
+/*
+*@param z (float) Valor estandar
+*@param interval (String) Valor que determina si la probabilidad debe ser para un valor a la izquierda a la derecha.
+*@return (float) Valor de la funcion de Probabilidad Normal Estandar
+*/
 Probability.calculateStandardNormal = function (z, interval)
 {
     var result = 0;
@@ -420,6 +587,11 @@ Probability.calculateStandardNormal = function (z, interval)
     return result.toFixed(3);
 }
 
+/*
+*@param a (float) Valor del limite inferior 
+*@param b (float) Valor del limite superior
+*@return (float) Valor de la funcion de Probabilidad Uniforme Continua
+*/
 Probability.calculateContinuousUniform = function (a, b)
 {
     var result = 0;
@@ -429,6 +601,13 @@ Probability.calculateContinuousUniform = function (a, b)
     return result.toFixed(3);
 }
 
+/*
+*@param beta (float) Promedio de ocurrencias
+*@param lower (float) Valor del dato inferior para el numero de ocurrencias
+*@param upper (float) Valor del dato superior para el numero de ocurrencias
+*@param interval (String) Valor que determina si la probabilidad debe ser para un valor a la izquierda o entre dos valores.
+*@return (float) Valor de la funcion de Probabilidad Exponencial
+*/
 Probability.calculateExponential = function (beta, lower, upper, interval)
 {
     var result = 0;
@@ -443,365 +622,4 @@ Probability.calculateExponential = function (beta, lower, upper, interval)
     }
 
     return result.toFixed(3);
-}
-
-
-//VALIDACIONES PARA LOS DATOS EN CADA CALCULO DE DISTRIBUCIONES
-
-function Validate () { }
-
-Validate.p = function(){return "El parametro p debe ser mayor que 0 y menor que 1. ";}
-
-Validate.nB = function(){return "El parametro n debe ser un entero positivo mayor que 0. ";}
-Validate.xB = function(){return "La variable x debe ser un entero positivo menor o igual a n. ";}
-
-Validate.xG = function(){return "La variable x debe ser un entero positivo mayor que 0. ";}
-
-Validate.xNB = function(){return "La variable x debe ser un entero positivo mayor o igual a k. ";}
-Validate.kNB = function(){return "El parametro k debe ser un entero positivo mayor que 0. ";}
-
-Validate.NHG = function(){return "El parametro N debe ser un entero positivo mayor o igual a k. ";}
-Validate.kHG = function(){return "El parametro k debe ser un entero positivo menor o igual a n. ";}
-Validate.nHG = function(){return "El parametro n debe ser un entero positivo menor o igual a N. ";}
-Validate.xHG = function(){return "La variable x debe ser un entero positivo menor o igual a k. ";}
-
-Validate.lambdaP = function(){return "El parametro lambda debe ser mayor o igual a 0. ";}
-Validate.xP = function(){return "La variable x debe ser un entero positivo. ";}
-
-Validate.kDU = function(){return "El parametro k debe ser un entero positivo mayor que 0. ";}
-
-Validate.mN = function(){return "La media debe ser un valor de tipo numerico. ";}
-Validate.sN = function(){return "La desviacion estandar debe ser mayor o igual a 0. ";}
-Validate.xN = function(){return "La variable x debe ser un valor de tipo numerico. ";}
-
-Validate.xSN = function(){return "La variable x debe ser un valor de tipo numerico. ";}
-
-Validate.aCU = function(){return "La variable a debe ser un valor de tipo numerico. ";}
-Validate.bCU = function(){return "La variable b debe ser un valor de tipo numerico. ";}
-
-Validate.betaE = function(){return "El parametro beta debe ser mayor o igual a 0. ";}
-Validate.xE = function(){return "La variable x debe ser un valor de tipo numerico. ";}
-
-
-
-Validate.binomial = function (n, p, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (n > 0) && ((p > 0) && (p < 1)) && ((x >= 0) && (x <= n)) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ((n > 0) == false)
-        {
-            error += Validate.nB();
-        }
-        if ( ((p > 0) && (p < 1)) == false )
-        {
-            error += Validate.p();
-        }
-        if ( ((x >= 0) && (x <= n)) == false )
-        {
-            error += Validate.xB();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.geometric = function (p, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( ((p > 0) && (p < 1)) && (x >= 1) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ( ((p > 0) && (p < 1)) == false )
-        {
-            error += Validate.p();
-        }
-        if ((x >= 1) == false )
-        {
-            error += Validate.xG();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.negativeBinomial = function (k, p, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (k > 0) && ((p > 0) && (p < 1)) && (x >= k) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ((k > 0) == false)
-        {
-            error += Validate.kNB();
-        }
-        if ( ((p > 0) && (p < 1)) == false )
-        {
-            error += Validate.p();
-        }
-        if ((x >= k) == false )
-        {
-            error += Validate.xNB();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.hyperGeometric = function (N, n, k, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (N >= k) && (n <= N) && (k <= n) && (x <= k) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ((N >= k) == false)
-        {
-            error += Validate.NHG();
-        }
-        if ((n <= N) == false )
-        {
-            error += Validate.nHG();
-        }
-        if((k <= n) == false)
-        {
-            error += Validate.kHG();
-        }
-        if ((x <= k) == false )
-        {
-            error += Validate.xHG();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.poisson = function (lambda, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (lambda >= 0) && (x >= 0) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ((lambda >= 0) == false)
-        {
-            error += Validate.lambdaP();
-        }
-        if ((x >= 0) == false )
-        {
-            error += Validate.xP();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.discreteUniform = function (k)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if (k > 0)
-    {
-        value = true;
-    }
-    else
-    {
-        if ((k > 0) == false )
-        {
-            error += Validate.kDU();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.normal = function (m, s, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (isNaN(m) == false) && (s >= 0) && (isNaN(x) == false) )
-    {
-        value = true;
-    }
-    else
-    {
-        if (isNaN(m))
-        {
-            error += Validate.mN();
-        }
-        if ((s >= 0) == false)
-        {
-            error += Validate.sN();
-        }
-        if (isNaN(x))
-        {
-            error += Validate.xN();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.standardNormal = function (x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if (isNaN(x) == false)
-    {
-        value = true;
-    }
-    else
-    {
-        if (isNaN(x))
-        {
-            error += Validate.xSN();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.continuousUniform = function (a, b)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (isNaN(a) == false) && (isNaN(b) == false) )
-    {
-        value = true;
-    }
-    else
-    {
-        if (isNaN(a))
-        {
-            error += Validate.aCU();
-        }
-        if (isNaN(b))
-        {
-            error += Validate.bCU();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
-}
-
-Validate.exponential = function (beta, x)
-{
-    var value = true;
-    var error = "Error: ";
-    
-    if ( (beta >= 0) && (isNaN(x) == false) )
-    {
-        value = true;
-    }
-    else
-    {
-        if ((beta >= 0) == false)
-        {
-            error += Validate.betaE();
-        }
-        if (isNaN(x))
-        {
-            error += Validate.xE();
-        }
-
-        value = false;
-    }
-    
-    if (value == false)
-    {
-        alert(error);
-    }
-    
-    return value;
 }
