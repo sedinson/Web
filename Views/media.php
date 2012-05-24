@@ -1,4 +1,6 @@
 <script type="text/javascript">
+    
+    //Mensajes descriptivos de cada caso
     var desc = ["El tamaño de la muestra no es la suficientemente grande para aproximar a la Normal","Poblacion Normal, Varianza poblacional(&sigma;&sup2;) conocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) conocida, Tamaño de muestra &ge; 30",
                 "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"];
     function mostrarVarP(){
@@ -13,6 +15,8 @@
     };
     $(document).ready(function (){
        $("#datos").validate({
+           
+           //Limitacion para los Datos de Entrada
           rules:{
               alfa:{
                   required: true,
@@ -45,6 +49,8 @@
                  number: true
               }
           },
+          
+          //Mensajes en caso de violar las limitaciones para cada uno de los casos
           messages: {
               alfa:{
                   required: "<br />Es obligatorio",
@@ -71,6 +77,8 @@
                  number: "Se necesita un valor numerico"
               }
           },
+          
+          //Esta es la funcion que calcula el Intervalo
           submitHandler: function(){
               var alfa = 1-$("#alfa").val();
               var z,zuni;
@@ -80,22 +88,26 @@
               var casetype;
               var des;
               var caso12 = false;
-              var grafica;
-              var tGrafica;
+              
+              //Aqui se evaluan los datos dados para saber en que caso estamos presentes
               if($("#consi:checked").val()=="si"){
                   sigma = Math.sqrt($("#varpoblacional").val());
                   z = NORMSINV(alfa/2);
                   zuni = NORMSINV(alfa);
-                  grafica = "normal";
-                  tGrafica = "Grafica Normal";
+                  
+                  //Caso I
                   if($("#siNorm:checked").val() == "si"){
                       casetype = "Tipo I";
                       des = 1;
                       caso12=true;
+                      
+                  //CASO II
                   }else if(n>=30){
                       casetype = "Tipo II";
                       des = 2;
                       caso12=true;
+                      
+                  //No es viable
                   }else{
                       casetype = "Desconocido";
                       $("#casoTipo").html(casetype);
@@ -105,20 +117,22 @@
                   }
               }else{
                   sigma = $("#smuestral").val();
+                  
+                  //Caso III
                   if($("#siNorm:checked").val() == "si"){
-                      grafica = "tstudent";
-                      tGrafica = "Grafica T-Student";
                       z= tStudentICDF(alfa/2,n-1);
                       zuni = tStudentICDF(alfa,n-1);
                       casetype="Tipo III";
                       des = 3;
+                      
+                  //Caso IV
                   }else if(n>=30){
-                      grafica = "normal";
-                      tGrafica = "Grafica Normal";
                       z = NORMSINV(alfa/2);
                       zuni = NORMSINV(alfa); 
                       casetype="Tipo IV";
                       des = 4;
+                      
+                   //No es viable
                   }else{
                       casetype = "Desconocido";
                       $("#casoTipo").html(caseType);
@@ -140,6 +154,8 @@
               var cont = $("#modalDialog");
               res.width(cont.width()-$("#datos").width()-130);
               var intervalo = $("#intervalo");
+              
+              //Se colocan los resultados en sus respectivas Divisiones
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &micro;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               $("#uniTitle").html("Limites Unilaterales");
@@ -149,6 +165,8 @@
                   $("#errorM").html("|x&#772;-&micro;|<pre class='wrap'>   &le;   "+amplitud+"</pre>");
                   $("#divError").show();
               }
+              
+              //Se muestra el resultado
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -158,11 +176,15 @@
           }
        });
     });
+    
+    //Esta  funcion mantiene el tamaño de las diviones que contienen los intervalos
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#errorM").width($("#errorM").children().width()+20);
         $("#unilateral").width($("#unilateral").children().width()+20);
     }
+    
+    //Esta funcion se llama periodacamente
     function periodic () {ajustarIntervalo()}
     
     function modalClosed() 

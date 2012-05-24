@@ -1,22 +1,8 @@
 <script type="text/javascript">
-    var desc = ["El tamaño de la muestra no es la suficientemente grande para aproximar a la Normal","Poblacion Normal, Varianza poblacional(&sigma;&sup2;) conocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) conocida, Tamaño de muestra &ge; 30",
-                "Poblacion Normal,Varianza poblacional(&sigma;&sup2;) desconocida","Poblacion No Normal, Varianza poblacional(&sigma;&sup2;) desconocida, Tamaño de muestra &ge; 30"]
-    $(document).load(function (){
-        $("#vpoblacional").hide();
-        $("#vmuestral").hide();
-    });
-    function mostrarVarP(){
-        $("#vmuestral").fadeOut("slow", function(){
-            $("#vpoblacional").fadeIn("slow");
-        });
-    };
-    function mostrarVarM(){
-        $("#vpoblacional").fadeOut("slow", function(){
-            $("#vmuestral").fadeIn("slow");
-        });
-    };
+
     $(document).ready(function (){
        $("#datos").validate({
+          //Limites establecidos para los datos de entrada
           rules:{
               alfa:{
                   required: true,
@@ -35,6 +21,8 @@
                  min:0
               }
           },
+          
+          //Mensajes de error en caso de violar los limites
           messages: {
               alfa:{
                   required: "<br />Es obligatorio",
@@ -53,6 +41,8 @@
                  min: "Todo numero al cuadro es positivo verdad?"
               }
           },
+          
+          //Funcion que evalua el resultado del intervalo
           submitHandler: function(){
               var alfa = 1-$("#alfa").val();
               var n = $("#tamano").val();
@@ -69,10 +59,14 @@
               var cont = $("#modalDialog");
               res.width(cont.width()-$("#datos").width()-130);
               var intervalo = $("#intervalo");
+              
+              //Se colocan los resultados en sus respectivas divisiones
               intervalo.html("<pre class='wrap'>"+min+"   &le;   &sigma;&sup2;   &le;   "+may+"</pre>");
               $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
               $("#uniTitle").html("Limites Unilaterales");
               $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
+              
+              //Se muestra el Resultado
               res.slideUp(function(){
                   res.slideDown(function(){
                       $("#divIntervalo").fadeIn();
@@ -82,10 +76,14 @@
           }
        });
     });
+    
+    //Funcion que acomoda el tamaño de las divisiones delos intervalos para que los cubra correctamente
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#unilateral").width($("#unilateral").children().width()+20);
     }
+    
+    //Esta funcion se llama periodicamente
     function periodic () {ajustarIntervalo()}
     
     function modalClosed() 

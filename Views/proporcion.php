@@ -1,20 +1,9 @@
 <script type="text/javascript">
-    $(document).load(function (){
-        $("#vpoblacional").hide();
-        $("#vmuestral").hide();
-    });
-    function mostrarVarP(){
-        $("#vmuestral").fadeOut("slow", function(){
-            $("#vpoblacional").fadeIn("slow");
-        });
-    };
-    function mostrarVarM(){
-        $("#vpoblacional").fadeOut("slow", function(){
-            $("#vmuestral").fadeIn("slow");
-        });
-    };
+
     $(document).ready(function (){
        $("#datos").validate({
+           
+           //Limites establecidos para los datos de Entrada
           rules:{
               alfa:{
                   required: true,
@@ -34,6 +23,8 @@
                   max: 1
               }
           },
+          
+          //Mensaje de error en caso de violar los limites
           messages: {
               alfa:{
                   required: "<br />Es obligatorio",
@@ -53,9 +44,13 @@
                   max: "<br />Proporcion 0&le;p&#x302;&le;1"
               }
           },
+          
+          //Funcion que se encarga de calcular el resultado del Intervalo
           submitHandler: function(){
             var n = $("#tamano").val();
             var p = $("#proporcion").val();
+            
+            //Verifica que se cumpa que np y nq sean mayor o igual a 5 en caso contrario muestra un error
             if(n*p<5 || (1-p)*n<5){
                 $("#nxp").show();
             }else{
@@ -73,6 +68,8 @@
                 var cont = $("#modalDialog");
                 res.width(cont.width()-$("#datos").width()-130);
                 var intervalo = $("#intervalo");
+                
+                //Se colocan los resultados en sus respectivas Divisiones
                 intervalo.html("<pre class='wrap'>"+min+"   &le;   p   &le;   "+may+"</pre>");
                 $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
                 $("#errorTitle").html("Error Muestral para n = "+n+" y p&#x302; = "+p);
@@ -82,6 +79,8 @@
                 $("#divError").show();
                 $("#uniTitle").html("Limites Unilaterales");
                 $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
+                
+                //Se muestra el resultado
                 res.slideUp(function(){
                     res.slideDown(function(){
                         $("#divIntervalo").fadeIn();
@@ -92,24 +91,35 @@
           }
        });
     });
+    
+    //Funcion que se encarga de mantener el tamaño adecuado para las divisiones que contienen los reusltados
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#errorM").width($("#errorM").children().width()+20);
         $("#unilateral").width($("#unilateral").children().width()+20);
     }
-    function periodic () {ajustarIntervalo()}
+    
+    //Esta funcion se llama periodicamente
+    function periodic () {
+        ajustarIntervalo()
+        actualizarP();
+    }
     
     function modalClosed() 
     {
         clearInterval(timmerPeriodic);
     }
+    
+    //Funcion establece el valor de p basado en x/n
     function actualizarP(){
         var n = $("#tamano");
         var x = $("#exitos");
-        if($(n.val()!=null && x.val()>=0 && n.val()>0)){
+        if($(n.val().length>0 && x.val().length>0 && n.val()>0)){
             $("#proporcion").val($("#exitos").val()/$("#tamano").val())
         }
     }
+    
+    //Verfica que np y nq sean mayor o igual a 5
     function verificarP(){
         var n = $("#tamano");
         var p = $("#proporcion");

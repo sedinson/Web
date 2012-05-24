@@ -1,4 +1,6 @@
 <script type="text/javascript">
+    
+    //Mensajes descriptivos de cada caso
     var desc = ["Poblaciones Normales, Varianzas poblacional(&sigma;&sup2;) conocidas","Poblaciones Normales, Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero estadisticamente iguales",
                 "Poblaciones Normales,Varianzas poblacionales(&sigma;&sup2;) desconocidas, pero estadisticamente diferentes","Muestras Dependientes"]
     $(document).load(function (){
@@ -17,6 +19,7 @@
     };
     $(document).ready(function (){
        $("#datos").validate({
+           //Establece los limites de los datos de entrada
           rules:{
               alfa:{
                   required: true,
@@ -76,6 +79,7 @@
               }
               
           },
+          //Mensajes de error en caso de violar los limites
           messages: {
               alfa:{
                   required: "<br />Es obligatorio",
@@ -128,6 +132,8 @@
           }
        });
     });
+    
+    //Funcion que se encarga de calcular el intervalo
     function calcularIntervalo(){
         var alfa = 1-$("#alfa").val();
         var z,zuni;
@@ -136,11 +142,13 @@
         var casetype;
         var des;
         var amplitud,amplituduni;
+        //Se evaluan los datos obtenidos para seleccionar el caso necesitado
         
         if($("#indsi:checked").val()=="si"){
             var sigma1;
             var sigma2;
             var n2 = $("#tamano2").val();
+            //Caso I y II
             if($("#consi:checked").val()=="si"){
                 sigma1 = $("#varpoblacional1").val();
                 sigma2 = $("#varpoblacional2").val();
@@ -151,6 +159,7 @@
                 amplitud = z*Math.sqrt(sigma1/n1+sigma2/n2);
                 amplituduni = zuni*Math.sqrt(sigma1/n1+sigma2/n2);
 
+             //Caso III
             }else{
                 sigma1 = $("#smuestral1").val();
                 sigma2 = $("#smuestral2").val();
@@ -163,6 +172,8 @@
                     var sp = ((n1-1)*sigma1+(n2-1)*sigma2)/(n1+n2-2);
                     amplitud = z*Math.sqrt(sp*((1/n1)+(1/n2)));
                     amplituduni = zuni*Math.sqrt(sp*((1/n1)+(1/n2)));
+                 
+                 //Caso IV
                 }else{
                     casetype = "Caso Tipo IV";
                     des=2;
@@ -173,6 +184,7 @@
                     amplituduni = zuni*Math.sqrt((sigma1/n1)+(sigma2/n2));
                 }
             }
+         //Caso V
         }else{
             var sd = $("#sd").val();
             casetype = "Caso Tipo V";
@@ -187,6 +199,8 @@
         var inf = trimfloat(difmed - amplituduni,4);
         var sup = trimfloat(difmed*1 + amplituduni,4);
         $("#casoTipo").html(casetype);
+        
+        //Se muestra un pequeño analisis respecto al intervalo obtenido
         var analisis;
         if(min<=0 && may>=0){
             analisis = "&micro;<sub>1</sub> y &micro;<sub>2</sub> son estadisticamente <b>IGUALES</b>";
@@ -195,6 +209,9 @@
         }else if(min>0){
             analisis = "&micro;<sub>1</sub> es estadisticamente <b>MAYOR</b> que &micro;<sub>2</sub>"
         }
+        
+        
+        //Se asignan los resultados a sus respectivas divisiones
         $("#analisis").html(analisis);
         $("#descCaso").html(desc[des]);
         $("#uniTitle").html("Limites Unilaterales");
@@ -207,6 +224,8 @@
         $("#intTitle").html("Intervalo con un "+((1-alfa)*100)+"% de Confianza");
         $("#uniTitle").html("Limites Unilaterales");
         $("#unilateral").html("<pre class='wrap'>Inferior: "+inf+"<br>Superior: "+sup+"</pre>");
+        
+        //Se muestra el resultado
         res.slideUp(function(){
             res.slideDown(function(){
                 $("#divIntervalo").fadeIn();
@@ -214,10 +233,14 @@
         });
         ajustarIntervalo();
     }
+    
+    //Se encarga de mantener el tamaño adecuado para las divisiones de los resultados
     function ajustarIntervalo(){
         $("#intervalo").width($("#intervalo").children().width()+20);
         $("#unilateral").width($("#unilateral").children().width()+20);
     }
+    
+    //Esta funcion se llama periodicamente
     function periodic () {
         ajustarIntervalo();
         if($("#consi:checked").val()=="si" || $("#conno:checked").val()=="no")
@@ -234,12 +257,16 @@
             $("#miu").val(x1.val()-x2.val());
         }
     }
+    
+    //Esta funcion se encarga de extraer las informacion necesaria de la tabla pegada
     function getData(text){
         var lines = text.split("\n");
         $("#textError").hide();
         if(lines.length > 0){
             var line0 = new Array();
             var line1 = new Array();
+            
+            //Cnstruyen las 2 Muestras
             for(var i=0;i<lines.length;i++){
                 var d = lines[i].split("\t");
                 if(d.length >= 2){
@@ -253,6 +280,8 @@
                 var med1,med2;
                 var n1 = line0.length;
                 var n2 = line1.length;
+                
+                //Media Muestra 1
                 var sum=0;
                 for(var i=0;i<line0.length;i++){
                     try{
@@ -263,7 +292,9 @@
                     }
                 }
                 med1=sum/n1;
-                sum=0;
+                
+                //Media Muestra 2
+                sum=0;                
                 for(var i=0;i<line1.length;i++){
                     try{
                         sum += parseFloat(line1[i]);
@@ -273,12 +304,18 @@
                     }
                 }
                 med2=sum/n2;
+                
+                //Diferencia de medias
                 var difmed = med1*1-med2*1;
+                
+                //Se asignan los valores a sus respectivas posiciones
                 $("#miu1").val(med1);
                 $("#tamano1").val(n1);
                 $("#miu2").val(med2);
                 $("#tamano2").val(n2);
                 $("#miu").val(difmed);
+                
+                //Varianza Muestra 1
                 sum = 0;
                 for(var i=0;i<n1;i++){
                     try{
@@ -286,6 +323,8 @@
                     }catch(err){};
                 }
                 $("#smuestral1").val(sum/(n1-1));
+                
+                //Varianza Muestra 2
                 sum = 0
                 for(var i=0;i<n2;i++){
                     try{
@@ -293,6 +332,8 @@
                     }catch(err){};
                 }
                 $("#smuestral2").val(sum/(n2-1));
+                
+                //Desviacion estandar respecto a la diferencia de Medias
                 sum = 0
                 for(var i=0;i<n1;i++){
                     try{
@@ -307,6 +348,8 @@
     {
         clearInterval(timmerPeriodic);
     }
+    
+    //Las siguiente funciones se encargan de mostrar las cajas de los datos rqueridos dependiendo del caso seleccionado
     function mostrarVar(){
         $("#divVarInd").fadeIn();
         $("#divtamano2").fadeIn();

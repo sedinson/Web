@@ -1,7 +1,14 @@
-/*Todas las funciones inversas aqui presentadas NORMSINV, tStudentICDF. fisherICDF, critchi
+/*
+ *@comment Todas las funciones inversas aqui presentadas NORMSINV, tStudentICDF. fisherICDF, critchi
  *son funciones adaptadas para que tiren el resultado de una grafica acumulada a la derecha
  *
- *Andrés A. Pérez L.
+ *@author Andrés A. Pérez L.
+ */
+
+
+/*
+ *@comment Valores de K para los intervalos de tolerancia, donde el sufijo biXX signfica para bilaterales y uni unilaterales. 01 y 05 para un Gamma de 0.01 y 0.05 respectivamente.
+ *          cada columna representa la proporcion 1-alfa de 0.9 0.95 y 0.99 respectivamente. Y cada fila los valores para n vistos en la tabla presentada en clase          
  */
 var matrizbi01 = [[160.193,188.491,242.300],[18.930,22.401,29.055],[9.398,11.250,14.527],[6.612,7.855,10.260],[5.337,6.34,8.301],[4.613,5.488,7.187],[4.147,4.936,6.468],[3.822,4.550,5.966],[3.582,4.265,5.594],[3.397,4.045,5.308],[3.250,3.870,5.079],[3.130,3.727,4.893],[3.029,3.608,4.737],[2.945,3.507,4.605],[2.872,3.421,4.492],[2.808,3.345,4.393],[2.753,3.279,4.307],[2.703,3.221,4.230],[2.659,3.168,4.161],[2.494,2.972,3.904],[2.385,2.841,3.733],[2.306,2.748,3.611],[2.247,2.677,3.518],[2.200,2.621,3.444],[2.162,2.576,3.385],[2.103,2.506,3.293],[2.060,2.454,3.225],[2.026,2.414,3.173],[1.999,2.382,3.130],[1.977,2.355,3.096],[1.905,2.270,2.983],[1.865,2.222,2.921],[1.839,2.191,2.880],[1.820,2.169,2.850],[1.645,1.960,2.576]];
 var matrizbi05 = [[32.019,37.674,48.430],[8.380,9.916,12.861],[5.369,6.370,8.299],[4.275,5.079,6.634],[3.712,4.414,5.775],[3.369,4.007,5.248],[3.136,3.732,4.891],[2.967,3.532,4.631],[2.839,3.379,4.433],[2.737,3.259,4.277],[2.655,3.162,4.150],[2.587,3.012,3.955],[2.529,3.012,3.955],[2.480,2.954,3.878],[2.437,2.903,3.812],[2.400,2.858,3.754],[2.366,2.819,3.702],[2.337,2.784,3.656],[2.310,2.752,3.615],[2.208,2.631,3.457],[2.140,2.549,3.350],[2.090,2.490,3.272],[2.052,2.445,3.213],[2.021,2.408,3.165],[1.996,2.379,3.126],[1.958,2.333,3.066],[1.929,2.299,3.021],[1.907,2.272,2.968],[1.889,2.251,2.958],[1.874,2.233,2.934],[1.825,2.175,2.859],[1.798,2.143,2.816],[1.780,2.121,2.788],[1.767,2.106,2.767],[1.645,1.960,2.576]];
@@ -29,7 +36,10 @@ var matrizuni01 = [[103.029,131.426,185.617],[13.995,17.170,23.896],[7.380,9.083
 // WWW URL:     http://home.online.no/~pjacklam
 
 // An algorithm with a relative error less than 1.15*10-9 in the entire region.
-
+/*
+ * Es algoritmo fue adaptado para que devuelva los valores para de Z para X que satisface
+ *  P(Z>=X)
+ */
 function NORMSINV(p)
 {
     // Coefficients in rational approximations
@@ -141,7 +151,12 @@ var SQRTH = 7.07106781186547524401E-1;
 var LOGPI = 1.14472988584940017414;
 var big = 4.503599627370496e15;
 var biginv = 2.22044604925031308085e-16;
-
+/*
+*@param float p Nivel de significancia
+*@param integer den Grado de libertad v1
+*@param integer num Grado de libertad v2
+*@return float El valor de F que satisface P(F>=f_(p,den,num))
+*/
 function fisherICDF(p,den,num){
     var precision = 0.0001;
     var max = p + precision;
@@ -171,11 +186,21 @@ function fisherICDF(p,den,num){
     }
     return 1/zs;
 }
+/*
+ *@param float f el valor F
+ *@param integer num LOs grados de libertad v1
+ *@param integer den Los grados de libertad v2
+ *@return float La probabilidad P(F<=f)
+ */
 function FisherCDF(f,num,den) {
     var df1 = num;
     var df2 = den;
     return betaInv(df1 * f / (df1 * f + df2), 0.5 * df1, 0.5 * df2);
 }
+
+/*
+ * La funciones a continuacion son usadas en las aproximacion para Fisher
+ */
 function betaInv(x1,p,q) {
     // ALGORITHM AS 63 APPL. STATIST. VOL.32, NO.1
     // Computes P(Beta>x)
@@ -244,7 +269,11 @@ function lnGamma(c) {
     }
     return (Math.log(2.5066282746310005 * ser / xx) - tmp);
 }
-
+/*
+ *@param float quantile La probabilidad de P(T>=t)
+ *@param integer freedomDegrees Los grados de libertad para T
+ *@return float EL valor de t que satisface p=P(T>=t) con freedomDegrees grados de libetad
+ */
 function tStudentICDF(quantile,freedomDegrees) {
     var t = 0;
     var j = 0;
@@ -277,6 +306,7 @@ function tStudentICDF(quantile,freedomDegrees) {
     }
     return t;
 }
+
 function tStudent(p,ndf,lower_tail) {
     // Algorithm 396: Student's t-quantiles by
     // G.W. Hill CACM 13(10), 619-620, October 1970
@@ -473,6 +503,11 @@ function pochisq(x, df) {
                     produce given p.  We just do a bisection
                     search for a value within CHI_EPSILON,
                     relying on the monotonicity of pochisq().  */
+/*
+ *@param float p La probalidad de P(X^2>=x^2)
+ *@param int df Los grados de libertad
+ *@return float El valor de X^2 que satisface a p=P(X^2>=x^2) con df grados de libertad
+ */
 
 function critchi(p, df) {
     var CHI_EPSILON = 0.000001;   /* Accuracy of critchi approximation */
@@ -502,7 +537,12 @@ function critchi(p, df) {
 }
 
 //	TRIMFLOAT  --  Trim a floating point number to maximum number of digits
-
+/*
+ * @param float ov El numero a recortar
+ * @param integer d el numero de posiciones decimales a dejar
+ * @return float devuelve el numero ov con d posiciones decimales
+ */
+    
 function trimfloat(ov, d) {
     var o = "", v = ov.toString();
     var c, i, n = 0, indec = false, aftdec = false;
@@ -532,15 +572,36 @@ function trimfloat(ov, d) {
     }
     return o;
 }
+/*
+ * @param float s1 La desviacion estandar muestral de la muestra 1
+ * @param float s2 La desviacion estandar muestral de la muestra 2
+ * @param int n1 El tamaño de la muestra 1
+ * @param int n2 El tamaño de la muestra 2
+ * @param alfa El nivel de significancia del intervalo
+ * @return Array EL intervalo de confianza para la muestra 1 y 2 con un nivel de confianza (1-alfa)
+ */
 function cocienteVarianzas(s1,s2,n1,n2,alfa){
     var interval = new Array(2);
     interval[0] = (s1/s2)*(1/fisherICDF(alfa/2,n1-1,n2-1));
     interval[1] = (s1/s2)*fisherICDF(alfa/2,n2-1,n1-1);
     return interval;
 }
+/*
+ * @param Array interval Los valores del intervalo de confianza
+ * @return boolean true si dentro del intervalo se encuentra 1, false en caso contrario
+ */
 function varianzasIguales(interval){
     return interval[0]<=1 && interval[1]>=1;
 }
+/*
+ * @param DOMObject div La division donde se colocaran las graficas
+ * @param String titulo El titulo que ira sobre las graficas
+ * @param float menor EL limite inferiro a ser mostrado en la grafica
+ * @param float mayor El limite mayor a mostrar en la grafica
+ * @param float porcentaje Un valor para mostrar sobre la grafica
+ * @param String nombreGrafica EL nombre de las graficas a ser cargado de la carpeta Resources\Public
+ * 
+ */
 function ponerGrafica(div,titulo,menor,mayor,porcentaje,nombreGrafica){
     div.html("<div id='graphTitle' class='wrap'></div><div id='graphSVG'></div><div id='percent' style='position: relative; top: -100px; font-weight: bold; font-size: 18px; color: black;'></div><div id='graphInt' style='width: 400px;margin-bottom: 15px;margin-top: -25px;' class='wrap'><div id='intMin' style='display: inline;float: left;margin-left: 50px;'></div><div id='intMay' style='display: inline;float: right;margin-right: 50px;'></div></div>");
     var divTitle = div.children("#graphTitle");
@@ -554,4 +615,3 @@ function ponerGrafica(div,titulo,menor,mayor,porcentaje,nombreGrafica){
     var percent = div.find("#percent");
     percent.html((porcentaje*100)+"%");
 }
-
