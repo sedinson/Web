@@ -2,6 +2,8 @@
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 m: {
                     required: true,
@@ -22,8 +24,14 @@
                 lb: {
                     required: true,
                     number: true
+                },
+                x: {
+                    required: true,
+                    number: true
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 m: {
                     required: "<br />Es obligatorio",
@@ -44,50 +52,69 @@
                 lb: {
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico"
+                },
+                x: {
+                    required: "<br />Es obligatorio",
+                    number: "<br />Se necesita un valor numerico"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
-                ocultarResultado();
-                
-                var m = $("#m").val();
-                var s = $("#s").val();
-                var la = $("#la").val();
-                var lb = $("#lb").val();
-                var res = 0;
-                var direccion = "<";
-                var grafica = "/Resources/Public/normal";
-                var valorX;
-                if ($("#caso1").is(":checked"))
+                //Se valida el valor de b cuando esta presente
+                if (validarLB() == true)
                 {
-                    direccion = "P(X&lt;" + lb + ")";
-                    res = Probability.calculateNormal(m, s, la, lb, "<");
-                    grafica += "inf.svg";
-                    valorX = "<div style='text-align: left;'>" + direccion + "</div>";
-                }
-                else if ($("#caso2").is(":checked"))
-                {
-                    direccion = "P(" + la + "&lt;X&lt;" + lb + ")";
-                    res = Probability.calculateNormal(m, s, la, lb, "<<");
-                    grafica += "bi.svg";
-                    valorX = "<div style='position: relative; float: left;'>P(X&lt;" + la + ")</div>";
-                    valorX += "<div style='position: relative; float: right;'>P(X&lt;" + lb + ")</div>";
-                }
-                else if ($("#caso3").is(":checked"))
-                {
-                    direccion = "P(X&gt;" + la + ")";
-                    res = Probability.calculateNormal(m, s, la, lb, ">");
-                    grafica += "sup.svg";
-                    valorX = "<div style='text-align: right;'>" + direccion + "</div>";
-                }
-                
-                $("#graf").html("<embed src='" + BaseUrl + grafica + "' alt='Distribucion Normal' type='image/svg+xml' width=400px />");
-                $("#valor").html(valorX);
+                    ocultarResultado();
 
-                mostrarResultado();
-   
-                $("#intTitle").html("El calculo es");
-                $("#calculoDP").html("<pre class='wrap'>" + direccion + " = " + res + "</pre>");
+                    var m = $("#m").val();
+                    var s = $("#s").val();
+                    var la = $("#la").val();
+                    var lb = $("#lb").val();
+                    var x = $("#x").val();
+                    var res = 0;
+                    var direccion = "<";
+                    var grafica = "/Resources/Public/normal";
+                    var valorX;
+
+                    //Probabilidad Acumulada a la izquierda
+                    if ($("#caso1").is(":checked"))
+                    {
+                        direccion = "P(X&lt;" + x + ")";
+                        res = Probability.calculateNormal(m, s, la, x, "<");
+                        grafica += "inf.svg";
+                        valorX = "<div style='text-align: left;'>" + direccion + "</div>";
+                    }
+
+                    //Probabilidad Acumulada entre dos valores
+                    else if ($("#caso2").is(":checked"))
+                    {
+                        direccion = "P(" + la + "&lt;X&lt;" + lb + ")";
+                        res = Probability.calculateNormal(m, s, la, lb, "<<");
+                        grafica += "bi.svg";
+                        valorX = "<div style='position: relative; float: left;'>P(X&lt;" + la + ")</div>";
+                        valorX += "<div style='position: relative; float: right;'>P(X&lt;" + lb + ")</div>";
+                    }
+
+                    //Probabilidad Acumulada a la derecha
+                    else if ($("#caso3").is(":checked"))
+                    {
+                        direccion = "P(X&gt;" + x + ")";
+                        res = Probability.calculateNormal(m, s, x, lb, ">");
+                        grafica += "sup.svg";
+                        valorX = "<div style='text-align: right;'>" + direccion + "</div>";
+                    }
+
+                    //Agrega el grafico respectivo al Div correspondiente
+                    $("#graf").html("<embed src='" + BaseUrl + grafica + "' alt='Distribucion Normal' type='image/svg+xml' width=400px />");
+                    $("#valor").html(valorX);
+
+                    mostrarResultado();
+
+                    //Se coloca el resultado en sus respectivos DIVS
+                    $("#intTitle").html("El calculo es");
+                    $("#calculoDP").html("<pre class='wrap'>" + direccion + " = " + res + "</pre>");
+                }
             }
         });
     });
@@ -107,27 +134,56 @@
         });
     }
     
-    function mostrarLimInf ()
+    //Se muestra la entrada que tendra el usuario de acuerdo a lo seleccionado
+    function cambiarContenidoDiv(valor)
     {
-        $("#limsup").fadeOut("slow", function (){
-            $("#liminf").fadeIn("slow");
+        var div
+        
+        if (valor == "limites")
+        {
+            var label1 = '<label for="la" class="data">L&iacute;mite inferior:</label>';
+            var texto1 = '<input id="la" name="la" type="text" />';
+            var label2 = '<label for="lb" class="data">L&iacute;mite superior:</label>';
+            var texto2 = '<input id="lb" name="lb" type="text" />';
+            var error = '<label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser mayor que el inferior</label>';
+            div = label1 + texto1 + label2 + texto2 + error;
+        }
+        else if (valor == "x")
+        {
+            var label = '<label for="x" class="data">Valor de X:</label>';
+            var texto = '<input id="x" name="x" type="text" />';
+            div = label + texto;
+        }
+        
+        $("#lim").fadeOut(300, function (){
+            $("#lim").html(div);
+            $("#lim").fadeIn(300);
         });
     }
     
-    function mostrarLimSup ()
+    
+    //Se valida si b es mayor que a
+    function validarLB ()
     {
-        $("#liminf").fadeOut("slow", function (){
-            $("#limsup").fadeIn("slow");
-        });
+        var la = parseInt($("#la").val());
+        var lb = parseInt($("#lb").val());
+
+        if (la > lb)
+        {
+            $("#LBerror").css("display", "inline");
+            $("#lb").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#LBerror").css("display", "none");
+            $("#lb").css("border", "");
+            return true;
+        }
     }
     
-    function mostrarLimites ()
-    {
-        $("#liminf").fadeIn("slow");
-        $("#limsup").fadeIn("slow");
-    }
     
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {validarLB();}
     
     function modalClosed() 
     {
@@ -154,20 +210,13 @@
                     <label for="tipo" class="data">Tipo de intervalo:</label>
                     <br />
                     <strong><label for="caso1">P(X&lt;x)</label>
-                        <input id="caso1" name="tipo" type="radio" value="caso1" onclick="javascript:mostrarLimSup();" /></strong>
+                        <input id="caso1" name="tipo" type="radio" value="caso1" onclick="javascript:cambiarContenidoDiv('x');" /></strong>
                     <strong><label for="caso2">P(a&lt;X&lt;b)</label>
-                        <input id="caso2" name="tipo" type="radio" value="caso2" onclick="javascript:mostrarLimites();" /></strong>
+                        <input id="caso2" name="tipo" type="radio" value="caso2" onclick="javascript:cambiarContenidoDiv('limites');" /></strong>
                     <strong><label for="caso3">P(X&gt;x)</label>
-                        <input id="caso3" name="tipo" type="radio" value="caso3" onclick="javascript:mostrarLimInf();" /></strong>
+                        <input id="caso3" name="tipo" type="radio" value="caso3" onclick="javascript:cambiarContenidoDiv('x');" /></strong>
                 </div>
-                <div id="liminf" style="display: none;">
-                    <label for="la" class="data">L&iacute;mite inferior:</label>
-                    <input id="la" name="la" type="text" />
-                </div>
-                <div id="limsup" style="display: none;">
-                    <label for="lb" class="data">L&iacute;mite superior:</label>
-                    <input id="lb" name="lb" type="text" />
-                </div>
+                <div id="lim"></div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />
                 </div>

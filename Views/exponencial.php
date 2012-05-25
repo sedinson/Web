@@ -1,9 +1,12 @@
 <script type="text/javascript">
     
+    //Se carga la imagen de la grafica
     $("#graf").html("<embed src='" + BaseUrl + "/Resources/Public/exponential.svg' alt='Distribucion Exponencial' type='image/svg+xml' width=400px />");
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 beta: {
                     required: true,
@@ -22,8 +25,15 @@
                     required: true,
                     number: true,
                     min: 0
+                },
+                x: {
+                    required: true,
+                    number: true,
+                    min: 0
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 beta: {
                     required: "<br />Es obligatorio",
@@ -42,57 +52,55 @@
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico",
                     min: "<br />No puede ser menor que 0"
+                },
+                x: {
+                    required: "<br />Es obligatorio",
+                    number: "<br />Se necesita un valor numerico",
+                    min: "<br />No puede ser menor que 0"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
+                //Se valida que el valor de b cuando esta presente
                 if (validarLB() == true)
                 {
                     ocultarResultado();
 
-                    var beta = $("#beta").val();
-                    var la = $("#la").val();
-                    var lb = $("#lb").val();
+                    var beta = parseFloat($("#beta").val());
+                    var la = parseFloat($("#la").val());
+                    var lb = parseFloat($("#lb").val());
+                    var x = parseFloat($("#x").val());
                     var res = 0;
                     var direccion = "<";
+                    
+                    //Probabilidad Acumulada a la izquierda
                     if ($("#caso1").is(":checked"))
                     {
-                        direccion = "X&lt;" + lb;
-                        res = Probability.calculateExponential(beta, la, lb, "<");
-                        var pos = parseInt(ubicarX(beta, lb));
-                        $("#valor").html("<div style='padding-left: " + pos + "px; width: 400px; text-align: left;'>" + lb + "</div>");
+                        direccion = "X&lt;" + x;
+                        res = Probability.calculateExponential(beta, la, x, "<");
+                        var pos = parseInt(ubicarX(beta, x));
+                        $("#valor").html("<div style='padding-left: " + pos + "px; text-align: left;'>" + x + "</div>");
                     }
+                    
+                    //Probabilidad Acumulada entre dos valores
                     else if ($("#caso2").is(":checked"))
                     {
                         direccion = la + "&lt;X&lt;" + lb;
                         res = Probability.calculateExponential(beta, la, lb, "<<");
-                        var valor;
-                        if (lb < beta)
-                        {
-                            var posA = parseInt(ubicarX(beta, la));
-                            var posB = parseInt(ubicarX(beta, lb));
-                            valor = "<div style='padding-left: " + posA + "px; display: inline-block; text-align: left;'>" + la + "</div>";
-                            valor += "<div style='padding-left: " + (posB - posA) + "px; display: inline-block; text-align: left;'>" + lb + "</div>";
-                        }
-                        else if (la > beta)
-                        {
-                            var posA = parseInt(ubicarX(beta, la));
-                            var posB = parseInt(ubicarX(beta, lb));
-                            valor = "<div style='padding-left: " + posA + "px; display: inline-block; text-align: left;'>" + la + "</div>";
-                            valor += "<div style='padding-left: " + (posB - posA) + "px; display: inline-block; text-align: left;'>" + lb + "</div>";
-                        }
-                        else
-                        {
-                            var posA = parseInt((ubicarX(beta, la)) / 2);
-                            var posB = parseInt((ubicarX(beta, lb)) / 2);
-                            valor = "<div style='position: relative; float: left; margin-left: " + posA + "px; width: 200px; text-align: left;'>" + la + "</div>";
-                            valor += "<div style='position: relative; float: right; margin-left: " + posB + "px; width: 200px; text-align: left;'>" + lb + "</div>";
-                        }
+                        var posA = ubicarX(beta, la);
+                        var posB = ubicarX(beta, lb);
+                        var valor = "<div style='display: inline; padding-left: " + posA + "px;'>" + la + "</div>";
+                        valor += "<div style='display: inline; padding-left: " + (posB - posA) + "px;'>" + lb + "</div>";
+                        
+                        //Se colocan los valores correspondientes en la grafica
                         $("#valor").html(valor);
                     }
 
                     mostrarResultado();
 
+                    //Se coloca el resultado en sus respectivos DIVS
                     $("#intTitle").html("El calculo es");
                     $("#calculoDP").html("<pre class='wrap'>P(" + direccion + ") = " + res + "</pre>");
                 }
@@ -116,10 +124,30 @@
         });
     }
     
-    function mostrarLimSup ()
+    //Se muestra la entrada que tendra el usuario de acuerdo a lo seleccionado
+    function cambiarContenidoDiv(valor)
     {
-        $("#liminf").fadeOut("slow", function (){
-            $("#limsup").fadeIn("slow");
+        var div
+        
+        if (valor == "limites")
+        {
+            var label1 = '<label for="la" class="data">L&iacute;mite inferior:</label>';
+            var texto1 = '<input id="la" name="la" type="text" />';
+            var label2 = '<label for="lb" class="data">L&iacute;mite superior:</label>';
+            var texto2 = '<input id="lb" name="lb" type="text" />';
+            var error = '<label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser mayor que el inferior</label>';
+            div = label1 + texto1 + label2 + texto2 + error;
+        }
+        else if (valor == "x")
+        {
+            var label = '<label for="x" class="data">Valor de X:</label>';
+            var texto = '<input id="x" name="x" type="text" />';
+            div = label + texto;
+        }
+        
+        $("#lim").fadeOut(300, function (){
+            $("#lim").html(div);
+            $("#lim").fadeIn(300);
         });
     }
     
@@ -133,7 +161,7 @@
     {
         if (x < (2 * beta))
         {
-            return ((x / (2 * beta)) * 400);
+            return parseInt((x / (2 * beta)) * 400);
         }
         else
         {
@@ -141,40 +169,29 @@
         }
     }
     
-    function ubicarX2 (beta, a, b)
-    {
-        if (b < beta){
-            
-        }
-    }
     
-    
-    $("#lb").keyup(validarLB);
-    
+    //Se valida si b es mayor que a
     function validarLB ()
     {
-        if(isNaN($("#la").val()) == false)
-        {
-            var la = parseInt($("#la").val());
-            var lb = parseInt($("#lb").val());
+        var la = parseInt($("#la").val());
+        var lb = parseInt($("#lb").val());
 
-            if (la > lb)
-            {
-                $("#LBerror").css("display", "inline");
-                $("#lb").css("border", "1px solid red");
-                return false;
-            }
-            else
-            {
-                $("#LBerror").css("display", "none");
-                $("#lb").css("border", "");
-                return true;
-            }
+        if (la > lb)
+        {
+            $("#LBerror").css("display", "inline");
+            $("#lb").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#LBerror").css("display", "none");
+            $("#lb").css("border", "");
+            return true;
         }
     }
     
     
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {validarLB();}
     
     function modalClosed() 
     {
@@ -190,26 +207,18 @@
         <div style="padding: 10px 15px;">
             <form id="datos">
                 <div>
-                    <label for="beta" class="data">Parametro beta (&beta;):</label>
+                    <label for="beta" class="data">Promedio de ocurrencias (&beta;):</label>
                     <input id="beta" name="beta" type="text" />
                 </div>
                 <div class="tipoDP">
                     <label for="tipo" class="data">Tipo de intervalo:</label>
                     <br />
                     <strong><label for="caso1">P(X&lt;x)</label>
-                        <input id="caso1" name="tipo" type="radio" value="caso1" onclick="javascript:mostrarLimSup();" /></strong>
+                        <input id="caso1" name="tipo" type="radio" value="caso1" onclick="javascript:cambiarContenidoDiv('x');" /></strong>
                     <strong><label for="caso2">P(a&lt;x&lt;b)</label>
-                        <input id="caso2" name="tipo" type="radio" value="caso2" onclick="javascript:mostrarLimites();" /></strong>
+                        <input id="caso2" name="tipo" type="radio" value="caso2" onclick="javascript:cambiarContenidoDiv('limites');" /></strong>
                 </div>
-                <div id="liminf" style="display: none;">
-                    <label for="la" class="data">L&iacute;mite inferior:</label>
-                    <input id="la" name="la" type="text" />
-                </div>
-                <div id="limsup" style="display: none;">
-                    <label for="lb" class="data">L&iacute;mite superior:</label>
-                    <input id="lb" name="lb" type="text" />
-                    <label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser mayor que el inferior</label>
-                </div>
+                <div id="lim"></div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />
                 </div>
@@ -224,7 +233,7 @@
         <div id="graficaDP">
             <div id="graphTitle" class="wrap">Gr&aacute;fica Exponencial</div>
             <div id="graf"></div>
-            <div id="valor" class="wrap" style="width: 400px;"></div>
+            <div id="valor" class="wrap" style="width: 400px; text-align: left;"></div>
         </div>
     </div>
     <div style="clear: left;"></div>

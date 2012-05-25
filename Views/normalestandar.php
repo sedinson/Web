@@ -4,6 +4,8 @@
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 z: {
                     required: true,
@@ -13,6 +15,8 @@
                     required: true
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 z: {
                     required: "<br />Es obligatorio",
@@ -22,6 +26,8 @@
                     required: "<br />Es obligatorio"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
                 ocultarResultado();
@@ -31,6 +37,8 @@
                 var direccion = "<";
                 var grafica = "/Resources/Public/normal";
                 var valorZ;
+                
+                //Probabilidad Acumulada a la izquierda
                 if ($("#caso1").is(":checked"))
                 {
                     direccion = "P(Z&lt;" + z + ")";
@@ -38,6 +46,8 @@
                     grafica += "inf.svg";
                     valorZ = "<div style='text-align: left;'>" + direccion + "</div>";
                 }
+                
+                //Probabilidad Acumulada a la derecha
                 else if ($("#caso2").is(":checked"))
                 {
                     direccion = "P(Z&gt;" + z + ")";
@@ -46,11 +56,13 @@
                     valorZ = "<div style='text-align: right;'>" + direccion + "</div>";
                 }
                 
+                //Agrega el grafico respectivo al Div correspondiente
                 $("#graf").html("<embed src='" + BaseUrl + grafica + "' alt='Distribucion Normal' type='image/svg+xml' width=400px />");
                 $("#valor").html(valorZ);
 
                 mostrarResultado();
    
+                //Se coloca el resultado en sus respectivos DIVS
                 $("#intTitle").html("El calculo es");
                 $("#calculoDP").html("<pre class='wrap'>" + direccion + " = " + res + "</pre>");
             }

@@ -188,15 +188,16 @@ Probability.poissonAccumulated = function (lambda, x)
 }
 
 /*
+*@param x (integer) Numero de exitos
 *@param k (integer) Numero de valores posibles de la variable discreta
 *@return (float) Valor de la funcion de Probabilidad Acumulada Uniforme Discreta
 */
-Probability.discreteUniformAccumulated = function (k)
+Probability.discreteUniformAccumulated = function (x, k)
 {
     var sum = 0;
-    for(var i=1; i<=k; i++)
+    for(var i=1; i<=x; i++)
     {
-        sum += Probability.discreteUniform(i);
+        sum += Probability.discreteUniform(k);
     }
     return sum;
 }
@@ -515,10 +516,11 @@ Probability.calculatePoisson = function (lambda, x, direction)
 
 /*
 *@param k (integer) Numero de valores posibles de la variable discreta
+*@param x (integer) Numero de exitos
 *@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
 *@return (float) Valor de la funcion de Probabilidad Uniforme Discreta
 */
-Probability.calculateDiscreteUniform = function (k, direction)
+Probability.calculateDiscreteUniform = function (k, x, direction)
 {
     var result = 0;
     
@@ -528,11 +530,11 @@ Probability.calculateDiscreteUniform = function (k, direction)
     }
     else if (direction == "<")
     {
-        result = Probability.discreteUniformAccumulated(k);
+        result = Probability.discreteUniformAccumulated(x, k);
     }
     else if (direction == ">")
     {
-        result = 1 - Probability.discreteUniformAccumulated(k-1);
+        result = 1 - Probability.discreteUniformAccumulated(x, k);
     }
     
     return result.toFixed(3);

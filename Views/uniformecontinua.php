@@ -2,6 +2,8 @@
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 a: {
                     required: true,
@@ -12,6 +14,8 @@
                     number: true
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 a: {
                     required: "<br />Es obligatorio",
@@ -22,8 +26,11 @@
                     number: "<br />Se necesita un valor numerico"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
+                //Se valida el valor de b
                 if (validarLB() == true)
                 {
                     ocultarResultado();
@@ -57,9 +64,7 @@
         });
     }
     
-    
-    $("#lb").keyup(validarLB);
-    
+    //Valida si b es mayor que a
     function validarLB ()
     {
         var a = parseInt($("#la").val());
@@ -80,7 +85,7 @@
     }
     
     
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    function periodic () {validarLB();}
     
     function modalClosed() 
     {

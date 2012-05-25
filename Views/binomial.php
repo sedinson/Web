@@ -2,6 +2,8 @@
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 n: {
                     required: true,
@@ -23,6 +25,8 @@
                     required: true
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 n: {
                     required: "<br />Es obligatorio",
@@ -41,8 +45,11 @@
                     min: "<br />No puede ser menor que 0"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
+                //Se valida el valor de x
                 if(validarX() == true)
                 {
                     ocultarResultado();
@@ -52,16 +59,22 @@
                     var x = $("#x").val();
                     var direccion = "=";
                     var res = 0;
+                    
+                    //Probabilidad Puntual
                     if ($("#puntual").is(":checked"))
                     {
                         direccion = "=";
                         res = Probability.calculateBinomial(n, p, x, "=");
                     }
+                    
+                    //Proababilidad Acumulada a la Izquierda
                     else if ($("#acuIzq").is(":checked"))
                     {
                         direccion = "&le;";
                         res = Probability.calculateBinomial(n, p, x, "<");
                     }
+                    
+                    //Probabilidad Acumulada a la Derecha
                     else if ($("#acuDer").is(":checked"))
                     {
                         direccion = "&ge;";
@@ -70,6 +83,7 @@
 
                     mostrarResultado();
 
+                    //Se coloca el resultado en sus respectivos DIVS
                     $("#intTitle").html("El calculo es");
                     $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
                 }
@@ -92,9 +106,7 @@
         });
     }
     
-    
-    $("#x").keyup(validarX);
-    
+    //Se valida si X es menor que n
     function validarX ()
     {
         var n = parseInt($("#n").val());
@@ -115,7 +127,8 @@
     }
     
     
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    //Se evalua periodicamente la funcion que valida X
+    function periodic () {validarX();}
     
     function modalClosed() 
     {
@@ -135,11 +148,11 @@
                     <input id="n" name="n" type="text" />
                 </div>
                 <div>
-                    <label for="p" class="data">Probabilidad (p):</label>
+                    <label for="p" class="data">Proporci&oacute;n de &eacute;xitos (p):</label>
                     <input id="p" name="p" type="text" />
                 </div>
                 <div>
-                    <label for="x" class="data">Variable aleatoria (X):</label>
+                    <label for="x" class="data">N&uacute;mero de intentos (X):</label>
                     <input id="x" name="x" type="text" />
                     <label id="Xerror" class="error" style="display: none;"><br />X debe ser menor que n</label>
                 </div>
@@ -147,13 +160,13 @@
                     <label for="tipo" class="data">Tipo de probabilidad:</label>
                     <br />
                     <input id="puntual" name="tipo" type="radio" checked="true" value="puntual" />
-                    <label for="puntual" class="data">Puntual (=)</label>
+                    <label for="puntual" class="data">P(X=x)</label>
                     <br />
                     <input id="acuIzq" name="tipo" type="radio" value="izquierda" />
-                    <label for="puntual" class="data">Acumulada a la izquierda (&le;)</label>
+                    <label for="puntual" class="data">P(X&le;x)</label>
                     <br />
                     <input id="acuDer" name="tipo" type="radio" value="derecha" />
-                    <label for="puntual" class="data">Acumulada a la derecha (&ge;)</label>
+                    <label for="puntual" class="data">P(X&ge;x)</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

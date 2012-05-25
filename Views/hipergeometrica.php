@@ -2,6 +2,8 @@
 
     $(document).ready(function (){
         $("#datos").validate({
+            
+            //Limitacion para los datos de entrada
             rules: {
                 N: {
                     required: true,
@@ -26,6 +28,8 @@
                     required: true
                 }
             },
+            
+            //Mensajes en caso de violar las limitaciones para cada uno de los casos
             messages: {
                 N: {
                     required: "<br />Es obligatorio",
@@ -47,8 +51,11 @@
                     min: "<br />No puede ser menor que 0"
                 }
             },
+            
+            //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
+                //Se validan los valores de N, n, k y X
                 if ((validarN() == true) && (validarn() == true) && (validarK() == true) && (validarX() == true))
                 {
                     ocultarResultado();
@@ -59,16 +66,22 @@
                     var x = $("#x").val();
                     var direccion = "=";
                     var res = 0;
+                    
+                    //Probabilidad Puntual
                     if ($("#puntual").is(":checked"))
                     {
                         direccion = "=";
                         res = Probability.calculateHyperGeometric(N, n, k, x, "=");
                     }
+                    
+                    //Proababilidad Acumulada a la Izquierda
                     else if ($("#acuIzq").is(":checked"))
                     {
                         direccion = "&le;";
                         res = Probability.calculateHyperGeometric(N, n, k, x, "<");
                     }
+                    
+                    //Proababilidad Acumulada a la Derecha
                     else if ($("#acuDer").is(":checked"))
                     {
                         direccion = "&ge;";
@@ -77,6 +90,7 @@
 
                     mostrarResultado();
 
+                    //Se coloca el resultado en sus respectivos DIVS
                     $("#intTitle").html("El calculo es");
                     $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
                 }
@@ -100,8 +114,7 @@
     }
     
     
-    $("#N").keyup(validarN);
-    
+    //Se valida si N es mayor o igual que k 
     function validarN ()
     {
         var N = parseInt($("#N").val());
@@ -121,8 +134,7 @@
         }
     }
     
-    $("#n").keyup(validarn);
-    
+    //Se valida si n es menor o igual que N
     function validarn ()
     {
         var n = parseInt($("#n").val());
@@ -142,8 +154,7 @@
         }
     }
     
-    $("#k").keyup(validarK);
-    
+    //Se valida si k es menor o igual que n
     function validarK ()
     {
         var n = parseInt($("#n").val());
@@ -163,8 +174,7 @@
         }
     }
     
-    $("#x").keyup(validarX);
-    
+    //Se valida si x es menor o igual que n
     function validarX ()
     {
         var n = parseInt($("#n").val());
@@ -185,7 +195,8 @@
     }
     
     
-    function periodic () {/*SI NECESITAS HACER ALGO PERIODICO SE PONE AQUI*/}
+    //Se evaluda periodicamente las funciones que validan N, n, k y X
+    function periodic () {validarN(); validarn(); validarK(); validarX();}
     
     function modalClosed() 
     {
@@ -211,12 +222,12 @@
                     <label id="nerror" class="error" style="display: none;"><br />n no puede ser mayor que N</label>
                 </div>
                 <div>
-                    <label for="k" class="data">Exitos (k):</label>
+                    <label for="k" class="data">&Eacute;xitos en la poblaci&oacute;n (k):</label>
                     <input id="k" name="k" type="text" />
                     <label id="Kerror" class="error" style="display: none;"><br />k no puede ser mayor que n</label>
                 </div>
                 <div>
-                    <label for="x" class="data">Variable aleatoria (X):</label>
+                    <label for="x" class="data">&Eacute;xitos en la muestra (X):</label>
                     <input id="x" name="x" type="text" />
                     <label id="Xerror" class="error" style="display: none;"><br />X no puede ser mayor que k</label>
                 </div>
@@ -224,13 +235,13 @@
                     <label for="tipo" class="data">Tipo de probabilidad:</label>
                     <br />
                     <input id="puntual" name="tipo" type="radio" checked="true" value="puntual" />
-                    <label for="puntual" class="data">Puntual (=)</label>
+                    <label for="puntual" class="data">P(X=x)</label>
                     <br />
                     <input id="acuIzq" name="tipo" type="radio" value="izquierda" />
-                    <label for="puntual" class="data">Acumulada a la izquierda (&le;)</label>
+                    <label for="puntual" class="data">P(X&le;x)</label>
                     <br />
                     <input id="acuDer" name="tipo" type="radio" value="derecha" />
-                    <label for="puntual" class="data">Acumulada a la derecha (&ge;)</label>
+                    <label for="puntual" class="data">P(X&ge;x)</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />
