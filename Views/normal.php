@@ -82,7 +82,7 @@
                     {
                         direccion = "P(X&lt;" + x + ")";
                         res = Probability.calculateNormal(m, s, la, x, "<");
-                        grafica += "inf.svg";
+                        grafica += "sup.svg";
                         valorX = "<div style='text-align: left;'>" + direccion + "</div>";
                     }
 
@@ -101,7 +101,7 @@
                     {
                         direccion = "P(X&gt;" + x + ")";
                         res = Probability.calculateNormal(m, s, x, lb, ">");
-                        grafica += "sup.svg";
+                        grafica += "inf.svg";
                         valorX = "<div style='text-align: right;'>" + direccion + "</div>";
                     }
 

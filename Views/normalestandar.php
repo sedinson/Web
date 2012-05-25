@@ -43,7 +43,7 @@
                 {
                     direccion = "P(Z&lt;" + z + ")";
                     res = Probability.calculateStandardNormal(z, "<");
-                    grafica += "inf.svg";
+                    grafica += "sup.svg";
                     valorZ = "<div style='text-align: left;'>" + direccion + "</div>";
                 }
                 
@@ -52,7 +52,7 @@
                 {
                     direccion = "P(Z&gt;" + z + ")";
                     res = Probability.calculateStandardNormal(z, ">");
-                    grafica += "sup.svg";
+                    grafica += "inf.svg";
                     valorZ = "<div style='text-align: right;'>" + direccion + "</div>";
                 }
                 
