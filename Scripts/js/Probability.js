@@ -358,16 +358,6 @@ Probability.standardNormal = function (z)
 }
 
 /*
-*@param a (float) Valor del limite inferior 
-*@param b (float) Valor del limite superior
-*@return (float) Valor de la funcion de Probabilidad Uniforme Continua
-*/
-Probability.continuousUniform = function (a, b)
-{
-    return ( 1/(b-a) );
-}
-
-/*
 *@param beta (float) Promedio de ocurrencias
 *@param x (float) Numero de ocurrencias
 *@return (float) Valor de la funcion de Probabilidad Exponencial
@@ -472,17 +462,20 @@ Probability.calculateHyperGeometric = function (N, n, k, x, direction)
 {
     var result = 0;
     
-    if (direction == "=")
+    if (parseInt(x) <= parseInt(k))
     {
-        result = Probability.hyperGeometric(N, n, k, x);
-    }
-    else if (direction == "<")
-    {
-        result = Probability.hyperGeometricAccumulated(N, n, k, x);
-    }
-    else if (direction == ">")
-    {
-        result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x-1);
+        if (direction == "=")
+        {
+            result = Probability.hyperGeometric(N, n, k, x);
+        }
+        else if (direction == "<")
+        {
+            result = Probability.hyperGeometricAccumulated(N, n, k, x);
+        }
+        else if (direction == ">")
+        {
+            result = 1 - Probability.hyperGeometricAccumulated(N, n, k, x-1);
+        }
     }
     
     return result.toFixed(3);
@@ -590,15 +583,28 @@ Probability.calculateStandardNormal = function (z, interval)
 }
 
 /*
-*@param a (float) Valor del limite inferior 
-*@param b (float) Valor del limite superior
+*@param a Valor del limite inferior 
+*@param b Valor del limite superior
+*@param x Numero de exitos
+*@param direction (String) Valor que determina si la probabilidad debe ser puntual, acumulada a la izquierda o a la derecha.
 *@return (float) Valor de la funcion de Probabilidad Uniforme Continua
 */
-Probability.calculateContinuousUniform = function (a, b)
+Probability.calculateContinuousUniform = function (a, b, x, direction)
 {
     var result = 0;
-    
-    result = Probability.continuousUniform(a, b);
+    var k = (b - a);
+    if (direction == "=")
+    {
+        result = Probability.discreteUniform(k);
+    }
+    else if (direction == "<")
+    {
+        result = Probability.discreteUniformAccumulated(x, k);
+    }
+    else if (direction == ">")
+    {
+        result = 1 - Probability.discreteUniformAccumulated(x, k);
+    }
         
     return result.toFixed(3);
 }

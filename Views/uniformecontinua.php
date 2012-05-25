@@ -12,6 +12,11 @@
                 b: {
                     required: true,
                     number: true
+                },
+                x: {
+                    required: true,
+                    number: true,
+                    min: 1
                 }
             },
             
@@ -24,26 +29,53 @@
                 b: {
                     required: "<br />Es obligatorio",
                     number: "<br />Se necesita un valor numerico"
+                },
+                x: {
+                    required: "<br />Es obligatorio",
+                    number: "<br />Se necesita un valor numerico",
+                    min: "<br />No puede ser menor que 1"
                 }
             },
             
             //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
-                //Se valida el valor de b
-                if (validarLB() == true)
+                //Se valida el valor de b y x
+                if ((validarLB() == true) && (validarX() == true))
                 {
                     ocultarResultado();
 
                     var a = $("#la").val();
                     var b = $("#lb").val();
+                    var x = $("#x").val();
+                    var direccion
+                    var res = 0;
                     
-                    var res = Probability.calculateContinuousUniform(a, b);
+                    //Probabilidad Puntual
+                    if ($("#puntual").is(":checked"))
+                    {
+                        direccion = "=";
+                        res = Probability.calculateContinuousUniform(a, b, x, "=");
+                    }
+
+                    //Proababilidad Acumulada a la Izquierda
+                    else if ($("#acuIzq").is(":checked"))
+                    {
+                        direccion = "&le;";
+                        res = Probability.calculateContinuousUniform(a, b, x, "<");
+                    }
+
+                    //Probabilidad Acumulada a la Derecha
+                    else if ($("#acuDer").is(":checked"))
+                    {
+                        direccion = "&ge;";
+                        res = Probability.calculateContinuousUniform(a, b, x, ">");
+                    }
 
                     mostrarResultado();
 
                     $("#intTitle").html("El calculo es");
-                    $("#calculoDP").html("<pre class='wrap'>P(" + a + "&lt;X&lt;" + b + ") = " + res + "</pre>");
+                    $("#calculoDP").html("<pre class='wrap'>P(X" + direccion + x + ") = " + res + "</pre>");
                 }
             }
         });
@@ -84,8 +116,29 @@
         }
     }
     
+    //Valida si x es menor o igual que (b-a)
+    function validarX ()
+    {
+        var x = parseInt($("#x").val());
+        var a = parseInt($("#la").val());
+        var b = parseInt($("#lb").val());
+        
+        if (x > (b - a))
+        {
+            $("#Xerror").css("display", "inline");
+            $("#x").css("border", "1px solid red");
+            return false;
+        }
+        else
+        {
+            $("#Xerror").css("display", "none");
+            $("#x").css("border", "");
+            return true;
+        }
+    }
     
-    function periodic () {validarLB();}
+    
+    function periodic () {validarLB(); validarX();}
     
     function modalClosed() 
     {
@@ -108,6 +161,23 @@
                     <label for="lb" class="data">L&iacute;mite superior (b):</label>
                     <input id="lb" name="lb" type="text" />
                     <label id="LBerror" class="error" style="display: none;"><br />El limite superior no puede ser menor que el inferior</label>
+                </div>
+                <div>
+                    <label for="x" class="data">Numero de &eacute;xitos (X):</label>
+                    <input id="x" name="x" type="text" />
+                    <label id="Xerror" class="error" style="display: none;"><br />X no puede ser menor que (b-a)</label>
+                </div>
+                <div class="tipoDP">
+                    <label for="tipo" class="data">Tipo de probabilidad:</label>
+                    <br />
+                    <input id="puntual" name="tipo" type="radio" checked="true" value="puntual" />
+                    <label for="puntual" class="data">P(X=x)</label>
+                    <br />
+                    <input id="acuIzq" name="tipo" type="radio" value="izquierda" />
+                    <label for="puntual" class="data">P(X&le;x)</label>
+                    <br />
+                    <input id="acuDer" name="tipo" type="radio" value="derecha" />
+                    <label for="puntual" class="data">P(X&ge;x)</label>
                 </div>
                 <div>
                     <input type="submit" class="calcular" value="Calcular Probabilidad" />

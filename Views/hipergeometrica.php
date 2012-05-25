@@ -55,8 +55,8 @@
             //Funcion que calcula la probabilidad
             submitHandler: function (){
                 
-                //Se validan los valores de N, n, k y X
-                if ((validarN() == true) && (validarn() == true) && (validarK() == true) && (validarX() == true))
+                //Se validan los valores de n, k y X
+                if ((validarn() == true) && (validarK() == true) && (validarX() == true))
                 {
                     ocultarResultado();
 
@@ -114,26 +114,6 @@
     }
     
     
-    //Se valida si N es mayor o igual que k 
-    function validarN ()
-    {
-        var N = parseInt($("#N").val());
-        var k = parseInt($("#k").val());
-        
-        if (N < k)
-        {
-            $("#Nerror").css("display", "inline");
-            $("#N").css("border", "1px solid red");
-            return false;
-        }
-        else
-        {
-            $("#Nerror").css("display", "none");
-            $("#N").css("border", "");
-            return true;
-        }
-    }
-    
     //Se valida si n es menor o igual que N
     function validarn ()
     {
@@ -157,10 +137,10 @@
     //Se valida si k es menor o igual que n
     function validarK ()
     {
-        var n = parseInt($("#n").val());
+        var N = parseInt($("#N").val());
         var k = parseInt($("#k").val());
         
-        if (k > n)
+        if (k > N)
         {
             $("#Kerror").css("display", "inline");
             $("#k").css("border", "1px solid red");
@@ -196,7 +176,7 @@
     
     
     //Se evaluda periodicamente las funciones que validan N, n, k y X
-    function periodic () {validarN(); validarn(); validarK(); validarX();}
+    function periodic () {validarn(); validarK(); validarX();}
     
     function modalClosed() 
     {
@@ -214,7 +194,6 @@
                 <div>
                     <label for="N" class="data">Tama&ntilde;o de la poblaci&oacute;n (N):</label>
                     <input id="N" name="N" type="text" />
-                    <label id="Nerror" class="error" style="display: none;"><br />N no puede ser menor que k</label>
                 </div>
                 <div>
                     <label for="n" class="data">Tama&ntilde;o de la muestra (n):</label>
@@ -224,12 +203,12 @@
                 <div>
                     <label for="k" class="data">&Eacute;xitos en la poblaci&oacute;n (k):</label>
                     <input id="k" name="k" type="text" />
-                    <label id="Kerror" class="error" style="display: none;"><br />k no puede ser mayor que n</label>
+                    <label id="Kerror" class="error" style="display: none;"><br />k no puede ser mayor que N</label>
                 </div>
                 <div>
                     <label for="x" class="data">&Eacute;xitos en la muestra (X):</label>
                     <input id="x" name="x" type="text" />
-                    <label id="Xerror" class="error" style="display: none;"><br />X no puede ser mayor que k</label>
+                    <label id="Xerror" class="error" style="display: none;"><br />X no puede ser mayor que n</label>
                 </div>
                 <div class="tipoDP">
                     <label for="tipo" class="data">Tipo de probabilidad:</label>
