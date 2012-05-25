@@ -2,8 +2,6 @@
  *@author David Seija Duque
  */
 
-
-
 /*
 *@param a (integer) Numero para el cual se desea calcular el factorial
 *@return (integer) Valor de a factorial
