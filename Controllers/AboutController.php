@@ -8,21 +8,23 @@
 /**
  * Description of AboutController
  *
- * @author Desarrollo 2
+ * @author sedinson
  */
 class AboutController extends ControllerBase {
     //put your code here
     
+    /*
+     * Accion que se carga al ver el acceso Quienes Colaboraron
+     */
     function Quienes () {
         $this->view->partial("quienes.php");
     }
     
+    /*
+     * Accion que se carga al ver el acceso Como Contribuir
+     */
     function Como () {
         $this->view->partial("como.php");
-    }
-    
-    function Documentacion () {
-        $this->view->partial("documentacion.php");
     }
 }
 

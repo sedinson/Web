@@ -3,27 +3,32 @@
  * and open the template in the editor.
  */
 
+//Creacion de algunas extensiones que son de utilidad en el programa
 Array.prototype.unique = function(a) {return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0});
 Math.logBase = function (x, b) {return Math.log(x)/Math.log(b)};
 jQuery.fn.exists = function(){return this.length>0;}
 
 function Stat () { }
 
+//Definicion de algunos datos a utilizar en la aplicacion
 Stat.min = Infinity;
 Stat.max = -1*Infinity;
 Stat.borders = false;
 Stat.p = 1;
 
+//Regresar el valor minimo de los datos analizados previamente
 Stat.minVal = function () 
 {
     return Stat.min;
 }
 
+//Regresar el maximo valor de los datos analizados previamente
 Stat.maxVal = function () 
 {
     return Stat.max;
 }
 
+//Regresar el promedio de los datos contenidos en el array
 Stat.averrage = function (array)
 {
     array = Stat.prepare(array);
@@ -38,6 +43,7 @@ Stat.averrage = function (array)
     return (sum/f);
 }
 
+//Regresar la moda de los datos contenidos en el array
 Stat.mode = function (array) 
 {
     array = Stat.prepare(array);
@@ -51,6 +57,7 @@ Stat.mode = function (array)
     return tmp;
 }
 
+//Regresar la varianza de los datos del array
 Stat.variance = function (array)
 {
     array = Stat.prepare(array);
@@ -66,16 +73,19 @@ Stat.variance = function (array)
     return (sum/f-Math.pow(Stat.averrage(array), 2));
 }
 
+//Regresar la desviacion estandar de los datos del array
 Stat.deviation = function (array)
 {
     return Math.sqrt(Stat.variance(array));
 }
 
+//Regresar el Coeficiente de Variacion de los datos del array
 Stat.CV = function (array)
 {
     return Stat.deviation(array) / Stat.averrage(array);
 }
 
+//Regresar el coeficiente de asimetria
 Stat.CAs = function (array)
 {
     array = Stat.prepare(array);
@@ -92,6 +102,7 @@ Stat.CAs = function (array)
     return sum/(f*Math.pow(Stat.deviation(array), 3));
 }
 
+//Regresar el coeficiente de apuntamiento
 Stat.CAp = function (array)
 {
     array = Stat.prepare(array);
@@ -108,6 +119,7 @@ Stat.CAp = function (array)
     return sum/(f*Math.pow(Stat.deviation(array), 4));
 }
 
+/*Medidas de posicion*/
 Stat.Quartile = function (i, n)
 {
     return (i*(n+1))/4;
@@ -123,6 +135,7 @@ Stat.Decile = function (i, n)
     return (i*(n+1))/10;
 }
 
+//Obtener un dato en una posicion especificada por una medida de posicion (Decil, cuartil, percentil)
 Stat.getData = function (f, i, array) 
 {
     try
@@ -169,6 +182,7 @@ Stat.getData = function (f, i, array)
     
 }
 
+//Regresar el numero de datos del array
 Stat.n = function (array) 
 {
     var sum = 0;
@@ -181,6 +195,7 @@ Stat.n = function (array)
     return sum;
 }
 
+//Regresar la mediana de los datos contenidos en el array
 Stat.median = function (array)
 {
     return Stat.getData(Stat.Quartile, 2, array);
@@ -283,12 +298,14 @@ Stat.getTableInfo = function (array)
     return str;
 }
 
+//Establecer configuraciones para la clase
 Stat.config = function (p, borders) 
 {
     Stat.p = p;
     Stat.borders = borders;
 }
 
+//Clase que contiene algunos metodos extras para usar
 function Extra() { }
 
 /*Convierte value en un array de datos. Usa \n como simbolo de nueva fila y \t como nueva columna.
@@ -328,6 +345,7 @@ Extra.transformData = function (value)
     return tmp;
 }
 
+//Ordenamiento de datos por InsertSort (Matriz)
 Extra.insertArraySort = function (array, pos) 
 {
    var a = array;
@@ -342,6 +360,7 @@ Extra.insertArraySort = function (array, pos)
    return a;
 }
 
+//Ordenamiento de datos por InsertSort (vector)
 Extra.insertSort = function (a) 
 {
    for (var i = 0, j, tmp; i < a.length; ++i) 
@@ -355,6 +374,7 @@ Extra.insertSort = function (a)
    return a;
 }
 
+//Crar una copia de un array
 Extra.createCopy = function (array) 
 {
     return array.slice(0);

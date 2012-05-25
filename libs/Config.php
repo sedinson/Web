@@ -5,6 +5,11 @@
  * and open the template in the editor.
  */
 
+/**
+ * Description of Config
+ *
+ * @author sedinson
+ */
     class Config
     {
         private $vars;

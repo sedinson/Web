@@ -62,19 +62,19 @@ function Graph(div)
                     g.lineTo(w-10, i*(h-80)/6+20);
                 }
                 g.stroke();
-    g.restore();
+        g.restore();
 
-    //Pintar la grafica contenida en la funcion
-    funct();
+        //Pintar la grafica contenida en la funcion
+        funct();
 
-    //Pintar el marco del eje x e y
-    g.strokeStyle = "#000000";
-    g.lineWidth = 2;
-    g.beginPath();
-        g.moveTo(50, 10);
-        g.lineTo(50, h-50);
-        g.lineTo(w-10, h-50);
-        g.stroke();
+        //Pintar el marco del eje x e y
+        g.strokeStyle = "#000000";
+        g.lineWidth = 2;
+        g.beginPath();
+            g.moveTo(50, 10);
+            g.lineTo(50, h-50);
+            g.lineTo(w-10, h-50);
+            g.stroke();
     }
     
     //Grafica de Barras
@@ -108,7 +108,7 @@ function Graph(div)
         }
     }
     
-    //Grafica de Barras
+    //Diagrama de Poligono de Frecuencia
     var poligonoFrecuencia = function () 
     {   //Calcular el ancho de las barras y algunas propiedades del texto
         var sep = (w-80)/data.length;
@@ -234,7 +234,7 @@ function Graph(div)
         }
     }
     
-    //Grafica de Frecuencia
+    //Grafica de Frecuencia Acumulada (ojiva)
     var frecuenciaAcumulada = function () 
     {   //Calcular la separacion entre cada punto
         var sep = (w-80)/data.length;
@@ -325,6 +325,7 @@ function Graph(div)
         }
     }
     
+    //Diagrama de Caja y Bigotes
     var cajaybigotes = function ()
     {   //Algunos calculos preliminares antes de empezar a graficar
         var bottomBase = 50;
@@ -542,17 +543,20 @@ function Graph(div)
         }
     }
     
+    //Diagrama de tallo y hojas
     var talloyhojas = function() 
-    {
+    {   //Calcular variables usadas en la disposicion en el canvas
         var distX = 50;
         var distY = 20;
         var sepX = 25;
         var sepY = 30;
         
+        //Configuraciones iniciales
         g.textBaseline = "top";
         g.fillStyle = "#000000";
         g.font = "22px Arial";
         
+        //Pintar la linea que separa los tallos de las hojas
         g.save();
             g.lineWidth = 2;
             g.beginPath();
@@ -562,6 +566,7 @@ function Graph(div)
                 g.stroke();
         g.restore();
         
+        //Pintar las hojas en sus respectivos tallos, y pintar tambien los tallos
         for(var i=0; i<cmdTYH.length; i++) 
         {
             g.textAlign = "right";
@@ -574,6 +579,7 @@ function Graph(div)
         }
     }
     
+    //Clase encargada de decidir que grafica se va a pintar
     var paint = function ()
     {   //Obtener el tamaño del contenedor y establecerlo en el canvas
         w = div.offsetWidth-10;
@@ -637,7 +643,7 @@ function Graph(div)
         data = Stat.prepare(array);
         olData = Extra.insertArraySort(Stat.prepare(array), 2);
         
-        //Obtener los valores minimo, maximo y la suma de todos los elementos del array
+        //Obtener los valores minimo, maximo, la suma de todos los elementos del array, etc...
         min = Stat.minVal();
         max = Stat.maxVal();
         frecuently = 0;
@@ -653,8 +659,10 @@ function Graph(div)
             sum += data[i][pData];
         }
         
+        //Vaciar los arrays especiales. Como el de la grafica de puntos y el de tallo y hojas
         cmdData = [];
         cmdTYH = [];
+        //Si es numerico el dato, se generan datos para tallo y hojas, Si es array se generan datos para grafica de puntos
         if(typeof original[0] != "number") {
             var init = [];
             for(i=0; i<original.length; i++)
@@ -671,7 +679,7 @@ function Graph(div)
                 cmdData[i] = [init[i], Extra.insertSort(Extra.createCopy(tmp))];
             }
         } 
-        else 
+        else
         {
             init = [];
             for(i=0; i<original.length; i++) 
@@ -695,6 +703,7 @@ function Graph(div)
         }
     }
     
+    //Mostrar la tabla especial para la grafica de puntos
     this.tablaPuntos = function () 
     {
         var str = "<table><thead><tr><th>clase</th><th>datos</th></tr></thead>";

@@ -7,6 +7,9 @@
 
 /**
  * Description of Content
+ * Clase encargada de mostrar contenido cargado luego de que una vista cargara una plantilla.
+ * En algun lugar en las plantillas usadas, se hace la llamada al metodo principal de esta clase
+ * que es el metodo display. Basicamente cargara el contenido enviado por la pagina.
  *
  * @author sedinson
  */

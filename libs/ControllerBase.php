@@ -1,4 +1,18 @@
 <?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of ControllerBase
+ * De esta clase heredaran todos los modelos sus metodos y su constructor. La idea es que esta clase
+ * contenga metodos importantes que no es necesario reescribir para todos los controladores, tales como
+ * obtener un modelo, tener las variables principales...
+ *
+ * @author sedinson
+ */
     abstract class ControllerBase {
 
         protected $post;

@@ -4,6 +4,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * Description of SPDO
+ * Extiende de la clase PDO (PHP Data Object), y su funcion es hacer que exita una sola instancia
+ * de la base de datos y tambien de conectarse a la BD.
+ *
+ * @author sedinson
+ */
     class SPDO extends PDO {
         
         private static $instance = null;

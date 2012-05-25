@@ -1,4 +1,16 @@
 <?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of View
+ * Esta clase será la encargada de controlar las plantillas y el contenido a cargar.
+ *
+ * @author sedinson
+ */
     class View
     {
         protected $content;
