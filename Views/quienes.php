@@ -22,10 +22,6 @@
             <td>David Seija Duque</td>
             <td><a href="mailto:davidson_747@hotmail.com">davidson_747@hotmail.com</a></td>
         </tr>
-        <tr>
-            <td>Jael Cortes</td>
-            <td><a href="mailto:jaelc88@hotmail.com">jaelc88@hotmail.com</a></td>
-        </tr>
     </table>
 </div>
 <div style="clear: both;"></div>
